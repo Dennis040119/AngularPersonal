@@ -48,6 +48,9 @@ export class AlumnoComponent {
     }else{
       window.alert("Falta un numero")
     }
-  }
+    }
 
+    tablas(){
+      
+    }
 }

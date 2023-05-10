@@ -12,6 +12,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule } from "@angular/material/form-field";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+
 
 
 
@@ -32,7 +34,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatButtonModule,
     MatInputModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
     
     
     
@@ -41,7 +44,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule
 
   ],
   providers: [],
