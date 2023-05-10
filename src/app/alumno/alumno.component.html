@@ -1,0 +1,26 @@
+<h1>Alumno page</h1>
+
+<form class="example-form">
+<mat-form-field class="example-full-width" >
+<input matInput type="number" [(ngModel)]="num1" placeholder="Numero 1" name="num1">
+</mat-form-field>
+
+<mat-form-field class="example-full-width">
+<input matInput type="number" [(ngModel)]="num2" placeholder="Numero 2" name="num2">
+</mat-form-field>
+
+<br><br>
+
+<button mat-raised-button (click)="sumar()">Sumar</button> <button mat-raised-button (click)="restar()">Restar</button> 
+<button mat-raised-button (click)="dividir()">Dividir</button> 
+<button mat-raised-button (click)="multiplicar()">Multiplicar</button>    
+<p>Resultado</p>
+
+<mat-form-field class="example-full-width">
+<input matInput [(ngModel)]="result" disabled placeholder="0" name="result">
+</mat-form-field>
+</form>
+
+
+
+  
