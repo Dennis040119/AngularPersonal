@@ -13,6 +13,9 @@ import {MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule } from "@angular/material/form-field";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import {AgregarComponent } from './agregar/agregar.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon'
 
 
 
@@ -23,7 +26,8 @@ import {MatTableModule} from '@angular/material/table';
   declarations: [
     AppComponent,
     AlumnoComponent,
-    TablaComponent
+    TablaComponent,
+    AgregarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,8 +39,9 @@ import {MatTableModule} from '@angular/material/table';
     MatInputModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatTableModule
-    
+    MatTableModule,
+    MatDialogModule,
+    MatIconModule
     
     
   ],
@@ -45,7 +50,9 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
+    MatIconModule
 
   ],
   providers: [],

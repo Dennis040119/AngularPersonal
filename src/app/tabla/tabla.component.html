@@ -1,11 +1,15 @@
-<p>tabla works!</p>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<p>Pagina Quimicos</p>
 
 <div class="example-container mat-elevation-z8">
 
     <div class="example-header">
         <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+          
         </mat-form-field>
+        <button mat-raised-button (click)="agregar()" style="margin-left: 2%;">Agregar</button>
+
       </div>
       
     <mat-table #table [dataSource]="dataSource">
@@ -28,7 +32,7 @@
       <!-- Weight Column -->
       <ng-container matColumnDef="weight">
         <mat-header-cell *matHeaderCellDef> Peso </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.weight}} kg </mat-cell>
       </ng-container>
   
       <!-- Symbol Column -->
@@ -36,7 +40,27 @@
         <mat-header-cell *matHeaderCellDef> Simbolo </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
       </ng-container>
+      
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef> options </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+
+        <button mat-button style="height: 25px; position: static;background: transparent;border: none;padding-top: 5px;vertical-align: text-top;">
+          <mat-icon style="color: black;">edit</mat-icon>
+        </button> 
+        <button mat-button class="consultar" 
+            style="height: 25px; position: static;background: transparent;border: none;padding-top: 5px;padding-left: 10%;vertical-align: text-top;">
+            <mat-icon style="color: #3f51b5;">visibility</mat-icon>
+        </button>
+        <button mat-button style="height: 25px;position: static;color: red;border: none;background: transparent;padding-top: 5px;padding-left: 10%;vertical-align: text-top;">
+            <mat-icon>delete</mat-icon>
+        </button>
+        
+        </mat-cell>
+      </ng-container>
   
+
+    
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>

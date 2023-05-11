@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { AgregarComponent } from '../agregar/agregar.component';
 
 @Component({
   selector: 'app-tabla',
@@ -7,13 +9,45 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./tabla.component.css']
 })
 export class TablaComponent {
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns = ['position', 'name', 'weight', 'symbol','options'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+  constructor(
+    
+    private dialog: MatDialog
+  
+  ){
+
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    
+  }
+
+  agregar() {
+    const dialogCrear = this.dialog.open(AgregarComponent, {
+      width: '350px',
+      height: '350px',
+      autoFocus: false,
+      disableClose: true,
+      data: {
+  
+      }
+    });
+    dialogCrear.afterClosed().subscribe(data => {
+      if (data != undefined) {
+        data.position=ELEMENT_DATA.length+1;
+        ELEMENT_DATA.push(data)
+        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+      } else {
+       
+      }
+    })
+
+
   }
 
 }
