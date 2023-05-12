@@ -14,3 +14,32 @@ example-container {
     min-height: 64px;
     padding: 8px 24px 0;
   }
+
+  /* .btn-edit{
+    height: 25px; 
+    position: static;
+    background: transparent;
+    border: none;
+    padding-top: 5px;
+    vertical-align: text-top;
+  }
+
+  .btn-detalle{
+    height: 25px; 
+    position: static;
+    background: transparent;
+    border: none;
+    padding-top: 5px;
+    padding-left: 10%;
+    vertical-align: text-top;
+  }
+
+  .btn-delete{
+    height: 25px;
+    position: static;
+    border: none;
+    background: transparent;
+    padding-top: 5px;
+    padding-left: 10%;
+    vertical-align: text-top;
+  } */

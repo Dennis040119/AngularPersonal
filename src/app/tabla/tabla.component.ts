@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarComponent } from '../agregar/agregar.component';
+import { Elemento } from '../elemento';
+
 
 @Component({
   selector: 'app-tabla',
   templateUrl: './tabla.component.html',
   styleUrls: ['./tabla.component.css']
 })
-export class TablaComponent {
+export class TablaComponent implements OnInit {
+  ELEMENT_DATA: Elemento[] = [];
+  adicion?:Elemento;
+
+
+
   displayedColumns = ['position', 'name', 'weight', 'symbol','options'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  data: any;
+  
 
   constructor(
     
@@ -20,11 +29,17 @@ export class TablaComponent {
 
   }
 
+  ngOnInit(): void {
+    this.construirtabla();
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     
   }
+
+  
 
   agregar() {
     const dialogCrear = this.dialog.open(AgregarComponent, {
@@ -33,49 +48,87 @@ export class TablaComponent {
       autoFocus: false,
       disableClose: true,
       data: {
-  
+        tipo :0
       }
     });
     dialogCrear.afterClosed().subscribe(data => {
       if (data != undefined) {
-        data.position=ELEMENT_DATA.length+1;
-        ELEMENT_DATA.push(data)
-        this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+        
+        
+        
+        console.log(this.ELEMENT_DATA.length)
+        data['posicion']=(this.ELEMENT_DATA.length+1);
+        console.log(data)
+        this.ELEMENT_DATA.push(data)
+        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
       } else {
        
       }
     })
-
-
+  }
+  detalle(e:Elemento) {
+    const dialogCrear = this.dialog.open(AgregarComponent, {
+      width: '350px',
+      height: '350px',
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        objeto: e,
+        tipo: 1
+      }
+    });
+    
   }
 
+  edit(e:Elemento) {
+    const dialogCrear = this.dialog.open(AgregarComponent, {
+      width: '350px',
+      height: '350px',
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        objeto: e,
+        tipo: 2
+      }
+    });
+    dialogCrear.afterClosed().subscribe(data => {
+      if (data != undefined) {
+        
+      } else {
+       
+      }
+    })
+  }
+
+  delete(e:Elemento){
+
+    var conta:number=0
+    conta =this.ELEMENT_DATA.indexOf(e);
+
+    this.ELEMENT_DATA.splice(conta,1)
+    console.log(this.ELEMENT_DATA)
+    
+    this.dataSource.filter = ""
+    
+  }
+
+ 
+
+  construirtabla(){
+    this.ELEMENT_DATA?.push();
+    this.ELEMENT_DATA?.push(new Elemento(1,'Hydrogen',1.0079,'H'));
+    this.ELEMENT_DATA?.push(new Elemento(2,'Helium',4.0026,'He'));
+    this.ELEMENT_DATA?.push(new Elemento( 3,'Lithium',  6.941,  'Li'));
+    this.ELEMENT_DATA?.push(new Elemento(4,  'Beryllium',  9.0122, 'Be'));
+    this.ELEMENT_DATA?.push(new Elemento( 5,  'Boron',  10.811,  'B'));
+    this.ELEMENT_DATA?.push(new Elemento( 6,  'Carbon', 12.0107,  'C'));
+    this.ELEMENT_DATA?.push(new Elemento(7,  'Nitrogen',  14.0067,  'N'));
+    this.ELEMENT_DATA?.push(new Elemento( 8,  'Oxygen',  15.9994,  'O'));
+    this.ELEMENT_DATA?.push(new Elemento( 9,  'Fluorine',  18.9984, 'F'));
+  }
+
+
 }
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-const ELEMENT_DATA: Element[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
+
+  
