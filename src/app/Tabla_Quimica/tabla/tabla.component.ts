@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarComponent } from '../agregar/agregar.component';
-import { Elemento } from '../elemento';
+import { Elemento } from '../../models/elemento';
 
 
 @Component({

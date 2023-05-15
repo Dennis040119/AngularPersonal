@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon'
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Elemento } from '../elemento';
+import { Elemento } from '../../models/elemento';
+
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 
