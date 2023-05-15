@@ -6,6 +6,8 @@ import {AppRoutingModule } from './app-routing.module';
 import {AppComponent } from './app.component';
 import {AlumnoComponent } from './alumno/alumno.component';
 import {TablaComponent } from './Tabla_Quimica/tabla/tabla.component';
+import { IndexComponent } from './Gamestore/index/index.component';
+
 
 //Material
 import {MatButtonModule} from '@angular/material/button';
@@ -16,6 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import {AgregarComponent } from './Tabla_Quimica/agregar/agregar.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -29,6 +32,9 @@ import {MatIconModule} from '@angular/material/icon';
     AlumnoComponent,
     TablaComponent,
     AgregarComponent,
+    IndexComponent,
+    
+
     
   ],
   imports: [
@@ -43,7 +49,8 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MatTableModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule
     
     
   ],
@@ -54,7 +61,8 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserAnimationsModule,
     MatTableModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule
 
   ],
   providers: [],
