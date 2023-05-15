@@ -25,9 +25,7 @@ export class TablaComponent implements OnInit {
     
     private dialog: MatDialog
   
-  ){
-
-  }
+  ){}
 
   ngOnInit(): void {
     this.construirtabla();

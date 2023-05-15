@@ -1,28 +1,22 @@
-.grilla{
-    display: table-column;
-    margin-bottom: 5%;
+.body{
    
-     
-    
 }
 
+
 .portada{
-    width: 100%;
+    width: 90%;
     height: 90%;
 }
 
 .card{
-    height: 90%;
-    width: 90%;
+    max-height: 60%;
+    max-width: 90%;
     display: flex;
     justify-content: center;
     cursor: pointer;
-    border:  black;
-    border-radius: 10px;
-    
-    
-    
-    
+    margin-left: 5%;
+    margin-top: 2%;
+     
 }
 
 .card:hover{
@@ -30,15 +24,20 @@
     
 }
 
+.descrip{
+    margin-left: 30%;
+}
+
 .figura{
     justify-content: center;
     
-    height: 90%;
+    max-height: 90%;
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
 }
 
-.descrip{
-    margin-left: 30%;
+.buttons{
+    margin-top: 2%;
+    float: right;
 }

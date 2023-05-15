@@ -3,17 +3,17 @@
 <mat-grid-list cols="4" rowHeight="250px">
     <mat-grid-tile class="grilla" 
         *ngFor="let tile of tiles"
-        [colspan]="tile.cols"
-        [rowspan]="tile.rows"
+        [colspan]="1"
+        [rowspan]="2"
         
         >
 
-        <div class="card" style="background-color:{{tile.color}} ;">
-            <figure class="figura">
+        <div class="card" style="background-color:{{tile.color}} ;" (click)="DetalleModal(tile)">
+            <figure class="figura" >
                 <img class="portada" src="{{tile.img}}" >
                 <br>
                 <div class="descrip">
-                    {{tile.text}}
+                    {{tile.nombre}}
                     <br>
                     {{tile.precio}} €
                 </div>

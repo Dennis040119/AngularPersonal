@@ -1,0 +1,36 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+<div class="body">
+
+    <div class="card" style="background-color:{{x.color}} ;">
+        <figure class="figura" >
+            <img class="portada" src="{{x.img}}" >
+            <br>
+            <div class="descrip">
+                {{x.nombre}}
+                <br>
+                {{x.precio}} €
+            </div>
+            
+            
+        </figure>
+    </div>
+
+
+    <div class="buttons">
+        
+        <button mat-button class="btn-buy" title="edit" (click)="cargar()">
+            
+            <mat-icon style="color: black;">shopping_cart</mat-icon>
+        </button> 
+        <button mat-button class="btn-buy" title="edit" >
+            <mat-icon style="color: black;">remove_shopping_cart</mat-icon>
+            
+        </button> 
+        <button mat-button class=" btn btn-danger" (click)="cerrar()"  >
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
+
+    </div>
+</div>
+

@@ -6,7 +6,8 @@ import {AppRoutingModule } from './app-routing.module';
 import {AppComponent } from './app.component';
 import {AlumnoComponent } from './alumno/alumno.component';
 import {TablaComponent } from './Tabla_Quimica/tabla/tabla.component';
-import { IndexComponent } from './Gamestore/index/index.component';
+import {IndexComponent } from './Gamestore/index/index.component';
+import {AgregarJuegoComponent } from './Gamestore/modal_juego/agregar-juego/agregar-juego.component';
 
 
 //Material
@@ -33,6 +34,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     TablaComponent,
     AgregarComponent,
     IndexComponent,
+    AgregarJuegoComponent
     
 
     
