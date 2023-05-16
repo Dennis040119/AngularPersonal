@@ -20,6 +20,7 @@ import {AgregarComponent } from './Tabla_Quimica/agregar/agregar.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/detalle-compra.component';
 
 
 
@@ -34,7 +35,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     TablaComponent,
     AgregarComponent,
     IndexComponent,
-    AgregarJuegoComponent
+    AgregarJuegoComponent,
+    DetalleCompraComponent
     
 
     
