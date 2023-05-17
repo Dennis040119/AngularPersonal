@@ -1,0 +1,52 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form{
+    width: 90%;
+}
+.card{
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-body{
+
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    width: 90%;
+}
+
+.dos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+  height: 50%;
+  margin-bottom: 2%;
+  position: sticky;
+  bottom: 0;
+  background-color: lightsteelblue;
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+}
+
+.btn-danger{
+    float: right;
+    align-items: flex-end;
+    background-color: rgb(255, 255, 255);
+    border: none;
+}
+.btn-success{
+  float: left;
+  margin-left: 30px; 
+  
+  border: none;
+}

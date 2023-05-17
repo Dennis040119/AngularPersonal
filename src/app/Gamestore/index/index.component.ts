@@ -1,6 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import {AgregarJuegoComponent} from 'src/app/Gamestore/modal_juego/agregar-juego/agregar-juego.component'
+import {AgregarJuegoComponent} from 'src/app/Gamestore/modal_juego/detalle-juego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
@@ -37,7 +37,7 @@ export class IndexComponent {
       width: '410px',
       height: '550px',
       autoFocus: false,
-      disableClose: true,
+      
       data: {
         objeto:vj,
         tipo :0
@@ -77,7 +77,7 @@ export class IndexComponent {
         width: '1100px',
         height: '500px',
         autoFocus: false,
-        disableClose: true,
+        
         data: this.carrito,
 
       });

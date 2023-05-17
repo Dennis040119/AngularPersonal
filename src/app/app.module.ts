@@ -7,7 +7,9 @@ import {AppComponent } from './app.component';
 import {AlumnoComponent } from './alumno/alumno.component';
 import {TablaComponent } from './Tabla_Quimica/tabla/tabla.component';
 import {IndexComponent } from './Gamestore/index/index.component';
-import {AgregarJuegoComponent } from './Gamestore/modal_juego/agregar-juego/agregar-juego.component';
+import {AgregarJuegoComponent } from './Gamestore/modal_juego/detalle-juego/detalle-juego.component';
+import { FormCompraComponent } from './Gamestore/modal_juego/form-compra/form-compra.component';
+import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/detalle-compra.component';
 
 
 //Material
@@ -20,7 +22,9 @@ import {AgregarComponent } from './Tabla_Quimica/agregar/agregar.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/detalle-compra.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 
@@ -36,7 +40,8 @@ import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/d
     AgregarComponent,
     IndexComponent,
     AgregarJuegoComponent,
-    DetalleCompraComponent
+    DetalleCompraComponent,
+    FormCompraComponent
     
 
     
@@ -54,7 +59,9 @@ import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/d
     MatTableModule,
     MatDialogModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
     
   ],
@@ -66,7 +73,9 @@ import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/d
     MatTableModule,
     MatDialogModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 
   ],
   providers: [],

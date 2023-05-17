@@ -1,0 +1,72 @@
+<div class="body">
+<h2 style="float: left; margin-top: 10px;">Formulario de Pago</h2>
+<br>
+<form [formGroup]="form" class="form" layout="column" onkeypress="alertas()"  onkeydown="if(event.keyCode==13){
+        if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
+          var form = event.target.form;
+          var index = Array.prototype.indexOf.call(form, event.target);
+          form.elements[index + 1].focus();
+          event.preventDefault();
+        }}">
+
+<div class="card" layout="column" >
+    
+    <div class="card-body">
+      
+      <mat-form-field style="width: 80%;">
+        <mat-label>Nombres</mat-label>
+        <input matInput  formControlName="nombres" name="nombres"   maxlength="50" autocomplete="off" />
+      </mat-form-field>
+      <p *ngIf="nombres==''.trim() " style="color: red; font-size: 11px;">Obligatorio*</p>
+
+      <mat-form-field style="width: 80%;">
+        <mat-label>Apellidos</mat-label>
+          <input matInput  formControlName="apellidos" name="apellidos" maxlength="50" autocomplete="off"  />
+      </mat-form-field>
+      <mat-form-field  style="width: 60%;">
+        <mat-label>Nroº Tarjeta </mat-label>
+          <input matInput  formControlName="tarjeta" (keypress)="onlyNumbers($event)" name="tarjeta" maxlength="16"  min="0"  autocomplete="off" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%;">
+        <mat-label>correo</mat-label>
+        <input matInput  formControlName="correo" name="correo" type="email"  autocomplete="off"  />
+      </mat-form-field>
+      <mat-form-field style="width: 80%;">
+        <mat-label>direccion</mat-label>
+        <input matInput  formControlName="direccion" name="direccion"  autocomplete="off"  />
+      </mat-form-field>
+      <mat-form-field  style="width: 50%;">
+        <mat-label>movil</mat-label>
+        <input matInput  formControlName="movil" (keypress)="onlyNumbers($event)" name="" maxlength="9"  min="0"  autocomplete="off"  />
+      </mat-form-field>
+      <mat-form-field  style="width: 50%;">
+        <mat-label>Fecha de entrega</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fchEntrega" >
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+  </div>
+  <div class="card-header position-sticky sticky-top" style="margin:2%;background-color:rgb(255, 255, 255);top: -25px;">
+    
+    <button mat-button class=" btn btn-danger" (click)="close()"  >
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <button mat-button class=" btn btn-success"   >
+        <mat-icon>done</mat-icon>
+    </button>
+    
+  </div>
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>

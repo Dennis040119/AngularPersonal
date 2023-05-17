@@ -2,6 +2,8 @@ import { Component,Inject,OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
+import { AgregarJuegoComponent } from '../detalle-juego/detalle-juego.component';
+import { FormCompraComponent } from '../form-compra/form-compra.component';
 
 @Component({
   selector: 'app-detalle-compra',
@@ -33,8 +35,8 @@ export class DetalleCompraComponent implements OnInit {
   ngOnInit(): void {
     
     this.carrito =this.data;
-    console.log(this.carrito);
-    console.log(this.carrito.length)
+    //console.log(this.carrito);
+    //console.log(this.carrito.length)
     this.dataSource = new MatTableDataSource(this.carrito);
     
     
@@ -51,10 +53,30 @@ export class DetalleCompraComponent implements OnInit {
   edit() {
   }
 
-  delete(){
+  delete(v:Videojuegos){
+
+    var conta:number=0
+    conta =this.carrito.indexOf(v);
+
+    this.carrito.splice(conta,1)
+    console.log(this.carrito)
+    
+    this.dataSource.filter = ""
   }
 
-  detalle(){
+  detalle(vj:Videojuegos){
+    const dialogCrear = this.dialog.open(AgregarJuegoComponent, {
+      
+      width: '410px',
+      height: '550px',
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        objeto:vj,
+        tipo :1
+      }
+    });
+    
   }
 
   crearcarrito(){
@@ -70,5 +92,20 @@ export class DetalleCompraComponent implements OnInit {
 
   close(){
     this.dialogRef.close();
+  }
+
+  formCompra(){
+
+    const dialogref =this.dialog.open(FormCompraComponent,{
+
+      width: '500px',
+      height: '700px',
+      autoFocus: false,
+      //disableClose: true,
+      data: {
+        objeto:this.carrito,
+        
+      }
+    });
   }
 }

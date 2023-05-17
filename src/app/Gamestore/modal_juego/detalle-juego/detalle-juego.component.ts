@@ -3,13 +3,14 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { Videojuegos } from 'src/app/models/videojuegos';
 
 @Component({
-  selector: 'app-agregar-juego',
-  templateUrl: './agregar-juego.component.html',
-  styleUrls: ['./agregar-juego.component.css']
+  selector: 'app-detalle-juego',
+  templateUrl: './detalle-juego.component.html',
+  styleUrls: ['./detalle-juego.component.css']
 })
 export class AgregarJuegoComponent implements OnInit {
 
   x:Videojuegos=new Videojuegos();
+  tipo:number=0
 
   constructor(
     
@@ -23,7 +24,7 @@ export class AgregarJuegoComponent implements OnInit {
   ngOnInit(): void {
     //Obtengo los datos que me envia el componente tabla(el elemento selecionado)
     this.x ={...this.data['objeto']};
-    //this.tipo = this.data['tipo'];
+    this.tipo = this.data['tipo'];
     //console.log(this.x);
 
   }
