@@ -1,7 +1,9 @@
-import { Component,Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Component,ElementRef,Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../detalle-compra/detalle-compra.component';
+import { IndexComponent } from '../../index/index.component';
+import { Videojuegos } from 'src/app/models/videojuegos';
 
 @Component({
   selector: 'app-form-compra',
@@ -10,13 +12,17 @@ import { DetalleCompraComponent } from '../detalle-compra/detalle-compra.compone
 })
 export class FormCompraComponent implements OnInit {
 
-  form!: FormGroup;
+  public form!: FormGroup;
   nombres:string=' ';
+  minDate = new Date();
+  
   booNombres:boolean=true;
 
   constructor(
     private dialogRef: MatDialogRef<FormCompraComponent>,
-    private dialogRef2: MatDialogRef<DetalleCompraComponent>,
+    private dialogRef2:MatDialog,
+    
+    private el: ElementRef,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private formBuilder: FormBuilder,
     
@@ -26,16 +32,21 @@ export class FormCompraComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const invalidControl = this.el.nativeElement.querySelector('[formControlName="nombres"]');
+    invalidControl.focus();
     this.formGroup();
+    this.minDate.setDate(this.minDate.getDate()+1)
+    console.log(this.minDate);
 
   }
 
   
   alertas(){
     this.nombres=this.form.get('nombres')?.value;
-    if(this.nombres== ("")||null){
+    console.log(this.nombres)
+     if(this.nombres== (("")||null)){
         this.booNombres=false
-    }else{this.booNombres=true}
+     }else{this.booNombres=true}
   }
 
   formGroup(){
@@ -53,7 +64,7 @@ export class FormCompraComponent implements OnInit {
 
   close(){
     this.dialogRef.close();
-    this.dialogRef2.close();
+    
     
   }
 
@@ -69,5 +80,47 @@ export class FormCompraComponent implements OnInit {
 
     return true;
   }
+
+  formValidators(){
+    
+    this.form.get('nombres')?.setValidators([Validators.required]);
+    this.form.get('nombres')?.updateValueAndValidity();
+
+    this.form.get('apellidos')?.setValidators([Validators.required]);
+    this.form.get('apellidos')?.updateValueAndValidity();
+
+    this.form.get('tarjeta')?.setValidators([Validators.required,
+      Validators.maxLength(16),Validators.minLength(16),Validators.pattern('^[0-9]*$')]);
+    this.form.get('tarjeta')?.updateValueAndValidity();
+
+    this.form.get('correo')?.setValidators([Validators.required]);
+    this.form.get('correo')?.updateValueAndValidity();
+
+    this.form.get('direccion')?.setValidators([Validators.required]);
+    this.form.get('direccion')?.updateValueAndValidity();
+
+    this.form.get('movil')?.setValidators([Validators.required,
+      Validators.maxLength(9),Validators.minLength(9),Validators.pattern('^[0-9]*$')]);
+    this.form.get('movil')?.updateValueAndValidity();
+
+    this.form.get('fchEntrega')?.setValidators([Validators.required]);
+    this.form.get('fchEntrega')?.updateValueAndValidity();
+    
+  }
+
+  pagar(){
+     this.formValidators();
+
+
+     if(this.form.invalid){
+      window.alert("Formulario invalido")
+
+     }else{
+
+      IndexComponent.carrito=[];
+      window.alert("Compra confirmada")
+      this.dialogRef2.closeAll();
+     }
+   }
 
 }

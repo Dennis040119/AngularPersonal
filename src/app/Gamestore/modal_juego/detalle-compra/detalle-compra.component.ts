@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
 import { AgregarJuegoComponent } from '../detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from '../form-compra/form-compra.component';
+import { IndexComponent } from '../../index/index.component';
 
 @Component({
   selector: 'app-detalle-compra',
@@ -91,7 +92,7 @@ export class DetalleCompraComponent implements OnInit {
   }
 
   close(){
-    this.dialogRef.close();
+    this.dialogRef.close(IndexComponent.carrito);
   }
 
   formCompra(){

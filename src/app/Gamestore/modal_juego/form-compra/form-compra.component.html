@@ -1,7 +1,7 @@
 <div class="body">
 <h2 style="float: left; margin-top: 10px;">Formulario de Pago</h2>
 <br>
-<form [formGroup]="form" class="form" layout="column" onkeypress="alertas()"  onkeydown="if(event.keyCode==13){
+<form [formGroup]="form" class="form" layout="column"   onkeydown="if(event.keyCode==13){
         if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
           var form = event.target.form;
           var index = Array.prototype.indexOf.call(form, event.target);
@@ -9,13 +9,13 @@
           event.preventDefault();
         }}">
 
-<div class="card" layout="column" >
+<div class="card" layout="column"  >
     
     <div class="card-body">
       
       <mat-form-field style="width: 80%;">
         <mat-label>Nombres</mat-label>
-        <input matInput  formControlName="nombres" name="nombres"   maxlength="50" autocomplete="off" />
+        <input matInput  formControlName="nombres" (keyup)="alertas()" name="nombres"   maxlength="50" autocomplete="off" />
       </mat-form-field>
       <p *ngIf="nombres==''.trim() " style="color: red; font-size: 11px;">Obligatorio*</p>
 
@@ -41,7 +41,7 @@
       </mat-form-field>
       <mat-form-field  style="width: 50%;">
         <mat-label>Fecha de entrega</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fchEntrega" >
+        <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="fchEntrega" >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -53,7 +53,7 @@
     <button mat-button class=" btn btn-danger" (click)="close()"  >
         <mat-icon>exit_to_app</mat-icon>
     </button>
-    <button mat-button class=" btn btn-success"   >
+    <button mat-button class=" btn btn-success" (click)="pagar()" mat-dialog-close  >
         <mat-icon>done</mat-icon>
     </button>
     

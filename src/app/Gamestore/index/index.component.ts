@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 
+declare var carrito2: Videojuegos[];
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -12,7 +13,7 @@ import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-co
 })
 export class IndexComponent {
 
-  carrito:Videojuegos[] = [];
+  static carrito:Videojuegos[] = [];
   acumulador: number=0
 
   constructor(
@@ -46,7 +47,7 @@ export class IndexComponent {
     dialogCrear.afterClosed().subscribe(data => {
       if (data != undefined) {
 
-        this.carrito.push(data);
+        IndexComponent.carrito.push(data);
         this.SumaTotal();
         //console.log(this.carrito)
 
@@ -59,7 +60,7 @@ export class IndexComponent {
   SumaTotal(){
     
 
-    this.carrito.forEach(element => {
+    IndexComponent.carrito.forEach(element => {
       this.acumulador=(this.acumulador+element.precio);
       
     });
@@ -71,19 +72,30 @@ export class IndexComponent {
 
   DetalleCarritoModal(){
 
-    if(this.carrito.length>0){
+    if(IndexComponent.carrito.length>0){
+      
       const dialogCrear = this.dialog.open(DetalleCompraComponent, {
       
         width: '1100px',
         height: '500px',
         autoFocus: false,
         
-        data: this.carrito,
+        data: IndexComponent.carrito,
 
       });
-    }else{
-      window.alert("El carrito esta vacio");
-    }
+
+      dialogCrear.afterClosed().subscribe(data => {
+
+        if (data != undefined) {
+  
+        } else {
+          console.log(IndexComponent.carrito)
+          this.acumulador=0;
+          console.log(this.acumulador)
+        }
+      });
+
+    }else{window.alert("El carrito esta vacio");}
     
   }
 
