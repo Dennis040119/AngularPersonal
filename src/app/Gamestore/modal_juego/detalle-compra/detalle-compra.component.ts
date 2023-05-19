@@ -2,7 +2,7 @@ import { Component,Inject,OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import { AgregarJuegoComponent } from '../detalle-juego/detalle-juego.component';
+import { DetalleJuegoComponent } from '../detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from '../form-compra/form-compra.component';
 import { IndexComponent } from '../../index/index.component';
 
@@ -38,7 +38,10 @@ export class DetalleCompraComponent implements OnInit {
     this.carrito =this.data;
     //console.log(this.carrito);
     //console.log(this.carrito.length)
-    this.dataSource = new MatTableDataSource(this.carrito);
+    this.dataSource = new MatTableDataSource(IndexComponent.carrito);
+
+    
+    
     
     
     
@@ -56,39 +59,41 @@ export class DetalleCompraComponent implements OnInit {
 
   delete(v:Videojuegos){
 
+    console.log(v)
     var conta:number=0
-    conta =this.carrito.indexOf(v);
-
-    this.carrito.splice(conta,1)
-    console.log(this.carrito)
+    conta =IndexComponent.carrito.indexOf(v,0);
     
-    this.dataSource.filter = ""
+
+    if(conta >-1){
+      console.log(conta)
+      IndexComponent.carrito.splice(conta,1)
+      this.dataSource.filter ="";
+    
+    }else{
+      console.log("No se encuentra en el carrito")
+    }
   }
 
   detalle(vj:Videojuegos){
-    const dialogCrear = this.dialog.open(AgregarJuegoComponent, {
+    const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
-      width: '410px',
-      height: '550px',
+      width: '600px',
+      height: '350px',
       autoFocus: false,
-      disableClose: true,
+      
       data: {
         objeto:vj,
         tipo :1
       }
     });
-    
-  }
+    dialogCrear.afterClosed().subscribe(data => {
+      
+       
+        this.dataSource.filter = ""
+        //console.log(this.carrito)
 
-  crearcarrito(){
-    this.carrito2 = [
-      {id:1,nombre: 'BattleField 3',descripcion:"guerra",plataformas:"xbox", color: '#E36464',precio:20.99,img:'../../assets/battlefield3.jpg'},
-      {id:2,nombre:'Destiny',descripcion:"fantasia",plataformas:"play 4",  color: 'lightgreen',precio:10.99,img:'../../assets/Destiny.jpg'},
-      {id:3,nombre: 'Gears of war 2',descripcion:"shooter",plataformas:"xbox one", color: '#CB6A26',precio:35.99,img:'../../assets/GearsOfWar2.jpg'},
-      {id:4,nombre: 'HomeFront',descripcion:"RPG",plataformas:"PC", color: '#909090',precio:40.99,img:'../../assets/HomeFront.jpg'},
-      {id:5,nombre: 'Mario Galaxy',descripcion:"plataforma",plataformas:"Nintendo", color: '#4751CA',precio:30.99,img:'../../assets/Mario Galaxy.jpg'},
-      {id:6,nombre: 'six',descripcion:"guerra",plataformas:"xbox", color: '#DDBDF1',precio:10.99,img:'../../assets/battlefield3.jpg'},
-    ];
+      
+    });
   }
 
   close(){
@@ -101,6 +106,7 @@ export class DetalleCompraComponent implements OnInit {
 
       width: '500px',
       height: '700px',
+      
       autoFocus: false,
       //disableClose: true,
       data: {
@@ -108,5 +114,6 @@ export class DetalleCompraComponent implements OnInit {
         
       }
     });
+    
   }
 }

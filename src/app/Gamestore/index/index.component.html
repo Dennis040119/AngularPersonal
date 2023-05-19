@@ -1,12 +1,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<footer>
-
-
-<button mat-button class="btn-buy" title="edit" (click)="DetalleCarritoModal()">
+<div class="body">
+<br>
+<div class="footer">
+<button mat-button class="btn-buy" title="edit" (click)="DetalleCarritoModal()" >
         <mat-icon style="color: black;">shopping_cart</mat-icon>
         {{acumulador| number: '1.2-2'}}
 </button> 
-</footer>
+</div>
 <mat-grid-list cols="4" rowHeight="250px">
     <mat-grid-tile class="grilla" 
         *ngFor="let tile of tiles"
@@ -35,3 +35,5 @@
       
     </mat-grid-tile>
   </mat-grid-list>
+
+</div>

@@ -1,3 +1,20 @@
+.body{
+   
+    display: flex;
+    flex-direction: column;
+
+}
+
+.footer{
+    margin-top: 5%;
+    
+}
+
+.btn-buy{
+    background-color: aliceblue;
+    float: right;
+}
+
 .grilla{
     display: table-column;
     margin-bottom: 5%;
@@ -26,7 +43,7 @@
 }
 
 .card:hover{
-    opacity: 70%;
+    opacity: 80%;
     
 }
 

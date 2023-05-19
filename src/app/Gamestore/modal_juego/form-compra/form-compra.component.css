@@ -1,7 +1,22 @@
 .body{
     display: flex;
+    height: 100%;
     flex-direction: column;
     align-items: center;
+    background-color: rgba(76, 79, 79, 0.718);
+    
+}
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+}
+
+.span_timer{
+  float: right; 
+  margin-top: 18px;
+  margin-left: 45%;
 }
 
 .form{
@@ -41,7 +56,7 @@
 .btn-danger{
     float: right;
     align-items: flex-end;
-    background-color: rgb(255, 255, 255);
+    background-color:none;
     border: none;
 }
 .btn-success{

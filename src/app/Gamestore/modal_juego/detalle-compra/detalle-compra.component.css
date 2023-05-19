@@ -1,8 +1,11 @@
 .example-container {
     display: flex;
     flex-direction: column;
-    max-height: 500px;
-    min-width: 300px;
+    
+    
+  }
+  .btn{
+    background-color: aliceblue;
   }
   
   .mat-table {
@@ -12,6 +15,7 @@
 
   .example-header {
     min-height: 64px;
+    width: 90%;
     padding: 8px 24px 0;
   }
 

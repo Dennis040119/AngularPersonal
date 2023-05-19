@@ -1,43 +1,58 @@
 .body{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   height: 100%;
+
+
+}
+
+.figure{
+   display: flex;
+   height: 90%;
+   flex-direction: row;
    
+
 }
 
 
 .portada{
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 95%;
 }
 
 .card{
-    max-height: 60%;
-    max-width: 90%;
+    height: 100%;
+    width: 60%;
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    cursor: pointer;
-    margin-left: 5%;
-    margin-top: 2%;
-     
-}
-
-.card:hover{
-    opacity: 70%;
     
-}
-
-.descrip{
-    margin-left: 30%;
+    margin-left: 1%;
+    margin-top: 1%;
+     
 }
 
 .figura{
     justify-content: center;
-    
-    max-height: 90%;
-    width: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
+    height: 100%;
+    width: 100%; 
+}
+.descripcion{
+margin-left: 2%;
+margin-right: 2%;
+max-width: 50%;
+word-break:break-all;
+
 }
 
 .buttons{
-    margin-top: 2%;
-    float: right;
+    margin-top: 20%;
+    float: left;
+    width: 100%;
+}
+
+.btn-buy{
+    
+    margin-left: 2%;
 }

@@ -1,6 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import {AgregarJuegoComponent} from 'src/app/Gamestore/modal_juego/detalle-juego/detalle-juego.component'
+import {DetalleJuegoComponent} from 'src/app/Gamestore/modal_juego/detalle-juego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
@@ -21,22 +21,22 @@ export class IndexComponent {
   ) {}
 
   tiles:Videojuegos[] = [
-    {id:1,nombre: 'BattleField 3',descripcion:"guerra",plataformas:"xbox", color: '#E36464',precio:20.99,img:'../../assets/battlefield3.jpg'},
-    {id:2,nombre:'Destiny',descripcion:"fantasia",plataformas:"play 4",  color: 'lightgreen',precio:10.99,img:'../../assets/Destiny.jpg'},
-    {id:3,nombre: 'Gears of war 2',descripcion:"shooter",plataformas:"xbox one", color: '#CB6A26',precio:35.99,img:'../../assets/GearsOfWar2.jpg'},
-    {id:4,nombre: 'HomeFront',descripcion:"RPG",plataformas:"PC", color: '#909090',precio:40.99,img:'../../assets/HomeFront.jpg'},
-    {id:5,nombre: 'Mario Galaxy',descripcion:"plataforma",plataformas:"Nintendo", color: '#4751CA',precio:30.99,img:'../../assets/Mario Galaxy.jpg'},
-    {id:6,nombre: 'six',descripcion:"guerra",plataformas:"xbox", color: '#DDBDF1',precio:10.99,img:'../../assets/battlefield3.jpg'},
+    {id:1,nombre: 'BattleField 3',descripcion:"sdfhosdhfoisdhfoihsdofihsdofhoisdhfoshdfiodshofhoirhwoehoiwhrowheorhwoehrowhro",plataformas:"xbox", color: '#E36464',precio:20.99,img:'../../assets/battlefield3.jpg'},
+    {id:2,nombre:'Destiny',descripcion:"ngdofhgoidhfoighdfoihgoidfgsgsgsgshgohsdfoighdsfgdgdggsgssgggggggggggsgggggggggofi",plataformas:"play 4",  color: 'lightgreen',precio:10.99,img:'../../assets/Destiny.jpg'},
+    {id:3,nombre: 'Gears of war 2',descripcion:"fngdlhgoidfhogihfdioghoifdhgoidhoighdoghodifdgbkdbshgldbfogdoihgodhgoidfoighfgods",plataformas:"xbox one", color: '#CB6A26',precio:35.99,img:'../../assets/GearsOfWar2.jpg'},
+    {id:4,nombre: 'HomeFront',descripcion:"gdnfkjghfdhgoifdhgoihfdoighdoighodishgoshgoishgoishoghsgsg",plataformas:"PC", color: '#909090',precio:40.99,img:'../../assets/HomeFront.jpg'},
+    {id:5,nombre: 'Mario Galaxy',descripcion:"dfghoifdhgofhdoighoifdhfgiohdoighoidhghdfioghdofhgoidhfgfdioonboinfb",plataformas:"Nintendo", color: '#4751CA',precio:30.99,img:'../../assets/Mario Galaxy.jpg'},
+    {id:6,nombre: 'six',descripcion:"fdtjoirejtjiojdtiohdiohgoidhgoihdoighoshgoishogiorggoirhgoi",plataformas:"xbox", color: '#DDBDF1',precio:10.99,img:'../../assets/battlefield3.jpg'},
   ];
 
 
 
   DetalleModal(vj:Videojuegos){
 
-    const dialogCrear = this.dialog.open(AgregarJuegoComponent, {
+    const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
-      width: '410px',
-      height: '550px',
+      width: '600px',
+      height: '350px',
       autoFocus: false,
       
       data: {
@@ -48,18 +48,17 @@ export class IndexComponent {
       if (data != undefined) {
 
         IndexComponent.carrito.push(data);
-        this.SumaTotal();
+        
         //console.log(this.carrito)
 
-      } else {
-       
-      }
+      } else {}
+
+      this.SumaTotal();
     })
   }
 
   SumaTotal(){
-    
-
+    this.acumulador=0;
     IndexComponent.carrito.forEach(element => {
       this.acumulador=(this.acumulador+element.precio);
       
@@ -86,15 +85,11 @@ export class IndexComponent {
 
       dialogCrear.afterClosed().subscribe(data => {
 
-        if (data != undefined) {
-  
-        } else {
           console.log(IndexComponent.carrito)
-          this.acumulador=0;
           console.log(this.acumulador)
-        }
+          this.SumaTotal()
       });
-
+      
     }else{window.alert("El carrito esta vacio");}
     
   }

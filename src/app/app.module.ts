@@ -7,7 +7,7 @@ import {AppComponent } from './app.component';
 import {AlumnoComponent } from './alumno/alumno.component';
 import {TablaComponent } from './Tabla_Quimica/tabla/tabla.component';
 import {IndexComponent } from './Gamestore/index/index.component';
-import {AgregarJuegoComponent } from './Gamestore/modal_juego/detalle-juego/detalle-juego.component';
+import {DetalleJuegoComponent } from './Gamestore/modal_juego/detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from './Gamestore/modal_juego/form-compra/form-compra.component';
 import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/detalle-compra.component';
 
@@ -39,7 +39,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     TablaComponent,
     AgregarComponent,
     IndexComponent,
-    AgregarJuegoComponent,
+    DetalleJuegoComponent,
     DetalleCompraComponent,
     FormCompraComponent
     

@@ -15,6 +15,7 @@ export class FormCompraComponent implements OnInit {
   public form!: FormGroup;
   nombres:string=' ';
   minDate = new Date();
+  tiempo: { min: number; sec: number; } = {min:0,sec:0}; 
   
   booNombres:boolean=true;
 
@@ -36,8 +37,27 @@ export class FormCompraComponent implements OnInit {
     invalidControl.focus();
     this.formGroup();
     this.minDate.setDate(this.minDate.getDate()+1)
-    console.log(this.minDate);
+    //console.log(this.minDate);
+    
+    setTimeout(() => {window.confirm("Se acabo el tiempo"),this.dialogRef.close();},300000);
+    this.startTimer();
 
+    
+  }
+
+  startTimer() {
+    this.tiempo = { min: 5, sec: 0 } // choose whatever you want
+
+    this.tiempo.sec.toFixed(2)
+    let intervalId = setInterval(() => {
+      if (this.tiempo.sec - 1 == -1) {
+        this.tiempo.min -= 1;
+        this.tiempo.sec = 59
+        this.tiempo.sec.toFixed(2)
+      } 
+      else this.tiempo.sec -= 1
+      if (this.tiempo.min === 0 && this.tiempo.sec == 0) clearInterval(intervalId)
+    }, 1000)
   }
 
   
@@ -113,7 +133,7 @@ export class FormCompraComponent implements OnInit {
 
 
      if(this.form.invalid){
-      window.alert("Formulario invalido")
+      window.alert("Formulario invalido");
 
      }else{
 
