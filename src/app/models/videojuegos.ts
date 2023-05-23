@@ -5,7 +5,10 @@ export class Videojuegos {
     precio!: number;
     color!: string;
     descripcion!: string;
-    plataformas!: string;
+    plataforma1!: string;
+    plataforma2!: string;
+    plataforma3!: string;
+    rol!:string;
     img!: string;
     
 

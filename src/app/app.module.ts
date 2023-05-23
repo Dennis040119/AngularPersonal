@@ -10,6 +10,8 @@ import {IndexComponent } from './Gamestore/index/index.component';
 import {DetalleJuegoComponent } from './Gamestore/modal_juego/detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from './Gamestore/modal_juego/form-compra/form-compra.component';
 import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/detalle-compra.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 
 //Material
@@ -50,6 +52,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     //Material
     MatFormFieldModule,
     MatButtonModule,

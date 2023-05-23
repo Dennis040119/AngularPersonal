@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Primera_App';
+
+  constructor(
+    
+    private router: Router,
+    
+  ) {
+   
+  }
 }

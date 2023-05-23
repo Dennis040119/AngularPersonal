@@ -1,33 +1,48 @@
-import { Component, VERSION } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { Videojuegos } from 'src/app/models/videojuegos';
 import {DetalleJuegoComponent} from 'src/app/Gamestore/modal_juego/detalle-juego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
+import { VideoJuegoServiceService } from 'src/app/services/video-juego-service.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Usuario } from 'src/app/models/usuario';
 
 declare var carrito2: Videojuegos[];
+
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent {
+export class IndexComponent implements OnInit {
 
   static carrito:Videojuegos[] = [];
   acumulador: number=0
+  tiles:Videojuegos[] = []
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private VideoJuegoService:VideoJuegoServiceService,
+    private UsuarioService:UsuarioService
   ) {}
 
-  tiles:Videojuegos[] = [
-    {id:1,nombre: 'BattleField 3',descripcion:"sdfhosdhfoisdhfoihsdofihsdofhoisdhfoshdfiodshofhoirhwoehoiwhrowheorhwoehrowhro",plataformas:"xbox", color: '#E36464',precio:20.99,img:'../../assets/battlefield3.jpg'},
-    {id:2,nombre:'Destiny',descripcion:"ngdofhgoidhfoighdfoihgoidfgsgsgsgshgohsdfoighdsfgdgdggsgssgggggggggggsgggggggggofi",plataformas:"play 4",  color: 'lightgreen',precio:10.99,img:'../../assets/Destiny.jpg'},
-    {id:3,nombre: 'Gears of war 2',descripcion:"fngdlhgoidfhogihfdioghoifdhgoidhoighdoghodifdgbkdbshgldbfogdoihgodhgoidfoighfgods",plataformas:"xbox one", color: '#CB6A26',precio:35.99,img:'../../assets/GearsOfWar2.jpg'},
-    {id:4,nombre: 'HomeFront',descripcion:"gdnfkjghfdhgoifdhgoihfdoighdoighodishgoshgoishgoishoghsgsg",plataformas:"PC", color: '#909090',precio:40.99,img:'../../assets/HomeFront.jpg'},
-    {id:5,nombre: 'Mario Galaxy',descripcion:"dfghoifdhgofhdoighoifdhfgiohdoighoidhghdfioghdofhgoidhfgfdioonboinfb",plataformas:"Nintendo", color: '#4751CA',precio:30.99,img:'../../assets/Mario Galaxy.jpg'},
-    {id:6,nombre: 'six',descripcion:"fdtjoirejtjiojdtiohdiohgoidhgoihdoighoshgoishogiorggoirhgoi",plataformas:"xbox", color: '#DDBDF1',precio:10.99,img:'../../assets/battlefield3.jpg'},
-  ];
+
+  ngOnInit(): void {
+    this.listarVideoJuegos();
+    this.UsuarioService.listarUsuarios().subscribe((data =>
+      {
+        data.forEach(Usuario => {
+          console.log(Usuario);
+          
+
+          
+        });
+      }))
+  }
+
+  
+    
 
 
 
@@ -95,4 +110,10 @@ export class IndexComponent {
   }
 
 
+  listarVideoJuegos(){
+    this.VideoJuegoService.listarVideoJuegos().subscribe((data) =>{
+
+      this.tiles=data;
+    })
+  }
 }
