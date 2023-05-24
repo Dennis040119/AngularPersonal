@@ -30,15 +30,8 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarVideoJuegos();
-    this.UsuarioService.listarUsuarios().subscribe((data =>
-      {
-        data.forEach(Usuario => {
-          console.log(Usuario);
-          
-
-          
-        });
-      }))
+    console.log(this.tiles)
+    
   }
 
   

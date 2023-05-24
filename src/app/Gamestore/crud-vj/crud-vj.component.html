@@ -1,0 +1,60 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+
+<div class="body">
+
+    <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+          
+        </mat-form-field>
+        <button mat-raised-button (click)="agregar()" style="margin-left: 2%;">Agregar</button>
+
+    </div>
+      
+    <mat-table #table [dataSource]="dataSource" style="background-color: aliceblue;">
+  
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="precio">
+        <mat-header-cell *matHeaderCellDef> Peso </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.precio}} $ </mat-cell>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="plataformas">
+        <mat-header-cell *matHeaderCellDef> Plataformas </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.plataforma1}},{{element.plataforma2}},{{element.plataforma3}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef> options </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+
+        <button mat-button class="btn-edit" title="edit" (click)="edit(element)">
+          <mat-icon style="color: black;">edit</mat-icon>
+        </button> 
+        <button mat-button class="btn-detalle" title="open" (click)="detalle(element)">
+            <mat-icon style="color: #3f51b5;">visibility</mat-icon>
+        </button>
+        <button mat-button class="btn-delete" title="close"  (click)="delete(element)">
+            <mat-icon style="color: red;">delete</mat-icon>
+        </button>
+        
+        </mat-cell>
+      </ng-container>
+  
+
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>

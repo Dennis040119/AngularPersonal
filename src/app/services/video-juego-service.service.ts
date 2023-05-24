@@ -20,4 +20,15 @@ export class VideoJuegoServiceService {
    listarVideoJuegos(): Observable<Videojuegos[]> {
     return this.http.get<Videojuegos[]>(baseUrl + '/videoJuegoList');
   }
+
+  registrarVj(Vj:Videojuegos){
+    return this.http.post(baseUrl+'/videoJuegoSave',Vj);
+  }
+  actualizarVj(Vj:Videojuegos){
+    return this.http.put(baseUrl+'/videoJuegoPut',Vj);
+  }
+
+  eliminarVj(id:number){
+    return this.http.delete(baseUrl+'/videoJuegoDelete/'+id);
+  }
 }

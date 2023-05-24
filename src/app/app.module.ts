@@ -10,6 +10,8 @@ import {IndexComponent } from './Gamestore/index/index.component';
 import {DetalleJuegoComponent } from './Gamestore/modal_juego/detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from './Gamestore/modal_juego/form-compra/form-compra.component';
 import { DetalleCompraComponent } from './Gamestore/modal_juego/detalle-compra/detalle-compra.component';
+import { ModalVjComponent } from './Gamestore/crud-vj/modal-vj/modal-vj.component';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
@@ -26,6 +28,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { CrudVjComponent } from './Gamestore/crud-vj/crud-vj.component';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 
@@ -43,7 +48,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     IndexComponent,
     DetalleJuegoComponent,
     DetalleCompraComponent,
-    FormCompraComponent
+    FormCompraComponent,
+    CrudVjComponent,
+    ModalVjComponent,
+    
     
 
     
@@ -64,7 +72,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatIconModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
     
     
   ],
@@ -78,7 +87,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatIconModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
 
   ],
   providers: [],

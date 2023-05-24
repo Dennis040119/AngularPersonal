@@ -1,0 +1,85 @@
+<div class="body">
+  <div class="titulo">
+    <h2 style="float: left; margin-top: 10px;">Registro VideoJuego</h2>
+  </div>
+
+<br>
+<form [formGroup]="form" class="form" layout="column"   onkeydown="if(event.keyCode==13){
+        if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
+          var form = event.target.form;
+          var index = Array.prototype.indexOf.call(form, event.target);
+          form.elements[index + 1].focus();
+          event.preventDefault();
+        }}">
+
+<div class="card" layout="column"  >
+    
+    <div class="card-body">
+      
+      <mat-form-field style="width: 80%;">
+        <mat-label>Nombre</mat-label>
+        <input matInput  formControlName="nombre"  name="nombre"   maxlength="50" autocomplete="off" />
+      </mat-form-field>
+      <p *ngIf="nombres==''.trim() " style="color: red; font-size: 11px;">Obligatorio*</p>
+      <mat-form-field  style="width: 60%;">
+        <mat-label>Precio</mat-label>
+          <input matInput  formControlName="precio" (keypress)="onlyNumbers($event)" name="precio" maxlength="16"  min="0"  autocomplete="off" />
+      </mat-form-field>
+      <mat-form-field style="width: 80%;">
+        <mat-label>descripcion</mat-label>
+        <input matInput  formControlName="descripcion" name="descripcion" type="text"  autocomplete="off"  />
+      </mat-form-field>
+      <mat-form-field style="width: 40%;">
+        <mat-select placeholder="Plataforma 1" formControlName="plataforma1">
+          <mat-option *ngFor="let plata of plataformas" [value]="plata.nombre">
+            {{ plata.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 40%;">
+        <mat-select placeholder="Plataforma 2" formControlName="plataforma1">
+          <mat-option *ngFor="let plata of plataformas" [value]="plata.nombre">
+            {{ plata.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 40%;">
+        <mat-select placeholder="Plataforma 3" formControlName="plataforma1">
+          <mat-option *ngFor="let plata of plataformas" [value]="plata.nombre">
+            {{ plata.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field  style="width: 50%;">
+        <mat-label>img</mat-label>
+        <input matInput  formControlName="img"  name="img" type="text" maxlength="40"  min="0"  autocomplete="off"  />
+      </mat-form-field>
+      <mat-form-field style="width: 80%;">
+        <mat-label>color</mat-label>
+        <input matInput  formControlName="color" name="color"  autocomplete="off"  />
+      </mat-form-field>
+
+    </div>
+  </div>
+  <div class="card-header position-sticky sticky-top" style="margin:2%;background-color:rgb(255, 255, 255);top: -25px;">
+    
+    <button mat-button class=" btn btn-danger" (click)="close()"  >
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <button mat-button class=" btn btn-success" (click)="registar()"  >
+        <mat-icon>done</mat-icon>
+    </button>
+    
+  </div>
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
