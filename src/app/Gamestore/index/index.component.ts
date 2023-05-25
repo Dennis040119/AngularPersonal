@@ -106,7 +106,10 @@ export class IndexComponent implements OnInit {
   listarVideoJuegos(){
     this.VideoJuegoService.listarVideoJuegos().subscribe((data) =>{
 
-      this.tiles=data;
+      if(data!=undefined){
+        this.tiles=data;
+      }
+      
     })
   }
 }

@@ -21,7 +21,7 @@
         
         <div class="buttons">
         
-            <button mat-button class="btn-buy" title="agregar" (click)="cargar()">
+            <button mat-button class="btn-buy" title="agregar" *ngIf="tipo!=2" (click)="cargar()">
                 <mat-icon style="color: black;">shopping_cart</mat-icon>
             </button> 
             <button mat-button class="btn-buy" title="eliminar" *ngIf="tipo==1"  (click)="quitar(x)">

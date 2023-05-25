@@ -30,33 +30,40 @@
         <input matInput  formControlName="descripcion" name="descripcion" type="text"  autocomplete="off"  />
       </mat-form-field>
       <mat-form-field style="width: 40%;">
-        <mat-select placeholder="Plataforma 1" formControlName="plataforma1">
+        <mat-select placeholder="Plataforma 1" formControlName="plataforma1" (selectionChange)="cambioPLataformas()">
           <mat-option *ngFor="let plata of plataformas" [value]="plata.nombre">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field style="width: 40%;">
-        <mat-select placeholder="Plataforma 2" formControlName="plataforma1">
-          <mat-option *ngFor="let plata of plataformas" [value]="plata.nombre">
+      <mat-form-field style="width: 50%;">
+        <mat-select placeholder="Plataforma 2" formControlName="plataforma2" (selectionChange)="cambioPLataformas2()">
+          <mat-option *ngFor="let plata of plataformas2" [value]="plata.nombre">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field style="width: 40%;">
-        <mat-select placeholder="Plataforma 3" formControlName="plataforma1">
-          <mat-option *ngFor="let plata of plataformas" [value]="plata.nombre">
+      <mat-form-field style="width: 50%;">
+        <mat-select placeholder="Plataforma 3" formControlName="plataforma3" >
+          <mat-option *ngFor="let plata of plataformas3" [value]="plata.nombre">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field  style="width: 50%;">
-        <mat-label>img</mat-label>
-        <input matInput  formControlName="img"  name="img" type="text" maxlength="40"  min="0"  autocomplete="off"  />
+      <mat-form-field style="width: 50%;">
+        <mat-select placeholder="Portada" formControlName="img" >
+          <mat-option *ngFor="let img of arrayImg" [value]="img['path']">
+            {{ img['nombre'] }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <mat-form-field style="width: 80%;">
-        <mat-label>color</mat-label>
-        <input matInput  formControlName="color" name="color"  autocomplete="off"  />
+      <mat-form-field style="width: 50%;"  >
+        <mat-select placeholder="Color" formControlName="color"  >
+          <mat-option  *ngFor="let col of arrayColores" [value]="col.nombre" style="background-color: {{col.nombre}};">
+            {{ col.nombre }}
+          </mat-option>
+
+        </mat-select>
       </mat-form-field>
 
     </div>
@@ -66,7 +73,7 @@
     <button mat-button class=" btn btn-danger" (click)="close()"  >
         <mat-icon>exit_to_app</mat-icon>
     </button>
-    <button mat-button class=" btn btn-success" (click)="registar()"  >
+    <button mat-button class=" btn btn-success" (click)="registar()" (click)=actualiza()  >
         <mat-icon>done</mat-icon>
     </button>
     
