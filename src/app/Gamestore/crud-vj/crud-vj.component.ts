@@ -6,6 +6,7 @@ import { VideoJuegoServiceService } from 'src/app/services/video-juego-service.s
 import { ModalVjComponent } from './modal-vj/modal-vj.component';
 import { DetalleJuegoComponent } from '../modal_juego/detalle-juego/detalle-juego.component';
 import { IndexComponent } from '../index/index.component';
+import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
 
 @Component({
   selector: 'app-crud-vj',
@@ -88,19 +89,35 @@ export class CrudVjComponent implements OnInit {
   }
 
   delete(vj:Videojuegos){
-    this.VjService.eliminarVj(vj.id).subscribe((data) =>{
-      this.respta = data
-
-      try {
-        if(this.respta['mensaje'] == "Elimnado correctamente"){window.alert(this.respta['mensaje'])}else{
-        window.alert(this.respta['mensaje'])}
-      } catch (error) {window.alert(this.respta['mensaje']+"  "+error)}
-      finally{this.construirtabla()}
-      
 
 
+     const dialogConfirm=this.dialog.open(DialogConfirmComponent,{
 
+      width: '200px',
+      height: '100px',
+      autoFocus: false,
+      role:'dialog',
+      data:{objeto:vj}
+
+    });
+
+    dialogConfirm.afterClosed().subscribe(data =>{
+      console.log(data)
+      if(data=="Si"){
+        this.VjService.eliminarVj(vj.id).subscribe((data) =>{
+          this.respta = data
+    
+          try {
+            if(this.respta['mensaje'] == "Elimnado correctamente"){window.alert(this.respta['mensaje'])}else{
+            window.alert(this.respta['mensaje'])}
+          } catch (error) {window.alert(this.respta['mensaje']+"  "+error)}
+          finally{this.construirtabla()}
+        })
+      }else{
+        this.construirtabla()
+      }
     })
+    
   }
 
   detalle(vj:Videojuegos){

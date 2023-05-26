@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Plataforma } from 'src/app/models/plataforma';
 import { Videojuegos } from 'src/app/models/videojuegos';
+import { EnumService } from 'src/app/services/enum.service';
 import { VideoJuegoServiceService } from 'src/app/services/video-juego-service.service';
 
 @Component({
@@ -38,6 +39,7 @@ export class ModalVjComponent implements OnInit {
     private dialog: MatDialogRef<ModalVjComponent>,
     private el: ElementRef,
     private vjService:VideoJuegoServiceService,
+    private enumService:EnumService,
     
     
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -65,11 +67,6 @@ export class ModalVjComponent implements OnInit {
       console.log(this.tipo)
       this.setVjRecepcion();
     }
-   
-    
-
-   
-    
   }
 
   formGroup(){
@@ -115,7 +112,7 @@ export class ModalVjComponent implements OnInit {
   registar(){
     this.formValidators();
 
-      console.log(this.tipo)
+      
      if(this.form.invalid || this.tipo=="edit"){
       if(this.form.invalid)  {window.alert("Formulario invalido");}  
      }else{
@@ -124,11 +121,11 @@ export class ModalVjComponent implements OnInit {
         this.constructorObj()
         this.vjService.registrarVj(this.objRegistrar).subscribe((data)=>{
           this.data=data
-          console.log(data)
+          
           if( this.data["mensaje"] == "Registrado correctamente"){
             this.close();
           }else{
-            
+            window.alert(this.data["mensaje"])
           }
         })
       } catch (error) {
@@ -217,34 +214,17 @@ export class ModalVjComponent implements OnInit {
   
 
   comboPLataforma1(){
-    this.plataformas=[]
-    this.plataformas.push(new Plataforma("PC","Microsoft",5))
-    this.plataformas.push(new Plataforma("Play Station 4","Sony",4))
-    this.plataformas.push(new Plataforma("Play Station 5","Sony",5))
-    this.plataformas.push(new Plataforma("Xbox 360","Microsoft",4))
-    this.plataformas.push(new Plataforma("Xbox One","Microsoft",5))
-    this.plataformas.push(new Plataforma("Nintendo Switch","Nintendo",5))
+    this.plataformas=[];
+    this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas=data})
+   
   }
 
-  comboPLataforma2(){
-    this.plataformas2=[]
-    this.plataformas2.push(new Plataforma("PC","Microsoft",5))
-    this.plataformas2.push(new Plataforma("Play Station 4","Sony",4))
-    this.plataformas2.push(new Plataforma("Play Station 5","Sony",5))
-    this.plataformas2.push(new Plataforma("Xbox 360","Microsoft",4))
-    this.plataformas2.push(new Plataforma("Xbox One","Microsoft",5))
-    this.plataformas2.push(new Plataforma("Nintendo Switch","Nintendo",5))
-  }
+  
 
   comboPLataforma3(){
 
-    this.plataformas3=[]
-    this.plataformas3.push(new Plataforma("PC","Microsoft",5))
-    this.plataformas3.push(new Plataforma("Play Station 4","Sony",4))
-    this.plataformas3.push(new Plataforma("Play Station 5","Sony",5))
-    this.plataformas3.push(new Plataforma("Xbox 360","Microsoft",4))
-    this.plataformas3.push(new Plataforma("Xbox One","Microsoft",5))
-    this.plataformas3.push(new Plataforma("Nintendo Switch","Nintendo",5))
+    this.plataformas3=[];
+    this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas3=data})
   }
 
   formValidators(){
@@ -269,8 +249,7 @@ export class ModalVjComponent implements OnInit {
 
   cambioPLataformas(){
 
-    this.comboPLataforma2()
-    this.comboPLataforma3()
+    this.plataformas2=[]
 
     this.form.get("plataforma2")?.setValue("");
     this.form.get("plataforma3")?.setValue("");
@@ -281,22 +260,28 @@ export class ModalVjComponent implements OnInit {
 
       var nombre=this.form.get("plataforma1")?.value
       var conta:number=0
-      conta =this.plataformas2.findIndex( (vj) => vj.nombre==nombre);
-
-      if(conta >-1){
-        
-        this.plataformas2.splice(conta,1)
-        this.plataformas3.splice(conta,1)
-        
-      }else{console.log("No se encuentra en el combobox")}
+      this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas2=data
+        conta =this.plataformas2.findIndex( (plata) => plata.nombre==nombre);
+        console.log(this.plataformas2)
+        if(conta >-1){
+          
+          this.plataformas2.splice(conta,1)
+          this.plataformas3.splice(conta,1)
+          
+        }else{console.log("No se encuentra en el combobox")}
+      
+      
+      
+      })
+     
     }
 
   }
 
   cambioPLataformas2(){
-    this.comboPLataforma3()
-
     
+
+    this.plataformas3=[]
 
     this.form.get("plataforma3")?.enable();
 
@@ -304,17 +289,23 @@ export class ModalVjComponent implements OnInit {
 
       var conta1:number=0
       var conta2:number=0
-
-      conta1 =this.plataformas3.findIndex( (vj) => vj.nombre==this.form.get("plataforma1")?.value);
+      this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas3=data
+      
+        conta1 =this.plataformas3.findIndex( (vj) => vj.nombre==this.form.get("plataforma1")?.value);
       
       
-      if(conta1 >-1){
+        if(conta1 >-1){
         
         this.plataformas3.splice(conta1,1)
         ///////////////////////////////
         conta2 =this.plataformas3.findIndex( (vj) => vj.nombre==this.form.get("plataforma2")?.value);
-       if(conta2 >-1){this.plataformas3.splice(conta2,1)}
-                      }else{}
+        if(conta2 >-1){this.plataformas3.splice(conta2,1)}
+                      
+        }else{console.log("No se encuentra en el combobox")}
+      
+      
+      })
+      
 
     }
   }

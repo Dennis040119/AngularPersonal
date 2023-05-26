@@ -26,13 +26,22 @@
       <!-- Weight Column -->
       <ng-container matColumnDef="precio">
         <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.precio}} $ </mat-cell>
+        <mat-cell *matCellDef="let element"> 
+          {{element.precio| number:'1.2-2'}} $ </mat-cell>
       </ng-container>
   
       <!-- Symbol Column -->
       <ng-container matColumnDef="plataformas">
         <mat-header-cell *matHeaderCellDef> Plataformas </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.plataforma1}},{{element.plataforma2}},{{element.plataforma3}} </mat-cell>
+        <mat-cell *matCellDef="let element"> 
+          <div *ngIf="(element.plataforma2 && element.plataforma3) == '' ">{{element.plataforma1}}</div>
+          <div *ngIf="((element.plataforma3) == '') && ((element.plataforma2) != '') ">{{element.plataforma1}},{{element.plataforma2}}</div>
+          <div *ngIf="(element.plataforma2 && element.plataforma3) != '' ">{{element.plataforma1}},{{element.plataforma2}}
+            ,{{element.plataforma3}}
+          </div>
+          
+          
+        </mat-cell>
       </ng-container>
       
       <ng-container matColumnDef="options">
