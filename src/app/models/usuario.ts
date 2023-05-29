@@ -1,13 +1,13 @@
 export class Usuario {
 
-    pk!: pk;
+    id!: number;
+    user!: string;
+    password!: string;
     email!:string;
     tarjetaCredito!:string;
     direccion!:string;
+    rol!: string;
     
 }
 
-interface pk {
-    username: string;
-    password: string;
-  }
+

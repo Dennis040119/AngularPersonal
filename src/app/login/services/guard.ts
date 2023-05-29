@@ -12,8 +12,8 @@ export class Guard implements CanActivate {
     
     canActivate(): boolean {
 
-        const currentUser=localStorage.getItem("Username");
-        if(currentUser=="usuario01")
+        const currentUser=localStorage.getItem("key");
+        if(currentUser=="true")
         {
             return true
         }else{

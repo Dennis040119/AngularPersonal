@@ -10,7 +10,7 @@ import { Guard } from './login/services/guard';
 const routes: Routes = [
   
   {path:"gamestore",canActivate:[Guard],component:IndexComponent},
-  {path:"CrudVj",canActivate:[Guard],component:CrudVjComponent},
+   {path:"CrudVj",canActivate:[Guard],component:CrudVjComponent},
   {path:"",loadChildren:()=>import('./login/login.module').then((m)=>m.LoginModule)},
   
 
