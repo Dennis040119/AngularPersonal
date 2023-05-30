@@ -3,8 +3,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {logincomponent} from './login.component';
 import {LogueoComponent} from './logueo/logueo.component';
 import { Guard } from './services/guard';
-import { IndexComponent } from '../Gamestore/index/index.component';
-import { CrudVjComponent } from '../Gamestore/crud-vj/crud-vj.component';
+import { IndexComponent } from '../Gamestore/User/indexUser/index.component';
+import { CrudVjComponent } from '../Gamestore/Admin/crud-vj/crud-vj.component';
 
 
 
@@ -14,19 +14,25 @@ const routes: Routes = [
       component: LogueoComponent,
       children: [
         {
-          path: '',
+          path: 'login',
           redirectTo: 'login',
           pathMatch: 'full'
         },
        
-        {path: '', redirectTo: 'log/login', pathMatch: 'full'},
-        {path: '**', redirectTo: 'log/login', pathMatch: 'full'},
+        {path: '', redirectTo: 'login', pathMatch: 'full'},
+        {path: '**', redirectTo: 'login', pathMatch: 'full'},
       ]
     },
-    {path:"gamestore",canActivate:[Guard],component:IndexComponent , data: {
-      requiredRoles: ["Role1", "Role2", "Role3"]
-  }},
-    {path:"CrudVj",canActivate:[Guard],component:CrudVjComponent},
+    // {path:"index",canActivate:[Guard],component:IndexComponent , data: {
+    //   require: [Guard.roles=="user" ]
+    // }},
+    // {path:"CrudVj",canActivate:[Guard],component:CrudVjComponent,data:{
+    //   require: [Guard.roles=="admin"]
+    // }},
+    {path:"gamestore",canActivate:[Guard],
+    loadChildren:()=>import('../Gamestore/gamestore.module').then((m)=>m.GamestoreModule)
+    },
+    
   ];
 
 @NgModule({

@@ -2,7 +2,7 @@ import { Component,ElementRef,Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../detalle-compra/detalle-compra.component';
-import { IndexComponent } from '../../index/index.component';
+import { IndexComponent } from '../../indexUser/index.component';
 import { Videojuegos } from 'src/app/models/videojuegos';
 
 @Component({

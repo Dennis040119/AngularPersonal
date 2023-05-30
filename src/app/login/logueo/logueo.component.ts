@@ -3,6 +3,7 @@ import {Component, NgModule, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { Route, Router } from '@angular/router';
+import { Guard } from '../services/guard';
 
 
 
@@ -39,14 +40,20 @@ export class LogueoComponent implements OnInit {
         this.usuarioService.buscarLogin(this.email,this.password).subscribe(data=>{
         if(data.length==1){
         localStorage.setItem("key","true")
-        window.alert("Bienvenido: ");
+        
 
         if(data[0].rol=="user"){
-          this.router.navigate(['gamestore']);
+          Guard.roles="user"
+          window.alert("Bienvenido usuario: ");
+          this.router.navigate(['gamestore/indexUser']);
+          console.log(Guard.roles)
         }
 
         if(data[0].rol=="admin"){
-          this.router.navigate(['CrudVj']);
+          Guard.roles="admin"
+          window.alert("Bienvenido administrador: ");
+          this.router.navigate(['gamestore/indexAdmin']);
+          console.log(Guard.roles)
         }
         
         

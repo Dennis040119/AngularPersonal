@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Plataforma } from '../models/plataforma';
+import { Plataforma } from '../../../models/plataforma';
 import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8090/enums'

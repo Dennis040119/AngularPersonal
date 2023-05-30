@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
+import {CommonModule } from '@angular/common';
+import {Component, NgModule, OnInit } from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 
 @Component({
@@ -9,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Primera_App';
+  key = localStorage.getItem("key")
 
   constructor(
     

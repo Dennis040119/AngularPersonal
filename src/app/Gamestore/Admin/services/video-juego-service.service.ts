@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Videojuegos } from '../models/videojuegos';
+import { Videojuegos } from '../../../models/videojuegos';
 
 const baseUrl = 'http://localhost:8090/videojuego'
 

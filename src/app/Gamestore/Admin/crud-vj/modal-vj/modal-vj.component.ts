@@ -4,8 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Plataforma } from 'src/app/models/plataforma';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import { EnumService } from 'src/app/services/enum.service';
-import { VideoJuegoServiceService } from 'src/app/services/video-juego-service.service';
+import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
+import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 
 @Component({
   selector: 'app-modal-vj',

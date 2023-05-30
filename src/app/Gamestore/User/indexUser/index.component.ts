@@ -1,12 +1,10 @@
-import { Component, OnInit, VERSION } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import {DetalleJuegoComponent} from 'src/app/Gamestore/modal_juego/detalle-juego/detalle-juego.component'
+import {DetalleJuegoComponent} from '../modal_juego/detalle-juego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
-import { VideoJuegoServiceService } from 'src/app/services/video-juego-service.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
-import { Usuario } from 'src/app/models/usuario';
+import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { UsuarioService } from 'src/app/Gamestore/Admin/services/usuario.service';
 
 declare var carrito2: Videojuegos[];
 

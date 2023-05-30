@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import { IndexComponent } from '../../index/index.component';
+import { IndexComponent } from '../../indexUser/index.component';
 
 @Component({
   selector: 'app-detalle-juego',

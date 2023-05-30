@@ -1,18 +1,25 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, CanActivateFn } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
   })
 export class Guard implements CanActivate {
 
+    static roles:string="";
+    
+
     constructor(
-        
+      private router: Router,
+      
       ) { }
     
-    canActivate(): boolean {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
         const currentUser=localStorage.getItem("key");
+        
+        
+        
         if(currentUser=="true")
         {
             return true

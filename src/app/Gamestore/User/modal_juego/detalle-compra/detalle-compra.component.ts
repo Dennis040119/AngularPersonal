@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
 import { DetalleJuegoComponent } from '../detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from '../form-compra/form-compra.component';
-import { IndexComponent } from '../../index/index.component';
+import { IndexComponent } from '../../indexUser/index.component';
 
 @Component({
   selector: 'app-detalle-compra',
@@ -117,3 +117,5 @@ export class DetalleCompraComponent implements OnInit {
     
   }
 }
+
+export { FormCompraComponent };

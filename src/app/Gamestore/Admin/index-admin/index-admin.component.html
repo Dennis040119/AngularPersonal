@@ -1,0 +1,54 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <div class="example-container">
+    <div>
+  
+      <mat-toolbar color="primary" class="example-toolbar">
+        <!-- <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+          <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+        </button> -->
+  
+        <img src="../../../../assets/logo_barra.jpg" class="img-logo">
+  
+        <span class="example-spacer"></span>
+  
+        
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+  
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="CrudVj">
+            <mat-icon>games</mat-icon>
+            <span>VideoJuegos</span>
+          </button>
+          
+          
+          <button mat-menu-item routerLink="CrudUsuario">
+            <mat-icon>account_circle</mat-icon>
+            <span>Usuarios</span>
+          </button>
+
+          <button mat-menu-item  (click)="login()">
+            <mat-icon>login</mat-icon>
+            <span>Log out</span>
+          </button>
+
+          
+          
+        </mat-menu>
+  
+      </mat-toolbar>
+   
+      <router-outlet></router-outlet>
+   
+  
+    </div>
+    
+  
+  </div>
+
+
+
+
+  

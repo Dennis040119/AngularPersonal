@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import { VideoJuegoServiceService } from 'src/app/services/video-juego-service.service';
+import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 import { ModalVjComponent } from './modal-vj/modal-vj.component';
-import { DetalleJuegoComponent } from '../modal_juego/detalle-juego/detalle-juego.component';
-import { IndexComponent } from '../index/index.component';
+import { DetalleJuegoComponent } from '../../User/modal_juego/detalle-juego/detalle-juego.component';
+import { IndexComponent } from '../../User/indexUser/index.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
 
 @Component({
@@ -146,3 +146,5 @@ export class CrudVjComponent implements OnInit {
     })
   }
 }
+
+export { ModalVjComponent };
