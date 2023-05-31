@@ -5,7 +5,7 @@ import { Videojuegos } from 'src/app/models/videojuegos';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 import { ModalVjComponent } from './modal-vj/modal-vj.component';
 import { DetalleJuegoComponent } from '../../User/modal_juego/detalle-juego/detalle-juego.component';
-import { IndexComponent } from '../../User/indexUser/index.component';
+import { VideojuegosHome } from '../../User/VideoJuegosHome/VideoJuegosHome.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
 
 @Component({
@@ -136,7 +136,7 @@ export class CrudVjComponent implements OnInit {
     dialogCrear.afterClosed().subscribe(data => {
       if (data != undefined) {
 
-        IndexComponent.carrito.push(data);
+        VideojuegosHome.carrito.push(data);
         
         //console.log(this.carrito)
 

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Videojuegos } from 'src/app/models/videojuegos';
-import { IndexComponent } from '../../indexUser/index.component';
+import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 
 @Component({
   selector: 'app-detalle-juego',
@@ -38,16 +38,16 @@ export class DetalleJuegoComponent implements OnInit {
   quitar(v:Videojuegos){
 
     
-    var supo:Videojuegos[] = IndexComponent.carrito;
+    var supo:Videojuegos[] = VideojuegosHome.carrito;
     //console.log(v==supo? "SOn iguales":"son diferentes")
     console.log(v)
     console.log(supo[0])
 
    
-     var  conta =IndexComponent.carrito.findIndex(obj =>obj.id==v.id);
+     var  conta =VideojuegosHome.carrito.findIndex(obj =>obj.id==v.id);
      if(conta  >-1){
        console.log(conta)
-       IndexComponent.carrito.splice(conta,1)
+       VideojuegosHome.carrito.splice(conta,1)
        this.dialogRef.close();
     
      }else{

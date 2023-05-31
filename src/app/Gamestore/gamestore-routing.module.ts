@@ -1,27 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { Guard } from '../login/services/guard';
 import { CrudVjComponent } from './Admin/crud-vj/crud-vj.component';
-import { IndexComponent } from './User/indexUser/index.component';
+import { VideojuegosHome } from './User/VideoJuegosHome/VideoJuegosHome.component';
 import { GamestoreComponent } from './gamestore.component';
 import { LogueoComponent } from '../login/logueo/logueo.component';
 import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
+import { IndexUserComponent } from './User/index-user/index-user.component';
 
 const routes: Routes = [
   
   
   {
     path: 'indexUser',
-    component: IndexComponent,
+    component: IndexUserComponent,
     children: [
       {
-        path: 'indexUser',
+        path: 'homeVideojuegos',
+        component:VideojuegosHome
         //canActivate:[Guard],
-        redirectTo: 'indexUser',
-        
-        
       },
+      {path: '', redirectTo: 'indexUser', pathMatch: 'full'},
+      {path: '**', redirectTo: 'indexUser', pathMatch: 'full'}
     ]
   },
 
@@ -37,18 +39,20 @@ const routes: Routes = [
         path:'CrudUsuario',
         component:CrudUsuariosComponent
       },
-      {path: '', redirectTo: 'login', pathMatch: 'full'},
-      {path: '**', redirectTo: 'login', pathMatch: 'full'},
-
-      
+      {path: '', redirectTo: 'indexAdmin', pathMatch: 'full'},
+      {path: '**', redirectTo: 'indexAdmin', pathMatch: 'full'},
 
     ]
   },
-
+  
   {
-    path: 'gamestore',
-    component: LogueoComponent,
+    path: '',
+    //redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
+    redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
+    pathMatch:'full'
+    
   },
+  
  
   
   

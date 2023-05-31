@@ -3,30 +3,31 @@
     <div>
   
       <mat-toolbar color="primary" class="example-toolbar">
-        <!-- <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-          <mat-icon *ngIf="sidenav.opened">close</mat-icon>
-        </button> -->
   
         <img src="../../../../assets/logo_barra.jpg" class="img-logo">
   
-        <span class="example-spacer">GameStore/Administracion</span>
+        <span class="example-spacer">GameStore</span>
   
         
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+        <button style="float: right;" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
   
         <mat-menu #menu="matMenu">
-          <button mat-menu-item routerLink="CrudVj">
+          <button mat-menu-item routerLink="homeVideojuegos">
             <mat-icon>games</mat-icon>
             <span>VideoJuegos</span>
           </button>
           
           
-          <button mat-menu-item routerLink="CrudUsuario">
+          <button mat-menu-item >
             <mat-icon>account_circle</mat-icon>
-            <span>Usuarios</span>
+            <span>Consolas</span>
+          </button>
+
+          <button mat-menu-item >
+            <mat-icon>account_circle</mat-icon>
+            <span>Accesorios</span>
           </button>
 
           <button mat-menu-item  (click)="login()">
@@ -49,6 +50,3 @@
   </div>
 
 
-
-
-  

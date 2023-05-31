@@ -4,16 +4,16 @@ import {DetalleJuegoComponent} from '../modal_juego/detalle-juego/detalle-juego.
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
-import { UsuarioService } from 'src/app/Gamestore/Admin/services/usuario.service';
+
 
 declare var carrito2: Videojuegos[];
 
 @Component({
   selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css']
+  templateUrl: './VideojuegosHome.component.html',
+  styleUrls: ['./VideojuegosHome.component.css']
 })
-export class IndexComponent implements OnInit {
+export class VideojuegosHome implements OnInit {
 
   static carrito:Videojuegos[] = [];
   acumulador: number=0
@@ -22,7 +22,7 @@ export class IndexComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
-    private UsuarioService:UsuarioService
+    
   ) {}
 
 
@@ -53,7 +53,7 @@ export class IndexComponent implements OnInit {
     dialogCrear.afterClosed().subscribe(data => {
       if (data != undefined) {
 
-        IndexComponent.carrito.push(data);
+        VideojuegosHome.carrito.push(data);
         
         //console.log(this.carrito)
 
@@ -65,7 +65,7 @@ export class IndexComponent implements OnInit {
 
   SumaTotal(){
     this.acumulador=0;
-    IndexComponent.carrito.forEach(element => {
+    VideojuegosHome.carrito.forEach(element => {
       this.acumulador=(this.acumulador+element.precio);
       
     });
@@ -77,7 +77,7 @@ export class IndexComponent implements OnInit {
 
   DetalleCarritoModal(){
 
-    if(IndexComponent.carrito.length>0){
+    if(VideojuegosHome.carrito.length>0){
       
       const dialogCrear = this.dialog.open(DetalleCompraComponent, {
       
@@ -85,13 +85,13 @@ export class IndexComponent implements OnInit {
         height: '500px',
         autoFocus: false,
         
-        data: IndexComponent.carrito,
+        data: VideojuegosHome.carrito,
 
       });
 
       dialogCrear.afterClosed().subscribe(data => {
 
-          console.log(IndexComponent.carrito)
+          console.log(VideojuegosHome.carrito)
           console.log(this.acumulador)
           this.SumaTotal()
       });

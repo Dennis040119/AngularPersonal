@@ -4,7 +4,7 @@ import { GamestoreRoutingModule } from './gamestore-routing.module';
 import { GamestoreComponent } from '../Gamestore/gamestore.component';
 import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Material
 
 import {MatButtonModule} from '@angular/material/button';
@@ -21,6 +21,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
+import { ModalUserComponent } from './Admin/crud-usuarios/modal-user/modal-user.component';
+import { IndexUserComponent } from './User/index-user/index-user.component';
 
 
 
@@ -30,10 +32,14 @@ import {MatMenuModule} from '@angular/material/menu';
     GamestoreComponent,
     CrudUsuariosComponent,
     IndexAdminComponent,
+    ModalUserComponent,
+    IndexUserComponent,
   ],
   imports: [
     CommonModule,
     GamestoreRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     //Material
     MatFormFieldModule,

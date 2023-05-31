@@ -1,0 +1,66 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+<div class="body">
+    <div class="titulo">
+      <h2 style="float: left; margin-top: 10px;">Registro Usuarios</h2>
+    </div>
+  
+  <br>
+  <form [formGroup]="form"  class="form" layout="column"   onkeydown="if(event.keyCode==13){
+          if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
+            var form = event.target.form;
+            var index = Array.prototype.indexOf.call(form, event.target);
+            form.elements[index + 1].focus();
+            event.preventDefault();
+          }}">
+  
+  <div class="card" layout="column"  >
+      
+      <div class="card-body">
+        
+        <mat-form-field style="width: 60%;">
+          <mat-label>Username</mat-label>
+          <input matInput  formControlName="user"  name="user"   maxlength="50" autocomplete="off" />
+        </mat-form-field>
+        
+        <mat-form-field  style="width: 60%;">
+          <mat-label>Password</mat-label>
+            <input matInput  formControlName="password"   name="password" maxlength="16"  min="0"  autocomplete="off" />
+        </mat-form-field>
+        <mat-form-field style="width: 80%;">
+          <mat-label>Email</mat-label>
+          <input matInput  formControlName="email" name="email" type="text"  autocomplete="off"  />
+        </mat-form-field>
+        <mat-form-field style="width: 80%;">
+            <mat-label>TarjetaCredito</mat-label>
+            <input matInput  formControlName="TarjetaCredito" (keypress)="onlyNumbers($event)" name="TarjetaCredito" maxlength="16"  autocomplete="off"  />
+          </mat-form-field>
+          <mat-form-field style="width: 80%;">
+            <mat-label>Direccion</mat-label>
+            <input matInput  formControlName="direccion" name="direccion" type="text"  autocomplete="off"  />
+          </mat-form-field>
+        <mat-form-field style="width: 60%;">
+          <mat-select placeholder="Rol " formControlName="rol" >
+            <mat-option  value="admin">
+              Administrador
+            </mat-option>
+            <mat-option  value="user">
+                Usuario
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+      </div>
+    </div>
+    <div class="card-header position-sticky sticky-top" style="margin:2%;background-color:rgb(255, 255, 255);top: -25px;">
+      
+      <button mat-button class=" btn btn-danger" (click)="close()"  >
+          <mat-icon>exit_to_app</mat-icon>
+      </button>
+      <button mat-button class=" btn btn-success" (click)="registar()" (click)=actualiza()  >
+          <mat-icon>done</mat-icon>
+      </button>
+      
+    </div>
+  </form>
+  
+  </div>

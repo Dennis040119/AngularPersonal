@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
 import { DetalleJuegoComponent } from '../detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from '../form-compra/form-compra.component';
-import { IndexComponent } from '../../indexUser/index.component';
+import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 
 @Component({
   selector: 'app-detalle-compra',
@@ -38,7 +38,7 @@ export class DetalleCompraComponent implements OnInit {
     this.carrito =this.data;
     //console.log(this.carrito);
     //console.log(this.carrito.length)
-    this.dataSource = new MatTableDataSource(IndexComponent.carrito);
+    this.dataSource = new MatTableDataSource(VideojuegosHome.carrito);
 
     
     
@@ -61,12 +61,12 @@ export class DetalleCompraComponent implements OnInit {
 
     console.log(v)
     var conta:number=0
-    conta =IndexComponent.carrito.indexOf(v,0);
+    conta =VideojuegosHome.carrito.indexOf(v,0);
     
 
     if(conta >-1){
       console.log(conta)
-      IndexComponent.carrito.splice(conta,1)
+      VideojuegosHome.carrito.splice(conta,1)
       this.dataSource.filter ="";
     
     }else{
@@ -97,7 +97,7 @@ export class DetalleCompraComponent implements OnInit {
   }
 
   close(){
-    this.dialogRef.close(IndexComponent.carrito);
+    this.dialogRef.close(VideojuegosHome.carrito);
   }
 
   formCompra(){
