@@ -3,7 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {logincomponent} from './login.component';
 import {LogueoComponent} from './logueo/logueo.component';
 import { Guard } from './services/guard';
-import { IndexComponent } from '../Gamestore/User/indexUser/index.component';
+import { VideojuegosHome } from '../Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
 import { CrudVjComponent } from '../Gamestore/Admin/crud-vj/crud-vj.component';
 
 
@@ -29,8 +29,10 @@ const routes: Routes = [
     // {path:"CrudVj",canActivate:[Guard],component:CrudVjComponent,data:{
     //   require: [Guard.roles=="admin"]
     // }},
-    {path:"gamestore",canActivate:[Guard],
+    {path:"gamestore",
+    canActivate:[Guard],
     loadChildren:()=>import('../Gamestore/gamestore.module').then((m)=>m.GamestoreModule)
+    
     },
     
   ];

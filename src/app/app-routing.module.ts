@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import '@angular/compiler'
-import { IndexComponent } from './Gamestore/User/indexUser/index.component';
+import { VideojuegosHome } from './Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
 import { LoginModule } from './login/login.module';
 import { LogueoComponent } from './login/logueo/logueo.component';
@@ -12,9 +12,7 @@ const routes: Routes = [
   // {path:"index",canActivate:[Guard],component:IndexComponent},
   // {path:"CrudVj",canActivate:[Guard],component:CrudVjComponent},
   {path:"",loadChildren:()=>import('./login/login.module').then((m)=>m.LoginModule)},
-  {
-    path: '**', redirectTo: "" 
-  }
+  {path:"gamestore",loadChildren:()=>import('./Gamestore/gamestore.module').then((m)=>m.GamestoreModule),redirectTo:""},
   
 
 ];

@@ -26,4 +26,8 @@ export class UsuarioService {
     {
           return this.http.get<Usuario[]>(baseUrl+'/loginFind/'+user+'/'+pass);
     }
+
+     registrar(user:Usuario){
+      return this.http.post((baseUrl + '/usuarioSave'),user);
+    }
 }

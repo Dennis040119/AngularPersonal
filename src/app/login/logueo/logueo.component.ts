@@ -71,7 +71,7 @@ export class LogueoComponent implements OnInit {
 
 
 
-
+      console.log(Guard.roles)
 
     })
 

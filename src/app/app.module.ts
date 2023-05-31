@@ -5,7 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule } from './app-routing.module';
 import {AppComponent } from './app.component';
 
-import {IndexComponent } from './Gamestore/User/indexUser/index.component';
+import {VideojuegosHome } from './Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
 import {DetalleJuegoComponent } from './Gamestore/User/modal_juego/detalle-juego/detalle-juego.component';
 import { DetalleCompraComponent } from './Gamestore/User/modal_juego/detalle-compra/detalle-compra.component';
 import { FormCompraComponent } from './Gamestore/User/modal_juego/form-compra/form-compra.component';
@@ -30,6 +30,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { Videojuegos } from './models/videojuegos';
 
 
 
@@ -42,7 +43,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 @NgModule({
   declarations: [
     AppComponent,
-    IndexComponent,
+    VideojuegosHome,
     DetalleJuegoComponent,
     DetalleCompraComponent,
     FormCompraComponent,
