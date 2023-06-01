@@ -8,6 +8,14 @@ import { DetalleJuegoComponent } from '../../User/modal_juego/detalle-juego/deta
 import { VideojuegosHome } from '../../User/VideoJuegosHome/VideoJuegosHome.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
 
+///pdf imports
+
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+
+
+
 @Component({
   selector: 'app-crud-vj',
   templateUrl: './crud-vj.component.html',
@@ -145,6 +153,50 @@ export class CrudVjComponent implements OnInit {
       
     })
   }
+  downloadPdf() {
+
+    this.construirtabla();
+    var prepare: any=[];
+    this.listavj.forEach(e=>{
+      var tempObj =[];
+      
+      tempObj.push(e.id);
+      tempObj.push(e.nombre);
+      tempObj.push(e.precio);
+      tempObj.push(e.descripcion);
+      tempObj.push(e.plataforma1);
+      tempObj.push(e.plataforma2);
+      tempObj.push(e.plataforma2);
+      tempObj.push(e.img);
+      tempObj.push(e.color);
+
+      prepare.push(tempObj)
+      
+    });
+    const doc = new jsPDF('l');
+    autoTable(doc,{
+      
+        head: [['Id','nombre','precio','descripcion','plataforma1','plataforma2'
+        ,'plataforma3','img','color']],
+        body: prepare,
+
+        theme: 'grid' ,
+
+        
+    });
+
+    ////Poner imagenes
+     
+    
+    var string = doc.output('datauristring');
+    var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
+    var x = window.open()!;
+    x.document.open(embed);
+    x.document.write(embed);
+    x.document.close();
+    //doc.save('VideoJuegos_List' + '.pdf');
+  }
 }
+
 
 export { ModalVjComponent };

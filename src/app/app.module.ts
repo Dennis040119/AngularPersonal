@@ -15,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DialogConfirmComponent } from './axuliares/dialog-confirm/dialog-confirm.component';
 import { CookieService } from 'ngx-cookie-service';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
+import * as PropTypes from 'prop-types';
 
 //Material
 import {MatButtonModule} from '@angular/material/button';
@@ -52,6 +53,7 @@ import { Videojuegos } from './models/videojuegos';
     DialogConfirmComponent,
     
     
+    
 
     
   ],
@@ -61,6 +63,7 @@ import { Videojuegos } from './models/videojuegos';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    
     //Material
     MatFormFieldModule,
     MatButtonModule,

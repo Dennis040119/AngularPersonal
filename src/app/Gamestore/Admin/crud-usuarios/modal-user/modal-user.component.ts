@@ -1,8 +1,9 @@
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, RequiredValidator } from '@angular/forms';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Pattern } from '@mui/icons-material';
 import { UsuarioService } from 'src/app/login/services/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 
@@ -50,6 +51,23 @@ export class ModalUserComponent implements OnInit {
     
     
   })
+  
+  }
+  ValidControls(){
+    this.form.get("user")?.setValidators([Validators.required,])
+    this.form.get("user")?.updateValueAndValidity();
+
+    this.form.get("password")?.setValidators([Validators.required,])
+    this.form.get("password")?.updateValueAndValidity();
+
+    this.form.get("email")?.setValidators([Validators.required,
+      Validators.pattern("[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?")])
+    this.form.get("email")?.updateValueAndValidity();
+
+    this.form.get("rol")?.setValidators([Validators.required,])
+    this.form.get("rol")?.updateValueAndValidity();
+
+
   }
   construirUsuario(){
     this.objTransac.id=0;
@@ -88,6 +106,7 @@ export class ModalUserComponent implements OnInit {
   registar() {
 
     this.construirUsuario();
+    this.ValidControls();
     if(this.form.valid){
       console.log(this.objTransac)
 

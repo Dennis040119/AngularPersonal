@@ -5,6 +5,12 @@ import { GamestoreComponent } from '../Gamestore/gamestore.component';
 import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { autoTable } from 'jspdf-autotable'; 
+
+
+
 //Material
 
 import {MatButtonModule} from '@angular/material/button';
@@ -23,6 +29,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import { ModalUserComponent } from './Admin/crud-usuarios/modal-user/modal-user.component';
 import { IndexUserComponent } from './User/index-user/index-user.component';
+import { Table } from 'jspdf-autotable';
 
 
 
@@ -40,6 +47,10 @@ import { IndexUserComponent } from './User/index-user/index-user.component';
     GamestoreRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    //PDF
+    
+    
+    
 
     //Material
     MatFormFieldModule,

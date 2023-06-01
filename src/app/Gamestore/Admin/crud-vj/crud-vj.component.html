@@ -9,6 +9,7 @@
           
         </mat-form-field>
         <button mat-raised-button (click)="agregar()" style="margin-left: 2%;">Agregar</button>
+        <button mat-raised-button (click)="downloadPdf()" style="margin-left: 2%;">Exportar</button>
 
     </div>
       
@@ -47,7 +48,7 @@
       <ng-container matColumnDef="options">
         <mat-header-cell *matHeaderCellDef> options </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
-
+        
         <button mat-button class="btn-edit" title="edit" (click)="edit(element)">
           <mat-icon style="color: black;">edit</mat-icon>
         </button> 
@@ -61,7 +62,7 @@
         </mat-cell>
       </ng-container>
   
-
+      
     
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
