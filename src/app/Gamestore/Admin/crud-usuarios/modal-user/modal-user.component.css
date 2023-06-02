@@ -37,6 +37,11 @@
     margin-left: 2%;
     width: 90%;
 }
+.divPasword{
+  display: flex;
+  
+  flex-direction: row;
+}
 
 .dos{
   display: flex;

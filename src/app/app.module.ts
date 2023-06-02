@@ -15,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DialogConfirmComponent } from './axuliares/dialog-confirm/dialog-confirm.component';
 import { CookieService } from 'ngx-cookie-service';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
+import { Videojuegos } from './models/videojuegos';
 import * as PropTypes from 'prop-types';
 
 //Material
@@ -31,7 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { Videojuegos } from './models/videojuegos';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 
@@ -78,7 +80,8 @@ import { Videojuegos } from './models/videojuegos';
     MatNativeDateModule,
     MatSelectModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCheckboxModule
     
     
   ],
@@ -95,7 +98,8 @@ import { Videojuegos } from './models/videojuegos';
     MatNativeDateModule,
     MatSelectModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCheckboxModule
 
   ],
   providers: [CookieService],

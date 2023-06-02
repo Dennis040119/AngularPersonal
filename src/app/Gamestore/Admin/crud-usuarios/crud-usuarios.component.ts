@@ -57,7 +57,11 @@ export class CrudUsuariosComponent implements OnInit {
       width: '400px',
       height: '600px',
       autoFocus: false,
-      disableClose:true
+      disableClose:true,
+      data:{
+        obj:null,
+        tipo:"registrar"
+      }
     });
     dialog.afterClosed().subscribe(data => {
       
@@ -66,7 +70,27 @@ export class CrudUsuariosComponent implements OnInit {
       });
 
   }
-    edit(_t61: any) {
+    edit(user: Usuario) {
+      const dialog = this.dialog.open(ModalUserComponent,{
+      
+        width: '500px',
+        height: '600px',
+        autoFocus: false,
+        disableClose:true,
+        data:{
+          obj:user,
+          tipo:"edit"
+        }
+      });
+      dialog.afterClosed().subscribe(data => {
+      
+        this.construirtabla();
+        this.dataSource.filter = ""
+        });
+  
+    }
+    
+    detalle(user: Usuario) {
       const dialog = this.dialog.open(ModalUserComponent,{
       
         width: '600px',
@@ -74,15 +98,7 @@ export class CrudUsuariosComponent implements OnInit {
         autoFocus: false,
       });
     }
-    detalle(_t61: any) {
-      const dialog = this.dialog.open(ModalUserComponent,{
-      
-        width: '600px',
-        height: '800px',
-        autoFocus: false,
-      });
-    }
-    delete(_t61: any) {
+    delete(user: Usuario) {
       const dialog = this.dialog.open(DialogConfirmComponent,{
       
         width: '300px',

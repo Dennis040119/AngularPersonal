@@ -13,6 +13,9 @@ export class IndexAdminComponent {
   isExpanded = true;
   isShowing = false;
 
+  events: string[] = [];
+  opened: boolean = false;
+
   constructor(
     private router:Router
   ){

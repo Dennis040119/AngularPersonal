@@ -16,7 +16,6 @@ import { autoTable } from 'jspdf-autotable';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule } from "@angular/material/form-field";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
@@ -29,7 +28,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import { ModalUserComponent } from './Admin/crud-usuarios/modal-user/modal-user.component';
 import { IndexUserComponent } from './User/index-user/index-user.component';
-import { Table } from 'jspdf-autotable';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatListModule} from '@angular/material/list';
+
+//Material Ui
 
 
 
@@ -57,7 +59,7 @@ import { Table } from 'jspdf-autotable';
     MatButtonModule,
     MatInputModule,
     MatMenuModule,
-    
+    MatCheckboxModule,
     MatTableModule,
     MatDialogModule,
     MatIconModule,
@@ -66,7 +68,13 @@ import { Table } from 'jspdf-autotable';
     MatNativeDateModule,
     MatSelectModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatListModule
+
+    
+    
+
+
   ]
 })
 export class GamestoreModule {
