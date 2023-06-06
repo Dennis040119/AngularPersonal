@@ -3,34 +3,36 @@
 
     <mat-sidenav-container class="mat-sidenav-container" >
 
-    <mat-toolbar color="primary" class="example-toolbar">
-      <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="example-app-name">Responsive App</h1>
-         </mat-toolbar>
-      <mat-sidenav class="MenuExpansible" #sidenav mode="side" 
-      
-      (click)="sidenav.toggle()">
+    
+      <mat-sidenav class="MenuExpansible" #sidenav mode="side"(click)="sidenav.toggle()">
 
-                   <button class="MenuButton" mat-menu-item routerLink="CrudVj">
-                    <mat-icon>games</mat-icon>
+                   <button mat-button class="MenuButton"  routerLink="CrudVj">
+                    <mat-icon style="color:rgb(252, 232, 179);">games</mat-icon>
                     <span>VideoJuegos</span>
-                  </button>
-                  <button class="MenuButton" mat-menu-item routerLink="CrudUsuario">
-                    <mat-icon>account_circle</mat-icon>
+                    </button>
+                  <button  mat-button class="MenuButton"  routerLink="CrudUsuario">
+                    <mat-icon style="color: rgb(252, 232, 179);">account_circle</mat-icon>
                     <span>Usuarios</span>
                   </button>
           
-                  <button class="MenuButton" mat-menu-item  (click)="login()">
-                    <mat-icon>login</mat-icon>
+                  <button  mat-button class="MenuButton"  (click)="login()">
+                    <mat-icon style="color: rgb(252, 232, 179);">login</mat-icon>
                     <span>Log out</span>
                   </button>
       </mat-sidenav>
     
       <mat-sidenav-content>
         
-        <button mat-button (click)="sidenav.toggle()"><mat-icon>home</mat-icon></button>
+        <mat-toolbar color="primary" class="example-toolbar">
+
+          <button mat-button (click)="sidenav.toggle()" style="float: left;"><mat-icon>home</mat-icon></button>
+          <img src="../../../../assets/logo_barra.jpg" class="img-logo" >
+          <p class="example-spacer" >GameStore</p>
+          
+        </mat-toolbar>
         
-        <router-outlet></router-outlet>
+        
+        <router-outlet (click)="sidenav.toggle()"></router-outlet>
       </mat-sidenav-content>
 
       

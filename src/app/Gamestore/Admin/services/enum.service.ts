@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Plataforma } from '../../../models/plataforma';
 import { Observable } from 'rxjs';
+import { Genero } from 'src/app/models/genero';
 
 const baseUrl = 'http://localhost:8090/enums'
 @Injectable({
@@ -15,5 +16,9 @@ export class EnumService {
 
   listarPlataformas():Observable<Plataforma[]> {
     return this.http.get<Plataforma[]>(baseUrl + '/PlataformaList');
+  }
+
+  listarGenero():Observable<Genero[]> {
+    return this.http.get<Genero[]>(baseUrl + '/GeneroList');
   }
 }

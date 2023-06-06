@@ -35,11 +35,14 @@
       <ng-container matColumnDef="plataformas">
         <mat-header-cell *matHeaderCellDef> Plataformas </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
-          <div *ngIf="(element.plataforma2 && element.plataforma3) == '' ">{{element.plataforma1}}</div>
+          {{element.plataformas}}
+
+          
+          <!-- <div *ngIf="(element.plataforma2 && element.plataforma3) == '' ">{{element.plataforma1}}</div>
           <div *ngIf="((element.plataforma3) == '') && ((element.plataforma2) != '') ">{{element.plataforma1}},{{element.plataforma2}}</div>
           <div *ngIf="(element.plataforma2 && element.plataforma3) != '' ">{{element.plataforma1}},{{element.plataforma2}}
             ,{{element.plataforma3}}
-          </div>
+          </div> -->
           
           
         </mat-cell>

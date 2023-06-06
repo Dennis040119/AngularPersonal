@@ -1,13 +1,13 @@
+import { Genero } from "./genero";
+
 export class Videojuegos {
 
-    id!: number;
+    id!: string;
     nombre!: string;
     precio!: number;
-    color!: string;
     descripcion!: string;
-    plataforma1!: string;
-    plataforma2!: string;
-    plataforma3!: string;
+    plataformas!: string;
+    genero!:Genero;
     rol!:string;
     img!: string;
     

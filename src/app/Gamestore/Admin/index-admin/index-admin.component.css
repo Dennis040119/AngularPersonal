@@ -9,6 +9,10 @@
   flex-direction: column;
   
 }
+.example-toolbar{
+  width: 100%;
+  background-color: rgb(144, 39, 39);
+}
 
 .mat-sidenav-container{
   position: absolute;
@@ -30,7 +34,7 @@
 
 .MenuExpansible{
   background-color: rgb(144, 39, 39);
-  
+
   display: flex;
   flex-direction: row;
   width: 10%;
@@ -38,13 +42,29 @@
 
 .MenuButton{
   width: 100%;
+  margin-top: 10%;
+  color: rgb(252, 232, 179);
+  border: none;
 }
 
+span{
+  color:rgb(252, 232, 179);
+}
 .example-sidenav-container {
   flex: 1;
 }
 .example-spacer {
-  flex: 1 1 auto;
+  width: 10%;
+  margin-left: 2%;
+  float: right;
+}
+.img-logo{
+  margin-left: 80%;
+  float: right;
+  max-width: 100%;
+  width: 4%;
+  height: 70%;
+  border-bottom: 5px solid black;
 }
 /*Side*/
 .example-sidenav-content {
@@ -115,19 +135,8 @@ padding-right: 20%;
 width: 100%;
 }
 
-span{
-width: auto;
-}
 
 
-
-.img-logo{
-  max-width: 100%;
-  width: 4%;
-  height: 70%;
-  border-bottom: 5px solid black;
-  
-}
 
 
 

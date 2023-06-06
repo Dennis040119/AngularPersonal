@@ -28,7 +28,7 @@ export class VideoJuegoServiceService {
     return this.http.put(baseUrl+'/videoJuegoPut',Vj);
   }
 
-  eliminarVj(id:number){
+  eliminarVj(id:string){
     return this.http.delete(baseUrl+'/videoJuegoDelete/'+id);
   }
 }

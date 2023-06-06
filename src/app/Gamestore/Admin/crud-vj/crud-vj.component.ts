@@ -18,8 +18,8 @@ import autoTable from 'jspdf-autotable'
 
 @Component({
   selector: 'app-crud-vj',
-  templateUrl: './crud-vj.component.html',
-  styleUrls: ['./crud-vj.component.css']
+  templateUrl: 'crud-vj.component.html',
+  styleUrls: ['crud-vj.component.css']
 })
 export class CrudVjComponent implements OnInit {
 
@@ -164,11 +164,9 @@ export class CrudVjComponent implements OnInit {
       tempObj.push(e.nombre);
       tempObj.push(e.precio);
       tempObj.push(e.descripcion);
-      tempObj.push(e.plataforma1);
-      tempObj.push(e.plataforma2);
-      tempObj.push(e.plataforma2);
+      tempObj.push(e.plataformas);
       tempObj.push(e.img);
-      tempObj.push(e.color);
+      
 
       prepare.push(tempObj)
       
@@ -176,8 +174,7 @@ export class CrudVjComponent implements OnInit {
     const doc = new jsPDF('l');
     autoTable(doc,{
       
-        head: [['Id','nombre','precio','descripcion','plataforma1','plataforma2'
-        ,'plataforma3','img','color']],
+        head: [['Id','nombre','precio','descripcion','plataforma','img']],
         body: prepare,
 
         theme: 'grid' ,

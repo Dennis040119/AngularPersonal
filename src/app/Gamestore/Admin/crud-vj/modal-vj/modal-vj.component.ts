@@ -6,6 +6,7 @@ import { Plataforma } from 'src/app/models/plataforma';
 import { Videojuegos } from 'src/app/models/videojuegos';
 import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { Genero } from 'src/app/models/genero';
 
 @Component({
   selector: 'app-modal-vj',
@@ -26,6 +27,9 @@ export class ModalVjComponent implements OnInit {
   plataformas2: Plataforma[]=[]
   plataformas3: Plataforma[]=[]
 
+  //Genero
+  generosList:Genero[]=[];
+
   //Imagenes/colores listas
   arrayImg: any[] = [];
   arrayColores:any[]=[];
@@ -40,11 +44,11 @@ export class ModalVjComponent implements OnInit {
     private el: ElementRef,
     private vjService:VideoJuegoServiceService,
     private enumService:EnumService,
-    
-    
+
+
     @Inject(MAT_DIALOG_DATA) private data: any,
     private formBuilder: FormBuilder,
-    
+
 
 
   ) { }
@@ -56,15 +60,17 @@ export class ModalVjComponent implements OnInit {
 
      //Cargamos los array de imagen y colores
      this.comboPLataforma1();
-     this.imagesArray();
-     this.coloresArray();
-    
+     this.generoComboBox();
+      this.imagesArray();
+
+
     //Recibimos la data
 
     if(this.data!=null){
       this.objRecepcion=this.data['objeto']
       this.tipo=this.data['tipo']
       console.log(this.tipo)
+      console.log(this.objRecepcion)
       this.setVjRecepcion();
     }
   }
@@ -77,9 +83,10 @@ export class ModalVjComponent implements OnInit {
       plataforma1:[],
       plataforma2:[],
       plataforma3:[],
+      genero:[],
       img:[],
       color:[]
-      
+
     })
 
     this.form.get("plataforma2")?.disable();
@@ -112,30 +119,31 @@ export class ModalVjComponent implements OnInit {
   registar(){
     this.formValidators();
 
-      
+
      if(this.form.invalid || this.tipo=="edit"){
-      if(this.form.invalid)  {window.alert("Formulario invalido");}  
+      if(this.form.invalid)  {window.alert("Formulario invalido");}
      }else{
 
       try {
         this.constructorObj()
-        this.vjService.registrarVj(this.objRegistrar).subscribe((data)=>{
-          this.data=data
-          
-          if( this.data["mensaje"] == "Registrado correctamente"){
-            this.close();
-          }else{
-            window.alert(this.data["mensaje"])
-          }
-        })
+        console.log(this.objRegistrar)
+         this.vjService.registrarVj(this.objRegistrar).subscribe((data)=>{
+         this.data=data
+         console.log(this.objRegistrar)
+       if( this.data["mensaje"] == "Registrado correctamente"){
+             this.close();
+           }else{
+             window.alert(this.data["mensaje"])
+           }
+         })
       } catch (error) {
         window.alert("Error al registrar: "+error)
       }
-      
-      
-      
+
+
+
      }
-   
+
   }
 
   actualiza(){
@@ -143,92 +151,107 @@ export class ModalVjComponent implements OnInit {
 
       console.log(this.tipo)
      if(this.form.invalid || this.tipo!="edit"){
-      if(this.form.invalid)  {window.alert("Formulario invalido");}  
+      if(this.form.invalid)  {window.alert("Formulario invalido");}
      }else{
 
       try {
         this.constructorObj()
         this.vjService.actualizarVj(this.objRegistrar).subscribe((data)=>{
           this.data=data
-          console.log(data)
+          console.log(this.data["mensaje"])
           if( this.data["mensaje"] == "Actualizado correctamente"){
             this.close();
           }else{
-            
+
           }
         })
       } catch (error) {
         window.alert("Error al registrar: "+error)
       }
-      
-      
-      
+
+
+
      }
 
   }
 
   setVjRecepcion(){
+
+    var lista
+    //Seteamos los valores cuando editamos un VJ
     this.objRegistrar.id=this.objRecepcion.id
     this.objRegistrar.rol="vj"
     this.form.get("nombre")?.setValue(this.objRecepcion.nombre)
     this.form.get("precio")?.setValue(this.objRecepcion.precio)
-    this.form.get("color")?.setValue(this.objRecepcion.color)
+
     this.form.get("img")?.setValue(this.objRecepcion.img)
+    console.log(this.objRecepcion.genero)
+    this.form.get("genero")?.setValue(this.objRecepcion.genero)
     this.form.get("descripcion")?.setValue(this.objRecepcion.descripcion)
-    this.form.get("plataforma1")?.setValue(this.objRecepcion.plataforma1)
-    
-    
-    
-    if(this.form.get("plataforma1")?.value!=null){
-      this.cambioPLataformas()
-      this.form.get("plataforma2")?.enable();
-      this.form.get("plataforma2")?.setValue(this.objRecepcion.plataforma2)
-    }
-    
-    if(this.form.get("plataforma2")?.value!=null){
-      this.cambioPLataformas2()
-      this.form.get("plataforma3")?.enable();
-      this.form.get("plataforma3")?.setValue(this.objRecepcion.plataforma3)
-    }
+    this.enumService.listarPlataformas().subscribe(data =>{
+
+      lista=data
+      var codigo1=this.objRecepcion.plataformas.slice(0,5)
+
+      this.form.get("plataforma1")?.setValue(codigo1)
+      console.log(this.objRecepcion.plataformas.length)
+
+      /////////////////////////
+      if(this.objRecepcion.plataformas.length>5){
+        this.cambioPLataformas()
+        this.form.get("plataforma2")?.enable();
+        console.log(this.objRecepcion.plataformas.slice(6,11))
+        this.form.get("plataforma2")?.setValue(this.objRecepcion.plataformas.slice(6,11))
+      }
+
+      if(this.objRecepcion.plataformas.length>12){
+        this.cambioPLataformas2()
+        this.form.get("plataforma3")?.enable();
+        console.log(this.objRecepcion.plataformas.slice(12,17))
+        this.form.get("plataforma3")?.setValue(this.objRecepcion.plataformas.slice(12,17))
+      }
+
+    })
+
+
+
+
 
   }
 
   constructorObj() {
-    if(this.tipo!="edit"){
-      this.objRegistrar.id=0
-    }else{
-      this.objRegistrar.id=this.objRecepcion.id
-    }
     
+    if(this.tipo!="edit"){this.objRegistrar.id="0"}
+    else{this.objRegistrar.id=this.objRecepcion.id}
+
     this.objRegistrar.rol="vj"
     this.objRegistrar.nombre=this.form.get("nombre")?.value
     this.objRegistrar.precio=this.form.get("precio")?.value
-    this.objRegistrar.color=this.form.get("color")?.value
     this.objRegistrar.img=this.form.get("img")?.value
+    this.objRegistrar.genero=this.form.get("genero")?.value
     this.objRegistrar.descripcion=this.form.get("descripcion")?.value
-    this.objRegistrar.plataforma1=this.form.get("plataforma1")?.value
-    this.objRegistrar.plataforma2=this.form.get("plataforma2")?.value
-    this.objRegistrar.plataforma3=this.form.get("plataforma3")?.value
+    this.objRegistrar.plataformas=this.form.get("plataforma1")?.value
 
-  }
-  
 
-  comboPLataforma1(){
-    this.plataformas=[];
-    this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas=data})
-   
-  }
+    if(this.form.get("plataforma2")?.value != undefined){
 
-  
+        this.objRegistrar.plataformas=this.objRegistrar.plataformas+","+this.form.get("plataforma2")?.value
 
-  comboPLataforma3(){
+        ////////////////////////////////////
+        if(this.form.get("plataforma3")?.value != ""){
+          this.objRegistrar.plataformas=this.objRegistrar.plataformas+","+this.form.get("plataforma3")?.value
+        }
+      
 
-    this.plataformas3=[];
-    this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas3=data})
+    }
+    console.log(this.objRegistrar.plataformas)
+    console.log(this.objRegistrar)
+
+
   }
 
   formValidators(){
-    
+
     this.form.get('nombre')?.setValidators([Validators.required]);
     this.form.get('nombre')?.updateValueAndValidity();
 
@@ -239,47 +262,54 @@ export class ModalVjComponent implements OnInit {
     Validators.pattern(/^-?\d*[.,]?\d{0,2}$/)]);
     this.form.get('precio')?.updateValueAndValidity();
 
-    this.form.get('color')?.setValidators([Validators.required]);
-    this.form.get('color')?.updateValueAndValidity();
-
     this.form.get('plataforma1')?.setValidators([Validators.required]);
     this.form.get('plataforma1')?.updateValueAndValidity();
 
   }
 
+  comboPLataforma1(){return this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas=data})}
+
   cambioPLataformas(){
 
+    console.log("Cambio plataformas"+this.plataformas)
     this.plataformas2=[]
 
     this.form.get("plataforma2")?.setValue("");
     this.form.get("plataforma3")?.setValue("");
 
     this.form.get("plataforma2")?.enable();
-    
+
     if(this.form.get("plataforma1")?.value != null){
 
-      var nombre=this.form.get("plataforma1")?.value
+      var id=this.form.get("plataforma1")?.value
       var conta:number=0
+
+
       this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas2=data
-        conta =this.plataformas2.findIndex( (plata) => plata.nombre==nombre);
+
+        console.log(id)
         console.log(this.plataformas2)
+        conta =this.plataformas2.findIndex( (plata) => plata.id==id);
         if(conta >-1){
-          
+
           this.plataformas2.splice(conta,1)
           this.plataformas3.splice(conta,1)
-          
+
         }else{console.log("No se encuentra en el combobox")}
-      
-      
-      
+
+
+
       })
-     
+
+    }else{
+      console.log("Form plataformas 1 es null");
+      console.log(this.form.get("plataforma1")?.value);
     }
 
   }
 
   cambioPLataformas2(){
-    
+
 
     this.plataformas3=[]
 
@@ -290,22 +320,22 @@ export class ModalVjComponent implements OnInit {
       var conta1:number=0
       var conta2:number=0
       this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas3=data
-      
-        conta1 =this.plataformas3.findIndex( (vj) => vj.nombre==this.form.get("plataforma1")?.value);
-      
-      
+
+        conta1 =this.plataformas3.findIndex( (vj) => vj.id==this.form.get("plataforma1")?.value);
+
+
         if(conta1 >-1){
-        
+
         this.plataformas3.splice(conta1,1)
         ///////////////////////////////
-        conta2 =this.plataformas3.findIndex( (vj) => vj.nombre==this.form.get("plataforma2")?.value);
+        conta2 =this.plataformas3.findIndex( (vj) => vj.id==this.form.get("plataforma2")?.value);
         if(conta2 >-1){this.plataformas3.splice(conta2,1)}
-                      
+
         }else{console.log("No se encuentra en el combobox")}
-      
-      
+
+
       })
-      
+
 
     }
   }
@@ -319,21 +349,19 @@ export class ModalVjComponent implements OnInit {
       {nombre:"Mario Galaxy",path:"../../assets/Mario Galaxy.jpg"},
       {nombre:"HomeFront",path:"../../assets/HomeFront.jpg"},
       {nombre:"Default",path:"../../assets/logo_barra.jpg"}
-    
-    
+
+
     ]
 
   }
 
-  coloresArray(){
-    this.arrayColores = [
-      {nombre:"red"},{nombre:"crimson"},{nombre:"lightSalmon"},
-      {nombre:"MediumVioletRed"},{nombre:"DeepPink"},{nombre:"Pink"},
-      {nombre:"Yellow"},{nombre:"LightGoldenrodYellow"},{nombre:"PaleGoldenrod"},
-      {nombre:"MediumSlateBlue"},{nombre:"Purple"},{nombre:"DarkViolet"},
-
-    ]
+  generoComboBox(){
+    this.enumService.listarGenero().subscribe(data =>{
+      this.generosList=data
+    })
   }
 
-  
+
+
+
 }

@@ -19,8 +19,8 @@ const routes: Routes = [
     children: [
       {
         path: 'homeVideojuegos',
-        component:VideojuegosHome
-        //canActivate:[Guard],
+        component:VideojuegosHome,
+        canActivate:[Guard],
       },
       {path: '', redirectTo: 'indexUser', pathMatch: 'full'},
       {path: '**', redirectTo: 'indexUser', pathMatch: 'full'}
@@ -29,15 +29,24 @@ const routes: Routes = [
 
   {
     path: 'indexAdmin',
+    
     component: IndexAdminComponent,
     children: [
       {
         path: 'CrudVj',
+        canActivate:[Guard],
         component:CrudVjComponent,
+        children:[
+          {path: '', redirectTo: 'CrudVj', pathMatch: 'full'},
+        ]
       },
       {
         path:'CrudUsuario',
-        component:CrudUsuariosComponent
+        canActivate:[Guard],
+        component:CrudUsuariosComponent,
+        children:[
+          {path: '', redirectTo: 'CrudUsuario', pathMatch: 'full'},
+        ]
       },
       {path: '', redirectTo: 'indexAdmin', pathMatch: 'full'},
       {path: '**', redirectTo: 'indexAdmin', pathMatch: 'full'},

@@ -29,24 +29,31 @@
         <mat-label>descripcion</mat-label>
         <input matInput  formControlName="descripcion" name="descripcion" type="text"  autocomplete="off"  />
       </mat-form-field>
-      <mat-form-field style="width: 40%;">
+      <mat-form-field style="width: 50%;">
         <mat-select placeholder="Plataforma 1" formControlName="plataforma1" (selectionChange)="cambioPLataformas()">
-          <mat-option *ngFor="let plata of plataformas" [value]="plata.nombre">
+          <mat-option *ngFor="let plata of plataformas" [value]="plata.id">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field style="width: 50%;">
         <mat-select placeholder="Plataforma 2" formControlName="plataforma2" (selectionChange)="cambioPLataformas2()">
-          <mat-option *ngFor="let plata of plataformas2" [value]="plata.nombre">
+          <mat-option *ngFor="let plata of plataformas2" [value]="plata.id">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field style="width: 50%;">
         <mat-select placeholder="Plataforma 3" formControlName="plataforma3" >
-          <mat-option *ngFor="let plata of plataformas3" [value]="plata.nombre">
+          <mat-option *ngFor="let plata of plataformas3" [value]="plata.id">
             {{ plata.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 50%;">
+        <mat-select placeholder="Genero" formControlName="genero" >
+          <mat-option *ngFor="let gen of generosList" [value]="gen">
+            {{ gen.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -57,14 +64,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field style="width: 50%;"  >
-        <mat-select placeholder="Color" formControlName="color"  >
-          <mat-option  *ngFor="let col of arrayColores" [value]="col.nombre" style="background-color: {{col.nombre}};">
-            {{ col.nombre }}
-          </mat-option>
-
-        </mat-select>
-      </mat-form-field>
+      
 
     </div>
   </div>

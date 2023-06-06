@@ -23,12 +23,7 @@ const routes: Routes = [
         {path: '**', redirectTo: 'login', pathMatch: 'full'},
       ]
     },
-    // {path:"index",canActivate:[Guard],component:IndexComponent , data: {
-    //   require: [Guard.roles=="user" ]
-    // }},
-    // {path:"CrudVj",canActivate:[Guard],component:CrudVjComponent,data:{
-    //   require: [Guard.roles=="admin"]
-    // }},
+    
     {path:"gamestore",
     canActivate:[Guard],
     loadChildren:()=>import('../Gamestore/gamestore.module').then((m)=>m.GamestoreModule)
