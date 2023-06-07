@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import '@angular/compiler'
-import { VideojuegosHome } from './Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
-import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
-import { LoginModule } from './login/login.module';
-import { LogueoComponent } from './login/logueo/logueo.component';
-import { Guard } from './login/services/guard';
+
 
 const routes: Routes = [
   

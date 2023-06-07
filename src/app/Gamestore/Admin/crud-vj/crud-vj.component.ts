@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
@@ -21,7 +21,7 @@ import autoTable from 'jspdf-autotable'
   templateUrl: 'crud-vj.component.html',
   styleUrls: ['crud-vj.component.css']
 })
-export class CrudVjComponent implements OnInit {
+export class CrudVjComponent implements OnInit,AfterViewInit  {
 
   listavj!: Videojuegos[];
   displayedColumns = ['nombre', 'precio', 'plataformas','options'];
@@ -30,18 +30,31 @@ export class CrudVjComponent implements OnInit {
   //Respuesta de servicios
   respta:any
 
+  //Audio de fondo
+  audioPlayer!: HTMLAudioElement;
+  @ViewChild('audioPlayer') audioPlayerRef: any;
+
   constructor(
     
     private dialog: MatDialog,
     private VjService:VideoJuegoServiceService,
     //@Inject(MAT_DIALOG_DATA) private data: any,
   
-  ){}
+  ){ this.audioPlayer = new Audio();}
 
 
   ngOnInit(): void {
     this.construirtabla();
     console.log(this.listavj)
+    
+  }
+  ngAfterViewInit() {
+    
+    this.audioPlayer.src = '../../../assets/audio/enemy.mp3';
+    
+    //const audioPlayer: HTMLAudioElement = this.audioPlayerRef.nativeElement;
+    this.audioPlayer.load();
+    this.audioPlayer.play();
     
   }
 
@@ -62,17 +75,15 @@ export class CrudVjComponent implements OnInit {
     const dialogCrear = this.dialog.open(ModalVjComponent, {
       
       width: '600px',
-      height: '800x',
+      height: '700px',
       autoFocus: false,
+      data:{tipo:"save"}
+      
     });
     dialogCrear.afterClosed().subscribe(data => {
       
        this.construirtabla();
-        this.dataSource.filter = ""
-        
-
-      
-    });
+        this.dataSource.filter = ""});
   }
 
   edit(vj:Videojuegos){
@@ -80,20 +91,14 @@ export class CrudVjComponent implements OnInit {
     const dialogCrear = this.dialog.open(ModalVjComponent, {
       
       width: '600px',
-      height: '800x',
+      height: '700px',
       autoFocus: false,
       data:{objeto:vj,tipo:"edit"}
     });
     dialogCrear.afterClosed().subscribe(data => {
       
        this.construirtabla();
-        this.dataSource.filter = ""
-        
-
-      
-    });
-    
-
+        this.dataSource.filter = "" });
   }
 
   delete(vj:Videojuegos){
@@ -145,9 +150,6 @@ export class CrudVjComponent implements OnInit {
       if (data != undefined) {
 
         VideojuegosHome.carrito.push(data);
-        
-        //console.log(this.carrito)
-
       } else {}
 
       

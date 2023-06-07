@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -15,7 +15,12 @@ import { Genero } from 'src/app/models/genero';
 })
 export class ModalVjComponent implements OnInit {
 
+  @ViewChild('fileInput') fileInput: any;
+
   public form!: FormGroup;
+
+  //titulo
+  h1:string=""
 
   //Variables del metodo alertas()
   nombres:string=' ';
@@ -33,6 +38,10 @@ export class ModalVjComponent implements OnInit {
   //Imagenes/colores listas
   arrayImg: any[] = [];
   arrayColores:any[]=[];
+  //Url
+  selectedFile!: File;
+  selectedFileUrl: string="";
+  selectedFileName: string="";
 
   //Objetos que recibimos y contruimos para las transacc
   tipo:string="";
@@ -63,12 +72,14 @@ export class ModalVjComponent implements OnInit {
      this.generoComboBox();
       this.imagesArray();
 
-
+      this.h1="Registro VideoJuegos"
     //Recibimos la data
-
-    if(this.data!=null){
+    
+    if(this.data!=null &&this.data['objeto']!=undefined){
       this.objRecepcion=this.data['objeto']
       this.tipo=this.data['tipo']
+      this.h1="Actualizar VideoJuegos"
+     
       console.log(this.tipo)
       console.log(this.objRecepcion)
       this.setVjRecepcion();
@@ -118,7 +129,7 @@ export class ModalVjComponent implements OnInit {
 
   registar(){
     this.formValidators();
-
+    console.log(this.generosList);
 
      if(this.form.invalid || this.tipo=="edit"){
       if(this.form.invalid)  {window.alert("Formulario invalido");}
@@ -126,6 +137,16 @@ export class ModalVjComponent implements OnInit {
 
       try {
         this.constructorObj()
+
+          var gen
+          gen = this.generosList.find(gen => gen.id==this.form.get("genero")?.value);
+          if(gen !=undefined){
+            this.objRegistrar.genero=gen
+          }
+          
+        
+
+
         console.log(this.objRegistrar)
          this.vjService.registrarVj(this.objRegistrar).subscribe((data)=>{
          this.data=data
@@ -156,6 +177,12 @@ export class ModalVjComponent implements OnInit {
 
       try {
         this.constructorObj()
+        var gen
+        gen = this.generosList.find(gen => gen.id==this.form.get("genero")?.value);
+        if(gen !=undefined){
+          this.objRegistrar.genero=gen
+        }
+
         this.vjService.actualizarVj(this.objRegistrar).subscribe((data)=>{
           this.data=data
           console.log(this.data["mensaje"])
@@ -185,8 +212,8 @@ export class ModalVjComponent implements OnInit {
     this.form.get("precio")?.setValue(this.objRecepcion.precio)
 
     this.form.get("img")?.setValue(this.objRecepcion.img)
-    console.log(this.objRecepcion.genero)
-    this.form.get("genero")?.setValue(this.objRecepcion.genero)
+    
+    this.form.get("genero")?.setValue(this.objRecepcion.genero.id)
     this.form.get("descripcion")?.setValue(this.objRecepcion.descripcion)
     this.enumService.listarPlataformas().subscribe(data =>{
 
@@ -194,13 +221,13 @@ export class ModalVjComponent implements OnInit {
       var codigo1=this.objRecepcion.plataformas.slice(0,5)
 
       this.form.get("plataforma1")?.setValue(codigo1)
-      console.log(this.objRecepcion.plataformas.length)
+
 
       /////////////////////////
       if(this.objRecepcion.plataformas.length>5){
         this.cambioPLataformas()
         this.form.get("plataforma2")?.enable();
-        console.log(this.objRecepcion.plataformas.slice(6,11))
+       
         this.form.get("plataforma2")?.setValue(this.objRecepcion.plataformas.slice(6,11))
       }
 
@@ -221,14 +248,21 @@ export class ModalVjComponent implements OnInit {
 
   constructorObj() {
     
+     
     if(this.tipo!="edit"){this.objRegistrar.id="0"}
     else{this.objRegistrar.id=this.objRecepcion.id}
 
     this.objRegistrar.rol="vj"
     this.objRegistrar.nombre=this.form.get("nombre")?.value
     this.objRegistrar.precio=this.form.get("precio")?.value
-    this.objRegistrar.img=this.form.get("img")?.value
-    this.objRegistrar.genero=this.form.get("genero")?.value
+
+    var cadena ="../../assets/"
+    this.objRegistrar.img=cadena+this.selectedFileName
+
+   
+    console.log(this.objRegistrar.img)
+    
+    
     this.objRegistrar.descripcion=this.form.get("descripcion")?.value
     this.objRegistrar.plataformas=this.form.get("plataforma1")?.value
 
@@ -244,7 +278,12 @@ export class ModalVjComponent implements OnInit {
       
 
     }
-    console.log(this.objRegistrar.plataformas)
+
+    if(this.objRegistrar.plataformas.endsWith(",")){
+      console.log("paso el endswith")
+      this.objRegistrar.plataformas=this.objRegistrar.plataformas.replace(',','')
+    }else{}
+    
     console.log(this.objRegistrar)
 
 
@@ -271,7 +310,7 @@ export class ModalVjComponent implements OnInit {
 
   cambioPLataformas(){
 
-    console.log("Cambio plataformas"+this.plataformas)
+    
     this.plataformas2=[]
 
     this.form.get("plataforma2")?.setValue("");
@@ -287,8 +326,7 @@ export class ModalVjComponent implements OnInit {
 
       this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas2=data
 
-        console.log(id)
-        console.log(this.plataformas2)
+        
         conta =this.plataformas2.findIndex( (plata) => plata.id==id);
         if(conta >-1){
 
@@ -359,6 +397,24 @@ export class ModalVjComponent implements OnInit {
     this.enumService.listarGenero().subscribe(data =>{
       this.generosList=data
     })
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    this.selectedFileName = this.selectedFile.name;
+    
+    this.getURLFromFile(this.selectedFile)
+    
+  }
+
+  getURLFromFile(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.selectedFileUrl = e.target.result;
+      this.selectedFileName = this.selectedFile.name;
+    };
+    reader.readAsDataURL(file);
+    
   }
 
 
