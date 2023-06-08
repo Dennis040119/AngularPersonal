@@ -29,7 +29,7 @@
         
         <mat-checkbox style="margin-top: 5%;margin-left: 3%;" *ngIf="tipoDialog=='edit'" (change)="checkPass()" formControlName="Checkpassword" name="checkNewPass">Cambiar Contraseña</mat-checkbox>
         </div>
-        <mat-form-field  style="width: 60%;" *ngIf="checkNewPass==true">
+        <mat-form-field  style="width: 60%;" *ngIf="checkNewPass==true || tipoDialog=='registrar' ">
           <mat-label>Nueva Contraseña</mat-label>
             <input matInput  formControlName="Newpassword" type="password"  name="Newpassword:" maxlength="16"  min="0"  autocomplete="off" />
         </mat-form-field>
@@ -63,7 +63,7 @@
       <button mat-button class=" btn btn-danger" (click)="close()"  >
           <mat-icon>exit_to_app</mat-icon>
       </button>
-      <button mat-button class=" btn btn-success" (click)="registar()" (click)=actualiza()  >
+      <button mat-button class=" btn btn-success" (click)="operacion()">
           <mat-icon>done</mat-icon>
       </button>
       

@@ -3,16 +3,19 @@
     display: flex;
     flex-direction: column;
 
+
 }
 
 .footer{
-    margin-top: 5%;
+    margin-top: 0.5%;
+    margin-bottom: 5%;
     
 }
 
 .btn-buy{
     background-color: aliceblue;
     float: right;
+    margin-right: 5%;
 }
 
 .grilla{

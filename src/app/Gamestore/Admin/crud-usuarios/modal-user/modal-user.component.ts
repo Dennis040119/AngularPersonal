@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule, RequiredValidator } from '@angular/fo
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { retry } from 'rxjs';
 import { UsuarioService } from 'src/app/login/services/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 
@@ -50,16 +51,19 @@ export class ModalUserComponent implements OnInit {
     if(this.dataDialog["obj"]!=null){
       this.objetoDialog=this.dataDialog["obj"]
       console.log(this.objetoDialog)
+    }else{
+      
     }
 
-    if(this.dataDialog["tipo"]=="edit"){
-      this.tipoDialog=this.dataDialog["tipo"]
+    this.tipoDialog=this.dataDialog["tipo"]
+    if(this.tipoDialog=="edit"){
+      
       this.SetActualizaUsuario();
       this.form.get("password")?.disable();
     }
    
     
-    
+    console.log(this.tipoDialog)
     
 
 
@@ -85,8 +89,24 @@ export class ModalUserComponent implements OnInit {
     this.form.get("user")?.setValidators([Validators.required,])
     this.form.get("user")?.updateValueAndValidity();
 
-    this.form.get("password")?.setValidators([Validators.required,])
-    this.form.get("password")?.updateValueAndValidity();
+    if(this.tipoDialog=="edit" && this.checkNewPass){
+      this.form.get("password")?.setValidators([Validators.required,])
+      this.form.get("password")?.updateValueAndValidity();
+
+      this.form.get("Newpassword")?.setValidators([Validators.required])
+      this.form.get("Newpassword")?.updateValueAndValidity();
+
+      
+    }
+
+    if(this.tipoDialog=="registrar"){
+      this.form.get("password")?.setValidators([Validators.required,])
+      this.form.get("password")?.updateValueAndValidity();
+
+      this.form.get("Newpassword")?.setValidators([Validators.required])
+      this.form.get("Newpassword")?.updateValueAndValidity();
+    }
+    
 
     this.form.get("email")?.setValidators([Validators.required,
       Validators.pattern("[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?")])
@@ -100,7 +120,12 @@ export class ModalUserComponent implements OnInit {
   construirUsuario(){
     this.objTransac.id=0;
     this.objTransac.user=this.form.get("user")?.value
-    this.objTransac.password=this.form.get("password")?.value
+
+    ////Pass cuando edita
+    if(this.tipoDialog=="edit" && !this.checkNewPass){this.objTransac.password=this.objetoDialog.password}
+    else{this.objTransac.password=this.form.get("password")?.value}
+
+    
     this.objTransac.email=this.form.get("email")?.value
     this.objTransac.tarjetaCredito=this.form.get("TarjetaCredito")?.value
     this.objTransac.direccion=this.form.get("direccion")?.value
@@ -138,22 +163,55 @@ export class ModalUserComponent implements OnInit {
       this.form.get("password")?.enable();
       this.form.get("password")?.setValue("")
     }else{this.form.get("password")?.disable();
-      this.form.get("password")?.setValue("123456789")
+      if(this.form.get("password")?.value != undefined){this.form.get("password")?.setValue("123456789")}
+      else{this.form.get("password")?.setValue("")}
+      
       }
     
   }
 
+  newPassActu():boolean{
+
+    var rpta
+    if(this.form.get("Checkpassword")?.value==true){
+     rpta = this.form.get("password")?.value==this.form.get("Newpassword")?.value? true:false
+     console.log(this.form.get("password")?.value +" : "+this.form.get("Newpassword")?.value)
+    }else{ rpta= true;}
+
+    return rpta
+   
+  }
+
+  operacion(){
+    this.tipoDialog=='registrar'? this.registar():this.actualiza()  
+  }
+
   actualiza() {
-      console.log("actuzaliza")
+    console.log("actualiza")
+    this.construirUsuario();
+    this.ValidControls();
+    if(this.form.valid && this.newPassActu()){
+      console.log(this.objTransac)
+      this.objTransac.id=this.objetoDialog.id
+      this.UsuarioService.actualizar(this.objTransac).subscribe((data) => {
+        this.dataService=data
+        if(this.dataService['mensaje']=="Actualizado usuario correctamente"){
+          window.alert(this.dataService['mensaje'])
+          this.dialog.close();
+        }else{window.alert(this.dataService['mensaje'])}
+      })
+    }else{ this.form.valid? window.alert("Ambas contraseñas deben ser iguales"):window.alert("Formulario no valido")}
+
+
     }
   close() {
      this.dialog.close();
     }
   registar() {
-
+    console.log("registra")
     this.construirUsuario();
     this.ValidControls();
-    if(this.form.valid){
+    if(this.form.valid && this.form.get("Newpassword")?.value== this.objTransac.password){
       console.log(this.objTransac)
 
       this.UsuarioService.registrar(this.objTransac).subscribe((data) => {
@@ -163,12 +221,10 @@ export class ModalUserComponent implements OnInit {
           this.dialog.close();
         }else{window.alert(this.dataService['mensaje'])}
       })
-    }else{
-
-    }
+    }else{ this.form.valid? window.alert("Ambas contraseñas deben ser iguales"):window.alert("Formulario no valido")}
       
     
-    }
+  }
 }
 
 

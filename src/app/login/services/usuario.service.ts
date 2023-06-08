@@ -27,7 +27,15 @@ export class UsuarioService {
           return this.http.get<Usuario[]>(baseUrl+'/loginFind/'+user+'/'+pass);
     }
 
-     registrar(user:Usuario){
+    registrar(user:Usuario){
       return this.http.post((baseUrl + '/usuarioSave'),user);
+    }
+
+    actualizar(user:Usuario){
+      return this.http.put((baseUrl + '/usuarioPut'),user);
+    }
+
+    eliminar(id:number){
+      return this.http.delete((baseUrl + '/UsuarioDelete/'+id));
     }
 }

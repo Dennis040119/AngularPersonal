@@ -13,7 +13,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(""));
 
   function redirectToLogin(): void {
-    const router = new Router(null, null, null, new Location());
+    const router = new Router();
     router.navigateByUrl('/login');
   }
 

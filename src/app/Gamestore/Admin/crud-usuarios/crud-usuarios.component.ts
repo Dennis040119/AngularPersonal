@@ -105,8 +105,25 @@ export class CrudUsuariosComponent implements OnInit {
         height: '120px',
         autoFocus: false,
       });
-      
+      dialog.afterClosed().subscribe(data => {
+        console.log(data)
+        if(data=="Si"){
+          this.UsuarioService.eliminar(user.id).subscribe(data =>{
+            this.respta=data
+            window.alert(this.respta["mensaje"]);
+          this.construirtabla();
+          this.dataSource.filter = ""
+        })
+
+        }else{
+          console.log("no elimino "+data)
+          this.construirtabla();
+          this.dataSource.filter = ""
+        }
+        
+      })
     }
+    
 
 
 }
