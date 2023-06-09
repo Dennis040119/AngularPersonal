@@ -21,4 +21,8 @@ export class AppComponent {
   ) {
    
   }
+
+  static consola(text:any){
+    console.log(text);
+  }
 }

@@ -18,6 +18,10 @@ import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
 import { Videojuegos } from './models/videojuegos';
 import * as PropTypes from 'prop-types';
 
+//Componente error
+import { ErrorHandler } from '@angular/core';
+import { GlobalErrorHandler } from './login/services/GlobalError-handler';
+
 //Material
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule } from '@angular/material/input';
@@ -102,7 +106,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule
 
   ],
-  providers: [CookieService],
+  providers: [CookieService ,  {provide:ErrorHandler,useClass:GlobalErrorHandler}],
   bootstrap: [AppComponent]
 }
 )

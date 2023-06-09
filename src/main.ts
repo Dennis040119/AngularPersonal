@@ -14,7 +14,7 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 
   function redirectToLogin(): void {
     const router = new Router();
-    router.navigateByUrl('/login');
+    router.navigateByUrl('');
   }
 
 

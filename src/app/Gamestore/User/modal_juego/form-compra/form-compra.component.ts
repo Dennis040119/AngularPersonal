@@ -53,6 +53,7 @@ export class FormCompraComponent implements OnInit {
       if (this.tiempo.sec - 1 == -1) {
         this.tiempo.min -= 1;
         this.tiempo.sec = 59
+        
         this.tiempo.sec.toFixed(2)
       } 
       else this.tiempo.sec -= 1

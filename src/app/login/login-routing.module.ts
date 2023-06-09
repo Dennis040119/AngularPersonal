@@ -14,7 +14,7 @@ const routes: Routes = [
       component: LogueoComponent,
       children: [
         {
-          path: 'login',
+          path: 'gamestore',
           redirectTo: 'login',
           pathMatch: 'full'
         },

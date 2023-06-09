@@ -8,8 +8,15 @@
 
 .footer{
     margin-top: 0.5%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     
+}
+.SelectGenero{
+    max-width: 10%;
+}
+
+.SelectPlata{
+    max-width: 10%;
 }
 
 .btn-buy{
@@ -21,9 +28,7 @@
 .grilla{
     display: table-column;
     margin-bottom: 5%;
-   
-     
-    
+ 
 }
 
 .portada{

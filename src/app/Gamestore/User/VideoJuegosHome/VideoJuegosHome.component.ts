@@ -4,6 +4,10 @@ import {DetalleJuegoComponent} from '../modal_juego/detalle-juego/detalle-juego.
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { AppComponent } from 'src/app/app.component';
+import { EnumService } from '../../Admin/services/enum.service';
+import { Genero } from 'src/app/models/genero';
+import { Plataforma } from 'src/app/models/plataforma';
 
 
 declare var carrito2: Videojuegos[];
@@ -18,25 +22,70 @@ export class VideojuegosHome implements OnInit {
   static carrito:Videojuegos[] = [];
   acumulador: number=0
   tiles:Videojuegos[] = []
+  resguardo:Videojuegos[]
+  GenerosList:Genero[]
+  PlataformasList:Plataforma[]
+
+  //NgModels
+  SelectionGene:string
+  SelectionPlata:string
+  Nombrefiltrer:string=""
 
   constructor(
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
+    private EnumService:EnumService
     
   ) {}
 
 
   ngOnInit(): void {
     this.listarVideoJuegos();
+    this.comboEnums()
     console.log(this.tiles)
     
   }
 
   
+  applyFilter() {
+    AppComponent.consola(this.Nombrefiltrer+" , " + this.SelectionGene+" , "+this.SelectionPlata)
     
+    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.tiles=this.resguardo
+    if(this.Nombrefiltrer!=""){
+      var filtrado= this.tiles.filter(vj => vj.nombre.toLowerCase().includes(this.Nombrefiltrer.toLowerCase()));
+      this.tiles=filtrado
+    }
+
+    if(this.SelectionGene!="ge000" && this.SelectionGene!=undefined){
+      var filtrado =this.tiles.filter(vj => vj.genero.id.includes(this.SelectionGene.trim().toLowerCase()) )
+      this.tiles=filtrado
+    }
+
+    if(this.SelectionPlata!="pf000" && this.SelectionPlata!=undefined){
+      var filtrado =this.tiles.filter(vj => vj.plataformas.includes(this.SelectionPlata.trim().toLowerCase()) )
+      this.tiles=filtrado
+    }
 
 
+    
+  }
 
+  clearFilter(){
+    this.tiles=this.resguardo
+    this.Nombrefiltrer=""
+    this.SelectionGene=""
+    this.SelectionPlata=""
+  }
+  comboEnums(){
+    this.EnumService.listarGenero().subscribe(data =>{
+      this.GenerosList=data
+    })
+
+    this.EnumService.listarPlataformas().subscribe(data =>{
+      this.PlataformasList=data
+    })
+  }
   DetalleModal(vj:Videojuegos){
 
     const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
@@ -106,8 +155,11 @@ export class VideojuegosHome implements OnInit {
 
       if(data!=undefined){
         this.tiles=data;
+        this.resguardo=data
       }
       
     })
   }
+
+  
 }

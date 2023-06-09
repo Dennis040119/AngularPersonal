@@ -14,6 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/primera-app",
+            
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -23,6 +24,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+              
             ],
             "styles": [
               "src/styles.css"
@@ -85,10 +87,9 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+              
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+            
             "scripts": []
           }
         }

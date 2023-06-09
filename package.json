@@ -25,6 +25,7 @@
     "@fontsource/roboto": "^5.0.2",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
+    "canvg": "^4.0.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.29",
