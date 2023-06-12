@@ -10,7 +10,8 @@
           
         </mat-form-field>
         <button mat-raised-button (click)="agregar()" style="margin-left: 2%;">Agregar</button>
-        <button mat-raised-button (click)="downloadPdf()" style="margin-left: 2%;">Exportar</button>
+        <button mat-raised-button (click)="downloadPdf()" style="margin-left: 2%;">PDF</button>
+        <button mat-raised-button (click)="downloadExcel()" style="margin-left: 2%;">Excel</button>
 
     </div>
       
@@ -22,7 +23,7 @@
       <!-- Name Column -->
       <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombre| uppercase}} </mat-cell>
       </ng-container>
   
       <!-- Weight Column -->

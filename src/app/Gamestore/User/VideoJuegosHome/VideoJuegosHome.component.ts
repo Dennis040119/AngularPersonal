@@ -13,7 +13,7 @@ import { Plataforma } from 'src/app/models/plataforma';
 declare var carrito2: Videojuegos[];
 
 @Component({
-  selector: 'app-index',
+  selector: 'app-root',
   templateUrl: './VideojuegosHome.component.html',
   styleUrls: ['./VideojuegosHome.component.css']
 })
@@ -80,10 +80,12 @@ export class VideojuegosHome implements OnInit {
   comboEnums(){
     this.EnumService.listarGenero().subscribe(data =>{
       this.GenerosList=data
+      this.GenerosList.splice(0,1)
     })
 
     this.EnumService.listarPlataformas().subscribe(data =>{
       this.PlataformasList=data
+      this.PlataformasList.splice(0,1)
     })
   }
   DetalleModal(vj:Videojuegos){

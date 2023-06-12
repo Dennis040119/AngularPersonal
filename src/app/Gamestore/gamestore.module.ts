@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 import { GamestoreRoutingModule } from './gamestore-routing.module';
 import { GamestoreComponent } from '../Gamestore/gamestore.component';
 import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.component';
+import { CrudVjComponent } from './Admin/crud-vj/crud-vj.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//PDF
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { autoTable } from 'jspdf-autotable'; 
+
+//Excel
+
 
 
 
@@ -43,12 +48,14 @@ import {MatListModule} from '@angular/material/list';
     IndexAdminComponent,
     ModalUserComponent,
     IndexUserComponent,
+    
   ],
   imports: [
     CommonModule,
     GamestoreRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    
     //PDF
     
     

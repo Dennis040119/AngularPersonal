@@ -4,7 +4,7 @@ import { Component, OnInit, Injectable, HostListener } from '@angular/core';
   providedIn: 'root'
 })
 @Component({
-  selector: 'login-root',
+  selector: 'app-root',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

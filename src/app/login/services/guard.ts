@@ -25,7 +25,7 @@ export class Guard implements CanActivate {
             return true
         }else{
           this.router.navigate(['']);
-            return false
+          return false
             
         }
         

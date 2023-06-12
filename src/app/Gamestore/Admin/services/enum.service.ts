@@ -2,7 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Plataforma } from '../../../models/plataforma';
 import { Observable } from 'rxjs';
-import { Genero } from 'src/app/models/genero';
+import { Genero } from 'src/app/models/genero'
+//Excel 
+import * as XLSX from 'xlsx'
+
+import * as FileSaver from 'file-saver';
+
+
 
 const baseUrl = 'http://localhost:8090/enums'
 @Injectable({
@@ -21,4 +27,26 @@ export class EnumService {
   listarGenero():Observable<Genero[]> {
     return this.http.get<Genero[]>(baseUrl + '/GeneroList');
   }
+  
+  exportToExcel(data: any[], fileName: string, sheetName: string): void {
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(data);
+
+      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
+    
+      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array',bookSST:true });
+      this.openExcelFile(excelBuffer, fileName);
+    }
+  
+  private openExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+    const excelFileURL = URL.createObjectURL(data);
+    FileSaver(data, fileName + '.xlsx');
+
+    
+    }
+
+    
+
+    
 }

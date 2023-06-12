@@ -16,3 +16,5 @@ export class GlobalErrorHandler implements ErrorHandler {
     }
     
 }
+
+export { ErrorHandler };

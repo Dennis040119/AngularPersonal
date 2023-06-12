@@ -7,12 +7,15 @@ import { ModalVjComponent } from './modal-vj/modal-vj.component';
 import { DetalleJuegoComponent } from '../../User/modal_juego/detalle-juego/detalle-juego.component';
 import { VideojuegosHome } from '../../User/VideoJuegosHome/VideoJuegosHome.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
+import * as XLSX from 'xlsx'
 
 ///pdf imports
 
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import { EnumService } from '../services/enum.service';
+import { DataSource } from '@angular/cdk/collections';
 
 
 
@@ -38,6 +41,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     
     private dialog: MatDialog,
     private VjService:VideoJuegoServiceService,
+    private EnumService:EnumService
     //@Inject(MAT_DIALOG_DATA) private data: any,
   
   ){ this.audioPlayer = new Audio();}
@@ -187,6 +191,8 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     ////Poner imagenes
      
     
+
+    //Abrir solo el visor del navegador
     var string = doc.output('datauristring');
     var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
     var x = window.open()!;
@@ -194,6 +200,13 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     x.document.write(embed);
     x.document.close();
     //doc.save('VideoJuegos_List' + '.pdf');
+  }
+  downloadExcel(){
+
+    this.VjService.listarVideoJuegos().subscribe((data) =>
+    {this.listavj=data;
+    this.EnumService.exportToExcel(this.listavj, 'Reporte_VideoJuegos', 'Reporte_VideoJuegos');
+    })
   }
 }
 

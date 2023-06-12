@@ -13,12 +13,6 @@ const routes: Routes = [
       path: '',
       component: LogueoComponent,
       children: [
-        {
-          path: 'gamestore',
-          redirectTo: 'login',
-          pathMatch: 'full'
-        },
-       
         {path: '', redirectTo: 'login', pathMatch: 'full'},
         {path: '**', redirectTo: 'login', pathMatch: 'full'},
       ]
@@ -29,6 +23,7 @@ const routes: Routes = [
     loadChildren:()=>import('../Gamestore/gamestore.module').then((m)=>m.GamestoreModule)
     
     },
+    {path: 'error-page', component: logincomponent },
     
   ];
 

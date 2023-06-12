@@ -30,4 +30,5 @@ export class IndexUserComponent {
     this.router.navigate(['']);
   }
 
+
 }

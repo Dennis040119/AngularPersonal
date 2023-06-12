@@ -9,6 +9,8 @@ import { LogueoComponent } from '../login/logueo/logueo.component';
 import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
 import { IndexUserComponent } from './User/index-user/index-user.component';
+import { GlobalErrorHandler } from '../login/services/GlobalError-handler';
+import { logincomponent } from '../login/login.component';
 
 const routes: Routes = [
   
@@ -37,7 +39,7 @@ const routes: Routes = [
         canActivate:[Guard],
         component:CrudVjComponent,
         children:[
-          {path: '', redirectTo: 'CrudVj', pathMatch: 'full'},
+          {path:'', redirectTo: 'CrudVj', pathMatch: 'full'},
         ]
       },
       {
@@ -45,7 +47,7 @@ const routes: Routes = [
         canActivate:[Guard],
         component:CrudUsuariosComponent,
         children:[
-          {path: '', redirectTo: 'CrudUsuario', pathMatch: 'full'},
+          {path:'', redirectTo: 'CrudUsuario', pathMatch: 'full'},
         ]
       },
       {path: '', redirectTo: 'indexAdmin', pathMatch: 'full'},
@@ -56,11 +58,12 @@ const routes: Routes = [
   
   {
     path: '',
-    //redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
-    redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
+    redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
+    //redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
     pathMatch:'full'
     
   },
+  {path: 'error-page', component: logincomponent },
   
 ];
 
