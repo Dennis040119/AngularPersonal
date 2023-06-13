@@ -7,6 +7,7 @@ import { Videojuegos } from 'src/app/models/videojuegos';
 import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 import { Genero } from 'src/app/models/genero';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-modal-vj',
@@ -70,8 +71,7 @@ export class ModalVjComponent implements OnInit {
      //Cargamos los array de imagen y colores
      this.comboPLataforma1();
      this.generoComboBox();
-      this.imagesArray();
-
+      
       this.h1="Registro VideoJuegos"
     //Recibimos la data
     
@@ -80,7 +80,7 @@ export class ModalVjComponent implements OnInit {
       this.tipo=this.data['tipo']
       this.h1="Actualizar VideoJuegos"
      
-      console.log(this.tipo)
+     
       console.log(this.objRecepcion)
       this.setVjRecepcion();
     }
@@ -95,7 +95,7 @@ export class ModalVjComponent implements OnInit {
       plataforma2:[],
       plataforma3:[],
       genero:[],
-      img:[],
+      
       color:[]
 
     })
@@ -121,7 +121,7 @@ export class ModalVjComponent implements OnInit {
 
   alertas(){
     this.nombres=this.form.get('nombres')?.value;
-    console.log(this.nombres)
+    
      if(this.nombres== (("")||null)){
         this.booNombres=false
      }else{this.booNombres=true}
@@ -129,7 +129,7 @@ export class ModalVjComponent implements OnInit {
 
   registar(){
     this.formValidators();
-    console.log(this.generosList);
+    
 
      if(this.form.invalid || this.tipo=="edit"){
       if(this.form.invalid)  {window.alert("Formulario invalido");}
@@ -147,7 +147,7 @@ export class ModalVjComponent implements OnInit {
         
 
 
-        console.log(this.objRegistrar)
+        
          this.vjService.registrarVj(this.objRegistrar).subscribe((data)=>{
          this.data=data
          console.log(this.objRegistrar)
@@ -170,7 +170,7 @@ export class ModalVjComponent implements OnInit {
   actualiza(){
     this.formValidators();
 
-      console.log(this.tipo)
+      
      if(this.form.invalid || this.tipo!="edit"){
       if(this.form.invalid)  {window.alert("Formulario invalido");}
      }else{
@@ -185,7 +185,7 @@ export class ModalVjComponent implements OnInit {
 
         this.vjService.actualizarVj(this.objRegistrar).subscribe((data)=>{
           this.data=data
-          console.log(this.data["mensaje"])
+         
           if( this.data["mensaje"] == "Actualizado correctamente"){
             this.close();
           }else{
@@ -207,11 +207,16 @@ export class ModalVjComponent implements OnInit {
     var lista
     //Seteamos los valores cuando editamos un VJ
     this.objRegistrar.id=this.objRecepcion.id
+    //El rol de videojuegos siempre sera 'vj'
     this.objRegistrar.rol="vj"
     this.form.get("nombre")?.setValue(this.objRecepcion.nombre)
     this.form.get("precio")?.setValue(this.objRecepcion.precio)
 
-    this.form.get("img")?.setValue(this.objRecepcion.img)
+    //Operamos para poder cargar la imagen que le corresponde 
+    var numero = this.objRecepcion.img.length
+    this.selectedFileUrl=this.objRecepcion.img
+    this.selectedFileName = this.objRecepcion.img.substring(24,numero)
+   
     
     this.form.get("genero")?.setValue(this.objRecepcion.genero.id)
     this.form.get("descripcion")?.setValue(this.objRecepcion.descripcion)
@@ -224,17 +229,17 @@ export class ModalVjComponent implements OnInit {
 
 
       /////////////////////////
-      if(this.objRecepcion.plataformas.length>5){
+      if(this.objRecepcion.plataformas.length>=5){
         this.cambioPLataformas()
         this.form.get("plataforma2")?.enable();
        
         this.form.get("plataforma2")?.setValue(this.objRecepcion.plataformas.slice(6,11))
       }
-
-      if(this.objRecepcion.plataformas.length>12){
+      
+      if(this.objRecepcion.plataformas.length>=11){
         this.cambioPLataformas2()
         this.form.get("plataforma3")?.enable();
-        console.log(this.objRecepcion.plataformas.slice(12,17))
+        
         this.form.get("plataforma3")?.setValue(this.objRecepcion.plataformas.slice(12,17))
       }
 
@@ -256,11 +261,11 @@ export class ModalVjComponent implements OnInit {
     this.objRegistrar.nombre=this.form.get("nombre")?.value
     this.objRegistrar.precio=this.form.get("precio")?.value
 
-    var cadena ="../../assets/"
+    var cadena ="../../assets/PortadasVj/"
     this.objRegistrar.img=cadena+this.selectedFileName
 
    
-    console.log(this.objRegistrar.img)
+    
     
     
     this.objRegistrar.descripcion=this.form.get("descripcion")?.value
@@ -294,8 +299,7 @@ export class ModalVjComponent implements OnInit {
     this.form.get('nombre')?.setValidators([Validators.required]);
     this.form.get('nombre')?.updateValueAndValidity();
 
-    this.form.get('img')?.setValidators([Validators.required]);
-    this.form.get('img')?.updateValueAndValidity();
+   
 
     this.form.get('precio')?.setValidators([Validators.required,
     Validators.pattern(/^-?\d*[.,]?\d{0,2}$/)]);
@@ -306,7 +310,11 @@ export class ModalVjComponent implements OnInit {
 
   }
 
-  comboPLataforma1(){return this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas=data})}
+  comboPLataforma1(){
+    return this.enumService.listarPlataformas().subscribe((data)=>{
+      this.plataformas=data
+      this.plataformas.splice(0,1)
+    })}
 
   cambioPLataformas(){
 
@@ -324,8 +332,9 @@ export class ModalVjComponent implements OnInit {
       var conta:number=0
 
 
-      this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas2=data
-
+      this.enumService.listarPlataformas().subscribe((data)=>{
+        this.plataformas2=data
+        this.plataformas2.splice(0,1)
         
         conta =this.plataformas2.findIndex( (plata) => plata.id==id);
         if(conta >-1){
@@ -361,7 +370,7 @@ export class ModalVjComponent implements OnInit {
 
         conta1 =this.plataformas3.findIndex( (vj) => vj.id==this.form.get("plataforma1")?.value);
 
-
+        this.plataformas3.splice(0,1)
         if(conta1 >-1){
 
         this.plataformas3.splice(conta1,1)
@@ -378,20 +387,7 @@ export class ModalVjComponent implements OnInit {
     }
   }
 
-  imagesArray(){
-    //assets
-     this.arrayImg = [
-      {nombre:"Gears of war 2",path:"../../assets/GearsOfWar2.jpg"},
-      {nombre:"BattleField 3",path:"../../assets/battlefield3.jpg"},
-      {nombre:"Destiny",path:"../../assets/Destiny.jpg"},
-      {nombre:"Mario Galaxy",path:"../../assets/Mario Galaxy.jpg"},
-      {nombre:"HomeFront",path:"../../assets/HomeFront.jpg"},
-      {nombre:"Default",path:"../../assets/logo_barra.jpg"}
-
-
-    ]
-
-  }
+  
 
   generoComboBox(){
     this.enumService.listarGenero().subscribe(data =>{

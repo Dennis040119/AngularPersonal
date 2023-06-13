@@ -2,6 +2,8 @@ import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/co
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/videojuegos';
+import { Plataforma } from 'src/app/models/plataforma';
+
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 import { ModalVjComponent } from './modal-vj/modal-vj.component';
 import { DetalleJuegoComponent } from '../../User/modal_juego/detalle-juego/detalle-juego.component';
@@ -16,6 +18,7 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { EnumService } from '../services/enum.service';
 import { DataSource } from '@angular/cdk/collections';
+import { AppComponent } from 'src/app/app.component';
 
 
 
@@ -27,7 +30,7 @@ import { DataSource } from '@angular/cdk/collections';
 export class CrudVjComponent implements OnInit,AfterViewInit  {
 
   listavj!: Videojuegos[];
-  displayedColumns = ['nombre', 'precio', 'plataformas','options'];
+  displayedColumns = ['nombre', 'precio','genero' ,'plataformas','options'];
   dataSource = new MatTableDataSource(this.listavj);
 
   //Respuesta de servicios
@@ -36,6 +39,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
   //Audio de fondo
   audioPlayer!: HTMLAudioElement;
   @ViewChild('audioPlayer') audioPlayerRef: any;
+  PlataformList: Plataforma[];
 
   constructor(
     
@@ -207,6 +211,15 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     {this.listavj=data;
     this.EnumService.exportToExcel(this.listavj, 'Reporte_VideoJuegos', 'Reporte_VideoJuegos');
     })
+  }
+
+  plataformasConvert(plata:string){
+    var rpta:string|undefined
+    var pla1:string|undefined
+    var pla2:string|undefined
+    var pla3:string|undefined
+
+    
   }
 }
 
