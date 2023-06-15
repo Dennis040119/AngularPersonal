@@ -17,7 +17,7 @@ export class VideoJuegoServiceService {
 
    }
 
-   listarVideoJuegos(): Observable<Videojuegos[]> {
+  listarVideoJuegos(): Observable<Videojuegos[]> {
     return this.http.get<Videojuegos[]>(baseUrl + '/videoJuegoList');
   }
 

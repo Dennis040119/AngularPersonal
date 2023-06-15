@@ -11,6 +11,7 @@ import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
 import { IndexUserComponent } from './User/index-user/index-user.component';
 import { GlobalErrorHandler } from '../login/services/GlobalError-handler';
 import { logincomponent } from '../login/login.component';
+import { CrudVcComponent } from './Admin/crud-vc/crud-vc.component';
 
 const routes: Routes = [
   
@@ -50,6 +51,19 @@ const routes: Routes = [
           {path:'', redirectTo: 'CrudUsuario', pathMatch: 'full'},
         ]
       },
+      {
+        path: 'CrudVc',
+        canActivate:[Guard],
+        component:CrudVcComponent,
+        children:[
+          {path:'', redirectTo: 'CrudVc', pathMatch: 'full'},
+        ]
+      },
+
+
+
+
+
       {path: '', redirectTo: 'indexAdmin', pathMatch: 'full'},
       {path: '**', redirectTo: 'indexAdmin', pathMatch: 'full'},
 

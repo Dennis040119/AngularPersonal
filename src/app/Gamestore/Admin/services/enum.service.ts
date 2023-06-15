@@ -7,6 +7,7 @@ import { Genero } from 'src/app/models/genero'
 import * as XLSX from 'xlsx'
 
 import * as FileSaver from 'file-saver';
+import { Marca } from 'src/app/models/marca';
 
 
 
@@ -26,6 +27,10 @@ export class EnumService {
 
   listarGenero():Observable<Genero[]> {
     return this.http.get<Genero[]>(baseUrl + '/GeneroList');
+  }
+
+  listarMarcas():Observable<Marca[]> {
+    return this.http.get<Marca[]>(baseUrl + '/MarcaList');
   }
   
   exportToExcel(data: any[], fileName: string, sheetName: string): void {

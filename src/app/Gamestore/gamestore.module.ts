@@ -6,6 +6,8 @@ import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.compo
 import { CrudVjComponent } from './Admin/crud-vj/crud-vj.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CrudVcComponent } from './Admin/crud-vc/crud-vc.component';
+import { ModalVcComponent } from './Admin/crud-vc/modal-vc/modal-vc.component';
 //PDF
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -36,6 +38,7 @@ import { IndexUserComponent } from './User/index-user/index-user.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatListModule} from '@angular/material/list';
 
+
 //Material Ui
 
 
@@ -48,6 +51,8 @@ import {MatListModule} from '@angular/material/list';
     IndexAdminComponent,
     ModalUserComponent,
     IndexUserComponent,
+    CrudVcComponent,
+    ModalVcComponent,
     
   ],
   imports: [

@@ -1,0 +1,84 @@
+<div class="body">
+    <div class="titulo">
+      <h2 style="float: left; margin-top: 10px;">{{h1}}</h2>
+    </div>
+  
+  <br>
+  <form [formGroup]="form" class="form" layout="column"   onkeydown="if(event.keyCode==13){
+          if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
+            var form = event.target.form;
+            var index = Array.prototype.indexOf.call(form, event.target);
+            form.elements[index + 1].focus();
+            event.preventDefault();
+          }}">
+  
+  <div class="card" layout="column"  >
+      
+      <div class="card-body">
+        
+        <mat-form-field style="width: 80%;">
+          <mat-label>Nombre</mat-label>
+          <input matInput  formControlName="nombre"  name="nombre"   maxlength="50" autocomplete="off" />
+        </mat-form-field>
+        <p *ngIf="nombres==''.trim() " style="color: red; font-size: 11px;">Obligatorio*</p>
+        <mat-form-field  style="width: 60%;">
+          <mat-label>Precio</mat-label>
+            <input matInput  formControlName="precio" (keypress)="onlyNumbers($event)" name="precio" maxlength="16"  min="0"  autocomplete="off" />
+        </mat-form-field>
+        <mat-form-field style="width: 80%;">
+          <mat-label>descripcion</mat-label>
+          <input matInput  formControlName="descripcion" name="descripcion" type="text"  autocomplete="off"  />
+        </mat-form-field>
+        <mat-form-field style="width: 50%;">
+          <mat-select placeholder="Plataforma 1" formControlName="plataforma" >
+            <mat-option *ngFor="let plata of plataformas" [value]="plata.id">
+              {{ plata.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field style="width: 50%;">
+          <mat-select placeholder="Plataforma 1" formControlName="marca" >
+            <mat-option *ngFor="let marca of Marcas" [value]="marca.idMarca">
+              {{ marca.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+       
+        <div style="display: flex; flex-direction: row;width: 70%;max-height: 15%;">
+         
+          <input type="file" (ngModel)="selectedFileName" (change)="onFileSelected($event)" style="display: none" #fileInput>
+          <button mat-icon-button (click)="fileInput.click()" style="margin-left: 1%;">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+          <input [value]="selectedFileName" disabled="true"  style="max-width: 40%;height: 10%;margin-left: 2%;margin-top: 2%;">
+          <div *ngIf="selectedFileUrl" style="max-width: 30%;max-height: 30%;margin-left: 5%;" >
+            <img [src]="selectedFileUrl" alt="Imagen seleccionada" style="max-width: 100%;max-height: 100%;" >
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-header position-sticky sticky-top" style="margin:2%;background-color:rgb(255, 255, 255);top: -25px;">
+      
+      <button mat-button class=" btn btn-danger" (click)="close()"  >
+          <mat-icon>exit_to_app</mat-icon>
+      </button>
+      <button mat-button class=" btn btn-success" (click)="registar()" (click)=actualiza()  >
+          <mat-icon>done</mat-icon>
+      </button>
+      
+    </div>
+  
+  
+  
+  
+  
+  </form>
+  
+  
+  
+  
+  
+  </div>
+  

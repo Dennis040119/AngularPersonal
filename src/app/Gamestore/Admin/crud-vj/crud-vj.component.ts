@@ -13,9 +13,12 @@ import * as XLSX from 'xlsx'
 
 ///pdf imports
 
+import 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
+
+
 import { EnumService } from '../services/enum.service';
 import { DataSource } from '@angular/cdk/collections';
 import { AppComponent } from 'src/app/app.component';
@@ -61,8 +64,8 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     this.audioPlayer.src = '../../../assets/audio/enemy.mp3';
     
     //const audioPlayer: HTMLAudioElement = this.audioPlayerRef.nativeElement;
-    this.audioPlayer.load();
-    this.audioPlayer.play();
+    //this.audioPlayer.load();
+    //this.audioPlayer.play();
     
   }
 
@@ -189,8 +192,10 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
 
         theme: 'grid' ,
 
+
         
     });
+    
 
     ////Poner imagenes
      

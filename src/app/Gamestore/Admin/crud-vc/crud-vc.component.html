@@ -1,0 +1,76 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+
+<div class="body">
+  <audio #audioPlayer autoplay></audio>
+    <div class="example-header">
+     
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+          
+        </mat-form-field>
+        <button mat-raised-button (click)="agregar()" style="margin-left: 2%;min-width: 8%;">Agregar</button>
+        <button mat-raised-button (click)="downloadPdf()" style="margin-left: 2%;">PDF</button>
+        <button mat-raised-button (click)="downloadExcel()" style="margin-left: 2%;">Excel</button>
+        
+    </div>
+      <div class="tableDiv">
+    <mat-table #table [dataSource]="dataSource" class="table">
+  
+      
+      
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.nombre| uppercase}} </mat-cell>
+      </ng-container>
+  
+     
+      <ng-container matColumnDef="precio">
+        <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          {{ element.precio|currency:"EUR"}}  </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="plataforma" >
+        <mat-header-cell *matHeaderCellDef style="width: 10%;"> Plataforma </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          {{element.plataforma.nombre}}  </mat-cell>
+      </ng-container>
+  
+      
+      <ng-container matColumnDef="marca">
+        <mat-header-cell *matHeaderCellDef> Marca </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          {{element.marca}}
+
+          
+       
+          
+        </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef> options </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="margin-right: 1%;"> 
+        
+        <button mat-button class="btn" title="edit" (click)="edit(element)">
+          <mat-icon style="color: black;">edit</mat-icon>
+        </button> 
+        <button mat-button class="btn" title="open" (click)="detalle(element)">
+            <mat-icon style="color: #3f51b5;">visibility</mat-icon>
+        </button>
+        <button mat-button class="btn" title="close"  (click)="delete(element)">
+            <mat-icon style="color: red;">delete</mat-icon>
+        </button>
+        
+        </mat-cell>
+      </ng-container>
+  
+      
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  </div>
+2
