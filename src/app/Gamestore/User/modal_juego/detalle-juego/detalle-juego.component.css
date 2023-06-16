@@ -3,6 +3,7 @@
    flex-direction: column;
    width: 100%;
    height: 100%;
+   
 
 
 }
@@ -47,7 +48,7 @@ word-break:break-all;
 }
 
 .buttons{
-    margin-top: 20%;
+    margin-top: 12%;
     float: left;
     width: 100%;
 }

@@ -30,15 +30,15 @@
           <input matInput  formControlName="descripcion" name="descripcion" type="text"  autocomplete="off"  />
         </mat-form-field>
         <mat-form-field style="width: 50%;">
-          <mat-select placeholder="Plataforma 1" formControlName="plataforma" >
-            <mat-option *ngFor="let plata of plataformas" [value]="plata.id">
+          <mat-select placeholder="Plataforma" formControlName="plataforma" >
+            <mat-option *ngFor="let plata of plataformas" [value]="plata.platId">
               {{ plata.nombre }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field style="width: 50%;">
-          <mat-select placeholder="Plataforma 1" formControlName="marca" >
-            <mat-option *ngFor="let marca of Marcas" [value]="marca.idMarca">
+          <mat-select placeholder="Marca" formControlName="marca" >
+            <mat-option *ngFor="let marca of Marcas" [value]="marca.nombre">
               {{ marca.nombre }}
             </mat-option>
           </mat-select>
@@ -48,10 +48,10 @@
         <div style="display: flex; flex-direction: row;width: 70%;max-height: 15%;">
          
           <input type="file" (ngModel)="selectedFileName" (change)="onFileSelected($event)" style="display: none" #fileInput>
-          <button mat-icon-button (click)="fileInput.click()" style="margin-left: 1%;">
+          <button mat-icon-button (click)="fileInput.click()" style="margin-left: 1%;" [disabled]="disabledBtn">
             <mat-icon>attach_file</mat-icon>
           </button>
-          <input [value]="selectedFileName" disabled="true"  style="max-width: 40%;height: 10%;margin-left: 2%;margin-top: 2%;">
+          <input [value]="selectedFileName"  disabled="true"  style="max-width: 40%;height: 10%;margin-left: 2%;margin-top: 2%;">
           <div *ngIf="selectedFileUrl" style="max-width: 30%;max-height: 30%;margin-left: 5%;" >
             <img [src]="selectedFileUrl" alt="Imagen seleccionada" style="max-width: 100%;max-height: 100%;" >
             

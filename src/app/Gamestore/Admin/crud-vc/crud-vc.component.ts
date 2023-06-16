@@ -9,6 +9,8 @@ import { EnumService } from '../services/enum.service';
 import { ModalVcComponent } from './modal-vc/modal-vc.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
 import { AppComponent } from 'src/app/app.component';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-crud-vc',
@@ -21,6 +23,9 @@ export class CrudVcComponent implements OnInit {
   dataSource = new MatTableDataSource(this.listaVc);
 
   dataRest:any
+  selectedFile: File;
+  selectedFileName: any;
+  selectedFileUrl: any;
 
   constructor(
     
@@ -43,7 +48,7 @@ applyFilter(event: Event) {
 
 construirtabla(){
   this.VcService.listarVideoConsolas().subscribe((data) =>
-    {this.listaVc=data;
+   { this.listaVc=data;
     this.dataSource = new MatTableDataSource(this.listaVc);
     })
 }
@@ -51,7 +56,7 @@ agregar() {
 const dialog = this.dialog.open(ModalVcComponent, {
       
   width: '600px',
-  height: '700px',
+  height: '600px',
   autoFocus: false,
   data:{tipo:"save"}
   
@@ -59,23 +64,19 @@ const dialog = this.dialog.open(ModalVcComponent, {
 dialog.afterClosed().subscribe(data => {
   
    this.construirtabla();
-    this.dataSource.filter = ""});
+  this.dataSource.filter = ""});
 }
 
-downloadPdf() {
 
-}
-downloadExcel() {
 
-}
 edit(Vc:VideoConsola){
   const dialog = this.dialog.open(ModalVcComponent, {
       
     width: '600px',
-    height: '700px',
+    height: '600px',
     autoFocus: false,
     data:{
-      tipo:"update",
+      tipo:"edit",
       obj:Vc}
     
   });
@@ -90,7 +91,7 @@ detalle(Vc:VideoConsola) {
   const dialog = this.dialog.open(ModalVcComponent, {
       
     width: '600px',
-    height: '700px',
+    height: '600px',
     autoFocus: false,
     data:{
       tipo:"detalle",
@@ -109,23 +110,80 @@ delete(Vc:VideoConsola) {
     height: '100px',
     autoFocus: false,
     data:{
-      tipo:"update",
+      tipo:"eliminar",
       obj:Vc}
     
   });
   dialog.afterClosed().subscribe(data => {
+    console.log(data)
     if(data=="Si"){
-      this.VcService.eliminarVc(Vc.vcid).subscribe(data =>{
-        this.dataRest=data
-        if(this.dataRest["mensaje"]=="Elimnado correctamente"){
-          AppComponent.consola(this.dataRest["mensaje"])
-        }else{
-          AppComponent.consola(this.dataRest["mensaje"])
-        }
-      })
+      
+        this.VcService.eliminarVc(Vc.vcid).subscribe(data =>{
+          this.dataRest=data
+          if(this.dataRest["mensaje"]=="Elimnado correctamente"){ 
+                AppComponent.consola(this.dataRest["mensaje"])
+                this.construirtabla()
+          }else{AppComponent.consola(this.dataRest["mensaje"])
+          this.construirtabla()}
+        });
     }
-     this.construirtabla();
-     this.dataSource.filter = ""});
-}
+      
+    this.construirtabla()
+    this.dataSource.filter = ""
+      
+    
+    });
+  }
+ 
+  downloadPdf() {
+
+    this.construirtabla();
+    var prepare: any=[];
+    this.listaVc.forEach(e=>{
+      var tempObj =[];
+      
+      tempObj.push(e.vcid);
+      tempObj.push(e.nombre);
+      tempObj.push(e.precio);
+      tempObj.push(e.descripcion);
+      tempObj.push(e.plataforma.nombre);
+      tempObj.push(e.img);
+      
+
+      prepare.push(tempObj)
+      
+    });
+    const doc = new jsPDF('l');
+    autoTable(doc,{
+      
+        head: [['Id','nombre','precio','descripcion','plataforma','img']],
+        body: prepare,
+
+        theme: 'grid' ,
+
+
+        
+    });
+    
+
+    ////Poner imagenes
+  
+    //Abrir solo el visor del navegador
+    var string = doc.output('datauristring');
+    var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
+    var x = window.open()!;
+    x.document.open(embed);
+    x.document.write(embed);
+    x.document.close();
+    //doc.save('VideoJuegos_List' + '.pdf');
+  }
+
+
+  downloadExcel() {
+    this.VcService.listarVideoConsolas().subscribe((data) =>
+    {this.listaVc=data;
+    this.EnumService.exportToExcel(this.listaVc, 'Reporte_VideoConsolas', 'Reporte_VideoConsolas');
+    })
+  }
 
 }

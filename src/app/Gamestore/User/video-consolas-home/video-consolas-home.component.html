@@ -8,17 +8,26 @@
     </mat-form-field>
 
     <mat-form-field style="margin-left: 3%;" class="SelectGenero">
-        <mat-select placeholder="Genero" [(ngModel)]="SelectionGene" (selectionChange)="applyFilter()" >
-            <mat-option *ngFor="let gen of GenerosList" value="{{gen.id}}">
+        <mat-select placeholder="Marca" [(ngModel)]="SelectionMarca" (selectionChange)="applyFilter()" >
+            <mat-option *ngFor="let gen of MarcaList" value="{{gen.nombre}}">
                 {{gen.nombre}}
             </mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field style="margin-left: 3%;" class="SelectPlata">
-        <mat-select placeholder="Plataformas" [(ngModel)]="SelectionPlata" (selectionChange)="applyFilter()" >
-            <mat-option *ngFor="let pla of PlataformasList" value="{{pla.platId}}">
-                {{pla.nombre}}
+        <mat-select placeholder="Precios" [(ngModel)]="SelectionPrecio" (selectionChange)="applyFilter()" >
+            <mat-option  value=0>
+                
+            </mat-option>
+            <mat-option  value=1>
+             menor a 1000
+            </mat-option>
+            <mat-option  value=2>
+                entre 1000 y 2000
+            </mat-option>
+            <mat-option  value=3>
+                mayor a 2000
             </mat-option>
         </mat-select>
     </mat-form-field>

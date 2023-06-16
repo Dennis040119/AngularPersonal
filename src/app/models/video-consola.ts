@@ -4,7 +4,7 @@ export class VideoConsola {
 
     vcid:string
     nombre:string
-    Plataforma:Plataforma
+    plataforma:Plataforma
     precio:number
     descripcion:string
     marca:string

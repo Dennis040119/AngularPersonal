@@ -118,7 +118,7 @@ export class ModalUserComponent implements OnInit {
 
   }
   construirUsuario(){
-    this.objTransac.id=0;
+    this.objTransac.userid=0;
     this.objTransac.user=this.form.get("user")?.value
 
     ////Pass cuando edita
@@ -192,7 +192,7 @@ export class ModalUserComponent implements OnInit {
     this.ValidControls();
     if(this.form.valid && this.newPassActu()){
       console.log(this.objTransac)
-      this.objTransac.id=this.objetoDialog.id
+      this.objTransac.userid=this.objetoDialog.userid
       this.UsuarioService.actualizar(this.objTransac).subscribe((data) => {
         this.dataService=data
         if(this.dataService['mensaje']=="Actualizado usuario correctamente"){

@@ -87,9 +87,9 @@ export class DetalleJuegoComponent implements OnInit {
       var pla2:string|undefined
       var pla3:string|undefined
       this.PlataformList=data
-      pla1=(this.PlataformList.find(pla => pla.id==this.x.plataformas.slice(0,5) ))?.nombre
-      pla2=(this.PlataformList.find(pla => pla.id==this.x.plataformas.slice(6,11)))?.nombre
-      pla3=(this.PlataformList.find(pla => pla.id==this.x.plataformas.slice(12,17)))?.nombre
+      pla1=(this.PlataformList.find(pla => pla.platId==this.x.plataformas.slice(0,5) ))?.nombre
+      pla2=(this.PlataformList.find(pla => pla.platId==this.x.plataformas.slice(6,11)))?.nombre
+      pla3=(this.PlataformList.find(pla => pla.platId==this.x.plataformas.slice(12,17)))?.nombre
       this.plataformas=pla1
       
       if(pla2!=(undefined) && pla2!=""){this.plataformas=pla1+","+pla2}

@@ -12,6 +12,7 @@ import { IndexUserComponent } from './User/index-user/index-user.component';
 import { GlobalErrorHandler } from '../login/services/GlobalError-handler';
 import { logincomponent } from '../login/login.component';
 import { CrudVcComponent } from './Admin/crud-vc/crud-vc.component';
+import { VideoConsolasHomeComponent } from './User/video-consolas-home/video-consolas-home.component';
 
 const routes: Routes = [
   
@@ -23,6 +24,11 @@ const routes: Routes = [
       {
         path: 'homeVideojuegos',
         component:VideojuegosHome,
+        canActivate:[Guard],
+      },
+      {
+        path: 'homeVideoConsolas',
+        component:VideoConsolasHomeComponent,
         canActivate:[Guard],
       },
       {path: '', redirectTo: 'indexUser', pathMatch: 'full'},
@@ -72,8 +78,8 @@ const routes: Routes = [
   
   {
     path: '',
-    redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
-    //redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
+    //redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
+    redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
     pathMatch:'full'
     
   },

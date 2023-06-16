@@ -31,21 +31,21 @@
       </mat-form-field>
       <mat-form-field style="width: 50%;">
         <mat-select placeholder="Plataforma 1" formControlName="plataforma1" (selectionChange)="cambioPLataformas()">
-          <mat-option *ngFor="let plata of plataformas" [value]="plata.id">
+          <mat-option *ngFor="let plata of plataformas" [value]="plata.platId">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field style="width: 50%;">
         <mat-select placeholder="Plataforma 2" formControlName="plataforma2" (selectionChange)="cambioPLataformas2()">
-          <mat-option *ngFor="let plata of plataformas2" [value]="plata.id">
+          <mat-option *ngFor="let plata of plataformas2" [value]="plata.platId">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field style="width: 50%;">
         <mat-select placeholder="Plataforma 3" formControlName="plataforma3" >
-          <mat-option *ngFor="let plata of plataformas3" [value]="plata.id">
+          <mat-option *ngFor="let plata of plataformas3" [value]="plata.platId">
             {{ plata.nombre }}
           </mat-option>
         </mat-select>

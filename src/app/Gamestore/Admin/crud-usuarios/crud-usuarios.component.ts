@@ -108,7 +108,7 @@ export class CrudUsuariosComponent implements OnInit {
       dialog.afterClosed().subscribe(data => {
         console.log(data)
         if(data=="Si"){
-          this.UsuarioService.eliminar(user.id).subscribe(data =>{
+          this.UsuarioService.eliminar(user.userid).subscribe(data =>{
             this.respta=data
             window.alert(this.respta["mensaje"]);
           this.construirtabla();

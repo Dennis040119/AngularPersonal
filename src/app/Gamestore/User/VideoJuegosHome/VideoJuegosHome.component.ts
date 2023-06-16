@@ -92,7 +92,7 @@ export class VideojuegosHome implements OnInit {
 
     const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
-      width: '600px',
+      width: '650px',
       height: '350px',
       autoFocus: false,
       

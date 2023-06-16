@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 import { GamestoreRoutingModule } from './gamestore-routing.module';
 import { GamestoreComponent } from '../Gamestore/gamestore.component';
 import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.component';
+import {ModalUserComponent} from './Admin/crud-usuarios/modal-user/modal-user.component';
 import { CrudVjComponent } from './Admin/crud-vj/crud-vj.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CrudVcComponent } from './Admin/crud-vc/crud-vc.component';
 import { ModalVcComponent } from './Admin/crud-vc/modal-vc/modal-vc.component';
+import { VideoConsolasHomeComponent } from './User/video-consolas-home/video-consolas-home.component';
+import { IndexUserComponent } from './User/index-user/index-user.component';
+import { DetalleVideconsolaComponent } from './User/modal_juego/detalle-videconsola/detalle-videconsola.component';
+
 //PDF
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -33,8 +38,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
-import { ModalUserComponent } from './Admin/crud-usuarios/modal-user/modal-user.component';
-import { IndexUserComponent } from './User/index-user/index-user.component';
+
+
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatListModule} from '@angular/material/list';
 
@@ -53,6 +58,9 @@ import {MatListModule} from '@angular/material/list';
     IndexUserComponent,
     CrudVcComponent,
     ModalVcComponent,
+    VideoConsolasHomeComponent,
+    DetalleVideconsolaComponent
+    
     
   ],
   imports: [

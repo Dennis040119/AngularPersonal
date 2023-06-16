@@ -143,11 +143,6 @@ export class ModalVjComponent implements OnInit {
           if(gen !=undefined){
             this.objRegistrar.genero=gen
           }
-          
-        
-
-
-        
          this.vjService.registrarVj(this.objRegistrar).subscribe((data)=>{
          this.data=data
          console.log(this.objRegistrar)
@@ -336,7 +331,7 @@ export class ModalVjComponent implements OnInit {
         this.plataformas2=data
         this.plataformas2.splice(0,1)
         
-        conta =this.plataformas2.findIndex( (plata) => plata.id==id);
+        conta =this.plataformas2.findIndex( (plata) => plata.platId==id);
         if(conta >-1){
 
           this.plataformas2.splice(conta,1)
@@ -368,14 +363,14 @@ export class ModalVjComponent implements OnInit {
       var conta2:number=0
       this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas3=data
 
-        conta1 =this.plataformas3.findIndex( (vj) => vj.id==this.form.get("plataforma1")?.value);
+        conta1 =this.plataformas3.findIndex( (vj) => vj.platId==this.form.get("plataforma1")?.value);
 
         this.plataformas3.splice(0,1)
         if(conta1 >-1){
 
         this.plataformas3.splice(conta1,1)
         ///////////////////////////////
-        conta2 =this.plataformas3.findIndex( (vj) => vj.id==this.form.get("plataforma2")?.value);
+        conta2 =this.plataformas3.findIndex( (vj) => vj.platId==this.form.get("plataforma2")?.value);
         if(conta2 >-1){this.plataformas3.splice(conta2,1)}
 
         }else{console.log("No se encuentra en el combobox")}
