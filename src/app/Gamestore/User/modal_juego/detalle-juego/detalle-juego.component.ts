@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Videojuegos } from 'src/app/models/videojuegos';
+import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
-import { Genero } from 'src/app/models/genero';
-import { Plataforma } from 'src/app/models/plataforma';
+import { Genero } from 'src/app/models/enum/genero';
+import { Plataforma } from 'src/app/models/enum/plataforma';
 
 @Component({
   selector: 'app-detalle-juego',

@@ -1,7 +1,7 @@
 import { Component,Inject,OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Videojuegos } from 'src/app/models/videojuegos';
+import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { DetalleJuegoComponent } from '../detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from '../form-compra/form-compra.component';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';

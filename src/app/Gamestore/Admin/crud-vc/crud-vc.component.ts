@@ -2,7 +2,7 @@ import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { VideoConsola } from 'src/app/models/video-consola';
+import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { VideoJuegoServiceService } from '../services/video-juego-service.service';
 import { VideoConsolaServiceService } from '../services/video-consola-service.service';
 import { EnumService } from '../services/enum.service';

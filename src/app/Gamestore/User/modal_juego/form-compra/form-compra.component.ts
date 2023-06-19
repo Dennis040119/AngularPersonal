@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../detalle-compra/detalle-compra.component';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
-import { Videojuegos } from 'src/app/models/videojuegos';
+import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 
 @Component({
   selector: 'app-form-compra',

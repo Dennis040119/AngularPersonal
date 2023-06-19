@@ -39,6 +39,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { EurosPipe } from './pipes/euros.pipe';
 
 
 
@@ -60,6 +61,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CrudVjComponent,
     ModalVjComponent,
     DialogConfirmComponent,
+    EurosPipe,
     
     
     

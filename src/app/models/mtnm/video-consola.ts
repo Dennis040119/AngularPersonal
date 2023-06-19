@@ -1,4 +1,4 @@
-import { Plataforma } from "./plataforma"
+import { Plataforma } from "../enum/plataforma"
 
 export class VideoConsola {
 

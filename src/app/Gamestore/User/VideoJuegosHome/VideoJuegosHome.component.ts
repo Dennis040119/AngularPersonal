@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Videojuegos } from 'src/app/models/videojuegos';
+import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import {DetalleJuegoComponent} from '../modal_juego/detalle-juego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 import { AppComponent } from 'src/app/app.component';
 import { EnumService } from '../../Admin/services/enum.service';
-import { Genero } from 'src/app/models/genero';
-import { Plataforma } from 'src/app/models/plataforma';
+import { Genero } from 'src/app/models/enum/genero';
+import { Plataforma } from 'src/app/models/enum/plataforma';
 
 
 declare var carrito2: Videojuegos[];

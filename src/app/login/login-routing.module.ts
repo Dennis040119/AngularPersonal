@@ -23,7 +23,7 @@ const routes: Routes = [
     loadChildren:()=>import('../Gamestore/gamestore.module').then((m)=>m.GamestoreModule)
     
     },
-    {path: 'error-page', component: logincomponent },
+    {path: '**', component: logincomponent },
     
   ];
 

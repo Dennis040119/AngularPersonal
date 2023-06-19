@@ -3,13 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import '@angular/compiler'
 import { LoginModule } from './login/login.module';
 import { logincomponent } from './login/login.component';
+import { LogueoComponent } from './login/logueo/logueo.component';
 
 
 const routes: Routes = [
   
  
   {path:"",loadChildren:()=>import('./login/login.module').then((m)=>m.LoginModule)},
+  
   {path: 'error-page', component: logincomponent },
+  {path:"**",component:LogueoComponent},
   
 
 ];

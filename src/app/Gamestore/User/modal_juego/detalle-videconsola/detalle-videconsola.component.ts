@@ -3,10 +3,10 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 
 import { number, string, any } from 'prop-types';
 import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
-import { Genero } from 'src/app/models/genero';
-import { Plataforma } from 'src/app/models/plataforma';
-import { VideoConsola } from 'src/app/models/video-consola';
-import { Videojuegos } from 'src/app/models/videojuegos';
+import { Genero } from 'src/app/models/enum/genero';
+import { Plataforma } from 'src/app/models/enum/plataforma';
+import { VideoConsola } from 'src/app/models/mtnm/video-consola';
+import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleJuegoComponent } from '../detalle-juego/detalle-juego.component';
 

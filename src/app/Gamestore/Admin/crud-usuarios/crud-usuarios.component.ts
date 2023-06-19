@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { VideoJuegoServiceService } from '../services/video-juego-service.service';
 import { UsuarioService } from '../../../login/services/usuario.service';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/models/mtnm/usuario';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalUserComponent } from './modal-user/modal-user.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';

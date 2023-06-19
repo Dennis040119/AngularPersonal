@@ -2,11 +2,11 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { Plataforma } from 'src/app/models/plataforma';
-import { Videojuegos } from 'src/app/models/videojuegos';
+import { Plataforma } from 'src/app/models/enum/plataforma';
+import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
-import { Genero } from 'src/app/models/genero';
+import { Genero } from 'src/app/models/enum/genero';
 import { last } from 'rxjs';
 
 @Component({

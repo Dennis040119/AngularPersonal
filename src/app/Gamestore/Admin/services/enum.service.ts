@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Plataforma } from '../../../models/plataforma';
+import { Plataforma } from '../../../models/enum/plataforma';
 import { Observable } from 'rxjs';
-import { Genero } from 'src/app/models/genero'
+import { Genero } from 'src/app/models/enum/genero'
 //Excel 
 import * as XLSX from 'xlsx'
 
 import * as FileSaver from 'file-saver';
-import { Marca } from 'src/app/models/marca';
+import { Marca } from 'src/app/models/enum/marca';
 
 
 

@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { Videojuegos } from 'src/app/models/videojuegos';
-import { Plataforma } from 'src/app/models/plataforma';
+import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
+import { Plataforma } from 'src/app/models/enum/plataforma';
 
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 import { ModalVjComponent } from './modal-vj/modal-vj.component';

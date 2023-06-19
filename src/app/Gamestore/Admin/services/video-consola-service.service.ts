@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { VideoConsola } from 'src/app/models/video-consola';
+import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 
 const baseUrl = 'http://localhost:8090/videoconsola'
 

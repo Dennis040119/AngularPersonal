@@ -5,9 +5,9 @@ import { ModalVjComponent } from '../../crud-vj/crud-vj.component';
 import { EnumService } from '../../services/enum.service';
 import { VideoJuegoServiceService } from '../../services/video-juego-service.service';
 import { VideoConsolaServiceService } from '../../services/video-consola-service.service';
-import { Plataforma } from 'src/app/models/plataforma';
-import { VideoConsola } from 'src/app/models/video-consola';
-import { Marca } from 'src/app/models/marca';
+import { Plataforma } from 'src/app/models/enum/plataforma';
+import { VideoConsola } from 'src/app/models/mtnm/video-consola';
+import { Marca } from 'src/app/models/enum/marca';
 
 @Component({
   selector: 'app-modal-vc',

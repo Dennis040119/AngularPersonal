@@ -1,4 +1,4 @@
-import { Genero } from "./genero";
+import { Genero } from "./../enum/genero";
 
 export class Videojuegos {
 
