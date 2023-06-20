@@ -7,12 +7,14 @@ import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VideoJuegoServiceService } from '../../Admin/services/video-juego-service.service';
 import { VideojuegosHome } from '../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
-import { DetalleJuegoComponent } from '../modal_juego/detalle-juego/detalle-juego.component';
+import { DetalleJuegoComponent } from '../VideoJuegosHome/detalle-juego/detalle-juego.component';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { EnumService } from '../../Admin/services/enum.service';
 import { VideoConsolaServiceService } from '../../Admin/services/video-consola-service.service';
-import { DetalleVideconsolaComponent } from '../modal_juego/detalle-videconsola/detalle-videconsola.component';
+import { DetalleVideconsolaComponent } from './detalle-videconsola/detalle-videconsola.component';
 import { Marca } from 'src/app/models/enum/marca';
+import { IndexUserComponent } from '../index-user/index-user.component';
+import { ProductosVentaPk, ProductosVenta } from 'src/app/models/cliente/productos-venta';
 
 @Component({
   selector: 'app-video-consolas-home',
@@ -35,7 +37,8 @@ export class VideoConsolasHomeComponent {
   constructor(
     private dialog: MatDialog,
     private VcService:VideoConsolaServiceService,
-    private EnumService:EnumService
+    private EnumService:EnumService,
+    private IndexInstancia:IndexUserComponent
     
   ) {}
 
@@ -117,27 +120,22 @@ export class VideoConsolasHomeComponent {
     dialogCrear.afterClosed().subscribe(data => {
       if (data != undefined) {
 
-        VideojuegosHome.carrito.push(data);
+        var vj:VideoConsola=data
+        var pk:ProductosVentaPk=new ProductosVentaPk("",vj.vcid)
+        var Pv=new ProductosVenta(pk,vj.nombre,vj.precio,1,"pv",vj.img)
+        console.log(Pv)
+
+        VideojuegosHome.carrito.push(Pv);
         
         //console.log(this.carrito)
 
       } else {}
 
-      this.SumaTotal();
+      this.IndexInstancia.SumaTotal()
     })
   }
 
-  SumaTotal(){
-    this.acumulador=0;
-    VideojuegosHome.carrito.forEach(element => {
-      this.acumulador=(this.acumulador+element.precio);
-      
-    });
-    ;
-    console.log(this.acumulador.toFixed(2));
-   
-
-  }
+  
 
   DetalleCarritoModal(){
 
@@ -157,7 +155,7 @@ export class VideoConsolasHomeComponent {
 
           console.log(VideojuegosHome.carrito)
           console.log(this.acumulador)
-          this.SumaTotal()
+          this.IndexInstancia.SumaTotal()
       });
       
     }else{window.alert("El carrito esta vacio");}

@@ -8,7 +8,8 @@ import { Plataforma } from 'src/app/models/enum/plataforma';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
-import { DetalleJuegoComponent } from '../detalle-juego/detalle-juego.component';
+import { DetalleJuegoComponent } from '../../VideoJuegosHome/detalle-juego/detalle-juego.component';
+import { ProductosVenta } from 'src/app/models/cliente/productos-venta';
 
 @Component({
   selector: 'app-detalle-videconsola',
@@ -55,7 +56,7 @@ export class DetalleVideconsolaComponent implements OnInit {
   quitar(v:VideoConsola){
 
     
-    var supo:Videojuegos[] = VideojuegosHome.carrito;
+    var supo:ProductosVenta[] = VideojuegosHome.carrito;
     //console.log(v==supo? "SOn iguales":"son diferentes")
     console.log(v)
     console.log(supo[0])

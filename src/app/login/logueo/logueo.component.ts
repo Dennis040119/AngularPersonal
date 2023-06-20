@@ -40,6 +40,7 @@ export class LogueoComponent implements OnInit {
         this.usuarioService.buscarLogin(this.email,this.password).subscribe(data=>{
         if(data.length==1){
         localStorage.setItem("key","true")
+        localStorage.setItem("user",data[0].user)
         
 
         if(data[0].rol=="user"){

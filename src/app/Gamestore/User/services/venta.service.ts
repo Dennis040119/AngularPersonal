@@ -23,8 +23,8 @@ export class VentaService {
     return this.http.get<Venta[]>(baseUrl + '/VtBuscar/'+id);
   }
 
-  registrarVt(Vj:Venta){
-    return this.http.post(baseUrl+'/VtSave',Vj);
+  registrarVt(Vj:Venta):Observable<Venta>{
+    return this.http.post<Venta>(baseUrl+'/VtSave',Vj);
   }
   actualizarVt(Vj:Venta){
     return this.http.put(baseUrl+'/VtPut',Vj);

@@ -21,6 +21,10 @@ export class VideoJuegoServiceService {
     return this.http.get<Videojuegos[]>(baseUrl + '/videoJuegoList');
   }
 
+  buscarVideoJuegos(id:string): Observable<Videojuegos[]> {
+    return this.http.get<Videojuegos[]>(baseUrl + '/vjBuscar/'+id);
+  }
+
   registrarVj(Vj:Videojuegos){
     return this.http.post(baseUrl+'/videoJuegoSave',Vj);
   }

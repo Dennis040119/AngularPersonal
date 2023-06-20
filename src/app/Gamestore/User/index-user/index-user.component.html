@@ -34,7 +34,15 @@
         
         <mat-toolbar color="primary" class="example-toolbar">
 
+         
+
           <button mat-button (click)="sidenav.toggle()" style="float: left;"><mat-icon>home</mat-icon></button>
+
+          <button mat-button class="btn-buy" title="carrito" (click)="DetalleCarritoModal()" >
+            <mat-icon style="color: black;margin-right: 2%;">shopping_cart</mat-icon>
+            <p style="margin-left: 1%;">{{acumulador| number: '1.2-2'}}</p>
+         </button> 
+
           <img src="../../../../assets/logo_barra.jpg" class="img-logo" >
           <p class="example-spacer" >GameStore</p>
           

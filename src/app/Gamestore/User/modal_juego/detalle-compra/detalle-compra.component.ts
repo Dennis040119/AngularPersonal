@@ -2,9 +2,14 @@ import { Component,Inject,OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
-import { DetalleJuegoComponent } from '../detalle-juego/detalle-juego.component';
+import { DetalleJuegoComponent } from '../../VideoJuegosHome/detalle-juego/detalle-juego.component';
 import { FormCompraComponent } from '../form-compra/form-compra.component';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
+import { ProductosVenta } from 'src/app/models/cliente/productos-venta';
+import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { VideoConsolaServiceService } from 'src/app/Gamestore/Admin/services/video-consola-service.service';
+import { VideoConsola } from 'src/app/models/mtnm/video-consola';
+import { DetalleVideconsolaComponent } from '../../video-consolas-home/detalle-videconsola/detalle-videconsola.component';
 
 @Component({
   selector: 'app-detalle-compra',
@@ -14,13 +19,14 @@ import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component
 export class DetalleCompraComponent implements OnInit {
   
   
-  carrito:Videojuegos[]=[];
-  carrito2:Videojuegos[]=[];
-
+  carrito:ProductosVenta[]=[];
+  
+  vjOutPut:Videojuegos
+  vcOutPut:VideoConsola
   
   
 
-  displayedColumns = ['Id', 'nombre', 'precio', 'portada','options'];
+  displayedColumns = ['Id', 'nombre', 'precio','cantidad' ,'portada','options'];
   dataSource = new MatTableDataSource(this.carrito);
   
   
@@ -29,14 +35,18 @@ export class DetalleCompraComponent implements OnInit {
     
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<DetalleCompraComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: Videojuegos[],
+    @Inject(MAT_DIALOG_DATA) private data: ProductosVenta[],
+
+    //Servicios
+    private VjService:VideoJuegoServiceService,
+    private VcService:VideoConsolaServiceService
   
   ){}
 
   ngOnInit(): void {
     
-    this.carrito =this.data;
-    //console.log(this.carrito);
+    
+    console.log(VideojuegosHome.carrito);
     //console.log(this.carrito.length)
     this.dataSource = new MatTableDataSource(VideojuegosHome.carrito);
 
@@ -57,11 +67,11 @@ export class DetalleCompraComponent implements OnInit {
   edit() {
   }
 
-  delete(v:Videojuegos){
+  delete(v:ProductosVenta){
 
     console.log(v)
     var conta:number=0
-    conta =VideojuegosHome.carrito.indexOf(v,0);
+    conta =VideojuegosHome.carrito.findIndex(pv => pv.productosVentaPk==v.productosVentaPk);
     
 
     if(conta >-1){
@@ -74,7 +84,50 @@ export class DetalleCompraComponent implements OnInit {
     }
   }
 
-  detalle(vj:Videojuegos){
+  detalle(Pv:ProductosVenta){
+
+    if(Pv.productosVentaPk.proId.includes("vj")){
+        this.VjService.buscarVideoJuegos(Pv.productosVentaPk.proId).subscribe({
+
+          next:(result) =>{
+            console.log(result)
+            this.vjOutPut=result[0]
+            
+            
+          },
+          error:(error)=>{
+
+          },
+          complete: ()=>{
+            console.log(this.vjOutPut)
+            this.detalleJuego(this.vjOutPut)
+          }
+
+
+        })
+    }
+
+    if(Pv.productosVentaPk.proId.includes("vc")){
+      this.VcService.buscarVideoCon(Pv.productosVentaPk.proId).subscribe({
+
+        next:(result) =>{
+          this.vcOutPut=result[0]
+        },
+        error:(error)=>{
+
+        },
+        complete: ()=>{
+          this.detalleConsola(this.vcOutPut)
+        }
+
+
+      })
+    }
+    
+  }
+
+  detalleJuego(vj:Videojuegos){
+    console.log(vj)
     const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
       width: '600px',
@@ -83,6 +136,28 @@ export class DetalleCompraComponent implements OnInit {
       
       data: {
         objeto:vj,
+        tipo :1
+      }
+    });
+    dialogCrear.afterClosed().subscribe(data => {
+      
+       
+        this.dataSource.filter = ""
+        //console.log(this.carrito)
+
+      
+    });
+  }
+
+  detalleConsola(vc:VideoConsola){
+    const dialogCrear = this.dialog.open(DetalleVideconsolaComponent, {
+      
+      width: '600px',
+      height: '350px',
+      autoFocus: false,
+      
+      data: {
+        objeto:vc,
         tipo :1
       }
     });

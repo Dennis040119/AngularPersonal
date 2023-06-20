@@ -6,7 +6,7 @@ import {AppRoutingModule } from './app-routing.module';
 import {AppComponent } from './app.component';
 
 import {VideojuegosHome } from './Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
-import {DetalleJuegoComponent } from './Gamestore/User/modal_juego/detalle-juego/detalle-juego.component';
+import {DetalleJuegoComponent } from './Gamestore/User/VideoJuegosHome/detalle-juego/detalle-juego.component';
 import { DetalleCompraComponent } from './Gamestore/User/modal_juego/detalle-compra/detalle-compra.component';
 import { FormCompraComponent } from './Gamestore/User/modal_juego/form-compra/form-compra.component';
 import { ModalVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
@@ -16,7 +16,7 @@ import { DialogConfirmComponent } from './axuliares/dialog-confirm/dialog-confir
 import { CookieService } from 'ngx-cookie-service';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
 
-import { Videojuegos } from './models/videojuegos';
+import { Videojuegos } from './models/mtnm/videojuegos';
 import * as PropTypes from 'prop-types';
 import * as XLSX from 'xlsx';
 

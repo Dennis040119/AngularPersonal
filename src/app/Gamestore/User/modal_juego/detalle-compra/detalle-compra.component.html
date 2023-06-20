@@ -1,53 +1,58 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<p>Carrito de compras</p>
 
-<div class="example-container mat-elevation-z8" style="width: 100%;height: 100%;background-color: rgba(76, 79, 79, 0.718);">
 
+<div class="example-container mat-elevation-z8" >
+   <h3 style="margin-left: 2%;">Carrito de compras</h3>
     <div class="example-header">
         <mat-form-field>
           <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
         </mat-form-field>
         <button mat-raised-button class="btn"  style="margin-left: 2%;" (click)="formCompra()">pagar</button>
-        <button mat-raised-button  style="margin-left: 2%;float: right;" (click)="close()">cerrar</button>
+        <button mat-raised-button  class="btn" style="margin-left: 2%;float: right;" (click)="close()">cerrar</button>
 
     </div>
       
-    <mat-table #table [dataSource]="dataSource" style="width: 80%;margin-left: 2%;margin-right: 2%;">
+    <mat-table #table [dataSource]="dataSource" >
   
       <ng-container matColumnDef="Id"  >
-        <mat-header-cell *matHeaderCellDef > Id </mat-header-cell>
-        <mat-cell *matCellDef="let Videojuegos"> {{Videojuegos.id}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%"> Id </mat-header-cell>
+        <mat-cell *matCellDef="let pv" style="max-width: 10%"> {{pv.productosVentaPk.proId}} </mat-cell>
       </ng-container>
   
       <!-- Name Column -->
       <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef >  Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let Videojuegos" > {{Videojuegos.nombre}} </mat-cell>
+        <mat-cell *matCellDef="let pv" > {{pv.nombre}} </mat-cell>
       </ng-container>
   
       <!-- Weight Column -->
       <ng-container matColumnDef="precio">
-        <mat-header-cell *matHeaderCellDef > precio </mat-header-cell>
-        <mat-cell *matCellDef="let Videojuegos" > {{Videojuegos.precio}}€  </mat-cell>
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%" > Precio </mat-header-cell>
+        <mat-cell *matCellDef="let pv" style="max-width: 10%"> {{pv.precio|euros}}  </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cantidad">
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%"> Cantidad </mat-header-cell>
+        <mat-cell *matCellDef="let pv" style="max-width: 10%"> {{pv.cantidad}}  </mat-cell>
       </ng-container>
   
       <!-- Symbol Column -->
       <ng-container matColumnDef="portada">
-        <mat-header-cell *matHeaderCellDef >      portada </mat-header-cell>
-        <mat-cell *matCellDef="let Videojuegos" ><img class="portada" src="{{Videojuegos.img}}">  </mat-cell>
+        <mat-header-cell *matHeaderCellDef > Portada </mat-header-cell>
+        <mat-cell *matCellDef="let pv" ><img class="portada" src="{{pv.img}}">  </mat-cell>
       </ng-container>
       
       <ng-container matColumnDef="options">
-        <mat-header-cell *matHeaderCellDef > options </mat-header-cell>
-        <mat-cell *matCellDef="let Videojuegos" > 
+        <mat-header-cell *matHeaderCellDef > Opciones </mat-header-cell>
+        <mat-cell *matCellDef="let pv" > 
 
         <button mat-button class="btn-edit" title="edit" (click)="edit()">
           <mat-icon style="color: black;">edit</mat-icon>
         </button> 
-        <button mat-button class="btn-detalle" title="open" (click)="detalle(Videojuegos)">
+        <button mat-button class="btn-detalle" title="open" (click)="detalle(pv)">
             <mat-icon style="color: #3f51b5;">visibility</mat-icon>
         </button>
-        <button mat-button class="btn-delete" title="close"  (click)="delete(Videojuegos)">
+        <button mat-button class="btn-delete" title="close"  (click)="delete(pv)">
             <mat-icon style="color: red;">delete</mat-icon>
         </button>
         

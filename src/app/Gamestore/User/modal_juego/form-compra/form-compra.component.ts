@@ -1,9 +1,15 @@
+import { ProductosVenta } from 'src/app/models/cliente/productos-venta';
+import { ProductoVentaService } from './../../services/producto-venta.service';
 import { Component,ElementRef,Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../detalle-compra/detalle-compra.component';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
+import { VentaService } from '../../services/venta.service';
+import { Venta } from 'src/app/models/cliente/venta';
+import { UsuarioService } from 'src/app/login/services/usuario.service';
+import { Usuario } from 'src/app/models/mtnm/usuario';
 
 @Component({
   selector: 'app-form-compra',
@@ -18,8 +24,15 @@ export class FormCompraComponent implements OnInit {
   tiempo: { min: number; sec: number; } = {min:0,sec:0}; 
   
   booNombres:boolean=true;
+  totalVenta:number=0
+  ///Objetos para las transacciones
+  VentaObj:Venta=new Venta()
+  user:Usuario
+  ProductosVentaObj:ProductosVenta
+
 
   constructor(
+    //Referencia a los componentes
     private dialogRef: MatDialogRef<FormCompraComponent>,
     private dialogRef2:MatDialog,
     
@@ -27,18 +40,26 @@ export class FormCompraComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: any,
     private formBuilder: FormBuilder,
     
-
+    //Serviciios
+    private VenServicios:VentaService,
+    private PvService:ProductoVentaService,
+    private UserService:UsuarioService
 
   ) { }
 
 
   ngOnInit(): void {
+    //Hacemos que el curso se haga focus en el primer formcontrol(nombre)
     const invalidControl = this.el.nativeElement.querySelector('[formControlName="nombres"]');
     invalidControl.focus();
     this.formGroup();
+
+    //Seteamos la fecha minima para el calendario
     this.minDate.setDate(this.minDate.getDate()+1)
-    //console.log(this.minDate);
     
+    console.log(VideojuegosHome.carrito);
+    
+    //Tiempo para cerrar el componente(5 min)
     setTimeout(() => {window.confirm("Se acabo el tiempo"),this.dialogRef.close();},300000);
     this.startTimer();
 
@@ -137,11 +158,96 @@ export class FormCompraComponent implements OnInit {
       window.alert("Formulario invalido");
 
      }else{
+      this.construirVenta()
+      ////////////////////////////obtener el usuario que esta registrado y setearlo en el obj venta
+      this.UserService.BuscarPorUser(localStorage.getItem("user")!).subscribe({
 
-      VideojuegosHome.carrito=[];
-      window.alert("Compra confirmada")
-      this.dialogRef2.closeAll();
+        next:(data)=>{
+          this.user=data[0]
+          console.log(data[0])
+          this.VentaObj.usuario=this.user
+        },
+        error:(error)=>{
+          window.alert("Error al encontrar Usuario")
+        },
+        complete:()=>{  
+          console.log(this.user)
+          this.VenServicios.registrarVt(this.VentaObj).subscribe({
+            
+            next: data=>{
+              console.log(this.VentaObj)
+              console.log(data)
+              if(data.venId=="0000"){
+                window.alert("Error al registrar compra")
+              }else{
+                VideojuegosHome.carrito.forEach(element => {
+                  element.productosVentaPk.venId=data.venId
+                  this.PvService.registrarPv(element).subscribe({
+    
+                    
+    
+                   next: data=>{
+                       var rpta:any
+                       rpta=data
+                      if(rpta["mensaje"]=="Registrado correctamente"){
+                        window.alert("Compra exitosa")
+                        VideojuegosHome.carrito=[];
+          
+                        this.dialogRef2.closeAll();
+                      }else{
+                        window.alert(rpta["mensaje"])
+                      }
+                    },
+                    error:data=>{},
+                    complete:()=>{}
+    
+    
+                  })
+                });
+              }
+            },
+            error:data=>{},
+            complete:()=>{}
+    
+    
+    
+    
+          })}
+      })
+      
+     
+      ////////////////////////////////////////////////////////////////
+    
+      
      }
    }
 
+   construirVenta(){
+    var userLocal=localStorage.getItem("user")
+    this.VentaObj.venId=""
+    
+    this.VentaObj.nombre=this.form.get("nombres")!.value+" "+this.form.get("apellidos")!.value
+    this.VentaObj.movil=this.form.get("movil")!.value
+    this.VentaObj.correo=this.form.get("correo")!.value
+    this.VentaObj.tarjeta=this.form.get("tarjeta")!.value
+    this.VentaObj.direccion=this.form.get("direccion")!.value
+    this.VentaObj.rol="vt"
+    this.VentaObj.fEntrega=this.form.get("fchEntrega")!.value
+    this.SumarTotal()
+    this.VentaObj.total=this.totalVenta
+
+
+
+   }
+
+   
+
+   SumarTotal(){
+    VideojuegosHome.carrito.forEach(element => {
+      this.totalVenta=this.totalVenta+element.precio
+    });
+   }
+
 }
+
+

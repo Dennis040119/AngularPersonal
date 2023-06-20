@@ -118,7 +118,7 @@ export class ModalUserComponent implements OnInit {
 
   }
   construirUsuario(){
-    this.objTransac.userid=0;
+    this.objTransac.userid="";
     this.objTransac.user=this.form.get("user")?.value
 
     ////Pass cuando edita

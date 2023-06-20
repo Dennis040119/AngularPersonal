@@ -6,7 +6,7 @@ import { Plataforma } from 'src/app/models/enum/plataforma';
 
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
 import { ModalVjComponent } from './modal-vj/modal-vj.component';
-import { DetalleJuegoComponent } from '../../User/modal_juego/detalle-juego/detalle-juego.component';
+import { DetalleJuegoComponent } from '../../User/VideoJuegosHome/detalle-juego/detalle-juego.component';
 import { VideojuegosHome } from '../../User/VideoJuegosHome/VideoJuegosHome.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
 import * as XLSX from 'xlsx'

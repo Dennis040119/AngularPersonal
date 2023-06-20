@@ -139,7 +139,7 @@ export class ModalVjComponent implements OnInit {
         this.constructorObj()
 
           var gen
-          gen = this.generosList.find(gen => gen.id==this.form.get("genero")?.value);
+          gen = this.generosList.find(gen => gen.genId==this.form.get("genero")?.value);
           if(gen !=undefined){
             this.objRegistrar.genero=gen
           }
@@ -173,7 +173,7 @@ export class ModalVjComponent implements OnInit {
       try {
         this.constructorObj()
         var gen
-        gen = this.generosList.find(gen => gen.id==this.form.get("genero")?.value);
+        gen = this.generosList.find(gen => gen.genId==this.form.get("genero")?.value);
         if(gen !=undefined){
           this.objRegistrar.genero=gen
         }
@@ -213,7 +213,7 @@ export class ModalVjComponent implements OnInit {
     this.selectedFileName = this.objRecepcion.img.substring(24,numero)
    
     
-    this.form.get("genero")?.setValue(this.objRecepcion.genero.id)
+    this.form.get("genero")?.setValue(this.objRecepcion.genero.genId)
     this.form.get("descripcion")?.setValue(this.objRecepcion.descripcion)
     this.enumService.listarPlataformas().subscribe(data =>{
 

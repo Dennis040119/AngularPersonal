@@ -11,7 +11,7 @@ import { CrudVcComponent } from './Admin/crud-vc/crud-vc.component';
 import { ModalVcComponent } from './Admin/crud-vc/modal-vc/modal-vc.component';
 import { VideoConsolasHomeComponent } from './User/video-consolas-home/video-consolas-home.component';
 import { IndexUserComponent } from './User/index-user/index-user.component';
-import { DetalleVideconsolaComponent } from './User/modal_juego/detalle-videconsola/detalle-videconsola.component';
+import { DetalleVideconsolaComponent } from './User/video-consolas-home/detalle-videconsola/detalle-videconsola.component';
 
 //PDF
 import jsPDF from 'jspdf';

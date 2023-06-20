@@ -52,7 +52,7 @@
       </mat-form-field>
       <mat-form-field style="width: 50%;">
         <mat-select placeholder="Genero" formControlName="genero" >
-          <mat-option *ngFor="let gen of generosList" [value]="gen.id">
+          <mat-option *ngFor="let gen of generosList" [value]="gen.genId">
             {{ gen.nombre }}
           </mat-option>
         </mat-select>

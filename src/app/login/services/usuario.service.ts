@@ -35,7 +35,7 @@ export class UsuarioService {
       return this.http.put((baseUrl + '/usuarioPut'),user);
     }
 
-    eliminar(id:number){
+    eliminar(id:string){
       return this.http.delete((baseUrl + '/UsuarioDelete/'+id));
     }
 }

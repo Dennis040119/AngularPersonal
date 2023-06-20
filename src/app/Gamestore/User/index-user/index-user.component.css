@@ -59,7 +59,7 @@ span{
   float: right;
 }
 .img-logo{
-  margin-left: 80%;
+  margin-left: 65%;
   float: right;
   max-width: 100%;
   width: 4%;
@@ -133,4 +133,12 @@ display:list-item !important;
 .button{
 padding-right: 20%;
 width: 100%;
+}
+
+.btn-buy{
+  background-color: rgb(144, 39, 39);
+  float: right;
+  margin-right: 5%;
+  margin-left: 5%;
+  min-width: 8%;
 }

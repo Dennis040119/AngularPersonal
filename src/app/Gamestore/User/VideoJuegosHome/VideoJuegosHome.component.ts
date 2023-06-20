@@ -1,6 +1,7 @@
+import { IndexUserComponent } from './../index-user/index-user.component';
 import { Component, OnInit } from '@angular/core';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
-import {DetalleJuegoComponent} from '../modal_juego/detalle-juego/detalle-juego.component'
+import {DetalleJuegoComponent} from './detalle-juego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
@@ -8,6 +9,8 @@ import { AppComponent } from 'src/app/app.component';
 import { EnumService } from '../../Admin/services/enum.service';
 import { Genero } from 'src/app/models/enum/genero';
 import { Plataforma } from 'src/app/models/enum/plataforma';
+import { ProductosVenta, ProductosVentaPk } from 'src/app/models/cliente/productos-venta';
+import { element } from 'prop-types';
 
 
 declare var carrito2: Videojuegos[];
@@ -19,7 +22,10 @@ declare var carrito2: Videojuegos[];
 })
 export class VideojuegosHome implements OnInit {
 
-  static carrito:Videojuegos[] = [];
+  static carrito:ProductosVenta[] = [];
+  Pv:ProductosVenta
+
+
   acumulador: number=0
   tiles:Videojuegos[] = []
   resguardo:Videojuegos[]
@@ -34,7 +40,8 @@ export class VideojuegosHome implements OnInit {
   constructor(
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
-    private EnumService:EnumService
+    private EnumService:EnumService,
+    private IndexInstancia:IndexUserComponent
     
   ) {}
 
@@ -58,7 +65,7 @@ export class VideojuegosHome implements OnInit {
     }
 
     if(this.SelectionGene!="ge000" && this.SelectionGene!=undefined){
-      var filtrado =this.tiles.filter(vj => vj.genero.id.includes(this.SelectionGene.trim().toLowerCase()) )
+      var filtrado =this.tiles.filter(vj => vj.genero.genId.includes(this.SelectionGene.trim().toLowerCase()) )
       this.tiles=filtrado
     }
 
@@ -104,52 +111,34 @@ export class VideojuegosHome implements OnInit {
     dialogCrear.afterClosed().subscribe(data => {
       if (data != undefined) {
 
-        VideojuegosHome.carrito.push(data);
+        var vj:Videojuegos=data
+        
+        //Seteamos los valores del producto
+        console.log(vj)
+        var pk:ProductosVentaPk=new ProductosVentaPk("",vj.id)
+        this.Pv=new ProductosVenta(pk,vj.nombre,vj.precio,1,"pv",vj.img)
+        console.log(this.Pv)
+        ///
+        if(VideojuegosHome.carrito.find(e => e.productosVentaPk.proId==this.Pv.productosVentaPk.proId)){
+         
+            
+        }else{
+          VideojuegosHome.carrito.push(this.Pv);
+        }
+        ///
+        
         
         //console.log(this.carrito)
 
       } else {}
 
-      this.SumaTotal();
+      this.IndexInstancia.SumaTotal()
     })
   }
 
-  SumaTotal(){
-    this.acumulador=0;
-    VideojuegosHome.carrito.forEach(element => {
-      this.acumulador=(this.acumulador+element.precio);
-      
-    });
-    ;
-    console.log(this.acumulador.toFixed(2));
-   
+  
 
-  }
-
-  DetalleCarritoModal(){
-
-    if(VideojuegosHome.carrito.length>0){
-      
-      const dialogCrear = this.dialog.open(DetalleCompraComponent, {
-      
-        width: '1100px',
-        height: '500px',
-        autoFocus: false,
-        
-        data: VideojuegosHome.carrito,
-
-      });
-
-      dialogCrear.afterClosed().subscribe(data => {
-
-          console.log(VideojuegosHome.carrito)
-          console.log(this.acumulador)
-          this.SumaTotal()
-      });
-      
-    }else{window.alert("El carrito esta vacio");}
-    
-  }
+ 
 
 
   listarVideoJuegos(){
