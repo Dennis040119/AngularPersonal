@@ -7,7 +7,7 @@ import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VideoJuegoServiceService } from '../../Admin/services/video-juego-service.service';
 import { VideojuegosHome } from '../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
-import { DetalleJuegoComponent } from '../VideoJuegosHome/detalle-juego/detalle-juego.component';
+import { DetalleJuegoComponent } from '../VideoJuegosHome/Card-Videojuego/detalle-juego.component';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { EnumService } from '../../Admin/services/enum.service';
 import { VideoConsolaServiceService } from '../../Admin/services/video-consola-service.service';
@@ -28,6 +28,9 @@ export class VideoConsolasHomeComponent {
   resguardo:VideoConsola[]
   MarcaList:Marca[]
   PlataformasList:Plataforma[]
+
+  //
+  Pv:ProductosVenta
 
   //NgModels
   SelectionMarca:string
@@ -122,10 +125,23 @@ export class VideoConsolasHomeComponent {
 
         var vj:VideoConsola=data
         var pk:ProductosVentaPk=new ProductosVentaPk("",vj.vcid)
-        var Pv=new ProductosVenta(pk,vj.nombre,vj.precio,1,"pv",vj.img)
-        console.log(Pv)
+        this.Pv=new ProductosVenta(pk,vj.nombre,vj.precio,1,"pv",vj.img)
+        
 
-        VideojuegosHome.carrito.push(Pv);
+        if(VideojuegosHome.carrito.find(e => e.productosVentaPk.proId==this.Pv.productosVentaPk.proId)){
+         
+         var index:number= VideojuegosHome.carrito.findIndex(e => e.productosVentaPk.proId==this.Pv.productosVentaPk.proId)
+
+            if(index!=-1){
+              VideojuegosHome.carrito[index].cantidad=VideojuegosHome.carrito[index].cantidad+1
+              VideojuegosHome.carrito[index].precio=VideojuegosHome.carrito[index].precio+vj.precio
+            }
+
+        }else{
+          VideojuegosHome.carrito.push(this.Pv);
+        }
+
+        //VideojuegosHome.carrito.push(this.Pv);
         
         //console.log(this.carrito)
 

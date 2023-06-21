@@ -1,7 +1,7 @@
 import { IndexUserComponent } from './../index-user/index-user.component';
 import { Component, OnInit } from '@angular/core';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
-import {DetalleJuegoComponent} from './detalle-juego/detalle-juego.component'
+import {DetalleJuegoComponent} from './Card-Videojuego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
@@ -99,8 +99,8 @@ export class VideojuegosHome implements OnInit {
 
     const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
-      width: '650px',
-      height: '350px',
+      maxWidth: '420px',
+      maxHeight: '700px',
       autoFocus: false,
       
       data: {
@@ -121,7 +121,14 @@ export class VideojuegosHome implements OnInit {
         ///
         if(VideojuegosHome.carrito.find(e => e.productosVentaPk.proId==this.Pv.productosVentaPk.proId)){
          
-            
+         var index:number= VideojuegosHome.carrito.findIndex(e => e.productosVentaPk.proId==this.Pv.productosVentaPk.proId)
+
+            if(index!=-1){
+              VideojuegosHome.carrito[index].cantidad=VideojuegosHome.carrito[index].cantidad+1
+              VideojuegosHome.carrito[index].precio=VideojuegosHome.carrito[index].precio+vj.precio
+           
+            }
+
         }else{
           VideojuegosHome.carrito.push(this.Pv);
         }

@@ -2,7 +2,7 @@ import { Component,Inject,OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
-import { DetalleJuegoComponent } from '../../VideoJuegosHome/detalle-juego/detalle-juego.component';
+import { DetalleJuegoComponent } from '../../VideoJuegosHome/Card-Videojuego/detalle-juego.component';
 import { FormCompraComponent } from '../form-compra/form-compra.component';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 import { ProductosVenta } from 'src/app/models/cliente/productos-venta';

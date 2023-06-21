@@ -16,6 +16,8 @@ export class IndexAdminComponent {
   events: string[] = [];
   opened: boolean = false;
 
+  username:string=localStorage.getItem("user")!
+
   constructor(
     private router:Router
   ){

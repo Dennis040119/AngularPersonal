@@ -19,31 +19,34 @@ const routes: Routes = [
   
   {
     path: 'indexUser',
+    
     component: IndexUserComponent,
+   
     children: [
       {
         path: 'homeVideojuegos',
         component:VideojuegosHome,
-        canActivate:[Guard],
+        //canActivate:[Guard],
       },
       {
         path: 'homeVideoConsolas',
         component:VideoConsolasHomeComponent,
-        canActivate:[Guard],
+        //canActivate:[Guard],
       },
-      {path: '', redirectTo: 'indexUser', pathMatch: 'full'},
-      {path: '**', redirectTo: 'indexUser', pathMatch: 'full'}
+     
+     
+      
+      
     ]
   },
 
   {
     path: 'indexAdmin',
-    
     component: IndexAdminComponent,
     children: [
       {
         path: 'CrudVj',
-        canActivate:[Guard],
+        //canActivate:[Guard],
         component:CrudVjComponent,
         children:[
           {path:'', redirectTo: 'CrudVj', pathMatch: 'full'},
@@ -51,7 +54,7 @@ const routes: Routes = [
       },
       {
         path:'CrudUsuario',
-        canActivate:[Guard],
+        //canActivate:[Guard],
         component:CrudUsuariosComponent,
         children:[
           {path:'', redirectTo: 'CrudUsuario', pathMatch: 'full'},
@@ -59,7 +62,7 @@ const routes: Routes = [
       },
       {
         path: 'CrudVc',
-        canActivate:[Guard],
+        //canActivate:[Guard],
         component:CrudVcComponent,
         children:[
           {path:'', redirectTo: 'CrudVc', pathMatch: 'full'},
@@ -70,20 +73,22 @@ const routes: Routes = [
 
 
 
-      {path: '', redirectTo: 'indexAdmin', pathMatch: 'full'},
-      {path: '**', redirectTo: 'indexAdmin', pathMatch: 'full'},
+      {path: '', redirectTo: 'error', pathMatch: 'full'},
+      {path: '**', redirectTo: 'error', pathMatch: 'full'},
 
     ]
   },
-  
   {
     path: '',
-    //redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
-    redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
+    
+    redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
+    //redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
     pathMatch:'full'
     
   },
-  {path: 'error-page', component: logincomponent },
+  {path: 'error', component: LogueoComponent },
+  
+  
   
 ];
 

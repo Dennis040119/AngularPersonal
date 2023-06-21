@@ -4,9 +4,8 @@ import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule } from './app-routing.module';
 import {AppComponent } from './app.component';
-
 import {VideojuegosHome } from './Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
-import {DetalleJuegoComponent } from './Gamestore/User/VideoJuegosHome/detalle-juego/detalle-juego.component';
+import {DetalleJuegoComponent } from './Gamestore/User/VideoJuegosHome/Card-Videojuego/detalle-juego.component';
 import { DetalleCompraComponent } from './Gamestore/User/modal_juego/detalle-compra/detalle-compra.component';
 import { FormCompraComponent } from './Gamestore/User/modal_juego/form-compra/form-compra.component';
 import { ModalVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
@@ -15,8 +14,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DialogConfirmComponent } from './axuliares/dialog-confirm/dialog-confirm.component';
 import { CookieService } from 'ngx-cookie-service';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { Videojuegos } from './models/mtnm/videojuegos';
+//Pipe
+import { EurosPipe } from './pipes/euros.pipe';
+
+//Libreria de pdf y excel
 import * as PropTypes from 'prop-types';
 import * as XLSX from 'xlsx';
 
@@ -28,18 +31,19 @@ import { GlobalErrorHandler } from './login/services/GlobalError-handler';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule } from '@angular/material/input';
 import {MatFormFieldModule } from "@angular/material/form-field";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { EurosPipe } from './pipes/euros.pipe';
+import {MatCardModule} from '@angular/material/card';
+
+
 
 
 
@@ -75,14 +79,14 @@ import { EurosPipe } from './pipes/euros.pipe';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     
     //Material
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
     MatTableModule,
     MatDialogModule,
     MatIconModule,
@@ -92,7 +96,8 @@ import { EurosPipe } from './pipes/euros.pipe';
     MatSelectModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
     
     
   ],
@@ -100,7 +105,6 @@ import { EurosPipe } from './pipes/euros.pipe';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule,
     MatTableModule,
     MatDialogModule,
     MatIconModule,
@@ -110,7 +114,8 @@ import { EurosPipe } from './pipes/euros.pipe';
     MatSelectModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
 
   ],
   providers: [CookieService ,  {provide:ErrorHandler,useClass:GlobalErrorHandler}],

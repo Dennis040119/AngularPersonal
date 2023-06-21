@@ -4,6 +4,7 @@ import '@angular/compiler'
 import { LoginModule } from './login/login.module';
 import { logincomponent } from './login/login.component';
 import { LogueoComponent } from './login/logueo/logueo.component';
+import { notFoundGuard } from './login/services/not-found.guard';
 
 
 const routes: Routes = [
@@ -11,8 +12,8 @@ const routes: Routes = [
  
   {path:"",loadChildren:()=>import('./login/login.module').then((m)=>m.LoginModule)},
   
-  {path: 'error-page', component: logincomponent },
-  {path:"**",component:LogueoComponent},
+  {path: 'error', component: LogueoComponent },
+  //{path:"**",canActivate: [notFoundGuard]},
   
 
 ];

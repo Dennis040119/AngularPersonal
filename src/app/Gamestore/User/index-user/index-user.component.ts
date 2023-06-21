@@ -17,6 +17,10 @@ export class IndexUserComponent {
   isExpanded = true;
   isShowing = false;
 
+  //Username
+  username:string=localStorage.getItem("user")!
+  
+
   acumulador: number=0
 
   constructor(
@@ -24,6 +28,7 @@ export class IndexUserComponent {
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
     private EnumService:EnumService
+    
   ){
 
   }
