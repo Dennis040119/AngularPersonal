@@ -37,7 +37,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   listavj!: Videojuegos[];
-  displayedColumns = ['nombre', 'precio','genero' ,'plataformas','options'];
+  displayedColumns = ['nombre', 'precio','genero' ,'plataformas','img','options'];
   dataSource = new MatTableDataSource(this.listavj);
 
   //Respuesta de servicios
@@ -66,7 +66,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
   ngAfterViewInit() {
     
     this.audioPlayer.src = '../../../assets/audio/enemy.mp3';
-    this.dataSource.paginator = this.paginator;
+   
     //const audioPlayer: HTMLAudioElement = this.audioPlayerRef.nativeElement;
     //this.audioPlayer.load();
     //this.audioPlayer.play();
@@ -80,13 +80,22 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
   }
 
   construirtabla(){
-    this.VjService.listarVideoJuegos().subscribe((data) =>
-      {this.listavj=data;
-      this.dataSource = new MatTableDataSource(this.listavj);
-      this.dataSource.paginator = this.paginator;
-      })
-  }
+    this.VjService.listarVideoJuegos().subscribe({
 
+    next:(data) =>{
+      this.listavj=data;
+      this.dataSource = new MatTableDataSource(this.listavj);
+      
+     },
+     error:(data)=>{
+      window.alert("no se pudo obtener los datos")
+     },
+      complete:()=>{
+        this.dataSource.paginator = this.paginator;
+      }
+      
+    })
+  }
   agregar(){
     const dialogCrear = this.dialog.open(ModalVjComponent, {
       

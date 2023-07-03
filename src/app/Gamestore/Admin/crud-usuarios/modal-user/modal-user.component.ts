@@ -130,7 +130,7 @@ export class ModalUserComponent implements OnInit {
     this.objTransac.tarjetaCredito=this.form.get("TarjetaCredito")?.value
     this.objTransac.direccion=this.form.get("direccion")?.value
     this.objTransac.rol=this.form.get("rol")?.value
-
+    this.objTransac.estado="ac"
 
 
   }

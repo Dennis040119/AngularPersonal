@@ -25,9 +25,9 @@
       </ng-container>
   
      
-      <ng-container matColumnDef="precio">
+      <ng-container matColumnDef="precio" style="min-width: 10%;">
         <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
-        <mat-cell *matCellDef="let element"> 
+        <mat-cell *matCellDef="let element" style="min-width: 10%;"> 
           {{element.precio| number:'1.2-2'|currency:"EUR"}}  </mat-cell>
       </ng-container>
 
@@ -42,10 +42,13 @@
         <mat-header-cell *matHeaderCellDef> Plataformas </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
           {{element.plataformas}}
+        </mat-cell>
+      </ng-container>
 
-          
-       
-          
+      <ng-container matColumnDef="img">
+        <mat-header-cell *matHeaderCellDef> Portada </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          <img [src]="element.img" class="imgTabla">
         </mat-cell>
       </ng-container>
       
@@ -71,10 +74,10 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-    <mat-paginator style="" #paginator
-                 [pageSize]="7"
-                 [pageSizeOptions]="[7, 10, 15]"
+    <mat-paginator  #paginator
+                 [pageSize]="3"
+                 [pageSizeOptions]="[3, 7, 10]"
                  [showFirstLastButtons]="true">
-  </mat-paginator>
+    </mat-paginator>
   </div>
   </div>

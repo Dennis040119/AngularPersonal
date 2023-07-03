@@ -6,6 +6,7 @@ export class Usuario {
     email!:string;
     tarjetaCredito!:string;
     direccion!:string;
+    estado:string
     rol!: string;
     
 }
