@@ -1,7 +1,7 @@
 export class Usuario {
 
     userid!: string;
-    user!: string;
+    username!: string;
     password!: string;
     email!:string;
     tarjetaCredito!:string;

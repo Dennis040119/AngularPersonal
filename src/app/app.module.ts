@@ -42,6 +42,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -97,7 +98,8 @@ import {MatCardModule} from '@angular/material/card';
     MatToolbarModule,
     MatSidenavModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
     
     
   ],
@@ -115,7 +117,8 @@ import {MatCardModule} from '@angular/material/card';
     MatToolbarModule,
     MatSidenavModule,
     MatCheckboxModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
 
   ],
   providers: [CookieService ,  {provide:ErrorHandler,useClass:GlobalErrorHandler}],

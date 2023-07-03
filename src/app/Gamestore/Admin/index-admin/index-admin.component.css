@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgb(252, 232, 179);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   
@@ -20,7 +20,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgb(252, 232, 179);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
 }
@@ -59,7 +59,7 @@ span{
   float: right;
 }
 .img-logo{
-  margin-left: 80%;
+  margin-left: 75%;
   float: right;
   max-width: 100%;
   width: 4%;

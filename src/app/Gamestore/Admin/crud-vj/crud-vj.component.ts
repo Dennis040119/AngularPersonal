@@ -23,6 +23,7 @@ import { EnumService } from '../services/enum.service';
 import { DataSource } from '@angular/cdk/collections';
 import { AppComponent } from 'src/app/app.component';
 import { array, bool } from 'prop-types';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -32,6 +33,8 @@ import { array, bool } from 'prop-types';
   styleUrls: ['crud-vj.component.css']
 })
 export class CrudVjComponent implements OnInit,AfterViewInit  {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   listavj!: Videojuegos[];
   displayedColumns = ['nombre', 'precio','genero' ,'plataformas','options'];
@@ -63,7 +66,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
   ngAfterViewInit() {
     
     this.audioPlayer.src = '../../../assets/audio/enemy.mp3';
-    
+    this.dataSource.paginator = this.paginator;
     //const audioPlayer: HTMLAudioElement = this.audioPlayerRef.nativeElement;
     //this.audioPlayer.load();
     //this.audioPlayer.play();
@@ -80,6 +83,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     this.VjService.listarVideoJuegos().subscribe((data) =>
       {this.listavj=data;
       this.dataSource = new MatTableDataSource(this.listavj);
+      this.dataSource.paginator = this.paginator;
       })
   }
 

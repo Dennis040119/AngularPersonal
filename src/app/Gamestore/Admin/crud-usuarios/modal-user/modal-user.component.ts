@@ -119,7 +119,7 @@ export class ModalUserComponent implements OnInit {
   }
   construirUsuario(){
     this.objTransac.userid="";
-    this.objTransac.user=this.form.get("user")?.value
+    this.objTransac.username=this.form.get("user")?.value
 
     ////Pass cuando edita
     if(this.tipoDialog=="edit" && !this.checkNewPass){this.objTransac.password=this.objetoDialog.password}
@@ -135,7 +135,7 @@ export class ModalUserComponent implements OnInit {
 
   }
   SetActualizaUsuario(){
-    this.form.get("user")?.setValue(this.objetoDialog.user)
+    this.form.get("user")?.setValue(this.objetoDialog.username)
     this.form.get("password")?.setValue("123456789")
     this.form.get("email")?.setValue(this.objetoDialog.email)
     this.form.get("TarjetaCredito")?.setValue(this.objetoDialog.tarjetaCredito)
