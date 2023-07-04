@@ -1,5 +1,11 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-<div class="body">
+
+<div class="d-flex justify-content-center align-items-center" *ngIf="preloaderTime">
+
+    <img src="../../../../assets/utils/loading.gif" alt="Pikachu andando">
+  
+  </div>
+<div class="body" *ngIf="!preloaderTime">
 <br>
 <div class="footer">
     <h1 style="margin-left: 2%;">VideoJuegos Disponibles</h1>
@@ -37,14 +43,14 @@
         
         >
 
-        <div class="card" style="background-color:rgb(228, 220, 221) ;" (click)="DetalleModal(tile)">
+        <div class="card" style="background-color:rgb(253, 212, 217) ;" (click)="DetalleModal(tile)">
             <figure class="figura" >
                 <img class="portada" src="{{tile.img}}">
                 <br>
                 <div class="descrip">
                     {{tile.nombre}}
                     <br>
-                    {{tile.precio}} €
+                    {{tile.precio|euros}} 
                 </div>
                 
                 

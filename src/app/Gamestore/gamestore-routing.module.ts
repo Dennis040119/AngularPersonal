@@ -81,8 +81,8 @@ const routes: Routes = [
   {
     path: '',
     
-    redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
-    //redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
+    //redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
+    redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
     pathMatch:'full'
     
   },

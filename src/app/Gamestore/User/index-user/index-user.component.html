@@ -5,21 +5,14 @@
 
       <mat-sidenav class="MenuExpansible" #sidenav mode="side"(click)="sidenav.toggle()">
 
-        <button mat-button class="MenuButton"  routerLink="homeVideojuegos">
-         <mat-icon style="color:rgb(252, 232, 179);">games</mat-icon>
-         <span>VideoJuegos</span>
+        <button mat-button class="MenuButton"  routerLink="" (click)="home()">
+         <mat-icon style="color:rgb(252, 232, 179);">home</mat-icon>
+         <span>Inicio</span>
          </button>
          
-        <button mat-button class="MenuButton" routerLink="homeVideoConsolas">
-          <mat-icon style="color:rgb(252, 232, 179);">videogame_asset</mat-icon>
-          <span>Consolas</span>
-        </button>
-
-
-        
-        <button mat-button class="MenuButton">
-          <mat-icon style="color:rgb(252, 232, 179);">account_circle</mat-icon>
-          <span>Accesorios</span>
+        <button mat-button class="MenuButton" >
+          <mat-icon style="color:rgb(252, 232, 179);">perm_identity</mat-icon>
+          <span>Cuenta</span>
         </button>
 
        <button mat-button  class="MenuButton" (click)="login()">
@@ -36,7 +29,7 @@
 
          
 
-          <button mat-button (click)="sidenav.toggle()" style="float: left;"><mat-icon>home</mat-icon></button>
+          <button mat-button (click)="sidenav.toggle()" style="float: left;"><mat-icon>dashboard</mat-icon></button>
           <p>{{username}}</p>
           <button mat-button class="btn-buy" title="carrito" (click)="DetalleCarritoModal()" >
             <mat-icon style="color: black;margin-right: 2%;">shopping_cart</mat-icon>
@@ -47,8 +40,47 @@
           <p class="example-spacer" >GameStore</p>
           
         </mat-toolbar>
-        
-        
+        <div class="divbuttonmenu">
+        <button mat-button [matMenuTriggerFor]="vjmenu" style="border: 1px black solid;">
+          <mat-icon style="color:rgb(144, 39, 39);">games</mat-icon>
+          VideoJuegos</button>
+          <mat-menu #vjmenu="matMenu">
+            <button mat-menu-item routerLink="homeVideojuegos">PlayStation 5</button>
+            <button mat-menu-item routerLink="homeVideojuegos">PlayStation 4</button>
+            <button mat-menu-item routerLink="homeVideojuegos">Xbox one</button>
+            <button mat-menu-item routerLink="homeVideojuegos">Xbox 360</button>
+
+          </mat-menu>
+
+          <button mat-button [matMenuTriggerFor]="vcmenu" style="border: 1px black solid;margin-left: 1%;">
+            <mat-icon style="color:rgb(144, 39, 39);">videogame_asset</mat-icon>
+            Perifericos</button>
+          <mat-menu #vcmenu="matMenu">
+            <button mat-menu-item routerLink="homeVideoConsolas">PlayStation 5</button>
+            <button mat-menu-item routerLink="homeVideoConsolas">PlayStation 4</button>
+            <button mat-menu-item routerLink="homeVideoConsolas">Xbox one</button>
+            <button mat-menu-item routerLink="homeVideoConsolas">Xbox 360</button>
+
+          </mat-menu>
+        </div>
+
+        <div style="margin-top: 3%;width: 80%;height: 60%;border: 1px solid black;">
+          <ngb-carousel >
+
+            <ng-template ngbSlide>
+                <img src="../../../../assets/PortadasVj/battlefield3.jpg" alt="Random first slide"  class="imgCarrusel">
+            </ng-template>
+            <ng-template ngbSlide>
+                <img src="../../../../assets/PortadasVj/Destiny.jpg" alt="Random second slide"  class="imgCarrusel" />
+            </ng-template>
+            <ng-template ngbSlide>
+                <img src="../../../../assets/PortadasVj/HomeFront.jpg" alt="Random third slide"  class="imgCarrusel" />
+            </ng-template>
+          
+          </ngb-carousel>
+      </div>
+
+    
         <router-outlet (click)="sidenav.toggle()"></router-outlet>
       </mat-sidenav-content>
    

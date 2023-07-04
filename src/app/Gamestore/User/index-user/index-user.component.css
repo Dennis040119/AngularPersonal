@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgb(252, 232, 179);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   
@@ -20,7 +20,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgb(252, 232, 179);
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
 }
@@ -141,4 +141,13 @@ width: 100%;
   margin-right: 5%;
   margin-left: 5%;
   min-width: 8%;
+}
+
+.divbuttonmenu{
+  margin-top: 2%;
+  margin-left: 1%;
+}
+.imgCarrusel{
+  width: 90%;
+  height: 80%;
 }

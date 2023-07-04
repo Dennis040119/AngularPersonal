@@ -190,7 +190,7 @@ export class FormCompraComponent implements OnInit {
                        var rpta:any
                        rpta=data
                       if(rpta["mensaje"]=="Registrado correctamente"){
-                        window.alert("Compra exitosa")
+                       
                         VideojuegosHome.carrito=[];
           
                         this.dialogRef2.closeAll();
@@ -204,10 +204,13 @@ export class FormCompraComponent implements OnInit {
     
                   })
                 });
+
               }
             },
             error:data=>{},
-            complete:()=>{}
+            complete:()=>{
+              window.alert("Compra exitosa")
+            }
     
     
     

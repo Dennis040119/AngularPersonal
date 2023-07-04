@@ -37,6 +37,9 @@ export class VideojuegosHome implements OnInit {
   SelectionPlata:string
   Nombrefiltrer:string=""
 
+  //Preloader
+  preloaderTime:boolean=true
+
   constructor(
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
@@ -50,6 +53,11 @@ export class VideojuegosHome implements OnInit {
     this.listarVideoJuegos();
     this.comboEnums()
     console.log(this.tiles)
+
+    setTimeout(() => {
+      // Código que se ejecutará después de 2 segundos
+      this.preloaderTime=false
+    }, 1000);
     
   }
 

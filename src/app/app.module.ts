@@ -15,7 +15,7 @@ import { DialogConfirmComponent } from './axuliares/dialog-confirm/dialog-confir
 import { CookieService } from 'ngx-cookie-service';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { IndexUserComponent } from './Gamestore/User/index-user/index-user.component';
 //Pipe
 import { EurosPipe } from './pipes/euros.pipe';
 
@@ -43,6 +43,13 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
+
+
+//Bootsstrap
+
+import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -67,6 +74,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ModalVjComponent,
     DialogConfirmComponent,
     EurosPipe,
+    IndexUserComponent
     
     
     
@@ -99,7 +107,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatSidenavModule,
     MatCheckboxModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule,
+    MatMenuModule,
+
+
+    //Bootstrap
+    
+    NgbCarouselModule,
+    
     
     
   ],
@@ -118,7 +134,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatSidenavModule,
     MatCheckboxModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule,
+
+    //Bootstrap
+    NgbCarouselModule
 
   ],
   providers: [CookieService ,  {provide:ErrorHandler,useClass:GlobalErrorHandler}],

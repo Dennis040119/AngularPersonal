@@ -6,16 +6,26 @@ import { MatDialog } from '@angular/material/dialog';
 import { VideoJuegoServiceService } from '../../Admin/services/video-juego-service.service';
 import { EnumService } from '../../Admin/services/enum.service';
 
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-index-user',
   templateUrl: './index-user.component.html',
-  styleUrls: ['./index-user.component.css']
+  styleUrls: ['./index-user.component.css'],
+  providers: [NgbCarouselConfig]
 })
 export class IndexUserComponent {
 
   public Sidenav: boolean = false;
   isExpanded = true;
   isShowing = false;
+
+  images = [
+    'url_de_imagen_1',
+    'url_de_imagen_2',
+    'url_de_imagen_3',
+    // Agrega más imágenes según sea necesario
+  ];
 
   //Username
   username:string=localStorage.getItem("user")!
@@ -27,10 +37,15 @@ export class IndexUserComponent {
     private router:Router,
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
-    private EnumService:EnumService
+    private EnumService:EnumService,
+    config: NgbCarouselConfig
+    
     
   ){
-
+    config.interval = 2000; // Cambia la imagen cada 2 segundos
+    config.wrap = true; // Permite volver al principio al llegar al final
+    config.keyboard = false; // Deshabilita la navegación con el teclado
+  
   }
  
 
@@ -45,6 +60,10 @@ export class IndexUserComponent {
 
   login(){
     this.router.navigate(['']);
+  }
+
+  home(){
+    this.router.navigate(['gamestore/indexUser']);
   }
 
   DetalleCarritoModal(){

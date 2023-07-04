@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import { UsuarioService } from '../services/usuario.service';
 import { Route, Router } from '@angular/router';
 import { Guard } from '../services/guard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -21,7 +22,8 @@ export class LogueoComponent implements OnInit {
   
   constructor(
     private usuarioService:UsuarioService,
-    private router:Router
+    private router:Router,
+    private  snackBar:MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -45,14 +47,14 @@ export class LogueoComponent implements OnInit {
 
         if(data[0].rol=="user"){
           Guard.roles="user"
-          window.alert("Bienvenido usuario: ");
+          this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
           this.router.navigate(['gamestore/indexUser']);
           console.log(Guard.roles)
         }
 
         if(data[0].rol=="admin"){
           Guard.roles="admin"
-          window.alert("Bienvenido administrador: ");
+          this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
           this.router.navigate(['gamestore/indexAdmin']);
           console.log(Guard.roles)
         }
@@ -62,12 +64,12 @@ export class LogueoComponent implements OnInit {
         
         }else{
         localStorage.setItem("key","false")
-        window.alert("Contraseña incorrecta: ");
+        this.openSnackBar("Contraseña Incorrecta","Denegada")
         }
       
         });
     /////////////////
-      }else{window.alert("Usuario no registrado: ");}
+      }else{this.openSnackBar("Usuario no registrado","Denegada");}
 
 
 
@@ -80,5 +82,11 @@ export class LogueoComponent implements OnInit {
    
    }else{ window.alert("Faltan datos")}
    
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
 }

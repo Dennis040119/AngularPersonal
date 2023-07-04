@@ -37,7 +37,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatMenuModule} from '@angular/material/menu';
+
 
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -55,7 +55,7 @@ import {MatListModule} from '@angular/material/list';
     CrudUsuariosComponent,
     IndexAdminComponent,
     ModalUserComponent,
-    IndexUserComponent,
+    
     CrudVcComponent,
     ModalVcComponent,
     VideoConsolasHomeComponent,
@@ -78,7 +78,7 @@ import {MatListModule} from '@angular/material/list';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatMenuModule,
+    
     MatCheckboxModule,
     MatTableModule,
     MatDialogModule,
@@ -89,7 +89,10 @@ import {MatListModule} from '@angular/material/list';
     MatSelectModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+
+
+    
 
     
     
