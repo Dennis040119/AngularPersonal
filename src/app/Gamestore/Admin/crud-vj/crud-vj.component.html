@@ -41,7 +41,7 @@
       <ng-container matColumnDef="plataformas">
         <mat-header-cell *matHeaderCellDef> Plataformas </mat-header-cell>
         <mat-cell *matCellDef="let element" > 
-          <p [textContent]="plataformasConvert(element.plataformas)"></p>
+       {{ element.plataformas|plataformPipe}}
          
         </mat-cell>
       </ng-container>

@@ -12,11 +12,12 @@ import { Marca } from 'src/app/models/enum/marca';
 
 
 const baseUrl = 'http://localhost:8090/enums'
+
 @Injectable({
   providedIn: 'root'
 })
 export class EnumService {
-
+  public listaPlataforma:Plataforma[]=[]
   constructor(private http: HttpClient) {
 
   }

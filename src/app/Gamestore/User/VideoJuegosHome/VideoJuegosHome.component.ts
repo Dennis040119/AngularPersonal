@@ -12,6 +12,7 @@ import { Plataforma } from 'src/app/models/enum/plataforma';
 import { ProductosVenta, ProductosVentaPk } from 'src/app/models/cliente/productos-venta';
 import { element } from 'prop-types';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 
 declare var carrito2: Videojuegos[];
@@ -50,36 +51,50 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     
   ) {}
   ngOnInit(): void {
-
-    
-   
     this.listarVideoJuegos();
     this.comboEnums()
-    
-
-    
-
-
-    var parametro = ""
-    parametro = this.route.snapshot.paramMap.get("plataforma")!;
-    this.SelectionPlata=parametro
-    
-
-    
   }
   ngAfterViewInit(): void {
 
-   
-    this.VideoJuegoService.listarVideoJuegos().subscribe({
+   this.getParametrosDato();
+  }
 
-      next:data=>{
-        if(data!=undefined){this.tiles=data;}
-      },
-      complete:()=>{
-        this.resguardo=this.tiles
-        this.applyFilter()
-      }
+  getParametrosDato(){
+
+    this.route.params.pipe(
+      switchMap(params => {
+      var parametro = ""
+      parametro = params['plataforma'];
+      return parametro
     })
+    )
+    .subscribe({
+      next: (param)=>{
+        this.SelectionPlata=param
+        
+        this.VideoJuegoService.listarVideoJuegos().subscribe({
+          next:data=>{
+            if(data!=undefined){this.tiles=data;}
+          },
+          complete:()=>{
+            this.resguardo=this.tiles
+            this.applyFilter()
+          }
+        })
+      }
+      ,
+      error: (error)=>{console.log("Error: "+error)}
+      ,
+      complete:()=>{
+        
+
+       
+      }
+    });
+
+
+
+
     
   }
 
@@ -176,7 +191,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
         ///
         
         
-        //console.log(this.carrito)
+        
 
       } else {}
 

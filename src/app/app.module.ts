@@ -50,6 +50,7 @@ import {MatMenuModule} from '@angular/material/menu';
 //Bootsstrap
 
 import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+import { PlataformPipePipe } from './pipes/plataform-pipe.pipe';
 
 
 
@@ -74,7 +75,8 @@ import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
     ModalVjComponent,
     DialogConfirmComponent,
     EurosPipe,
-    IndexUserComponent
+    IndexUserComponent,
+    PlataformPipePipe
     
     
     
