@@ -56,6 +56,7 @@ span{
 .example-spacer {
   width: 10%;
   margin-left: 2%;
+  margin-top: 1%;
   float: right;
 }
 .img-logo{
@@ -136,11 +137,10 @@ width: 100%;
 }
 
 .btn-buy{
-  background-color: rgb(144, 39, 39);
+  background-color: none;
   float: right;
-  margin-right: 5%;
   margin-left: 5%;
-  min-width: 8%;
+  min-width: 3%;
 }
 
 .divbuttonmenu{
@@ -148,6 +148,14 @@ width: 100%;
   margin-left: 1%;
 }
 .imgCarrusel{
-  width: 90%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
+}
+
+.divCarrusel{
+  margin-top: 3%;;
+  margin-left: 9%; 
+  width: 80%;
+  height: 60%;
+  border: 1px solid black;
 }

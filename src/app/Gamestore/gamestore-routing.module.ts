@@ -24,9 +24,19 @@ const routes: Routes = [
    
     children: [
       {
-        path: 'homeVideojuegos',
+        path: 'homeVideojuegos/:plataforma',
         component:VideojuegosHome,
         //canActivate:[Guard],
+        children:[
+          //{path:'', redirectTo: 'homeVideojuegos/:plataforma', pathMatch: 'full'},
+        ]
+      },
+      {
+        path: 'homeVideojuegos',
+        component:VideojuegosHome,
+        children:[
+          {path:'', redirectTo: 'homeVideojuegos', pathMatch: 'full'},
+        ]
       },
       {
         path: 'homeVideoConsolas',
@@ -81,8 +91,8 @@ const routes: Routes = [
   {
     path: '',
     
-    //redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
-    redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
+    redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
+    //redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
     pathMatch:'full'
     
   },

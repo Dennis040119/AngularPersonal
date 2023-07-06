@@ -1,5 +1,5 @@
 import { IndexUserComponent } from './../index-user/index-user.component';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import {DetalleJuegoComponent} from './Card-Videojuego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
@@ -11,21 +11,22 @@ import { Genero } from 'src/app/models/enum/genero';
 import { Plataforma } from 'src/app/models/enum/plataforma';
 import { ProductosVenta, ProductosVentaPk } from 'src/app/models/cliente/productos-venta';
 import { element } from 'prop-types';
+import { ActivatedRoute } from '@angular/router';
 
 
 declare var carrito2: Videojuegos[];
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-videojuegosHome',
   templateUrl: './VideojuegosHome.component.html',
   styleUrls: ['./VideojuegosHome.component.css']
 })
-export class VideojuegosHome implements OnInit {
+export class VideojuegosHome implements OnInit,AfterViewInit {
 
   static carrito:ProductosVenta[] = [];
   Pv:ProductosVenta
 
-
+  
   acumulador: number=0
   tiles:Videojuegos[] = []
   resguardo:Videojuegos[]
@@ -44,28 +45,55 @@ export class VideojuegosHome implements OnInit {
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
     private EnumService:EnumService,
-    private IndexInstancia:IndexUserComponent
+    private IndexInstancia:IndexUserComponent,
+    private route: ActivatedRoute
     
   ) {}
-
-
   ngOnInit(): void {
+
+    
+   
     this.listarVideoJuegos();
     this.comboEnums()
-    console.log(this.tiles)
+    
 
-    setTimeout(() => {
-      // Código que se ejecutará después de 2 segundos
-      this.preloaderTime=false
-    }, 1000);
+    
+
+
+    var parametro = ""
+    parametro = this.route.snapshot.paramMap.get("plataforma")!;
+    this.SelectionPlata=parametro
+    
+
+    
+  }
+  ngAfterViewInit(): void {
+
+   
+    this.VideoJuegoService.listarVideoJuegos().subscribe({
+
+      next:data=>{
+        if(data!=undefined){this.tiles=data;}
+      },
+      complete:()=>{
+        this.resguardo=this.tiles
+        this.applyFilter()
+      }
+    })
     
   }
 
   
   applyFilter() {
-    AppComponent.consola(this.Nombrefiltrer+" , " + this.SelectionGene+" , "+this.SelectionPlata)
     
-    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.preloaderTime=true
+    setTimeout(() => {
+      // Código que se ejecutará después de 2 segundos
+      this.preloaderTime=false
+      this.IndexInstancia.carrusel(false)
+    }, 500);
+    
+
     this.tiles=this.resguardo
     if(this.Nombrefiltrer!=""){
       var filtrado= this.tiles.filter(vj => vj.nombre.toLowerCase().includes(this.Nombrefiltrer.toLowerCase()));
@@ -87,6 +115,11 @@ export class VideojuegosHome implements OnInit {
   }
 
   clearFilter(){
+    this.preloaderTime=true
+    setTimeout(() => {
+      // Código que se ejecutará después de 2 segundos
+      this.preloaderTime=false
+    }, 500);
     this.tiles=this.resguardo
     this.Nombrefiltrer=""
     this.SelectionGene=""
@@ -151,18 +184,20 @@ export class VideojuegosHome implements OnInit {
     })
   }
 
-  
-
- 
-
 
   listarVideoJuegos(){
-    this.VideoJuegoService.listarVideoJuegos().subscribe((data) =>{
+    this.VideoJuegoService.listarVideoJuegos().subscribe({
 
-      if(data!=undefined){
-        this.tiles=data;
-        this.resguardo=data
+      next:data=>{
+        if(data!=undefined){
+          this.tiles=data;
+          
+        }
+      },
+      complete:()=>{
+        this.resguardo=this.tiles
       }
+      
       
     })
   }

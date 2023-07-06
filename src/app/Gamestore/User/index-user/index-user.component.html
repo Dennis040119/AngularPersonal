@@ -3,6 +3,8 @@
 
     <mat-sidenav-container class="mat-sidenav-container" >
 
+
+       <!-- Menu izquierdo expansivo, se encuentra oculto originalmente -->
       <mat-sidenav class="MenuExpansible" #sidenav mode="side"(click)="sidenav.toggle()">
 
         <button mat-button class="MenuButton"  routerLink="" (click)="home()">
@@ -24,31 +26,41 @@
       
    
       <mat-sidenav-content>
+
+        <!-- Menu Toolbar de la pagina -->
         
         <mat-toolbar color="primary" class="example-toolbar">
 
          
 
-          <button mat-button (click)="sidenav.toggle()" style="float: left;"><mat-icon>dashboard</mat-icon></button>
-          <p>{{username}}</p>
+          <button mat-button (click)="sidenav.toggle()" style="float: left;">
+            <mat-icon>dashboard</mat-icon>
+          </button>
+          <p style="margin-top: 1%;">{{username}}</p>
+
+
           <button mat-button class="btn-buy" title="carrito" (click)="DetalleCarritoModal()" >
-            <mat-icon style="color: black;margin-right: 2%;">shopping_cart</mat-icon>
-            <p style="margin-left: 1%;">{{acumulador| number: '1.2-2'}}</p>
-         </button> 
+            <mat-icon style="color: black;margin-right: 0.5%;">shopping_cart</mat-icon>
+         </button>
+         <p style="margin-top: 1%;">{{acumulador| number: '1.2-2'}}</p>
 
           <img src="../../../../assets/logo_barra.jpg" class="img-logo" >
           <p class="example-spacer" >GameStore</p>
           
         </mat-toolbar>
+
+          <!-- Div de los menu de botones -->
         <div class="divbuttonmenu">
         <button mat-button [matMenuTriggerFor]="vjmenu" style="border: 1px black solid;">
           <mat-icon style="color:rgb(144, 39, 39);">games</mat-icon>
           VideoJuegos</button>
           <mat-menu #vjmenu="matMenu">
-            <button mat-menu-item routerLink="homeVideojuegos">PlayStation 5</button>
-            <button mat-menu-item routerLink="homeVideojuegos">PlayStation 4</button>
-            <button mat-menu-item routerLink="homeVideojuegos">Xbox one</button>
-            <button mat-menu-item routerLink="homeVideojuegos">Xbox 360</button>
+            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf003']" >PlayStation 5</button>
+            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf004']">PlayStation 4</button>
+            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf002']">Xbox one</button>
+            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf001']">Xbox 360</button>
+            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf005']">Nintendo Wii</button>
+            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf006']">Antiguos</button>
 
           </mat-menu>
 
@@ -64,24 +76,27 @@
           </mat-menu>
         </div>
 
-        <div style="margin-top: 3%;width: 80%;height: 60%;border: 1px solid black;">
-          <ngb-carousel >
+          <!-- Div del carrusel de imagenes -->
+        <div  class="divCarrusel" *ngIf="boleancarrusel">
+          <ngb-carousel [interval]="1500" [pauseOnHover]="true">
 
             <ng-template ngbSlide>
-                <img src="../../../../assets/PortadasVj/battlefield3.jpg" alt="Random first slide"  class="imgCarrusel">
+                <img src="../../../../assets/utils/carrusel1.jpg" alt="Random first slide"  class="imgCarrusel">
             </ng-template>
             <ng-template ngbSlide>
-                <img src="../../../../assets/PortadasVj/Destiny.jpg" alt="Random second slide"  class="imgCarrusel" />
+                <img src="../../../../assets/utils/carrusel2.jpg" alt="Random second slide"  class="imgCarrusel" />
             </ng-template>
             <ng-template ngbSlide>
-                <img src="../../../../assets/PortadasVj/HomeFront.jpg" alt="Random third slide"  class="imgCarrusel" />
+                <img src="../../../../assets/utils/carrusel3.jpg" alt="Random third slide"  class="imgCarrusel" />
             </ng-template>
           
           </ngb-carousel>
       </div>
 
-    
-        <router-outlet (click)="sidenav.toggle()"></router-outlet>
+      
+
+          <!-- Pagina a la que se llama -->
+        <router-outlet (click)="sidenav.toggle()" style="margin-top: 3%;"></router-outlet>
       </mat-sidenav-content>
    
   

@@ -208,9 +208,9 @@ export class ModalVjComponent implements OnInit {
     this.form.get("precio")?.setValue(this.objRecepcion.precio)
 
     //Operamos para poder cargar la imagen que le corresponde 
-    var numero = this.objRecepcion.img.length
-    this.selectedFileUrl=this.objRecepcion.img
-    this.selectedFileName = this.objRecepcion.img.substring(24,numero)
+    var cadena = "../../../../assets/PortadasVj/"
+    this.selectedFileUrl=cadena+this.objRecepcion.img
+    this.selectedFileName = this.objRecepcion.img
    
     
     this.form.get("genero")?.setValue(this.objRecepcion.genero.genId)
@@ -256,8 +256,8 @@ export class ModalVjComponent implements OnInit {
     this.objRegistrar.nombre=this.form.get("nombre")?.value
     this.objRegistrar.precio=this.form.get("precio")?.value
 
-    var cadena ="../../assets/PortadasVj/"
-    this.objRegistrar.img=cadena+this.selectedFileName
+   
+    this.objRegistrar.img=this.selectedFileName
 
    
     

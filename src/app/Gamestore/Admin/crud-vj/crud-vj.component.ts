@@ -249,8 +249,8 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
            
             const imgData = data.cell.raw;
             const img = new Image();
-            
-            img.src = imgData!.toString()
+            var cadena = "../../../../assets/PortadasVj/"
+            img.src =cadena+imgData!.toString()
             console.log(imgData!.toString())
             data.cell.raw = img;
             
@@ -333,11 +333,20 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
 
   plataformasConvert(plata:string){
     var rpta:string|undefined
-    var pla1:string|undefined
+    var pla1:string|undefined=plata.slice(0,5)
+    this.EnumService.listarPlataformas().subscribe({
+      next:(data)=>{
+         pla1=data.find(pl=>pl.platId==plata.slice(0,5))?.nombre
+      },
+      complete:()=>{
+        rpta=pla1
+      }
+    })
     var pla2:string|undefined
     var pla3:string|undefined
+    //rpta=pla1
 
-    
+    return rpta
   }
 }
 

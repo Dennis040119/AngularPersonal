@@ -40,15 +40,16 @@
       
       <ng-container matColumnDef="plataformas">
         <mat-header-cell *matHeaderCellDef> Plataformas </mat-header-cell>
-        <mat-cell *matCellDef="let element"> 
-          {{element.plataformas}}
+        <mat-cell *matCellDef="let element" > 
+          <p [textContent]="plataformasConvert(element.plataformas)"></p>
+         
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="img">
         <mat-header-cell *matHeaderCellDef> Portada </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
-          <img [src]="element.img" class="imgTabla">
+          <img src="../../../../assets/PortadasVj/{{element.img}}" class="imgTabla">
         </mat-cell>
       </ng-container>
       

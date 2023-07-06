@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppComponent } from 'src/app/app.component';
-import { Genero } from 'src/app/models/enum/genero';
 import { Plataforma } from 'src/app/models/enum/plataforma';
-import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
-import { VideoJuegoServiceService } from '../../Admin/services/video-juego-service.service';
 import { VideojuegosHome } from '../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
-import { DetalleJuegoComponent } from '../VideoJuegosHome/Card-Videojuego/detalle-juego.component';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { EnumService } from '../../Admin/services/enum.service';
 import { VideoConsolaServiceService } from '../../Admin/services/video-consola-service.service';
@@ -37,6 +33,9 @@ export class VideoConsolasHomeComponent {
   SelectionPrecio:number
   Nombrefiltrer:string=""
 
+
+  preloaderTime:boolean=true
+
   constructor(
     private dialog: MatDialog,
     private VcService:VideoConsolaServiceService,
@@ -50,6 +49,12 @@ export class VideoConsolasHomeComponent {
     this.listarVideoConsola();
     this.comboEnums()
     console.log(this.tiles)
+
+    setTimeout(() => {
+      // Código que se ejecutará después de 2 segundos
+      this.preloaderTime=false
+      this.IndexInstancia.carrusel(false)
+    }, 800);
     
   }
 
