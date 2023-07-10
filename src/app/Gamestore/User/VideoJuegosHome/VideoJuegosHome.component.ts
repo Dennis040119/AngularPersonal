@@ -70,6 +70,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     )
     .subscribe({
       next: (param)=>{
+        console.log(param)
         this.SelectionPlata=param
         
         this.VideoJuegoService.listarVideoJuegos().subscribe({
@@ -77,6 +78,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
             if(data!=undefined){this.tiles=data;}
           },
           complete:()=>{
+            console.log(this.SelectionPlata)
             this.resguardo=this.tiles
             this.applyFilter()
           }
@@ -92,7 +94,9 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
       }
     });
 
-
+   this.route.params.subscribe(data=>{
+      this.SelectionPlata=data['plataforma'];
+    })
 
 
     

@@ -11,7 +11,7 @@
 }
 .example-toolbar{
   width: 100%;
-  background-color: rgb(144, 39, 39);
+  background-color: rgb(182, 23, 23);
 }
 
 .mat-sidenav-container{
@@ -33,7 +33,7 @@
 }
 
 .MenuExpansible{
-  background-color: rgb(144, 39, 39);
+  background-color: rgb(182, 23, 23);
 
   display: flex;
   flex-direction: row;
@@ -156,6 +156,12 @@ width: 100%;
   margin-top: 3%;;
   margin-left: 9%; 
   width: 80%;
-  height: 60%;
+  height: 30%;
   border: 1px solid black;
+}
+
+.footer{
+  width: 100%;
+  margin-top: 5%;
+  background-color:  rgb(182, 23, 23);;
 }

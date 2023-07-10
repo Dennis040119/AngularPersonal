@@ -23,6 +23,9 @@ export class EnumService {
   }
 
   listarPlataformas():Observable<Plataforma[]> {
+    this.http.get<Plataforma[]>(baseUrl + '/PlataformaList').subscribe(data=>{
+      this.listaPlataforma=data
+    })
     return this.http.get<Plataforma[]>(baseUrl + '/PlataformaList');
   }
 

@@ -19,34 +19,18 @@
     max-width: 14%;
 }
 
+.grillaDiv{
+    margin: 2%;
+}
 .grilla{
     display: table-column;
     margin-bottom: 5%;
+    margin-top: 3%;
  
-}
-
-
-
-.card{
-    height: 100%;
-    width: 60%;
-    
-    cursor: pointer;
-    border:  black;
-    border-radius: 10px;
-    background-color:rgb(144, 39, 39)
 }
 
 .card:hover{
     opacity: 80%;
     
 }
-.portada{
-    width: 80%;
-    height: 65%;
-    margin-top: 1%;
-   
-}
-.descrip{
-    margin-left: 15%;
-}
+

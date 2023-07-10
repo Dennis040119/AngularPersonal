@@ -12,6 +12,8 @@
     overflow: auto;
     max-height: 500px;
     background: local;
+    width: 90%;;
+    margin-left: 2%;
   }
 
   .example-header {
@@ -68,4 +70,9 @@
   width: 60%;
   height: 80%;
 }
-
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  padding: 0 0 0 0;
+}
+.mdc-data-table__table[_ngcontent-ng-c3315818091] {
+  white-space: normal
+}

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { VideoJuegoServiceService } from '../services/video-juego-service.service';
+import { EnumService } from '../services/enum.service';
 
 
 @Component({
@@ -7,7 +9,7 @@ import { Route, Router } from '@angular/router';
   templateUrl: './index-admin.component.html',
   styleUrls: ['./index-admin.component.css']
 })
-export class IndexAdminComponent {
+export class IndexAdminComponent implements OnInit {
 
   public Sidenav: boolean = false;
   isExpanded = true;
@@ -19,9 +21,15 @@ export class IndexAdminComponent {
   username:string=localStorage.getItem("user")!
 
   constructor(
-    private router:Router
+    private router:Router,
+    private Enum:EnumService
   ){
 
+  }
+  ngOnInit(): void {
+    this.Enum.listarPlataformas().subscribe(data=>{
+
+    })
   }
 
 

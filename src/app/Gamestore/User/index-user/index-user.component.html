@@ -52,7 +52,7 @@
           <!-- Div de los menu de botones -->
         <div class="divbuttonmenu">
         <button mat-button [matMenuTriggerFor]="vjmenu" style="border: 1px black solid;">
-          <mat-icon style="color:rgb(144, 39, 39);">games</mat-icon>
+          <mat-icon style="color:rgb(182, 23, 23);">games</mat-icon>
           VideoJuegos</button>
           <mat-menu #vjmenu="matMenu">
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf003']" >PlayStation 5</button>
@@ -77,8 +77,8 @@
         </div>
 
           <!-- Div del carrusel de imagenes -->
-        <div  class="divCarrusel" *ngIf="boleancarrusel">
-          <ngb-carousel [interval]="1500" [pauseOnHover]="true">
+        <div  class="divCarrusel" >
+          <ngb-carousel [interval]="1500" [animation]="true">
 
             <ng-template ngbSlide>
                 <img src="../../../../assets/utils/carrusel1.jpg" alt="Random first slide"  class="imgCarrusel">
@@ -97,9 +97,11 @@
 
           <!-- Pagina a la que se llama -->
         <router-outlet (click)="sidenav.toggle()" style="margin-top: 3%;"></router-outlet>
+
+        <footer  class="footer" >Esto es el footer</footer>
       </mat-sidenav-content>
    
-  
+     
     
     </mat-sidenav-container>
   

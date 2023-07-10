@@ -1,7 +1,7 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 
 
-<div class="d-flex justify-content-center align-items-center" *ngIf="preloaderTime">
+
+<div class="d-flex justify-content-center align-items-center" style="margin-top: 2%;" *ngIf="preloaderTime">
 
     <img src="../../../../assets/utils/loading.gif" alt="Pikachu andando">
   
@@ -36,29 +36,32 @@
 
     
 </div>
-<mat-grid-list cols="5" rowHeight="250px" >
-    <mat-grid-tile class="grilla" *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1" >
+<div class="grillaDiv" style="margin: 2%;">
+<mat-grid-list cols="5" rowHeight="230px"  gutterSize="10px">
 
-        <div class="card" style="
-        height: 100%; width: 80%;
+    <mat-grid-tile class="grilla" *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1" style="margin-bottom: 8%;" >
+
+        <div class="card" 
+        style="  
+        height: 100%; 
+        width: 100%;
         display: flex;
         flex-direction: column;
-        justify-self: center;
+        justify-content: center;
         cursor: pointer;
-        border:  black;
+        border: solid  black;
         border-radius: 10px;
-        background-color:rgb(144, 39, 39);
-        margin-bottom: 3%;
-        
+        word-wrap: break-word;
+         
         "
+        
         (click)="DetalleModal(tile)">
 
             
                 <img class="portada" src="../../../../assets/PortadasVj/{{tile.img}}" style="
                 width: 80%;
-                height: 65%;
-                margin-left: 5%;
-                margin-top: 4%;" >
+                height: 75%;
+                "    >
                 <br>
                 <div class="descrip" style="text-align: center;">
                     {{tile.nombre}}
@@ -71,6 +74,6 @@
       
       
     </mat-grid-tile>
-  </mat-grid-list>
-
+</mat-grid-list>
+</div>
 </div>

@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 
-<div class="d-flex justify-content-center align-items-center" *ngIf="preloaderTime" 
+<div class="d-flex justify-content-center align-items-center" style="margin-top: 2%;" *ngIf="preloaderTime" 
 >
 
     <img src="../../../../assets/utils/pacman.gif" alt="pacman andando" style="width: 300px;height: 220px;"> 
@@ -10,7 +10,7 @@
 <div class="body" *ngIf="!preloaderTime">
 <br>
 <div class="footer">
-    <h1 style="margin-left: 2%;">VideoJuegos Disponibles</h1>
+    <h1 style="margin-left: 2%;">Perifericos</h1>
     <mat-form-field style="margin-left: 5%;">
         <input matInput [(ngModel)]="Nombrefiltrer" (keyup)="applyFilter()" placeholder="Filtrar por nombre"> 
     </mat-form-field>
