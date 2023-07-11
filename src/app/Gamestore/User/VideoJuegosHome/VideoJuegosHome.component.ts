@@ -1,5 +1,5 @@
 import { IndexUserComponent } from './../index-user/index-user.component';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import {DetalleJuegoComponent} from './Card-Videojuego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
@@ -10,12 +10,11 @@ import { EnumService } from '../../Admin/services/enum.service';
 import { Genero } from 'src/app/models/enum/genero';
 import { Plataforma } from 'src/app/models/enum/plataforma';
 import { ProductosVenta, ProductosVentaPk } from 'src/app/models/cliente/productos-venta';
-import { element } from 'prop-types';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 
-declare var carrito2: Videojuegos[];
+
 
 @Component({
   selector: 'app-videojuegosHome',
@@ -23,6 +22,8 @@ declare var carrito2: Videojuegos[];
   styleUrls: ['./VideojuegosHome.component.css']
 })
 export class VideojuegosHome implements OnInit,AfterViewInit {
+
+  @ViewChild('miDiv',{ static: false }) grid: ElementRef
 
   static carrito:ProductosVenta[] = [];
   Pv:ProductosVenta
@@ -41,22 +42,37 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
 
   //Preloader
   preloaderTime:boolean=true
+  
 
   constructor(
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
     private EnumService:EnumService,
     private IndexInstancia:IndexUserComponent,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private el: ElementRef,
+    
     
   ) {}
   ngOnInit(): void {
+    
     this.listarVideoJuegos();
     this.comboEnums()
+
+   
   }
   ngAfterViewInit(): void {
 
    this.getParametrosDato();
+   console.log(this.grid)
+   
+ 
+
+   
+   //password.focus()
+   //invalidControl.focus();
+
+   
   }
 
   getParametrosDato(){
@@ -129,7 +145,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
       this.tiles=filtrado
     }
 
-
+    
     
   }
 

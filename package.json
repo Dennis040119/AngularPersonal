@@ -29,6 +29,7 @@
     "@popperjs/core": "^2.11.6",
     "angular-bootstrap-md": "^4.3.2",
     "bootstrap": "file:popperjs/core@ng-bootstrap/ng-bootstrap",
+    "bootstrap-icons": "^1.10.5",
     "canvg": "^4.0.1",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",

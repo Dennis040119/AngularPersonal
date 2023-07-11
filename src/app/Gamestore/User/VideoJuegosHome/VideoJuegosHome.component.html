@@ -6,12 +6,12 @@
     <img src="../../../../assets/utils/loading.gif" alt="Pikachu andando">
   
   </div>
-<div class="body" *ngIf="!preloaderTime">
+<div class="body" style="margin-bottom: 5%;" *ngIf="!preloaderTime">
 <br>
 <div class="footer">
     <h1 style="margin-left: 2%;">VideoJuegos Disponibles</h1>
     <mat-form-field style="margin-left: 5%;">
-        <input matInput [(ngModel)]="Nombrefiltrer" (keyup)="applyFilter()" placeholder="Filtrar por nombre"> 
+        <input name="focus" matInput [(ngModel)]="Nombrefiltrer" (keyup)="applyFilter()" placeholder="Filtrar por nombre"> 
     </mat-form-field>
 
     <mat-form-field style="margin-left: 3%;" class="SelectGenero">
@@ -21,7 +21,7 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-
+    
     <mat-form-field style="margin-left: 3%;" class="SelectPlata">
         <mat-select placeholder="Plataformas" [(ngModel)]="SelectionPlata" (selectionChange)="applyFilter()" >
             <mat-option *ngFor="let pla of PlataformasList" value="{{pla.platId}}">
@@ -36,18 +36,20 @@
 
     
 </div>
-<div class="grillaDiv" style="margin: 2%;">
-<mat-grid-list cols="5" rowHeight="230px"  gutterSize="10px">
+<div class="grillaDiv" #miDiv tabindex="0" style="margin: 2%;">
+<mat-grid-list  cols="5" rowHeight="250px"  gutterSize="10px">
 
-    <mat-grid-tile class="grilla" *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1" style="margin-bottom: 8%;" >
+    <mat-grid-tile  class="grilla" *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1" style="margin-bottom: 8%;" >
 
         <div class="card" 
         style="  
         height: 100%; 
-        width: 100%;
+        width: 90%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        
         cursor: pointer;
         border: solid  black;
         border-radius: 10px;
@@ -59,11 +61,18 @@
 
             
                 <img class="portada" src="../../../../assets/PortadasVj/{{tile.img}}" style="
-                width: 80%;
-                height: 75%;
+                width: 70%;
+                height: 60%;
+                border: 1px solid black;
+                margin-top: 2%;
                 "    >
                 <br>
-                <div class="descrip" style="text-align: center;">
+                <div class="descrip" style="
+                text-align: left; 
+                
+                
+                
+                ">
                     {{tile.nombre}}
                     <br>
                     {{tile.precio|euros}} 

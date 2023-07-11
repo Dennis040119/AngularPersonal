@@ -6,7 +6,9 @@
     background-color: rgba(76, 79, 79, 0.718);
     
 }
-
+div p{
+  
+}
 .titulo{
     display: flex;
     flex-direction: row;
