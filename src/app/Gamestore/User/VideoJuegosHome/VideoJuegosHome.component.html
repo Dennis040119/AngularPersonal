@@ -6,7 +6,8 @@
     <img src="../../../../assets/utils/loading.gif" alt="Pikachu andando">
   
   </div>
-<div class="body" style="margin-bottom: 5%;" *ngIf="!preloaderTime">
+<div class="body" style="margin-bottom: 5%;display: flex;flex-direction: column;
+" *ngIf="!preloaderTime">
 <br>
 <div class="footer">
     <h1 style="margin-left: 2%;">VideoJuegos Disponibles</h1>
@@ -36,7 +37,7 @@
 
     
 </div>
-<div class="grillaDiv" #miDiv tabindex="0" style="margin: 2%;">
+<div class="grillaDiv"  style="margin: 2%;width: 90%;">
 <mat-grid-list  cols="5" rowHeight="250px"  gutterSize="10px">
 
     <mat-grid-tile  class="grilla" *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1" style="margin-bottom: 8%;" >
@@ -49,7 +50,6 @@
         flex-direction: column;
         align-items: center;
         margin: 0 auto;
-        
         cursor: pointer;
         border: solid  black;
         border-radius: 10px;
@@ -67,15 +67,11 @@
                 margin-top: 2%;
                 "    >
                 <br>
-                <div class="descrip" style="
-                text-align: left; 
-                
-                
-                
-                ">
-                    {{tile.nombre}}
+                <div class="descrip" style="">
+
+                    <p>{{tile.nombre}}</p>
                     <br>
-                    {{tile.precio|euros}} 
+                   <p>{{tile.precio|euros}} </p>
                 </div>
                 
         </div>

@@ -10,6 +10,7 @@ import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video
 import { VideoConsolaServiceService } from 'src/app/Gamestore/Admin/services/video-consola-service.service';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { DetalleVideconsolaComponent } from '../../video-consolas-home/detalle-videconsola/detalle-videconsola.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-detalle-compra',
@@ -39,7 +40,8 @@ export class DetalleCompraComponent implements OnInit {
 
     //Servicios
     private VjService:VideoJuegoServiceService,
-    private VcService:VideoConsolaServiceService
+    private VcService:VideoConsolaServiceService,
+    private snackBar:MatSnackBar
   
   ){}
 
@@ -68,7 +70,7 @@ export class DetalleCompraComponent implements OnInit {
   }
 
   delete(v:ProductosVenta){
-
+    VideojuegosHome.carrito[0].productosVentaPk.proId
     console.log(v)
     var conta:number=0
     conta =VideojuegosHome.carrito.findIndex(pv => pv.productosVentaPk==v.productosVentaPk);
@@ -77,10 +79,11 @@ export class DetalleCompraComponent implements OnInit {
     if(conta >-1){
       console.log(conta)
       VideojuegosHome.carrito.splice(conta,1)
+      this.openSnackBar("Eliminado del carrito","")
       this.dataSource.filter ="";
     
     }else{
-      console.log("No se encuentra en el carrito")
+      this.openSnackBar("No se encuentra en el carrito","")
     }
   }
 
@@ -190,6 +193,12 @@ export class DetalleCompraComponent implements OnInit {
       }
     });
     
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
 }
 

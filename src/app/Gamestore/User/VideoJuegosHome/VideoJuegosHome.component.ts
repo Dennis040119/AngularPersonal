@@ -17,6 +17,7 @@ import { switchMap } from 'rxjs';
 
 
 @Component({
+ 
   selector: 'app-videojuegosHome',
   templateUrl: './VideojuegosHome.component.html',
   styleUrls: ['./VideojuegosHome.component.css']

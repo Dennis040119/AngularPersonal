@@ -84,7 +84,7 @@ export class LogueoComponent implements OnInit {
    
   }
 
-  openSnackBar(message: string, action: string) {
+  public openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 1000,
     });

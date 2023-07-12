@@ -7,6 +7,8 @@ import { VideoJuegoServiceService } from '../../Admin/services/video-juego-servi
 import { EnumService } from '../../Admin/services/enum.service';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { LogueoComponent } from 'src/app/login/logueo/logueo.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-index-user',
@@ -35,6 +37,7 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
     private EnumService:EnumService,
+    private snackBar:MatSnackBar,
     config: NgbCarouselConfig
     
     
@@ -96,7 +99,7 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
           this.SumaTotal()
       });
       
-    }else{window.alert("El carrito esta vacio");}
+    }else{this.openSnackBar("El carrito esta vacio","")}
     
   }
   public SumaTotal(){
@@ -113,6 +116,12 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
 
   public carrusel(bool:boolean){
     this.boleancarrusel=bool
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
 }
 

@@ -11,6 +11,7 @@
 }
 .example-toolbar{
   width: 100%;
+  max-width: 100%;
   background-color: rgb(182, 23, 23);
 }
 
@@ -176,6 +177,15 @@ width: 100%;
 }
 
 .btnFooter{
+  margin-right: 1%;
+  margin-top: 0.5%;
+ 
   float: right;
-  white-space: break-spaces;
+  width: 10%;
+}
+a{
+  margin-right: 7%;
+}
+i{
+  font-size: 20px;
 }

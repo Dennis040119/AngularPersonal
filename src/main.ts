@@ -4,8 +4,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { logincomponent } from './app/login/login.component';
+
 
 
 
