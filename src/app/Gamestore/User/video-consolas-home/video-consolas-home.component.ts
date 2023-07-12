@@ -58,6 +58,19 @@ export class VideoConsolasHomeComponent {
     
   }
 
+  getParametrosDato(){
+
+    this.route.params.pipe(
+      switchMap(params => {
+      var parametro = ""
+      parametro = params['marca'];
+      return parametro
+    })
+    )
+    .subscribe({
+      next: (param)=>{
+        console.log(param)
+        this.SelectionMarca=param
   
   applyFilter() {
     AppComponent.consola(this.Nombrefiltrer+" , " + this.SelectionMarca+" , "+this.SelectionPrecio)
