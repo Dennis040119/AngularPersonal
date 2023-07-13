@@ -33,7 +33,7 @@
 
          
 
-          <button mat-button (click)="sidenav.toggle()" style="float: left;">
+          <button mat-button (click)="sidenav.toggle()" style="float: left;" title="Menu">
             <mat-icon>dashboard</mat-icon>
           </button>
           <p style="margin-top: 1%;">{{username}}</p>
@@ -51,33 +51,37 @@
 
           <!-- Div de los menu de botones -->
         <div class="divbuttonmenu">
-        <button mat-button [matMenuTriggerFor]="vjmenu" style="border: 1px black solid;">
+        <button mat-button [matMenuTriggerFor]="vjmenu" #matMenuTrigger="matMenuTrigger"  
+        (mouseenter)="matMenuTrigger.openMenu()"  
           <mat-icon style="color:rgb(182, 23, 23);">games</mat-icon>
           VideoJuegos</button>
-          <mat-menu #vjmenu="matMenu">
+          <mat-menu #vjmenu="matMenu" [overlapTrigger]="false" >
+            <div (mouseleave)="matMenuTrigger.closeMenu()">
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf003']" >PlayStation 5</button>
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf004']">PlayStation 4</button>
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf002']">Xbox one</button>
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf001']">Xbox 360</button>
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf005']">Nintendo Wii</button>
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf006']">Antiguos</button>
-
+          </div>
           </mat-menu>
 
-          <button mat-button [matMenuTriggerFor]="vcmenu" style="border: 1px black solid;margin-left: 1%;">
+          <button mat-button [matMenuTriggerFor]="vcmenu" #matMenuTrigger2="matMenuTrigger"  
+          (mouseenter)="matMenuTrigger2.openMenu()"  
+          style="border: 1px black solid;margin-left: 1%;">
             <mat-icon style="color:rgb(144, 39, 39);">videogame_asset</mat-icon>
             Perifericos</button>
-          <mat-menu #vcmenu="matMenu">
-            <button mat-menu-item routerLink="homeVideoConsolas">PlayStation 5</button>
-            <button mat-menu-item routerLink="homeVideoConsolas">PlayStation 4</button>
-            <button mat-menu-item routerLink="homeVideoConsolas">Xbox one</button>
-            <button mat-menu-item routerLink="homeVideoConsolas">Xbox 360</button>
+          <mat-menu #vcmenu>
+            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc001']" >Sony</button>
+            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc002']">MicroSoft</button>
+            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc003']">Steam</button>
+            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc004']">Nintendo</button>
 
           </mat-menu>
         </div>
 
           <!-- Div del carrusel de imagenes -->
-        <div  class="divCarrusel" style="height: 30%;">
+        <div  class="divCarrusel" style="height: 38%;">
           <ngb-carousel [interval]="1500" [animation]="true">
 
             <ng-template ngbSlide>
@@ -100,10 +104,10 @@
 
         <footer  class="footer" >
           <div class="btnFooter">
-          <a href="https://es-es.facebook.com/"><i class="bi bi-facebook" style="color: black;margin-right: 2%;"></i></a>
-          <a href="https://es-es.facebook.com/"><i class="bi bi-instagram" style="color: black;margin-right: 2%;"></i></a>
-          <a href="https://es-es.facebook.com/"><i class="bi bi-twitter" style="color: black;margin-right: 2%;"></i></a>
-          <a href="https://es-es.facebook.com/"><i class="bi bi-twitch" style="color: black;margin-right: 2%;"></i></a>
+          <a href="https://es-es.facebook.com/" title="Facebook"><i class="bi bi-facebook" style="color: black;margin-right: 2%;"></i></a>
+          <a href="https://es-es.facebook.com/"  title="Instragram"><i class="bi bi-instagram" style="color: black;margin-right: 2%;"></i></a>
+          <a href="https://es-es.facebook.com/"  title="Twitter"><i class="bi bi-twitter" style="color: black;margin-right: 2%;"></i></a>
+          <a href="https://es-es.facebook.com/" title="Twitch"><i class="bi bi-twitch" style="color: black;margin-right: 2%;"></i></a>
          </div>
           
         </footer>

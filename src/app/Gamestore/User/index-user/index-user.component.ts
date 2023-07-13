@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { VideojuegosHome } from '../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
@@ -9,6 +9,7 @@ import { EnumService } from '../../Admin/services/enum.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LogueoComponent } from 'src/app/login/logueo/logueo.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-index-user',
@@ -17,6 +18,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providers: [NgbCarouselConfig]
 })
 export class IndexUserComponent implements OnInit,AfterViewInit {
+
+  @ViewChild(MatMenuTrigger) vjmenu: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger) vcmenu: MatMenuTrigger;
+
 
   public Sidenav: boolean = false;
   isExpanded = true;
@@ -31,6 +36,7 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
   
 
   acumulador: number=0
+  
 
   constructor(
     private router:Router,
@@ -38,7 +44,8 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
     private VideoJuegoService:VideoJuegoServiceService,
     private EnumService:EnumService,
     private snackBar:MatSnackBar,
-    config: NgbCarouselConfig
+    config: NgbCarouselConfig,
+    
     
     
   ){
@@ -122,6 +129,25 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
     this.snackBar.open(message, action, {
       duration: 1000,
     });
+  }
+
+  openMenus(menu:string){
+    this.vcmenu.openMenu()
+    // try {
+    //   console.log("this."+menu+".openMenu()")
+    //   eval("this."+menu+".openMenu()");
+    // } catch (error) {
+    //   console.error('Error al ejecutar el código:', error);
+    // }
+  }
+
+  closeMenus(menu:string){
+    try {
+      console.log("this."+menu+".closeMenu()")
+      eval("this."+menu+".closeMenu()");
+    } catch (error) {
+      console.error('Error al ejecutar el código:', error);
+    }
   }
 }
 

@@ -43,6 +43,11 @@ const routes: Routes = [
         component:VideoConsolasHomeComponent,
         //canActivate:[Guard],
       },
+      {
+        path: 'homeVideoConsolas/:marca',
+        component:VideoConsolasHomeComponent,
+        //canActivate:[Guard],
+      }
      
      
       

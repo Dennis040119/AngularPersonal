@@ -1,20 +1,20 @@
 <div class="login">
     <form class="custom-form" method="post">
-      <h1>Login</h1>
+      <h1>GameStore</h1>
       <input
-        type="email"
+        type="text"
         [(ngModel)]="email"
-        name="email"
-        placeholder="Email"
+        name="Usuario"
+        placeholder="Usuario"
         required="required"
       />
       <input
         type="password"
         [(ngModel)]="password"
-        name="password"
-        placeholder="Password"
+        name="Contraseña"
+        placeholder="Contraseña"
         required="required"
       />
-      <button mat-button (click)="login()">Log in</button>
+      <button mat-button (click)="login()" textContent="Ingresar">Ingresar</button>
     </form>
   </div>

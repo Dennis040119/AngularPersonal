@@ -44,8 +44,6 @@ export class DetalleVideconsolaComponent implements OnInit {
     this.tipo = this.data['tipo'];
     console.log(this.x);
     
-   
-
   }
 
   cargar(){
@@ -54,31 +52,11 @@ export class DetalleVideconsolaComponent implements OnInit {
   }
 
   quitar(v:VideoConsola){
-
-    
     var supo:ProductosVenta[] = VideojuegosHome.carrito;
-    //console.log(v==supo? "SOn iguales":"son diferentes")
     console.log(v)
     console.log(supo[0])
-
-   
-    //  var  conta =VideojuegosHome.carrito.findIndex(obj =>obj.id==v.id);
-    //  if(conta  >-1){
-    //    console.log(conta)
-    //    VideojuegosHome.carrito.splice(conta,1)
-    //    this.dialogRef.close();
-    
-    //  }else{
-    //    console.log("No se encuentra en el carrito")
-    //  }
-    
-    
-    
   }
-  cerrar(){
-    
-    this.dialogRef.close();
-  }
+  cerrar(){this.dialogRef.close();}
 
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppComponent } from 'src/app/app.component';
 import { Plataforma } from 'src/app/models/enum/plataforma';
@@ -11,13 +11,15 @@ import { DetalleVideconsolaComponent } from './detalle-videconsola/detalle-videc
 import { Marca } from 'src/app/models/enum/marca';
 import { IndexUserComponent } from '../index-user/index-user.component';
 import { ProductosVentaPk, ProductosVenta } from 'src/app/models/cliente/productos-venta';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-video-consolas-home',
   templateUrl: './video-consolas-home.component.html',
   styleUrls: ['./video-consolas-home.component.css']
 })
-export class VideoConsolasHomeComponent {
+export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
   static carrito:VideoConsola[] = [];
   acumulador: number=0
   tiles:VideoConsola[] = []
@@ -40,7 +42,8 @@ export class VideoConsolasHomeComponent {
     private dialog: MatDialog,
     private VcService:VideoConsolaServiceService,
     private EnumService:EnumService,
-    private IndexInstancia:IndexUserComponent
+    private IndexInstancia:IndexUserComponent,
+    private route: ActivatedRoute,
     
   ) {}
 
@@ -58,6 +61,12 @@ export class VideoConsolasHomeComponent {
     
   }
 
+  ngAfterViewInit(): void {
+
+    this.getParametrosDato();
+  
+   }
+
   getParametrosDato(){
 
     this.route.params.pipe(
@@ -71,20 +80,68 @@ export class VideoConsolasHomeComponent {
       next: (param)=>{
         console.log(param)
         this.SelectionMarca=param
-  
-  applyFilter() {
-    AppComponent.consola(this.Nombrefiltrer+" , " + this.SelectionMarca+" , "+this.SelectionPrecio)
+        
+        this.VcService.listarVideoConsolas().subscribe({
+          next:data=>{
+            if(data!=undefined){this.tiles=data;}
+          },
+          complete:()=>{
+            console.log(this.SelectionMarca)
+            this.resguardo=this.tiles
+            this.applyFilter()
+          }
+        })
+      }
+      ,
+      error: (error)=>{console.log("Error: "+error)}
+      ,
+      complete:()=>{}
+    });
+
+   this.route.params.subscribe(data=>{
+      this.SelectionMarca=data['marca'];
+    })
+
+
     
+  }
+  applyFilter() {
+    
+    this.preloaderTime=true
+    setTimeout(() => {
+      // Código que se ejecutará después de 2 segundos
+      this.preloaderTime=false
+      this.IndexInstancia.carrusel(false)
+    }, 500);
     //this.dataSource.filter = filterValue.trim().toLowerCase();
     this.tiles=this.resguardo
+
+
     if(this.Nombrefiltrer!=""){
       var filtrado= this.tiles.filter(vc => vc.nombre.toLowerCase().includes(this.Nombrefiltrer.toLowerCase()));
       this.tiles=filtrado
     }
 
-     if(this.SelectionMarca!="ge000" && this.SelectionMarca!=undefined){
-      var filtrado =this.tiles.filter(vc => vc.marca==this.SelectionMarca )
-      this.tiles=filtrado
+     if(this.SelectionMarca!=("mc000" &&"") && this.SelectionMarca!=undefined){
+
+      console.log("Selecion marca"+this.SelectionMarca)
+         var nombre:string
+      this.EnumService.listarMarcas().subscribe({
+       
+        next:data=>{
+          console.log("next data")
+          nombre=data.find(mc => mc.idMarca==this.SelectionMarca)!.nombre
+          console.log(nombre)
+        },
+        error:error=>{
+
+        },
+        complete:()=>{
+          var filtrado =this.tiles.filter(vc => vc.marca==nombre )
+          this.tiles=filtrado
+        }
+      })
+      
      }
 
      if(this.SelectionPrecio!=0 && this.SelectionPrecio!=undefined){
@@ -109,6 +166,12 @@ export class VideoConsolasHomeComponent {
   }
 
   clearFilter(){
+    
+    this.preloaderTime=true
+    setTimeout(() => {
+      // Código que se ejecutará después de 2 segundos
+      this.preloaderTime=false
+    }, 500);
     this.tiles=this.resguardo
     this.Nombrefiltrer=""
     this.SelectionMarca=""

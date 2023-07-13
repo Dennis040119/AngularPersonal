@@ -17,7 +17,7 @@
 
     <mat-form-field style="margin-left: 3%;" class="SelectGenero">
         <mat-select placeholder="Marca" [(ngModel)]="SelectionMarca" (selectionChange)="applyFilter()" >
-            <mat-option *ngFor="let gen of MarcaList" value="{{gen.nombre}}">
+            <mat-option *ngFor="let gen of MarcaList" value="{{gen.idMarca}}">
                 {{gen.nombre}}
             </mat-option>
         </mat-select>
@@ -25,17 +25,14 @@
 
     <mat-form-field style="margin-left: 3%;" class="SelectPlata">
         <mat-select placeholder="Precios" [(ngModel)]="SelectionPrecio" (selectionChange)="applyFilter()" >
-            <mat-option  value=0>
-                
-            </mat-option>
             <mat-option  value=1>
-             menor a 1000
+                > 1000
             </mat-option>
             <mat-option  value=2>
                 entre 1000 y 2000
             </mat-option>
             <mat-option  value=3>
-                mayor a 2000
+                  < 2000
             </mat-option>
         </mat-select>
     </mat-form-field>
@@ -46,33 +43,29 @@
 
    
 </div>
-<mat-grid-list cols="4" rowHeight="250px">
+<div style="margin: 2%;width: 90%;"><mat-grid-list cols="5" rowHeight="250px" gutterSize="10px">
     <mat-grid-tile class="grilla" 
         *ngFor="let tile of tiles"
         [colspan]="1"
-        [rowspan]="2"
+        [rowspan]="1"
         
         >
 
-        <div class="card" style="background-color:rgb(228, 220, 221) ;" (click)="DetalleModal(tile)">
-            <figure class="figura" >
-                <img class="portada" src="{{tile.img}}" >
-                <br>
+        <div class="card" style="height: 100%; 
+        ;" (click)="DetalleModal(tile)">
+            
+                <img class="portada" src="../../../../assets/Consolas/{{tile.img}}" >
+                
                 <div class="descrip">
                     {{tile.nombre}}
                     <br>
                     {{tile.precio}} €
                 </div>
-                
-                
-            </figure>
-            
-
         </div>
        
-      
-      
     </mat-grid-tile>
   </mat-grid-list>
+</div>
+
 
 </div>
