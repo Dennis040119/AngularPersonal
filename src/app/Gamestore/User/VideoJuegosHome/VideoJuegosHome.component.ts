@@ -24,7 +24,7 @@ import { switchMap } from 'rxjs';
 })
 export class VideojuegosHome implements OnInit,AfterViewInit {
 
-  @ViewChild('miDiv',{ static: false }) grid: ElementRef
+  @ViewChild("focus") foc: ElementRef;
 
   static carrito:ProductosVenta[] = [];
   Pv:ProductosVenta
@@ -56,7 +56,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     
   ) {}
   ngOnInit(): void {
-    
+
     this.listarVideoJuegos();
     this.comboEnums()
 
@@ -65,14 +65,8 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
   ngAfterViewInit(): void {
 
    this.getParametrosDato();
-   console.log(this.grid)
+  
    
- 
-
-   
-   //password.focus()
-   //invalidControl.focus();
-
    
   }
 
@@ -119,6 +113,19 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     
   }
 
+  focus(){
+    try {
+      setTimeout(() => {
+      const invalidControl = this.el.nativeElement.querySelector("#focus");
+      console.log(invalidControl)
+      invalidControl.focus();
+      
+      }, 700);
+    } catch (error) {
+      console.log("Error: " + error);
+    }
+  }
+
   
   applyFilter() {
     
@@ -147,7 +154,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     }
 
     
-    
+    this.focus()
   }
 
   clearFilter(){
@@ -160,6 +167,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     this.Nombrefiltrer=""
     this.SelectionGene=""
     this.SelectionPlata=""
+    this.focus()
   }
   comboEnums(){
     this.EnumService.listarGenero().subscribe(data =>{
@@ -176,8 +184,9 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
 
     const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
-      maxWidth: '420px',
-      maxHeight: '700px',
+      width: '30%',
+      height: '75%',
+      
       autoFocus: false,
       
       data: {
@@ -208,6 +217,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
 
         }else{
           VideojuegosHome.carrito.push(this.Pv);
+          this.IndexInstancia.openSnackBar("Agregado: "+this.Pv.nombre,"")
         }
         ///
         

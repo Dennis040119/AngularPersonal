@@ -51,6 +51,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import { PlataformPipePipe } from './pipes/plataform-pipe.pipe';
+import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-home/detalle-videconsola/detalle-videconsola.component';
 
 
 
@@ -76,7 +77,8 @@ import { PlataformPipePipe } from './pipes/plataform-pipe.pipe';
     DialogConfirmComponent,
     EurosPipe,
     IndexUserComponent,
-    PlataformPipePipe
+    PlataformPipePipe,
+    DetalleVideconsolaComponent
     
     
     

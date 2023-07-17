@@ -125,20 +125,20 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
     this.boleancarrusel=bool
   }
 
-  openSnackBar(message: string, action: string) {
+  public openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 1000,
     });
   }
 
   openMenus(menu:string){
-    this.vcmenu.openMenu()
-    // try {
-    //   console.log("this."+menu+".openMenu()")
-    //   eval("this."+menu+".openMenu()");
-    // } catch (error) {
-    //   console.error('Error al ejecutar el código:', error);
-    // }
+    
+     try {
+       console.log("this."+menu+".openMenu()")
+       eval("this."+menu+".openMenu()");
+     } catch (error) {
+       console.error('Error al ejecutar el código:', error);
+     }
   }
 
   closeMenus(menu:string){
@@ -149,6 +149,8 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
       console.error('Error al ejecutar el código:', error);
     }
   }
+
+ 
 }
 
 

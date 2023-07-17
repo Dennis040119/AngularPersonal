@@ -2,44 +2,39 @@
 
 <div class="body" style="background-color:rgb(228, 220, 221) ;">
 
-<div class="figure">
-    <div class="card" >
-        <figure class="figura" >
-            <img class="portada" src="../../../../../assets/Consolas/{{x.img}}" > 
-        </figure>
-    </div>
+<mat-card class="example-card">
 
-    <div class="descripcion">
-        <h3> Titulo: {{x.nombre}}</h3>
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image" style=" background-image: url('../../../../../../assets/Consolas/{{x.img}}');"></div>
+        <mat-card-title>{{x.nombre}}</mat-card-title>
+        <mat-card-subtitle>{{x.precio|euros}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="portada" src="../../../../../assets/Consolas/{{x.img}}" alt="Photo of a Shiba Inu">
+    <mat-card-content class="texto-card">
+        <p>
+         Descripcion: {{x.descripcion}}
+        </p>
+        <p>Marca: {{x.marca}}</p>
+        <p>Plataforma: {{x.plataforma.nombre}}</p>
         
-        <h3> Precio: {{x.precio}}</h3>
-        
-        <h3> descripcion: {{x.descripcion}}</h3>
-        
-        <h3> Plataformas: {{x.plataforma.nombre}}</h3> 
+      </mat-card-content>
 
-        <h3> Marca: {{x.marca}}</h3> 
-
-        
-        <div class="buttons">
-        
+      <mat-card-actions>
             <button mat-button class="btn-buy" title="agregar" *ngIf="tipo!=2" (click)="cargar()">
                 <mat-icon style="color: black;">shopping_cart</mat-icon>
             </button> 
             <button mat-button class="btn-buy" title="eliminar" *ngIf="tipo==1"  (click)="quitar(x)">
                 <mat-icon style="color: black;">remove_shopping_cart</mat-icon>
-                
             </button> 
             <button mat-button class=" btn-buy" (click)="cerrar()" style="float: right;" >
                 <mat-icon>exit_to_app</mat-icon>
             </button>
+    </mat-card-actions>
+
     
-        </div>
-
-    </div>
 
 
-</div> 
+</mat-card >
     
 
 </div>

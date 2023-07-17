@@ -133,8 +133,8 @@ export class DetalleCompraComponent implements OnInit {
     console.log(vj)
     const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
-      width: '600px',
-      height: '350px',
+      width: '30%',
+      height: '75%',
       autoFocus: false,
       
       data: {
@@ -155,8 +155,8 @@ export class DetalleCompraComponent implements OnInit {
   detalleConsola(vc:VideoConsola){
     const dialogCrear = this.dialog.open(DetalleVideconsolaComponent, {
       
-      width: '600px',
-      height: '350px',
+      width: '30%',
+      height: '75%',
       autoFocus: false,
       
       data: {
@@ -182,8 +182,8 @@ export class DetalleCompraComponent implements OnInit {
 
     const dialogref =this.dialog.open(FormCompraComponent,{
 
-      width: '500px',
-      height: '700px',
+      width: '40%',
+      height: '75%',
       
       autoFocus: false,
       //disableClose: true,

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppComponent } from 'src/app/app.component';
 import { Plataforma } from 'src/app/models/enum/plataforma';
@@ -44,6 +44,8 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     private EnumService:EnumService,
     private IndexInstancia:IndexUserComponent,
     private route: ActivatedRoute,
+    private el: ElementRef,
+    
     
   ) {}
 
@@ -141,7 +143,7 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
           this.tiles=filtrado
         }
       })
-      
+      this.focus()
      }
 
      if(this.SelectionPrecio!=0 && this.SelectionPrecio!=undefined){
@@ -165,6 +167,19 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     
   }
 
+  focus(){
+    try {
+      setTimeout(() => {
+      const invalidControl = this.el.nativeElement.querySelector("#focus");
+      console.log(invalidControl)
+      invalidControl.focus();
+      
+      }, 700);
+    } catch (error) {
+      console.log("Error: " + error);
+    }
+  }
+
   clearFilter(){
     
     this.preloaderTime=true
@@ -176,6 +191,7 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     this.Nombrefiltrer=""
     this.SelectionMarca=""
     this.SelectionPrecio=0
+    this.focus()
   }
   comboEnums(){
     this.EnumService.listarMarcas().subscribe(data =>{
@@ -192,8 +208,8 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
 
     const dialogCrear = this.dialog.open(DetalleVideconsolaComponent, {
       
-      width: '600px',
-      height: '350px',
+      width: '30%',
+      height: '75%',
       autoFocus: false,
       
       data: {

@@ -43,7 +43,8 @@
 
    
 </div>
-<div style="margin: 2%;width: 90%;"><mat-grid-list cols="5" rowHeight="250px" gutterSize="10px">
+<div style="margin: 2%;width: 90%;">
+    <mat-grid-list cols="5" rowHeight="250px" gutterSize="10px"  tabindex="1" id="focus" style="outline: none;">
     <mat-grid-tile class="grilla" 
         *ngFor="let tile of tiles"
         [colspan]="1"

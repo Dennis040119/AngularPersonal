@@ -12,7 +12,7 @@
 <div class="footer">
     <h1 style="margin-left: 2%;">VideoJuegos Disponibles</h1>
     <mat-form-field style="margin-left: 5%;">
-        <input name="focus" matInput [(ngModel)]="Nombrefiltrer" (keyup)="applyFilter()" placeholder="Filtrar por nombre"> 
+        <input   matInput [(ngModel)]="Nombrefiltrer" (keyup)="applyFilter()" placeholder="Filtrar por nombre"> 
     </mat-form-field>
 
     <mat-form-field style="margin-left: 3%;" class="SelectGenero">
@@ -37,10 +37,12 @@
 
     
 </div>
-<div class="grillaDiv"  style="margin: 2%;width: 90%;">
-<mat-grid-list  cols="5" rowHeight="250px"  gutterSize="10px">
 
-    <mat-grid-tile  class="grilla" *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1" style="margin-bottom: 8%;" >
+<div class="grillaDiv"   style="margin: 2%;width: 90%;">
+    
+<mat-grid-list  cols="5" tabindex="1" rowHeight="250px"  gutterSize="10px" id="focus" style="outline: none;transition:0.5s;" >
+    
+    <mat-grid-tile    class="grilla" *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1" style="margin-bottom: 8%;" >
 
         <div class="card" 
         style="  
@@ -60,7 +62,7 @@
         (click)="DetalleModal(tile)">
 
             
-                <img class="portada" src="../../../../assets/PortadasVj/{{tile.img}}" style="
+                <img  class="portada" src="../../../../assets/PortadasVj/{{tile.img}}" style="
                 width: 70%;
                 height: 60%;
                 margin-top: 2%;

@@ -51,11 +51,13 @@
 
           <!-- Div de los menu de botones -->
         <div class="divbuttonmenu">
+          
         <button mat-button [matMenuTriggerFor]="vjmenu" #matMenuTrigger="matMenuTrigger"  
-        (mouseenter)="matMenuTrigger.openMenu()" >
+        (mouseenter)="matMenuTrigger.openMenu()" 
+        style="border: 1px black solid;margin-left: 1%;" >
           <mat-icon style="color:rgb(182, 23, 23);">games</mat-icon>
           VideoJuegos</button>
-          <mat-menu #vjmenu="matMenu" [overlapTrigger]="false" >
+          <mat-menu #vjmenu="matMenu" [overlapTrigger]="false" (mouseleave)="matMenuTrigger.closeMenu()" >
             <div (mouseleave)="matMenuTrigger.closeMenu()">
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf003']" >PlayStation 5</button>
             <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf004']">PlayStation 4</button>
@@ -66,19 +68,37 @@
           </div>
           </mat-menu>
 
-          <button mat-button [matMenuTriggerFor]="vcmenu" #matMenuTrigger2="matMenuTrigger"  
+        <button mat-button [matMenuTriggerFor]="vcmenu" #matMenuTrigger2="matMenuTrigger"  
           (mouseenter)="matMenuTrigger2.openMenu()"  
           style="border: 1px black solid;margin-left: 1%;">
             <mat-icon style="color:rgb(144, 39, 39);">videogame_asset</mat-icon>
             Perifericos</button>
           <mat-menu #vcmenu>
+            <div (mouseleave)="matMenuTrigger2.closeMenu()">
             <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc001']" >Sony</button>
             <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc002']">MicroSoft</button>
             <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc003']">Steam</button>
             <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc004']">Nintendo</button>
+          </div>
+          </mat-menu>
 
+        <button mat-button [matMenuTriggerFor]="acmenu" #matMenuTrigger3="matMenuTrigger"  
+          (mouseenter)="matMenuTrigger3.openMenu()" 
+          style="border: 1px black solid;margin-left: 1%;" >
+            <i class="bi bi-mouse-fill" style="color:rgb(144, 39, 39);" ></i>
+            Accesorios</button>
+            <mat-menu #acmenu="matMenu" [overlapTrigger]="false" (mouseleave)="matMenuTrigger3.closeMenu()" >
+              <div (mouseleave)="matMenuTrigger3.closeMenu()">
+              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf003']" >Mouse</button>
+              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf004']">Teclados</button>
+              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf002']">Audifonos</button>
+              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf001']">Mandos</button>
+              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf005']">Pantallas</button>
+              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf006']">Altavoces</button>
+            </div>
           </mat-menu>
         </div>
+
 
           <!-- Div del carrusel de imagenes -->
         <div  class="divCarrusel" style="height: 38%;">

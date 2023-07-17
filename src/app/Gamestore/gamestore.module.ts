@@ -59,7 +59,7 @@ import {MatListModule} from '@angular/material/list';
     CrudVcComponent,
     ModalVcComponent,
     VideoConsolasHomeComponent,
-    DetalleVideconsolaComponent
+    
     
     
   ],
