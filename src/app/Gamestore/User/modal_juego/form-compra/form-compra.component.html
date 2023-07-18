@@ -1,10 +1,10 @@
 <div class="body">
   <div class="titulo">
-    <h2 style="float: left; margin-top: 10px;">Formulario de Pago</h2>
-    <span class="span_timer">{{tiempo.min}} : {{tiempo.sec}}</span>
+    <h3 style="">Formulario de Pago</h3>
+    <h4 class="span_timer">{{tiempo.min}} : {{tiempo.sec}}</h4>
   </div>
 
-<br>
+
 <form [formGroup]="form" class="form" layout="column"   onkeydown="if(event.keyCode==13){
         if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
           var form = event.target.form;
@@ -51,20 +51,17 @@
       </mat-form-field>
 
     </div>
-  </div>
-  <div class="card-header position-sticky sticky-top" style="margin:2%;background-color:rgb(255, 255, 255);top: -25px;">
+</div>
+  <div class="botones" >
     
-    <button mat-button class=" btn btn-danger" (click)="close()"  >
+    <button mat-button class="btn-danger" (click)="close()"  >
         <mat-icon>exit_to_app</mat-icon>
     </button>
-    <button mat-button class=" btn btn-success" (click)="pagar()"  >
+    <button mat-button class="btn-success" (click)="pagar()"  >
         <mat-icon>done</mat-icon>
     </button>
     
   </div>
-
-
-
 
 
 </form>

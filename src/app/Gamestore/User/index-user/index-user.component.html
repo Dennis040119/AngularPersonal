@@ -40,9 +40,13 @@
 
 
           <button mat-button class="btn-buy" title="carrito" (click)="DetalleCarritoModal()" >
-            <mat-icon style="color: black;margin-right: 0.5%;">shopping_cart</mat-icon>
+            <mat-icon style="color: rgb(0, 0, 0);margin-right: 0.5%;">shopping_cart</mat-icon>
          </button>
          <p style="margin-top: 1%;">{{acumulador| number: '1.2-2'}}</p>
+
+         <button mat-button class="btn-buy" title="carrito" (click)="pagar()" >
+          <mat-icon style="color: rgb(0, 0, 0);margin-right: 0.5%;">shopping_cart</mat-icon>
+       </button>
           
           <img src="../../../../assets/logo_barra.jpg" class="img-logo" >
           <p class="example-spacer" >GameStore</p>
@@ -51,76 +55,143 @@
 
           <!-- Div de los menu de botones -->
         <div class="divbuttonmenu">
-          
-        <button mat-button [matMenuTriggerFor]="vjmenu" #matMenuTrigger="matMenuTrigger"  
-        (mouseenter)="matMenuTrigger.openMenu()" 
-        style="border: 1px black solid;margin-left: 1%;" >
-          <mat-icon style="color:rgb(182, 23, 23);">games</mat-icon>
-          VideoJuegos</button>
-          <mat-menu #vjmenu="matMenu" [overlapTrigger]="false" (mouseleave)="matMenuTrigger.closeMenu()" >
-            <div (mouseleave)="matMenuTrigger.closeMenu()">
-            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf003']" >PlayStation 5</button>
-            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf004']">PlayStation 4</button>
-            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf002']">Xbox one</button>
-            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf001']">Xbox 360</button>
-            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf005']">Nintendo Wii</button>
-            <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf006']">Antiguos</button>
-          </div>
-          </mat-menu>
 
-        <button mat-button [matMenuTriggerFor]="vcmenu" #matMenuTrigger2="matMenuTrigger"  
-          (mouseenter)="matMenuTrigger2.openMenu()"  
-          style="border: 1px black solid;margin-left: 1%;">
+           <!-- DropDown de VideoJuegos -->
+          <div class="btn-group" >
+            <button mat-button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
+            style="border: 1px black solid;margin-left: 1%;" [routerLink]="['homeVideojuegos','pf000']" >
+            <mat-icon style="color:rgb(182, 23, 23);">games</mat-icon>
+              VideoJuegos
+            </button>
+                <ul class="dropdown-menu noclose">
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf003']" >PlayStation 5</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf004']">PlayStation 4</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf002']">Xbox one</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf001']">Xbox 360</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf005']">Nintendo Wii</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf006']">Antiguos</button>
+                    </li>
+                    
+                </ul>
+           </div>
+
+           <!-- DropDown de Consolas -->
+           <div class="btn-group" >
+            <button mat-button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
+            style="border: 1px black solid;margin-left: 1%;min-width: 15%;" >
             <mat-icon style="color:rgb(144, 39, 39);">videogame_asset</mat-icon>
-            Perifericos</button>
-          <mat-menu #vcmenu>
-            <div (mouseleave)="matMenuTrigger2.closeMenu()">
-            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc001']" >Sony</button>
-            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc002']">MicroSoft</button>
-            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc003']">Steam</button>
-            <button mat-menu-item [routerLink]="['homeVideoConsolas', 'mc004']">Nintendo</button>
-          </div>
-          </mat-menu>
+              Perifericos
+            </button>
+                <ul class="dropdown-menu noclose">
+                    <li>
+                      <button mat-button [routerLink]="['homeVideoConsolas', 'mc001']" >Sony</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideoConsolas', 'mc002']">MicroSoft</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideoConsolas', 'mc003']">Steam</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideoConsolas', 'mc004']">Nintendo</button>
+                    </li>
+                </ul>
+           </div>
+          
+    
+           <!-- DropDown de Accesorios -->
+           <div class="btn-group" >
+            <button mat-button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
+            style="border: 1px black solid;margin-left: 1%;" >
+            <i class="bi bi-headset" style="color:rgb(144, 39, 39);margin-right: 3%;" ></i>
+            Accesorios
+            </button>
+                <ul class="dropdown-menu noclose">
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf003']" >Mouse</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf004']">Teclados</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf002']">Audifonos</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf001']">Mandos</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf005']">Pantallas</button>
+                    </li>
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf006']">otros</button>
+                    </li>
+                    
+                </ul>
+           </div>
+        
+           
 
-        <button mat-button [matMenuTriggerFor]="acmenu" #matMenuTrigger3="matMenuTrigger"  
-          (mouseenter)="matMenuTrigger3.openMenu()" 
-          style="border: 1px black solid;margin-left: 1%;" >
-            <i class="bi bi-mouse-fill" style="color:rgb(144, 39, 39);" ></i>
-            Accesorios</button>
-            <mat-menu #acmenu="matMenu" [overlapTrigger]="false" (mouseleave)="matMenuTrigger3.closeMenu()" >
-              <div (mouseleave)="matMenuTrigger3.closeMenu()">
-              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf003']" >Mouse</button>
-              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf004']">Teclados</button>
-              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf002']">Audifonos</button>
-              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf001']">Mandos</button>
-              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf005']">Pantallas</button>
-              <button mat-menu-item [routerLink]="['homeVideojuegos', 'pf006']">Altavoces</button>
-            </div>
-          </mat-menu>
+           <!-- DropDown de Moviles -->
+          <div class="btn-group" >
+            <button mat-button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
+            style="border: 1px black solid;margin-left: 1%;" >
+            <i class="bi bi-phone-fill" style="color:rgb(144, 39, 39);" ></i>
+            
+              Moviles
+            </button>
+                <ul class="dropdown-menu noclose" style="margin-top: 30%;">
+                    <li>
+                      <button mat-button [routerLink]="['homeVideojuegos', 'pf003']" >Samsung</button>
+                    </li>
+                    <li>
+                      <button mat-button  [routerLink]="['homeVideojuegos', 'pf004']" >Apple</button>
+                    </li>
+                    <li>
+                        <button mat-button [routerLink]="['homeVideojuegos', 'pf005']" >Gamers</button>
+                    </li>
+                </ul>
+           </div>
+
+
+
+
         </div>
 
 
           <!-- Div del carrusel de imagenes -->
-        <div  class="divCarrusel" style="height: 38%;">
+        <div  class="divCarrusel" >
           <ngb-carousel [interval]="1500" [animation]="true">
 
             <ng-template ngbSlide>
-                <img src="../../../../assets/utils/carrusel1.jpg" alt="Random first slide"  class="imgCarrusel">
+                <img src="../../../../assets/utils/banner4.jpg" alt="Random first slide"  class="imgCarrusel">
             </ng-template>
             <ng-template ngbSlide>
-                <img src="../../../../assets/utils/carrusel2.jpg" alt="Random second slide"  class="imgCarrusel" />
+                <img src="../../../../assets/utils/banner5.jpg" alt="Random second slide"  class="imgCarrusel" />
             </ng-template>
             <ng-template ngbSlide>
-                <img src="../../../../assets/utils/carrusel3.jpg" alt="Random third slide"  class="imgCarrusel" />
+                <img src="../../../../assets/utils/banner6.jpg" alt="Random third slide"  class="imgCarrusel" />
             </ng-template>
           
           </ngb-carousel>
       </div>
-
       
+        
+          
+        
 
           <!-- Pagina a la que se llama -->
-        <router-outlet (click)="sidenav.toggle()" style="margin-top: 3%;"></router-outlet>
+        <router-outlet (click)="sidenav.toggle()" style="margin-top: 3%;margin-bottom: 10%;"></router-outlet>
 
         <footer  class="footer" >
           <div class="btnFooter">

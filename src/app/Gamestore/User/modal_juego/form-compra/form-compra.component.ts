@@ -3,13 +3,14 @@ import { ProductoVentaService } from './../../services/producto-venta.service';
 import { Component,ElementRef,Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import { DetalleCompraComponent } from '../detalle-compra/detalle-compra.component';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
-import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VentaService } from '../../services/venta.service';
 import { Venta } from 'src/app/models/cliente/venta';
 import { UsuarioService } from 'src/app/login/services/usuario.service';
 import { Usuario } from 'src/app/models/mtnm/usuario';
+import { IndexUserComponent } from '../../index-user/index-user.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { number } from 'prop-types';
 
 @Component({
   selector: 'app-form-compra',
@@ -21,7 +22,7 @@ export class FormCompraComponent implements OnInit {
   public form!: FormGroup;
   nombres:string=' ';
   minDate = new Date();
-  tiempo: { min: number; sec: number; } = {min:0,sec:0}; 
+  tiempo: { min: string; sec: string; } = {min:"0",sec:"0"}; 
   
   booNombres:boolean=true;
   totalVenta:number=0
@@ -35,6 +36,7 @@ export class FormCompraComponent implements OnInit {
     //Referencia a los componentes
     private dialogRef: MatDialogRef<FormCompraComponent>,
     private dialogRef2:MatDialog,
+
     
     private el: ElementRef,
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -43,7 +45,8 @@ export class FormCompraComponent implements OnInit {
     //Serviciios
     private VenServicios:VentaService,
     private PvService:ProductoVentaService,
-    private UserService:UsuarioService
+    private UserService:UsuarioService,
+    private snackBar:MatSnackBar,
 
   ) { }
 
@@ -55,30 +58,40 @@ export class FormCompraComponent implements OnInit {
     this.formGroup();
 
     //Seteamos la fecha minima para el calendario
-    this.minDate.setDate(this.minDate.getDate()+1)
+    this.minDate.setDate(this.minDate.getDate()+7)
     
     console.log(VideojuegosHome.carrito);
     
     //Tiempo para cerrar el componente(5 min)
-    setTimeout(() => {window.confirm("Se acabo el tiempo"),this.dialogRef.close();},300000);
+    setTimeout(() => {this.openSnackBar("Se acabo el tiempo",""),this.dialogRef.close();},300000);
     this.startTimer();
 
     
   }
 
   startTimer() {
-    this.tiempo = { min: 5, sec: 0 } // choose whatever you want
+    this.tiempo = { min: "5", sec: "00" } // choose whatever you want
 
-    this.tiempo.sec.toFixed(2)
+    var min:number=parseInt(this.tiempo.min)
+    var sec:number=parseInt(this.tiempo.sec,10)
+    
     let intervalId = setInterval(() => {
-      if (this.tiempo.sec - 1 == -1) {
-        this.tiempo.min -= 1;
-        this.tiempo.sec = 59
+      if (sec - 1 == -1) {
+       
+        min-= 1;
+        sec = 59
         
-        this.tiempo.sec.toFixed(2)
+        
       } 
-      else this.tiempo.sec -= 1
-      if (this.tiempo.min === 0 && this.tiempo.sec == 0) clearInterval(intervalId)
+      else sec -= 1
+      if (min === 0 && sec == 0) clearInterval(intervalId)
+
+      
+      if(sec<10){
+        this.tiempo.sec="0"+sec.toString()
+      }else{this.tiempo.sec=sec.toString()}
+      
+      this.tiempo.min=min.toString()
     }, 1000)
   }
 
@@ -155,7 +168,7 @@ export class FormCompraComponent implements OnInit {
 
 
      if(this.form.invalid){
-      window.alert("Formulario invalido");
+      this.openSnackBar("Formulario Invalido","")
 
      }else{
       this.construirVenta()
@@ -168,7 +181,7 @@ export class FormCompraComponent implements OnInit {
           this.VentaObj.usuario=this.user
         },
         error:(error)=>{
-          window.alert("Error al encontrar Usuario")
+          this.openSnackBar("Error al buscar usuario","")
         },
         complete:()=>{  
           console.log(this.user)
@@ -178,7 +191,7 @@ export class FormCompraComponent implements OnInit {
               console.log(this.VentaObj)
               console.log(data)
               if(data.venId=="0000"){
-                window.alert("Error al registrar compra")
+                this.openSnackBar("Error al procesar compra","")
               }else{
                 VideojuegosHome.carrito.forEach(element => {
                   element.productosVentaPk.venId=data.venId
@@ -195,7 +208,8 @@ export class FormCompraComponent implements OnInit {
           
                         this.dialogRef2.closeAll();
                       }else{
-                        window.alert(rpta["mensaje"])
+                        
+                        this.openSnackBar(rpta["mensaje"],"")
                       }
                     },
                     error:data=>{},
@@ -209,7 +223,7 @@ export class FormCompraComponent implements OnInit {
             },
             error:data=>{},
             complete:()=>{
-              window.alert("Compra exitosa")
+              this.openSnackBar("Compra Exitosa","")
             }
     
     
@@ -250,6 +264,12 @@ export class FormCompraComponent implements OnInit {
       this.totalVenta=this.totalVenta+element.precio
     });
    }
+
+   public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
+  }
 
 }
 

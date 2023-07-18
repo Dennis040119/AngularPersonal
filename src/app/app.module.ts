@@ -71,6 +71,7 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     VideojuegosHome,
     DetalleJuegoComponent,
     DetalleCompraComponent,
+    IndexUserComponent,
     FormCompraComponent,
     CrudVjComponent,
     ModalVjComponent,
@@ -78,7 +79,8 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     EurosPipe,
     IndexUserComponent,
     PlataformPipePipe,
-    DetalleVideconsolaComponent
+    DetalleVideconsolaComponent,
+    
     
     
     
@@ -124,6 +126,7 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     
   ],
   exports: [
+    IndexUserComponent,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

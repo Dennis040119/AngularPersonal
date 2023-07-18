@@ -182,8 +182,8 @@ export class DetalleCompraComponent implements OnInit {
 
     const dialogref =this.dialog.open(FormCompraComponent,{
 
-      width: '40%',
-      height: '75%',
+      width: '45%',
+      height: '90%',
       
       autoFocus: false,
       //disableClose: true,

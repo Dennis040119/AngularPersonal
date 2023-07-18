@@ -37,7 +37,7 @@
 }
 
 .MenuExpansible{
-  background-color: rgb(182, 100, 23);
+  background-color: rgb(21, 179, 92);
 
   display: flex;
   flex-direction: row;
@@ -158,9 +158,9 @@ width: 100%;
 
 .divCarrusel{
   margin-top: 2%;;
-  margin-left: 9%; 
-  width: 80%;
-  height: 30%;
+  margin-left: 15%; 
+  width: 70%;
+  height: 45%;
   border: 1px solid black;
 }
 
@@ -191,4 +191,17 @@ a{
 }
 i{
   font-size: 20px;
+}
+
+.btn-group{
+  margin-left: 1%;
+}
+.btn-group:hover .dropdown-menu.noclose {
+  display: block;
+ 
+  justify-content: center;
+}
+.dropdown-menu.noclose {
+  margin-top: 25%;
+  
 }

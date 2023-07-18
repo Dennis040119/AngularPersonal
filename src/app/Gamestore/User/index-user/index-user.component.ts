@@ -1,15 +1,16 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { VideojuegosHome } from '../VideoJuegosHome/VideoJuegosHome.component';
-import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
+import { DetalleCompraComponent, FormCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { MatDialog } from '@angular/material/dialog';
 import { VideoJuegoServiceService } from '../../Admin/services/video-juego-service.service';
 import { EnumService } from '../../Admin/services/enum.service';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { LogueoComponent } from 'src/app/login/logueo/logueo.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuTrigger } from '@angular/material/menu';
+
+
 
 @Component({
   selector: 'app-index-user',
@@ -21,6 +22,8 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
 
   @ViewChild(MatMenuTrigger) vjmenu: MatMenuTrigger;
   @ViewChild(MatMenuTrigger) vcmenu: MatMenuTrigger;
+
+ 
 
 
   public Sidenav: boolean = false;
@@ -62,9 +65,11 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
   ngAfterViewInit(): void {
     this.boleancarrusel=true
     console.log(this.boleancarrusel)
+  
   }
  
 
+ 
 
 
   getSidenav(): boolean {
@@ -150,7 +155,23 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
     }
   }
 
+  pagar(){
+    const dialogref =this.dialog.open(FormCompraComponent,{
+
+      width: '45%',
+      height: '90%',
+      
+      autoFocus: false,
+      //disableClose: true,
+      data: {}
+    });
+  }
+
+  
+  
+  }
+
  
-}
+
 
 
