@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { VideojuegosHome } from '../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleCompraComponent, FormCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { MatDialog } from '@angular/material/dialog';
-import { VideoJuegoServiceService } from '../../Admin/services/video-juego-service.service';
-import { EnumService } from '../../Admin/services/enum.service';
+import { VideoJuegoServiceService } from '../../../services/mtnm/video-juego-service.service';
+import { EnumService } from '../../../services/mtnm/enum.service';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 
 
@@ -33,7 +34,7 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
 
  boleancarrusel:boolean=true
   
-
+  img:string=""
   //Username
   username:string=localStorage.getItem("user")!
   
@@ -44,10 +45,10 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
   constructor(
     private router:Router,
     private dialog: MatDialog,
-    private VideoJuegoService:VideoJuegoServiceService,
-    private EnumService:EnumService,
     private snackBar:MatSnackBar,
     config: NgbCarouselConfig,
+
+    private imgService:StorageService
     
     
     
@@ -61,11 +62,13 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
   
   ngOnInit(): void {
     this.boleancarrusel=true
+    console.log(this.imgService.getImagen("vj0011689753161906.jpg","vjPortadas"))
+    this.img= this.imgService.getImagen("vj0011689753161906.jpg","vjPortadas")
   }
   ngAfterViewInit(): void {
     this.boleancarrusel=true
     console.log(this.boleancarrusel)
-  
+    
   }
  
 

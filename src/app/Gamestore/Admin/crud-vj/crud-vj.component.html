@@ -49,7 +49,7 @@
       <ng-container matColumnDef="img">
         <mat-header-cell *matHeaderCellDef> Portada </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
-          <img src="../../../../assets/PortadasVj/{{element.img}}" class="imgTabla">
+          <img src={{getimagen(element.img)}} class="imgTabla">
         </mat-cell>
       </ng-container>
       

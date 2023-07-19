@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { Plataforma } from 'src/app/models/enum/plataforma';
 
-import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { VideoJuegoServiceService } from 'src/app/services/mtnm/video-juego-service.service';
 import { ModalVjComponent } from './modal-vj/modal-vj.component';
 import { DetalleJuegoComponent } from '../../User/VideoJuegosHome/Card-Videojuego/detalle-juego.component';
 import { VideojuegosHome } from '../../User/VideoJuegosHome/VideoJuegosHome.component';
@@ -19,11 +19,12 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
 
-import { EnumService } from '../services/enum.service';
+import { EnumService } from '../../../services/mtnm/enum.service';
 import { DataSource } from '@angular/cdk/collections';
 import { AppComponent } from 'src/app/app.component';
 import { array, bool } from 'prop-types';
 import { MatPaginator } from '@angular/material/paginator';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 
 
@@ -48,11 +49,15 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
   @ViewChild('audioPlayer') audioPlayerRef: any;
   PlataformList: Plataforma[];
 
+
+  dirImgVj:string="imgVideoJuegos"
+
   constructor(
     
     private dialog: MatDialog,
     private VjService:VideoJuegoServiceService,
-    private EnumService:EnumService
+    private EnumService:EnumService,
+    private imgService:StorageService
     //@Inject(MAT_DIALOG_DATA) private data: any,
   
   ){ this.audioPlayer = new Audio();}
@@ -336,14 +341,11 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
 
     console.log(plata)
     console.log(this.PlataformList)
-    
-
     return "plataforma"
-    
-    
-    
-   
-    
+  }
+
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
   }
 }
 

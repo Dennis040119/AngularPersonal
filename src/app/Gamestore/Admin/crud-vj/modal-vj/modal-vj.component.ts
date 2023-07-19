@@ -4,16 +4,19 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Plataforma } from 'src/app/models/enum/plataforma';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
-import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
-import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { EnumService } from 'src/app/services/mtnm/enum.service';
+import { VideoJuegoServiceService } from 'src/app/services/mtnm/video-juego-service.service';
 import { Genero } from 'src/app/models/enum/genero';
 import { last } from 'rxjs';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 @Component({
   selector: 'app-modal-vj',
   templateUrl: './modal-vj.component.html',
   styleUrls: ['./modal-vj.component.css']
 })
+
+
 export class ModalVjComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: any;
@@ -39,10 +42,15 @@ export class ModalVjComponent implements OnInit {
   //Imagenes/colores listas
   arrayImg: any[] = [];
   arrayColores:any[]=[];
+
   //Url
   selectedFile!: File;
   selectedFileUrl: string="";
   selectedFileName: string="";
+
+  //Servicio de imagenes
+  fileToUpload: File;
+   dirImgVj:string="imgVideoJuegos"
 
   //Objetos que recibimos y contruimos para las transacc
   tipo:string="";
@@ -54,6 +62,7 @@ export class ModalVjComponent implements OnInit {
     private el: ElementRef,
     private vjService:VideoJuegoServiceService,
     private enumService:EnumService,
+    private imgService:StorageService,
 
 
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -84,6 +93,32 @@ export class ModalVjComponent implements OnInit {
       console.log(this.objRecepcion)
       this.setVjRecepcion();
     }
+  }
+
+  handleFileInput(event: Event) {
+    
+    const files = (event.target as HTMLInputElement).files!;
+    console.log(files.item(0)?.name)
+    this.fileToUpload = files.item(0)!;
+
+    console.log(this.fileToUpload)
+  }
+
+  uploadFile(id:string,dir:string) {
+    if (!this.fileToUpload) {
+      console.error('Debe seleccionar un archivo, un id y un tipo de archivo.');
+      return;
+    }
+
+    this.imgService.storeFile(this.fileToUpload, id, dir).subscribe({
+      next:data=>{
+        console.log(data)
+      },
+      error:data=>{
+        console.log(data)
+      }
+    })
+      
   }
 
   formGroup(){
@@ -143,15 +178,49 @@ export class ModalVjComponent implements OnInit {
           if(gen !=undefined){
             this.objRegistrar.genero=gen
           }
-         this.vjService.registrarVj(this.objRegistrar).subscribe((data)=>{
-         this.data=data
-         console.log(this.objRegistrar)
-       if( this.data["mensaje"] == "Registrado correctamente"){
-             this.close();
-           }else{
-             window.alert(this.data["mensaje"])
-           }
-         })
+
+          //Verificamos que se ha escogido una imagen
+          if (!this.fileToUpload) {
+            console.error('Debe seleccionar un archivo, un id y un tipo de archivo.');
+            return;
+          }
+      
+          //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
+          this.imgService.storeFile(this.fileToUpload, this.objRegistrar.id, this.dirImgVj).subscribe({
+            next:data1=>{
+              this.data=data1
+              console.log(data1)
+              if(this.data["url"]!=""){
+
+                this.objRegistrar.img=this.data["url"]
+                this.vjService.registrarVj(this.objRegistrar).subscribe({
+
+                  next:(data2)=>{
+                    this.data=data2
+                    console.log(this.objRegistrar)
+                      if( this.data["mensaje"] == "Registrado correctamente"){
+                        this.close();
+                      }else{
+                        window.alert(this.data["mensaje"])
+                      }
+                  },  
+                  error:data=>{}
+                 
+                 })
+              }else{}
+            
+            },
+            error:data=>{
+              console.log(data)
+            },
+            complete:()=>{
+
+            }
+          })
+
+
+        
+
       } catch (error) {
         window.alert("Error al registrar: "+error)
       }
@@ -178,20 +247,63 @@ export class ModalVjComponent implements OnInit {
           this.objRegistrar.genero=gen
         }
 
-        this.vjService.actualizarVj(this.objRegistrar).subscribe((data)=>{
-          this.data=data
-         
-          if( this.data["mensaje"] == "Actualizado correctamente"){
-            this.close();
-          }else{
+        
+        if (!this.fileToUpload) {
+          console.error('Debe seleccionar un archivo, un id y un tipo de archivo.');
+          return;
+        }
+    
+        //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
+        this.imgService.storeFile(this.fileToUpload, this.objRegistrar.id, this.dirImgVj).subscribe({
+          next:data1=>{
+            this.data=data1
+            console.log(data1)
+            if(this.data["url"]!=""){
+
+              //Seteamos el nombre de la imagen con la que se guardo en el obj 
+              this.objRegistrar.img=this.data["url"]
+              //Ahora si procedemos a actualizar el obj
+              this.vjService.actualizarVj(this.objRegistrar).subscribe({
+
+                next:data2=>{
+                  this.data=data2
+                  if( this.data["mensaje"] == "Actualizado correctamente"){this.close();}
+                  else{}
+                },
+                error:error=>{
+                  console.log(error)
+                },
+                complete:()=>{
+
+                }
+               
+              });
+              
+            }else{}
+          
+          },
+          error:data=>{
+            console.log(data)
+          },
+          complete:()=>{
 
           }
         })
+
+
+
+
+
+
+
+
+
+
       } catch (error) {
         window.alert("Error al registrar: "+error)
       }
 
-
+   
 
      }
 
@@ -382,6 +494,9 @@ export class ModalVjComponent implements OnInit {
     }
   }
 
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
   
 
   generoComboBox(){

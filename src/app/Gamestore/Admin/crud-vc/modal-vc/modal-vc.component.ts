@@ -1,10 +1,8 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ModalVjComponent } from '../../crud-vj/crud-vj.component';
-import { EnumService } from '../../services/enum.service';
-import { VideoJuegoServiceService } from '../../services/video-juego-service.service';
-import { VideoConsolaServiceService } from '../../services/video-consola-service.service';
+import { EnumService } from '../../../../services/mtnm/enum.service';
+import { VideoConsolaServiceService } from 'src/app/services/mtnm/video-consola-service.service';
 import { Plataforma } from 'src/app/models/enum/plataforma';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { Marca } from 'src/app/models/enum/marca';

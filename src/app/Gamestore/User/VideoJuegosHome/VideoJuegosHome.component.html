@@ -62,12 +62,12 @@
         (click)="DetalleModal(tile)">
 
             
-                <img  class="portada" src="../../../../assets/PortadasVj/{{tile.img}}" style="
+                <img  class="portada"  src={{getimagen(tile.img)}} style="
                 width: 70%;
                 height: 60%;
-                margin-top: 2%;
+                margin-top: 10%;
                 "    >
-                <br>
+                
                 <div class="descrip" style="text-align: center;">
 
                     <p>{{tile.nombre}}</p>

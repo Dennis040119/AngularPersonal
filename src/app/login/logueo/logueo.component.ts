@@ -1,9 +1,7 @@
-import {CommonModule } from '@angular/common';
-import {Component, NgModule, OnInit } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import { UsuarioService } from '../services/usuario.service';
-import { Route, Router } from '@angular/router';
-import { Guard } from '../services/guard';
+import {Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../../services/mtnm/usuario.service';
+import { Router } from '@angular/router';
+import { Guard } from '../../services/utils/guard';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 

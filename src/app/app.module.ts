@@ -25,7 +25,7 @@ import * as XLSX from 'xlsx';
 
 //Componente error
 import { ErrorHandler } from '@angular/core';
-import { GlobalErrorHandler } from './login/services/GlobalError-handler';
+import { GlobalErrorHandler } from './services/utils/GlobalError-handler';
 
 //Material
 import {MatButtonModule} from '@angular/material/button';

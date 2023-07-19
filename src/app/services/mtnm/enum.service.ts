@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Plataforma } from '../../../models/enum/plataforma';
+import { Plataforma } from '../../models/enum/plataforma';
 import { Observable } from 'rxjs';
 import { Genero } from 'src/app/models/enum/genero'
 //Excel 

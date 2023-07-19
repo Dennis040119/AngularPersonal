@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { EnumService } from '../Gamestore/Admin/services/enum.service';
+import { EnumService } from '../services/mtnm/enum.service';
 import { Plataforma } from '../models/enum/plataforma';
 import { finalize } from 'rxjs';
 

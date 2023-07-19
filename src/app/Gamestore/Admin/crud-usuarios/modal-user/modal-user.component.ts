@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule, RequiredValidator } from '@angular/fo
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { retry } from 'rxjs';
-import { UsuarioService } from 'src/app/login/services/usuario.service';
+import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { Usuario } from 'src/app/models/mtnm/usuario';
 
 ///Material

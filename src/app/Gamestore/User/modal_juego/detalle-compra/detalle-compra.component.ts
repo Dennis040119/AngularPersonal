@@ -6,11 +6,12 @@ import { DetalleJuegoComponent } from '../../VideoJuegosHome/Card-Videojuego/det
 import { FormCompraComponent } from '../form-compra/form-compra.component';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 import { ProductosVenta } from 'src/app/models/cliente/productos-venta';
-import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
-import { VideoConsolaServiceService } from 'src/app/Gamestore/Admin/services/video-consola-service.service';
+import { VideoJuegoServiceService } from 'src/app/services/mtnm/video-juego-service.service';
+import { VideoConsolaServiceService } from 'src/app/services/mtnm/video-consola-service.service';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
 import { DetalleVideconsolaComponent } from '../../video-consolas-home/detalle-videconsola/detalle-videconsola.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 @Component({
   selector: 'app-detalle-compra',
@@ -30,7 +31,7 @@ export class DetalleCompraComponent implements OnInit {
   displayedColumns = ['Id', 'nombre', 'precio','cantidad' ,'portada','options'];
   dataSource = new MatTableDataSource(this.carrito);
   
-  
+  dirImgVj:string="imgVideoJuegos"
 
   constructor(
     
@@ -41,7 +42,8 @@ export class DetalleCompraComponent implements OnInit {
     //Servicios
     private VjService:VideoJuegoServiceService,
     private VcService:VideoConsolaServiceService,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private imgService:StorageService
   
   ){}
 
@@ -199,6 +201,20 @@ export class DetalleCompraComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 1000,
     });
+  }
+
+  getimagen(filename:string){
+
+    var dirfile=""
+    
+    if(filename.substring(0,2)=="vj"){
+      dirfile="imgVideoJuegos"
+    }
+
+    if(filename.substring(0,2)=="vc"){
+      dirfile="imgVideoConsolas"
+    }
+    return this.imgService.getImagen(filename,dirfile)
   }
 }
 

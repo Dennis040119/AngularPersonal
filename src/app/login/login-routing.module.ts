@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {logincomponent} from './login.component';
 import {LogueoComponent} from './logueo/logueo.component';
-import { Guard } from './services/guard';
+import { Guard } from './../services/utils/guard';
 import { VideojuegosHome } from '../Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
 import { CrudVjComponent } from '../Gamestore/Admin/crud-vj/crud-vj.component';
 

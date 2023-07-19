@@ -2,12 +2,13 @@ import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VideojuegosHome } from '../VideoJuegosHome.component';
-import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
+import { EnumService } from 'src/app/services/mtnm/enum.service';
 import { Genero } from 'src/app/models/enum/genero';
 import { Plataforma } from 'src/app/models/enum/plataforma';
 import { ProductosVenta } from 'src/app/models/cliente/productos-venta';
-import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { VideoJuegoServiceService } from 'src/app/services/mtnm/video-juego-service.service';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 @Component({
   selector: 'app-detalle-juego',
@@ -26,6 +27,9 @@ export class DetalleJuegoComponent implements OnInit {
   GeneroList:Genero []
   PlataformList:Plataforma[]
 
+
+  dirImgVj:string="imgVideoJuegos"
+
   constructor(
     
     private dialog: MatDialog,
@@ -33,7 +37,8 @@ export class DetalleJuegoComponent implements OnInit {
     private EnumService:EnumService,
     private vjService:VideoJuegoServiceService,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private injector: Injector
+    private injector: Injector,
+    private imgService:StorageService
     
   
   ){}
@@ -134,6 +139,8 @@ export class DetalleJuegoComponent implements OnInit {
 
   }
 
-  
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
 
 }

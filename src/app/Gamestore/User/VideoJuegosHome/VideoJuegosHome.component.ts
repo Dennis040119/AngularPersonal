@@ -4,14 +4,15 @@ import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import {DetalleJuegoComponent} from './Card-Videojuego/detalle-juego.component'
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
-import { VideoJuegoServiceService } from 'src/app/Gamestore/Admin/services/video-juego-service.service';
+import { VideoJuegoServiceService } from 'src/app/services/mtnm/video-juego-service.service';
 import { AppComponent } from 'src/app/app.component';
-import { EnumService } from '../../Admin/services/enum.service';
+import { EnumService } from '../../../services/mtnm/enum.service';
 import { Genero } from 'src/app/models/enum/genero';
 import { Plataforma } from 'src/app/models/enum/plataforma';
 import { ProductosVenta, ProductosVentaPk } from 'src/app/models/cliente/productos-venta';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 
 
@@ -44,7 +45,8 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
   //Preloader
   preloaderTime:boolean=true
   
-
+  dirImgVj:string="imgVideoJuegos"
+  
   constructor(
     private dialog: MatDialog,
     private VideoJuegoService:VideoJuegoServiceService,
@@ -52,6 +54,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     private IndexInstancia:IndexUserComponent,
     private route: ActivatedRoute,
     private el: ElementRef,
+    private imgService:StorageService
     
     
   ) {}
@@ -247,6 +250,11 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
       
     })
   }
+
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+   
 
   
 }

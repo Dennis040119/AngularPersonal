@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { Guard } from '../login/services/guard';
+import { Guard } from './../services/utils/guard';
 import { CrudVjComponent } from './Admin/crud-vj/crud-vj.component';
 import { VideojuegosHome } from './User/VideoJuegosHome/VideoJuegosHome.component';
 import { GamestoreComponent } from './gamestore.component';
@@ -9,7 +9,7 @@ import { LogueoComponent } from '../login/logueo/logueo.component';
 import { CrudUsuariosComponent } from './Admin/crud-usuarios/crud-usuarios.component';
 import { IndexAdminComponent } from './Admin/index-admin/index-admin.component';
 import { IndexUserComponent } from './User/index-user/index-user.component';
-import { GlobalErrorHandler } from '../login/services/GlobalError-handler';
+import { GlobalErrorHandler } from './../services/utils/GlobalError-handler';
 import { logincomponent } from '../login/login.component';
 import { CrudVcComponent } from './Admin/crud-vc/crud-vc.component';
 import { VideoConsolasHomeComponent } from './User/video-consolas-home/video-consolas-home.component';

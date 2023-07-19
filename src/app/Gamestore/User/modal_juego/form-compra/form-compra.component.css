@@ -10,7 +10,7 @@
 
 .titulo{
     width: 90%;
-    border: solid black 1px;
+    
     justify-content: center;
 }
 
@@ -52,7 +52,7 @@ h3{
 }
 
 .botones{
-  border: black 1px solid;
+ 
   margin-bottom: 5%;
   margin-top: 5%;
 }

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { number, string, any } from 'prop-types';
-import { EnumService } from 'src/app/Gamestore/Admin/services/enum.service';
+import { EnumService } from 'src/app/services/mtnm/enum.service';
 import { Genero } from 'src/app/models/enum/genero';
 import { Plataforma } from 'src/app/models/enum/plataforma';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';

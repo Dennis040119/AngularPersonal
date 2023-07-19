@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { VideoJuegoServiceService } from '../services/video-juego-service.service';
-import { EnumService } from '../services/enum.service';
+import { Route, Router } from '@angular/router'
+import { EnumService } from '../../../services/mtnm/enum.service';
 
 
 @Component({

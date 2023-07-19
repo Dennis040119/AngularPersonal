@@ -1,12 +1,12 @@
 import { ProductosVenta } from 'src/app/models/cliente/productos-venta';
-import { ProductoVentaService } from './../../services/producto-venta.service';
+import { ProductoVentaService } from '../../../../services/mtnm/producto-venta.service';
 import { Component,ElementRef,Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
-import { VentaService } from '../../services/venta.service';
+import { VentaService } from 'src/app/services/mtnm/venta.service'
 import { Venta } from 'src/app/models/cliente/venta';
-import { UsuarioService } from 'src/app/login/services/usuario.service';
+import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { Usuario } from 'src/app/models/mtnm/usuario';
 import { IndexUserComponent } from '../../index-user/index-user.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
