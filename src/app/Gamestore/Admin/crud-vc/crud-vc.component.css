@@ -1,10 +1,10 @@
 .body {
     display: flex;
     flex-direction: column;
-    
+    justify-content: center;
     max-height: 500px;
     min-width: 300px;
-    margin-top: 5%;
+    margin-top: 10%;
     
   }
   
@@ -26,14 +26,19 @@
     align-content: center;
     align-items: center;
     margin-top: 3%;
-    max-width: 100%;
+    margin-left: 10%;
+    max-width: 80%;
+  }
+
+  .table{
+    min-width: 70%;
   }
 
   .mdc-data-table__table {
     /* Estilos personalizados aquí */
     background-color: #f2f2f2;
     border: 1px solid #ccc;
-    white-space: nowrap;
+    
     min-width: 83%;
 
     margin-left: 1%;
@@ -41,9 +46,20 @@
     /* Otros estilos que desees aplicar */
   }
 
-  .mdc-data-table__header-cell{
-    padding: 0,0,0,0;
+.mdc-data-table__header-cell{
+  padding: 0,0,0,0;
+  border-bottom:1px black solid;
 }
+
+/* Esta clase indica a las celdas de la tabla */
+.mdc-data-table__cell{
+  padding: 0 0 0 0;
+  border-bottom:1px black solid;
+  
+  height: auto;
+ 
+}
+
 
 .btn{
   width: 10%;
@@ -64,4 +80,9 @@
   height: 1.125rem;
   width: 1.125rem;
 } 
+
+.imgTabla{
+  width: 70%;
+  height: 110px;
+}
 

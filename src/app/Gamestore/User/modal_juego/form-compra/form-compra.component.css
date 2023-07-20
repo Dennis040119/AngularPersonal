@@ -71,3 +71,7 @@ h3{
   margin-bottom: 2%;
   margin-top: 2%;
 }
+
+mat-label{
+  color: black;
+}

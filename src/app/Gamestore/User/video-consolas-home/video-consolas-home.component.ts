@@ -13,6 +13,8 @@ import { IndexUserComponent } from '../index-user/index-user.component';
 import { ProductosVentaPk, ProductosVenta } from 'src/app/models/cliente/productos-venta';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { StorageService } from 'src/app/services/medias/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-video-consolas-home',
@@ -38,6 +40,8 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
 
   preloaderTime:boolean=true
 
+  dirImgVj:string="imgVideoConsolas"
+
   constructor(
     private dialog: MatDialog,
     private VcService:VideoConsolaServiceService,
@@ -45,6 +49,9 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     private IndexInstancia:IndexUserComponent,
     private route: ActivatedRoute,
     private el: ElementRef,
+    private imgService:StorageService,
+    private snackBar:MatSnackBar,
+
     
     
   ) {}
@@ -53,7 +60,6 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.listarVideoConsola();
     this.comboEnums()
-    console.log(this.tiles)
 
     setTimeout(() => {
       // Código que se ejecutará después de 2 segundos
@@ -80,7 +86,7 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     )
     .subscribe({
       next: (param)=>{
-        console.log(param)
+       
         this.SelectionMarca=param
         
         this.VcService.listarVideoConsolas().subscribe({
@@ -285,5 +291,15 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
       }
       
     })
+  }
+
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+
+  public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
 }

@@ -15,25 +15,25 @@
         
     </div>
       <div class="tableDiv">
-    <mat-table #table [dataSource]="dataSource" class="table">
+    <mat-table #table [dataSource]="dataSource" class="table" >
   
       
       
       <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.nombre| uppercase}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;margin-left: 5px;"> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;margin-left: 5px;"> {{element.nombre| uppercase}} </mat-cell>
       </ng-container>
   
      
-      <ng-container matColumnDef="precio" style="min-width: 10%;">
-        <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
-        <mat-cell *matCellDef="let element" style="min-width: 10%;"> 
+      <ng-container matColumnDef="precio" >
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Precio </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
           {{element.precio| number:'1.2-2'|currency:"EUR"}}  </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="genero" >
-        <mat-header-cell *matHeaderCellDef style="width: 10%;"> genero </mat-header-cell>
-        <mat-cell *matCellDef="let element"> 
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> genero </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
           {{element.genero.nombre}}  </mat-cell>
       </ng-container>
   

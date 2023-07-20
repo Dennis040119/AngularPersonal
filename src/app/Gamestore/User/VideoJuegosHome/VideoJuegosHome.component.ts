@@ -13,6 +13,7 @@ import { ProductosVenta, ProductosVentaPk } from 'src/app/models/cliente/product
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { StorageService } from 'src/app/services/medias/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -45,7 +46,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
   //Preloader
   preloaderTime:boolean=true
   
-  dirImgVj:string="imgVideoJuegos"
+  dirImgVj:string="imgVideojuegos"
   
   constructor(
     private dialog: MatDialog,
@@ -54,7 +55,8 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     private IndexInstancia:IndexUserComponent,
     private route: ActivatedRoute,
     private el: ElementRef,
-    private imgService:StorageService
+    private imgService:StorageService,
+    private snackBar:MatSnackBar,
     
     
   ) {}
@@ -84,7 +86,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     )
     .subscribe({
       next: (param)=>{
-        console.log(param)
+       
         this.SelectionPlata=param
         
         this.VideoJuegoService.listarVideoJuegos().subscribe({
@@ -92,14 +94,14 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
             if(data!=undefined){this.tiles=data;}
           },
           complete:()=>{
-            console.log(this.SelectionPlata)
+           
             this.resguardo=this.tiles
             this.applyFilter()
           }
         })
       }
       ,
-      error: (error)=>{console.log("Error: "+error)}
+      error: (error)=>{this.openSnackBar("Error: "+error,"")}
       ,
       complete:()=>{
         
@@ -120,7 +122,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     try {
       setTimeout(() => {
       const invalidControl = this.el.nativeElement.querySelector("#focus");
-      console.log(invalidControl)
+      
       invalidControl.focus();
       
       }, 700);
@@ -253,6 +255,12 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
 
   getimagen(filename:string){
     return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+
+  public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
    
 

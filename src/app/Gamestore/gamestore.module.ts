@@ -36,6 +36,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatListModule} from '@angular/material/list';
+import { UserConfigComponent } from './User/user-config/user-config.component';
+
 
 
 //Material Ui
@@ -46,12 +48,8 @@ import {MatListModule} from '@angular/material/list';
 @NgModule({
   declarations: [
     GamestoreComponent,
-    CrudUsuariosComponent,
-    IndexAdminComponent,
-    ModalUserComponent,
-    CrudVcComponent,
-    ModalVcComponent,
-    VideoConsolasHomeComponent,
+    UserConfigComponent,
+   
     
     
     
@@ -83,6 +81,7 @@ import {MatListModule} from '@angular/material/list';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    
 
 
     

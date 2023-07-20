@@ -1,5 +1,5 @@
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { VideoConsola } from 'src/app/models/mtnm/video-consola';
@@ -11,6 +11,9 @@ import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-
 import { AppComponent } from 'src/app/app.component';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { StorageService } from 'src/app/services/medias/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-crud-vc',
@@ -18,8 +21,11 @@ import autoTable from 'jspdf-autotable';
   styleUrls: ['./crud-vc.component.css']
 })
 export class CrudVcComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   listaVc:VideoConsola[]=[]
-  displayedColumns = ['nombre', 'precio','plataforma' ,'marca','options'];
+  displayedColumns = ['nombre', 'precio','plataforma' ,'marca','img','options'];
   dataSource = new MatTableDataSource(this.listaVc);
 
   dataRest:any
@@ -27,11 +33,15 @@ export class CrudVcComponent implements OnInit {
   selectedFileName: any;
   selectedFileUrl: any;
 
+  dirImgVj:string="imgVideoConsolas"
+
   constructor(
     
     private dialog: MatDialog,
     private VcService:VideoConsolaServiceService,
-    private EnumService:EnumService
+    private EnumService:EnumService,
+    private imgService:StorageService,
+    private snackBar:MatSnackBar,
     //@Inject(MAT_DIALOG_DATA) private data: any,
   
   ){ }
@@ -50,6 +60,7 @@ construirtabla(){
   this.VcService.listarVideoConsolas().subscribe((data) =>
    { this.listaVc=data;
     this.dataSource = new MatTableDataSource(this.listaVc);
+    this.dataSource.paginator = this.paginator;
     })
 }
 agregar() {
@@ -184,6 +195,16 @@ delete(Vc:VideoConsola) {
     {this.listaVc=data;
     this.EnumService.exportToExcel(this.listaVc, 'Reporte_VideoConsolas', 'Reporte_VideoConsolas');
     })
+  }
+
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+   
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
 
 }

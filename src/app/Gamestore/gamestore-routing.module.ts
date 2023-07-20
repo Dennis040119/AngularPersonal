@@ -13,6 +13,7 @@ import { GlobalErrorHandler } from './../services/utils/GlobalError-handler';
 import { logincomponent } from '../login/login.component';
 import { CrudVcComponent } from './Admin/crud-vc/crud-vc.component';
 import { VideoConsolasHomeComponent } from './User/video-consolas-home/video-consolas-home.component';
+import { UserConfigComponent } from './User/user-config/user-config.component';
 
 const routes: Routes = [
   
@@ -26,10 +27,6 @@ const routes: Routes = [
       {
         path: 'homeVideojuegos/:plataforma',
         component:VideojuegosHome,
-        //canActivate:[Guard],
-        children:[
-          //{path:'', redirectTo: 'homeVideojuegos/:plataforma', pathMatch: 'full'},
-        ]
       },
       {
         path: 'homeVideojuegos',
@@ -47,7 +44,15 @@ const routes: Routes = [
         path: 'homeVideoConsolas/:marca',
         component:VideoConsolasHomeComponent,
         //canActivate:[Guard],
+      },
+
+      {path: 'UserConfig', component:UserConfigComponent},
+      {
+        path: '',
+       
+        
       }
+      
      
      
       
@@ -84,7 +89,7 @@ const routes: Routes = [
         ]
       },
 
-
+     
 
 
 
@@ -98,11 +103,12 @@ const routes: Routes = [
     
     //redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
     redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
+    
     pathMatch:'full'
     
   },
   {path: 'error', component: LogueoComponent },
-  
+ 
   
   
 ];

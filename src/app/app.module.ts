@@ -16,6 +16,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { IndexUserComponent } from './Gamestore/User/index-user/index-user.component';
+import { CrudUsuariosComponent } from 'src/app/Gamestore/Admin/crud-usuarios/crud-usuarios.component';
+import {ModalUserComponent} from 'src/app/Gamestore/Admin/crud-usuarios/modal-user/modal-user.component';
+import { IndexAdminComponent } from 'src/app/Gamestore/Admin/index-admin/index-admin.component';
+import { CrudVcComponent } from 'src/app/Gamestore/Admin/crud-vc/crud-vc.component';
+import { ModalVcComponent } from 'src/app/Gamestore/Admin/crud-vc/modal-vc/modal-vc.component';
+import { VideoConsolasHomeComponent } from 'src/app/Gamestore/User/video-consolas-home/video-consolas-home.component'
 //Pipe
 import { EurosPipe } from './pipes/euros.pipe';
 
@@ -80,6 +86,13 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     IndexUserComponent,
     PlataformPipePipe,
     DetalleVideconsolaComponent,
+
+    CrudUsuariosComponent,
+    IndexAdminComponent,
+    ModalUserComponent,
+    CrudVcComponent,
+    ModalVcComponent,
+    VideoConsolasHomeComponent,
     
     
     
@@ -143,6 +156,7 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     MatCardModule,
     MatPaginatorModule,
     MatSnackBarModule,
+   
 
     //Bootstrap
     NgbCarouselModule

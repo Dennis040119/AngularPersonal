@@ -55,7 +55,7 @@
         <div class="card" style="height: 100%; 
         ;" (click)="DetalleModal(tile)">
             
-                <img class="portada" src="../../../../assets/Consolas/{{tile.img}}" >
+                <img class="portada"  src={{getimagen(tile.img)}} >
                 
                 <div class="descrip">
                     {{tile.nombre}}

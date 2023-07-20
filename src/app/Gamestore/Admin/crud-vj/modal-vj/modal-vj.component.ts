@@ -50,7 +50,7 @@ export class ModalVjComponent implements OnInit {
 
   //Servicio de imagenes
   fileToUpload: File;
-   dirImgVj:string="imgVideoJuegos"
+   dirImgVj:string="imgVideojuegos"
 
   //Objetos que recibimos y contruimos para las transacc
   tipo:string="";
@@ -320,10 +320,19 @@ export class ModalVjComponent implements OnInit {
     this.form.get("precio")?.setValue(this.objRecepcion.precio)
 
     //Operamos para poder cargar la imagen que le corresponde 
-    var cadena = "../../../../assets/PortadasVj/"
-    this.selectedFileUrl=cadena+this.objRecepcion.img
-    this.selectedFileName = this.objRecepcion.img
-   
+    
+    this.selectedFileUrl=this.getimagen(this.objRecepcion.img)
+
+    var patron: RegExp = /vj.*\.jpg/;
+    var texto:string = ""
+    console.log(this.getimagen(this.objRecepcion.img))
+
+    if(this.getimagen(this.objRecepcion.img).match(patron) !=null){
+      texto=this.getimagen(this.objRecepcion.img).match(patron)!.toString()!
+    }
+    
+    console.log(texto)
+    this.selectedFileName = texto
     
     this.form.get("genero")?.setValue(this.objRecepcion.genero.genId)
     this.form.get("descripcion")?.setValue(this.objRecepcion.descripcion)

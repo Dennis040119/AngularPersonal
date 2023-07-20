@@ -50,7 +50,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
   PlataformList: Plataforma[];
 
 
-  dirImgVj:string="imgVideoJuegos"
+  dirImgVj:string="imgVideojuegos"
 
   constructor(
     

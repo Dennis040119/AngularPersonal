@@ -46,15 +46,15 @@
         
        
         <div style="display: flex; flex-direction: row;width: 70%;max-height: 15%;">
-         
-          <input type="file" (ngModel)="selectedFileName" (change)="onFileSelected($event)" style="display: none" #fileInput>
-          <button mat-icon-button (click)="fileInput.click()" style="margin-left: 1%;" [disabled]="disabledBtn">
+        
+          <button mat-icon-button (click)="fileInput.click()"  style="margin-left: 1%;">
             <mat-icon>attach_file</mat-icon>
           </button>
-          <input [value]="selectedFileName"  disabled="true"  style="max-width: 40%;height: 10%;margin-left: 2%;margin-top: 2%;">
+  
+          <input type="file" (ngModel)="selectedFileName" (change)="handleFileInput($event)" (change)="onFileSelected($event)" style="display: none" #fileInput>
+          <input [value]="selectedFileName" (change)="onFileSelected($event)" disabled="true"  style="max-width: 40%;height: 10%;margin-left: 2%;margin-top: 2%;">
           <div *ngIf="selectedFileUrl" style="max-width: 30%;max-height: 30%;margin-left: 5%;" >
             <img [src]="selectedFileUrl" alt="Imagen seleccionada" style="max-width: 100%;max-height: 100%;" >
-            
           </div>
         </div>
       </div>

@@ -10,6 +10,8 @@ import { Videojuegos } from 'src/app/models/mtnm/videojuegos';
 import { VideojuegosHome } from '../../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleJuegoComponent } from '../../VideoJuegosHome/Card-Videojuego/detalle-juego.component';
 import { ProductosVenta } from 'src/app/models/cliente/productos-venta';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 @Component({
   selector: 'app-detalle-videconsola',
@@ -28,11 +30,14 @@ export class DetalleVideconsolaComponent implements OnInit {
   GeneroList:Genero []
   PlataformList:Plataforma[]
 
+  dirImgVj:string="imgVideoConsolas"
   constructor(
     
     private dialog: MatDialog,
     private dialogRef: MatDialogRef<DetalleVideconsolaComponent>,
     private EnumService:EnumService,
+    private imgService:StorageService,
+    private snackBar:MatSnackBar,
     @Inject(MAT_DIALOG_DATA) private data: any,
     
   
@@ -59,7 +64,15 @@ export class DetalleVideconsolaComponent implements OnInit {
   cerrar(){this.dialogRef.close();}
 
 
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
 
+  public openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
+  }
   
 
 }
