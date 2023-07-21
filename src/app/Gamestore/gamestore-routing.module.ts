@@ -47,11 +47,7 @@ const routes: Routes = [
       },
 
       {path: 'UserConfig', component:UserConfigComponent},
-      {
-        path: '',
-       
-        
-      }
+      
       
      
      

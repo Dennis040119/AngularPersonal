@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router'
 import { EnumService } from '../../../services/mtnm/enum.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,10 +19,14 @@ export class IndexAdminComponent implements OnInit {
   opened: boolean = false;
 
   username:string=localStorage.getItem("user")!
+  static snackBar: MatSnackBar;
+
+
 
   constructor(
     private router:Router,
-    private Enum:EnumService
+    private Enum:EnumService,
+    private snackBar:MatSnackBar
   ){
 
   }
@@ -41,6 +46,12 @@ export class IndexAdminComponent implements OnInit {
 
   login(){
     this.router.navigate(['']);
+  }
+
+  static openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
 
 }

@@ -9,6 +9,7 @@ import { VideoJuegoServiceService } from 'src/app/services/mtnm/video-juego-serv
 import { Genero } from 'src/app/models/enum/genero';
 import { last } from 'rxjs';
 import { StorageService } from 'src/app/services/medias/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modal-vj',
@@ -63,6 +64,7 @@ export class ModalVjComponent implements OnInit {
     private vjService:VideoJuegoServiceService,
     private enumService:EnumService,
     private imgService:StorageService,
+    private snackBar:MatSnackBar,
 
 
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -131,7 +133,7 @@ export class ModalVjComponent implements OnInit {
       plataforma3:[],
       genero:[],
       
-      color:[]
+    
 
     })
 
@@ -249,8 +251,8 @@ export class ModalVjComponent implements OnInit {
 
         
         if (!this.fileToUpload) {
-          console.error('Debe seleccionar un archivo, un id y un tipo de archivo.');
-          return;
+          
+         this.openSnackBar("Debe selecionar una imagen","")
         }
     
         //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
@@ -530,6 +532,12 @@ export class ModalVjComponent implements OnInit {
     };
     reader.readAsDataURL(file);
     
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
   }
 
 

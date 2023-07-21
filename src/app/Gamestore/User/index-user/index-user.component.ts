@@ -47,6 +47,8 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
     private dialog: MatDialog,
     private snackBar:MatSnackBar,
     config: NgbCarouselConfig,
+    
+    
 
     private imgService:StorageService
     
@@ -137,11 +139,7 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
     this.boleancarrusel=bool
   }
 
-  public openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 1000,
-    });
-  }
+  
 
   openMenus(menu:string){
     
@@ -171,6 +169,15 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
       autoFocus: false,
       //disableClose: true,
       data: {}
+    });
+  }
+
+  public openSnackBar(message: string, action: string) {
+
+    var snackBar:MatSnackBar
+
+    this.snackBar.open(message, action, {
+      duration: 1000,
     });
   }
 

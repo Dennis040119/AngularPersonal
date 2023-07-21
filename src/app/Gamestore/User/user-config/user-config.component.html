@@ -6,29 +6,62 @@
       </div>
     
     <br>
-    
+    <form [formGroup]="form" class="form" layout="column"   onkeydown="if(event.keyCode==13){
+      if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
+        var form = event.target.form;
+        var index = Array.prototype.indexOf.call(form, event.target);
+        form.elements[index + 1].focus();
+        event.preventDefault();
+      }}">
     <div class="card" layout="column"  >
         
         <div class="card-body">
           
           <mat-form-field style="width: 80%;">
-            <mat-label>Nombre</mat-label>
-            <input matInput    name="nombre"   maxlength="50" autocomplete="off" />
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username"    name="nombre"   maxlength="50" autocomplete="off" />
+          </mat-form-field>
+          <div class="divPasword">
+            <mat-form-field  style="width: 60%;" >
+              <mat-label>{{checkNewPass==true?"Antigua Contraseña":"Contraseña"}}</mat-label>
+              <input matInput  formControlName="password" type="password"  name="password" maxlength="16"  min="0"  autocomplete="off" />
+            </mat-form-field>
+            
+            <mat-checkbox style="margin-top: 5%;margin-left: 3%;" formControlName="Checkpassword" (change)="checkPass()"  name="checkNewPass">Cambiar Contraseña</mat-checkbox>
+          </div>
+            <mat-form-field  style="width: 60%;" *ngIf="checkNewPass==true">
+              <mat-label>Nueva Contraseña</mat-label>
+                <input matInput  formControlName="newpassword" type="password"  name="newContraseña:" maxlength="30"  min="0"  autocomplete="off" />
+            </mat-form-field>
+          
+          <mat-form-field style="width: 80%;">
+            <mat-label>Email</mat-label>
+            <input matInput  formControlName="email"  name="Email" type="email"  maxlength="50" autocomplete="on" />
+          </mat-form-field>
+          <mat-form-field style="width: 80%;">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion"   name="Direccion"   maxlength="200" autocomplete="on" />
+          </mat-form-field>
+          <mat-form-field style="width: 80%;">
+            <mat-label>Tarjeta</mat-label>
+            <input matInput  formControlName="tarjetaCredito" (keypress)="onlyNumbers($event)"  name="Tarjeta"   maxlength="16" autocomplete="off" />
           </mat-form-field>
        
          
-          <mat-form-field style="width: 80%;">
-            <mat-label>descripcion</mat-label>
-            <input matInput   name="descripcion" type="text"  autocomplete="off"  />
-          </mat-form-field>
+          
          
           
           <div style="display: flex; flex-direction: row;width: 70%;max-height: 15%;">
-            
-            <button mat-icon-button   style="margin-left: 1%;">
+        
+            <button mat-icon-button (click)="fileInput.click()"  style="margin-left: 1%;">
               <mat-icon>attach_file</mat-icon>
             </button>
     
+            <input type="file" (ngModel)="selectedFileName" (change)="handleFileInput($event)" (change)="onFileSelected($event)" style="display: none" #fileInput>
+            <input matInput [value]="selectedFileName" placeholder="Foto Usuario" disabled="true"  style="max-width: 40%;height: 10%;margin-left: 2%;margin-top: 2%;">
+            <div *ngIf="selectedFileUrl" style="max-width: 30%;max-height: 30%;margin-left: 5%;" >
+              <img mat-card-image class="img" [src]="selectedFileUrl" alt="Imagen seleccionada"   alt="imagen">
+            </div>
           </div>
     
           
@@ -36,19 +69,20 @@
           
         </div>
       </div>
-      <div class="card-header position-sticky sticky-top" style="margin:2%;background-color:rgb(255, 255, 255);top: -25px;">
+      <div class="divButton" >
         
-        <button mat-button class=" btn btn-danger"   >
+        <button mat-button class=" btn btn-success" style="margin-left: 5%;"  >
+          <mat-icon>done</mat-icon>
+      </button>
+        <button mat-button class=" btn btn-danger" style="margin-right: 5%;"  >
             <mat-icon>exit_to_app</mat-icon>
         </button>
-        <button mat-button class=" btn btn-success"   >
-            <mat-icon>done</mat-icon>
-        </button>
+        
         
       </div>
     
     
-    
+    </form>
     
    
 
