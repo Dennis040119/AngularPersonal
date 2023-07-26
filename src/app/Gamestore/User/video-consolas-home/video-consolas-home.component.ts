@@ -64,7 +64,7 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     setTimeout(() => {
       // Código que se ejecutará después de 2 segundos
       this.preloaderTime=false
-      this.IndexInstancia.carrusel(false)
+      
     }, 800);
     
   }
@@ -119,7 +119,7 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     setTimeout(() => {
       // Código que se ejecutará después de 2 segundos
       this.preloaderTime=false
-      this.IndexInstancia.carrusel(false)
+      
     }, 500);
     //this.dataSource.filter = filterValue.trim().toLowerCase();
     this.tiles=this.resguardo

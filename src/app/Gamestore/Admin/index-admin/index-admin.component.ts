@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router'
 import { EnumService } from '../../../services/mtnm/enum.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StorageService } from 'src/app/services/medias/storage.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class IndexAdminComponent implements OnInit {
   constructor(
     private router:Router,
     private Enum:EnumService,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private imgService:StorageService
   ){
 
   }
@@ -48,10 +50,14 @@ export class IndexAdminComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  static openSnackBar(message: string, action: string) {
+  public openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 1000,
     });
+  }
+
+  public getimagen(filename:string,dir:string){
+    return this.imgService.getImagen(filename,dir)
   }
 
 }

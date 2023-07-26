@@ -5,6 +5,7 @@ import { StorageService } from 'src/app/services/medias/storage.service';
 import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { IndexAdminComponent } from '../../Admin/index-admin/index-admin.component';
 import { IndexUserComponent } from '../index-user/index-user.component';
+import { EnumService } from 'src/app/services/mtnm/enum.service';
 
 @Component({
   selector: 'app-user-config',
@@ -18,6 +19,7 @@ export class UserConfigComponent implements OnInit {
   public form!: FormGroup;
 
   objRecepcion:Usuario
+  objTransacc:Usuario=new Usuario()
 
   tipoDialog:string="";
   checkNewPass:boolean=false
@@ -27,20 +29,27 @@ export class UserConfigComponent implements OnInit {
   selectedFileUrl: string="";
   selectedFileName: string="";
 
+  data:any
+
+  //contraseñaNueva
+  rpta:boolean=false
+
   //Servicio de imagenes
   fileToUpload: File;
-   dirImgVj:string="imgVideojuegos"
+   dirImgVj:string="userImage"
    constructor(
     private imgService:StorageService,
     private formBuilder: FormBuilder,
     private userService:UsuarioService,
-    private IndexUser:IndexUserComponent
+    private IndexUser:IndexUserComponent,
+    private enumservice:EnumService,
+    private storageService:StorageService
    ){}
   ngOnInit(): void {
     this.formGroup()
     this.getDatosUsuario()
 
-    
+   
   }
 
   formGroup(){
@@ -59,7 +68,7 @@ export class UserConfigComponent implements OnInit {
     })
 
     this.form.get("password")?.disable()
-
+    this.form.get("Checkpassword")?.setValue(false)
   }
 
   checkPass(){
@@ -78,8 +87,9 @@ export class UserConfigComponent implements OnInit {
   getDatosUsuario(){
     this.userService.BuscarPorUser(localStorage.getItem("user")!).subscribe({
       next:(data)=>{
-        console.log(data[0])
         this.objRecepcion=data[0]
+        this.selectedFileUrl=this.getimagen(this.objRecepcion.imagen)
+        this.selectedFileName=this.getimagen(this.objRecepcion.imagen)
       },
       error:(data)=>{
         
@@ -100,11 +110,110 @@ export class UserConfigComponent implements OnInit {
     this.form.get("direccion")?.setValue(this.objRecepcion.direccion)
    
 
+    //Operamos para poder cargar la imagen que le corresponde 
+    
+    this.selectedFileUrl=this.getimagen(this.objRecepcion.imagen)
 
+    var patron: RegExp = /us.*\.jpg/;
+    var texto:string = ""
+
+    if(this.getimagen(this.objRecepcion.imagen).match(patron) !=null){
+      texto=this.getimagen(this.objRecepcion.imagen).match(patron)!.toString()!
+    }
+    this.selectedFileName = texto
+
+    //
+
+    this.setImagen();
+    
+  }
+
+  ConstruirObj(){
+
+        this.objTransacc.userid=this.objRecepcion.userid
+        this.objTransacc.username=this.form.get("username")?.value
+        this.objTransacc.direccion=this.form.get("direccion")?.value
+        this.objTransacc.email=this.form.get("email")?.value
+        this.objTransacc.tarjetaCredito=this.form.get("tarjetaCredito")?.value
+
+        ////Pass cuando esta marcado el checkbox
+       
+       
+
+        this.objTransacc.rol="user"
+        this.objTransacc.estado="ac"
+
+        console.log(this.objTransacc)
+    
     
   }
 
   actualizar(){
+    this.newPassActu()
+
+    setTimeout(() => {
+      if(this.form.valid && this.rpta){
+
+        this.ConstruirObj()
+  
+        if (!this.fileToUpload) {
+          this.IndexUser.openSnackBar('Debe seleccionar un archivo, un id y un tipo de archivo.',"");
+          return;
+        }
+
+        if(this.rpta==true && this.form.get("Checkpassword")?.value==true){
+          this.objTransacc.password=this.form.get("newpassword")?.value
+        }
+
+        if(this.form.get("Checkpassword")?.value==false){
+          this.objTransacc.password=this.form.get("password")?.value
+        }
+    
+        if(this.objTransacc.userid!= undefined ||null){
+          this.imgService.storeFile(this.fileToUpload, this.objTransacc.userid, "userImage").subscribe({
+            next:data1=>{
+              this.data=data1
+                  if(this.data["url"]!=""){
+    
+                    this.storageService.deleteImagen(this.objRecepcion.imagen,"userImage").subscribe(data=>{
+                    
+                    })
+
+                    this.objTransacc.imagen=this.data["url"]
+                    this.userService.actualizar(this.objTransacc).subscribe({
+                      next:data2=>{
+                        this.data=data2
+                        if(this.data['mensaje']=="Actualizado usuario correctamente"){
+                          this.IndexUser.openSnackBar(this.data['mensaje'],"")
+                          
+                        }else{this.IndexUser.openSnackBar(this.data['mensaje'],"")}
+    
+                      },
+                      error:(error)=>{
+                        this.IndexUser.openSnackBar("Error al actualizar usuario","")
+                        console.log("Error actualizar user: "+error)
+                      }
+                    })
+                    
+                  }else{}
+            },
+            error:error=>{
+              console.log("Error registrar imagen: "+error)
+            }
+          })
+        }else{
+          console.log(this.objTransacc.userid)
+        }
+        
+  
+      }else{
+        if(this.form.invalid){
+          this.IndexUser.openSnackBar("Formulario Invalido","");
+        }else{this.IndexUser.openSnackBar("La antigua contraseña es erronea","");}
+        
+      }
+    }, 600);
+    
 
   }
 
@@ -123,28 +232,24 @@ export class UserConfigComponent implements OnInit {
   handleFileInput(event: Event) {
     
     const files = (event.target as HTMLInputElement).files!;
-    console.log(files.item(0)?.name)
     this.fileToUpload = files.item(0)!;
 
-    console.log(this.fileToUpload)
   }
 
-  uploadFile(id:string,dir:string) {
-    if (!this.fileToUpload) {
-      console.error('Debe seleccionar un archivo, un id y un tipo de archivo.');
-      return;
-    }
+  setImagen() {
+    const imageUrl = this.getimagen(this.objRecepcion.imagen); // Reemplaza esta URL con la URL de la imagen que deseas descargar
 
-    this.imgService.storeFile(this.fileToUpload, id, dir).subscribe({
-      next:data=>{
-        console.log(data)
-      },
-      error:data=>{
-        console.log(data)
-      }
-    })
-      
+    fetch(imageUrl)
+      .then(response => response.blob())
+      .then(blob => {
+        this.fileToUpload = new File([blob], this.selectedFileName, { type: 'image/jpg' });
+        
+      })
+      .catch(error => {
+        console.error('Error loading file:', error);
+      });
   }
+  
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
@@ -163,5 +268,37 @@ export class UserConfigComponent implements OnInit {
     reader.readAsDataURL(file);
     
   }
+
+  newPassActu(){
+
+    
+    if(this.form.get("Checkpassword")?.value==true){
+      
+      this.enumservice.desescryp(this.form.get("password")?.value,this.objRecepcion.password).subscribe({
+        next:(data)=>{
+
+           this.rpta=data
+           
+           
+        },
+        error:(error)=>{
+
+        },
+        complete:()=>{
+         
+        }
+      })
+    
+    }else{ this.rpta= true;
+    }
+
+    
+   
+  }
+
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+  
 
 }

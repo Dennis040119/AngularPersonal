@@ -138,7 +138,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
     setTimeout(() => {
       // Código que se ejecutará después de 2 segundos
       this.preloaderTime=false
-      this.IndexInstancia.carrusel(false)
+      
     }, 500);
     
 

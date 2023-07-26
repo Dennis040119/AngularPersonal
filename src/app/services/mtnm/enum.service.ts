@@ -29,6 +29,12 @@ export class EnumService {
     return this.http.get<Plataforma[]>(baseUrl + '/PlataformaList');
   }
 
+  
+  desescryp(passFront: string, bdpass: string): Observable<boolean> {
+    const url = `${baseUrl}/desescrypPass?passFront=${encodeURIComponent(passFront)}&bdpass=${encodeURIComponent(bdpass)}`;
+    return this.http.get<boolean>(url);
+  }
+
   listarGenero():Observable<Genero[]> {
     return this.http.get<Genero[]>(baseUrl + '/GeneroList');
   }

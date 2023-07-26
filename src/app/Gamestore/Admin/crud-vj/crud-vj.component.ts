@@ -25,6 +25,7 @@ import { AppComponent } from 'src/app/app.component';
 import { array, bool } from 'prop-types';
 import { MatPaginator } from '@angular/material/paginator';
 import { StorageService } from 'src/app/services/medias/storage.service';
+import { IndexAdminComponent } from '../index-admin/index-admin.component';
 
 
 
@@ -57,7 +58,8 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     private dialog: MatDialog,
     private VjService:VideoJuegoServiceService,
     private EnumService:EnumService,
-    private imgService:StorageService
+    private imgService:StorageService,
+    private indexAdmin:IndexAdminComponent
     //@Inject(MAT_DIALOG_DATA) private data: any,
   
   ){ this.audioPlayer = new Audio();}
@@ -257,6 +259,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
             const img = new Image();
             var cadena = "../../../../assets/PortadasVj/"
             img.src =cadena+imgData!.toString()
+            img.src =this.indexAdmin.getimagen(imgData!.toString(),"imgVideojuegos")
             console.log(imgData!.toString())
             data.cell.raw = img;
             

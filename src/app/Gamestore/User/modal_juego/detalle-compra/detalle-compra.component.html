@@ -4,8 +4,8 @@
 <div class="example-container mat-elevation-z8" >
    <h3 style="margin-left: 2%;margin-top: 2%;">Carrito de compras</h3>
     <div class="example-header">
-        <mat-form-field  >
-          <input matInput (keyup)="applyFilter($event)" placeholder="Filter" style="padding:  0 0 0 0">
+        <mat-form-field >
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter" style="padding:  0 0 0 0;">
         </mat-form-field>
         <button mat-button class="btn"  style="margin-left: 2%;" (click)="formCompra()" title="Pagar"><mat-icon>payment</mat-icon></button>
         <button mat-button  class="btn" style="margin-left: 2%;float: right;" (click)="close()" title="Salir"><mat-icon>exit_to_app</mat-icon></button>

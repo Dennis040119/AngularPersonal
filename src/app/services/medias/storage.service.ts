@@ -25,4 +25,9 @@ export class StorageService {
     const resourceUrl = `${this.backendBaseUrl}/file/${filename}/${dirFile}`;
     return resourceUrl;
   }
+
+  deleteImagen(filename: string, dirFile: string){
+   
+    return this.http.delete(this.backendBaseUrl+'/delfile/'+filename+'/'+dirFile);
+  }
 }

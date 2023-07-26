@@ -35,3 +35,8 @@
     width: 100px;
     height: 100px; 
   }
+
+  .divPasword{
+    display: flex;
+    flex-direction: row;
+  }

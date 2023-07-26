@@ -8,6 +8,7 @@ export class Usuario {
     direccion!:string;
     estado:string
     rol!: string;
+    imagen: string
     
 }
 

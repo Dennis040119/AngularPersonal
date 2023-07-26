@@ -64,7 +64,7 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
   
   ngOnInit(): void {
     this.boleancarrusel=true
-    console.log(this.imgService.getImagen("vj0011689753161906.jpg","vjPortadas"))
+   
     this.img= this.imgService.getImagen("vj0011689753161906.jpg","vjPortadas")
   }
   ngAfterViewInit(): void {

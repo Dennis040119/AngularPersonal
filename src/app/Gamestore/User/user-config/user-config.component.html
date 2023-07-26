@@ -58,9 +58,9 @@
             </button>
     
             <input type="file" (ngModel)="selectedFileName" (change)="handleFileInput($event)" (change)="onFileSelected($event)" style="display: none" #fileInput>
-            <input matInput [value]="selectedFileName" placeholder="Foto Usuario" disabled="true"  style="max-width: 40%;height: 10%;margin-left: 2%;margin-top: 2%;">
+            <input matInput [value]="selectedFileName" placeholder="Foto Usuario" disabled="true"  style="max-width: 60%;height: 10%;margin-left: 2%;margin-top: 2%;">
             <div *ngIf="selectedFileUrl" style="max-width: 30%;max-height: 30%;margin-left: 5%;" >
-              <img mat-card-image class="img" [src]="selectedFileUrl" alt="Imagen seleccionada"   alt="imagen">
+              <img mat-card-image class="img" src={{getimagen(objRecepcion.imagen)}} alt="Imagen seleccionada"   alt="imagen">
             </div>
           </div>
     
@@ -71,7 +71,7 @@
       </div>
       <div class="divButton" >
         
-        <button mat-button class=" btn btn-success" style="margin-left: 5%;"  >
+        <button mat-button class=" btn btn-success" style="margin-left: 5%;" (click)="actualizar()"  >
           <mat-icon>done</mat-icon>
       </button>
         <button mat-button class=" btn btn-danger" style="margin-right: 5%;"  >

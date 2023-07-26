@@ -23,14 +23,14 @@
         </mat-form-field>
         <div class="divPasword">
         <mat-form-field  style="width: 60%;" >
-          <mat-label>{{checkNewPass==true?"Antigua Contraseña":"Contraseña"}}</mat-label>
+          <mat-label>Contraseña</mat-label>
           <input matInput  formControlName="password" type="password"  name="password" maxlength="16"  min="0"  autocomplete="off" />
         </mat-form-field>
         
         <mat-checkbox style="margin-top: 5%;margin-left: 3%;" *ngIf="tipoDialog=='edit'" (change)="checkPass()" formControlName="Checkpassword" name="checkNewPass">Cambiar Contraseña</mat-checkbox>
         </div>
         <mat-form-field  style="width: 60%;" *ngIf="checkNewPass==true || tipoDialog=='registrar' ">
-          <mat-label>Nueva Contraseña</mat-label>
+          <mat-label>Confirmar Contraseña</mat-label>
             <input matInput  formControlName="Newpassword" type="password"  name="Newpassword:" maxlength="16"  min="0"  autocomplete="off" />
         </mat-form-field>
         <mat-form-field style="width: 80%;">
