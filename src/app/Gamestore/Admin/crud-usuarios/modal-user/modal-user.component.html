@@ -3,8 +3,7 @@
     <div class="titulo">
       <h2 style="float: left; margin-top: 10px;">Registro Usuarios</h2>
     </div>
-  
-  <br>
+  <div class="card" layout="column"  >
   <form [formGroup]="form"  class="form" layout="column"   onkeydown="if(event.keyCode==13){
           if (event.keyCode === 13 && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'mat-select') ){
             var form = event.target.form;
@@ -13,7 +12,7 @@
             event.preventDefault();
           }}">
   
-  <div class="card" layout="column"  >
+  
       
       <div class="card-body">
         
@@ -57,17 +56,19 @@
         </mat-form-field>
   
       </div>
-    </div>
-    <div class="card-header position-sticky sticky-top" style="margin:2%;background-color:rgb(255, 255, 255);top: -25px;">
+
+      <div class="divbtton" >
       
-      <button mat-button class=" btn btn-danger" (click)="close()"  >
-          <mat-icon>exit_to_app</mat-icon>
-      </button>
-      <button mat-button class=" btn btn-success" (click)="operacion()">
-          <mat-icon>done</mat-icon>
-      </button>
-      
+        <button mat-button class=" btn btn-danger" (click)="close()"  >
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
+        <button mat-button class=" btn btn-success" (click)="operacion()">
+            <mat-icon>done</mat-icon>
+        </button>
+        
+      </div>
+    
+    
+      </form>
     </div>
-  </form>
-  
   </div>

@@ -5,6 +5,7 @@ import {LogueoComponent} from './logueo/logueo.component';
 import { Guard } from './../services/utils/guard';
 import { VideojuegosHome } from '../Gamestore/User/VideoJuegosHome/VideoJuegosHome.component';
 import { CrudVjComponent } from '../Gamestore/Admin/crud-vj/crud-vj.component';
+import { RegistroComponent } from './registro/registro.component';
 
 
 
@@ -23,7 +24,9 @@ const routes: Routes = [
     loadChildren:()=>import('../Gamestore/gamestore.module').then((m)=>m.GamestoreModule)
     
     },
+    {path: 'registro', component: RegistroComponent },
     {path: '**', component: logincomponent },
+    
     
   ];
 

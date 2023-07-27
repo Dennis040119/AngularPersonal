@@ -170,9 +170,11 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
 
     const dialogCrear = this.dialog.open(DetalleJuegoComponent, {
       
-      width: '600px',
-      height: '350px',
+      width: '30%',
+      height: '75%',
+      
       autoFocus: false,
+      
       
       data: {
         objeto:vj,

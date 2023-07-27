@@ -101,8 +101,9 @@ edit(Vc:VideoConsola){
 detalle(Vc:VideoConsola) {
   const dialog = this.dialog.open(ModalVcComponent, {
       
-    width: '600px',
-    height: '600px',
+    width: '30%',
+    height: '75%',
+    
     autoFocus: false,
     data:{
       tipo:"detalle",

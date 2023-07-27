@@ -47,7 +47,10 @@ export class ModalUserComponent implements OnInit {
    invalidControl.focus();
 
    //Recibimos la data del modal CrudUsuarios y vemos en que tipo se esta llamando(registrar,editar o detalle)
-    this.dataDialog=this.data
+    if(this.data!=(undefined||null)){
+      this.dataDialog=this.data
+    }
+    
     if(this.dataDialog["obj"]!=null){
       this.objetoDialog=this.dataDialog["obj"]
       console.log(this.objetoDialog)
@@ -56,7 +59,7 @@ export class ModalUserComponent implements OnInit {
     }
 
     this.tipoDialog=this.dataDialog["tipo"]
-    if(this.tipoDialog=="edit"){
+    if(this.tipoDialog=="edit"||"view"){
       
       this.SetActualizaUsuario();
       this.form.get("password")?.disable();

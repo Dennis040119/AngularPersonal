@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/models/mtnm/usuario';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalUserComponent } from './modal-user/modal-user.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
+import { IndexAdminComponent } from '../index-admin/index-admin.component';
 
 @Component({
   selector: 'app-crud-usuarios',
@@ -17,7 +18,7 @@ export class CrudUsuariosComponent implements OnInit {
 
 
   listaUsu!: Usuario[];
-  displayedColumns = ['user', 'email', 'direcion','rol','options'];
+  displayedColumns = ['user', 'email', 'direcion','rol','activo','foto','options'];
   dataSource = new MatTableDataSource(this.listaUsu);
 
   //Respuesta de servicios
@@ -27,6 +28,7 @@ export class CrudUsuariosComponent implements OnInit {
     
     private dialog: MatDialog,
     private UsuarioService:UsuarioService,
+    private IndexAmdmin:IndexAdminComponent
     //@Inject(MAT_DIALOG_DATA) private data: any,
   
   ){}
@@ -43,6 +45,9 @@ export class CrudUsuariosComponent implements OnInit {
     
   }
 
+  getImagen(filename:string,dir:string){
+   return this.IndexAmdmin.getimagen(filename,dir)
+  }
   construirtabla(){
     this.UsuarioService.listarUsuarios().subscribe((data) =>
       {this.listaUsu=data;
@@ -54,8 +59,8 @@ export class CrudUsuariosComponent implements OnInit {
   agregar() {
     const dialog = this.dialog.open(ModalUserComponent,{
       
-      width: '400px',
-      height: '600px',
+      width: '40%',
+      height: '95%',
       autoFocus: false,
       disableClose:true,
       data:{
@@ -73,8 +78,8 @@ export class CrudUsuariosComponent implements OnInit {
     edit(user: Usuario) {
       const dialog = this.dialog.open(ModalUserComponent,{
       
-        width: '500px',
-        height: '600px',
+        width: '40%',
+        height: '95%',
         autoFocus: false,
         disableClose:true,
         data:{
@@ -93,9 +98,13 @@ export class CrudUsuariosComponent implements OnInit {
     detalle(user: Usuario) {
       const dialog = this.dialog.open(ModalUserComponent,{
       
-        width: '600px',
-        height: '800px',
+        width: '40%',
+        height: '95%',
         autoFocus: false,
+        data:{
+          obj:user,
+          tipo:"view"
+        }
       });
     }
     delete(user: Usuario) {

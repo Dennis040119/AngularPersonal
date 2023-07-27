@@ -15,6 +15,10 @@ export class UsuarioService {
 
 
     listarUsuarios(): Observable<Usuario[]> {
+      return this.http.get<Usuario[]>(baseUrl + '/usuarioList');
+    }
+
+    listarUsuariosActivos(): Observable<Usuario[]> {
       return this.http.get<Usuario[]>(baseUrl + '/usuarioAcList');
     }
 

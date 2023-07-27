@@ -43,7 +43,7 @@ export class UserConfigComponent implements OnInit {
     private userService:UsuarioService,
     private IndexUser:IndexUserComponent,
     private enumservice:EnumService,
-    private storageService:StorageService
+    
    ){}
   ngOnInit(): void {
     this.formGroup()
@@ -175,7 +175,7 @@ export class UserConfigComponent implements OnInit {
               this.data=data1
                   if(this.data["url"]!=""){
     
-                    this.storageService.deleteImagen(this.objRecepcion.imagen,"userImage").subscribe(data=>{
+                    this.imgService.deleteImagen(this.objRecepcion.imagen,"userImage").subscribe(data=>{
                     
                     })
 

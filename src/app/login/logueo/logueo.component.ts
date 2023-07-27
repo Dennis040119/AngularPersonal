@@ -78,8 +78,14 @@ export class LogueoComponent implements OnInit {
 
 
    
-   }else{ window.alert("Faltan datos")}
+   }else{ this.openSnackBar("Faltan Datos","")}
    
+  }
+
+  registrar(){
+
+    this.router.navigate(['gamestore/indexAdmin']);
+
   }
 
   public openSnackBar(message: string, action: string) {

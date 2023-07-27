@@ -10,7 +10,7 @@
 
     </div>
       
-    <mat-table #table [dataSource]="dataSource" style="background-color: aliceblue;">
+    <mat-table #table [dataSource]="dataSource" class="table" >
   
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
@@ -34,16 +34,28 @@
           {{element.direccion}}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="rol">
-        <mat-header-cell *matHeaderCellDef> Rol </mat-header-cell>
-        <mat-cell *matCellDef="let element"> 
+      <ng-container matColumnDef="rol" >
+        <mat-header-cell *matHeaderCellDef style="max-width: 7%;"> Rol </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 7%;"> 
           {{element.rol}}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="activo" >
+        <mat-header-cell *matHeaderCellDef style="max-width: 7%;"> activo </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 7%;"> 
+          {{element.rol}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="foto">
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;padding-left: 3%;"> foto </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
+          <img class="imgTabla" src="{{getImagen(element.imagen,'userImage')}}">
+          </mat-cell>
+      </ng-container>
+      
   
       
       
       <ng-container matColumnDef="options">
-        <mat-header-cell *matHeaderCellDef> options </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
         <mat-cell *matCellDef="let element"> 
 
         <button mat-button class="btn-edit" title="edit" (click)="edit(element)">
