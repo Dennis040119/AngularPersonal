@@ -214,9 +214,9 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     });
 
     //Estilos de las columnas
-    const columnWidths = [20, 40, 20, 50, 40, 30];
+    const columnWidths = [20, 40, 20, 60, 55, 40];
     //Numero de filas por pagina
-    const maxRowsPerPage = 34; 
+    const maxRowsPerPage = 40; 
     let currentPage = 1;
     let rowIndex = 0;
 
@@ -231,7 +231,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
     
     autoTable(doc,{
 
-        head: [['Id','nombre','precio','descripcion','plataforma','img']],
+        head: [['Id','Nombre','Precio','Descripcion','Plataformas','imagen']],
         body: prepare,
         theme: 'grid' ,
 
@@ -239,7 +239,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
           rowIndex = 0;
           currentPage++;
           if (currentPage < doc.getNumberOfPages()) {
-            doc.setPage(currentPage);
+            //doc.setPage(currentPage);
           }
         },
         
@@ -250,8 +250,9 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
            const row =data.row.index
            const col = data.column.index; // Índice de la columna
            data.cell.styles.cellWidth = columnWidths[col];
+           
            if(isHeadRow && data.section != 'head'){
-            data.cell.styles.minCellHeight = 25
+            data.cell.styles.minCellHeight = 35
           }
            
           //Obtiene las rutas de las celdas
@@ -304,15 +305,15 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
               console.log(img)
               
               
-              doc.addImage(img, x + 2, y + 2, 20, 20); // Ajustar el tamaño y la posición de la imagen según sea necesario
+              doc.addImage(img, x + 2, y + 2, 30, 25); // Ajustar el tamaño y la posición de la imagen según sea necesario
             
             }
            }
 
            if (rowIndex > maxRowsPerPage) {
             rowIndex = 0;
-            currentPage++;
-            doc.addPage();
+            //currentPage++;
+            //doc.addPage();
           }
           rowIndex++;
         },

@@ -46,14 +46,14 @@ export class LogueoComponent implements OnInit {
         if(data[0].rol=="user"){
           Guard.roles="user"
           this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
-          this.router.navigate(['gamestore/indexUser']);
+          this.router.navigate(['indexUser']);
           console.log(Guard.roles)
         }
 
         if(data[0].rol=="admin"){
           Guard.roles="admin"
           this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
-          this.router.navigate(['gamestore/indexAdmin']);
+          this.router.navigate(['indexAdmin']);
           console.log(Guard.roles)
         }
         
@@ -84,7 +84,7 @@ export class LogueoComponent implements OnInit {
 
   registrar(){
 
-    this.router.navigate(['gamestore/indexAdmin']);
+    this.router.navigate(['registro']);
 
   }
 

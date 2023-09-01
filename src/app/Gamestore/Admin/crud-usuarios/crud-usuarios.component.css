@@ -32,8 +32,8 @@
     background-color: var(--backGroundtablas);
     border-bottom-color: 1px solid #000000;
     white-space: nowrap;
-    min-width: 80%;
-    margin-left: 1%;
+    width: 80%;
+    margin-left: 10%;
     margin-right: 1%;
     white-space: normal;
     /* Otros estilos que desees aplicar */

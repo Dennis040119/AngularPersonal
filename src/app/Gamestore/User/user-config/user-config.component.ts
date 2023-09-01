@@ -185,7 +185,7 @@ export class UserConfigComponent implements OnInit {
                         this.data=data2
                         if(this.data['mensaje']=="Actualizado usuario correctamente"){
                           this.IndexUser.openSnackBar(this.data['mensaje'],"")
-                          
+                          this.IndexUser.home()
                         }else{this.IndexUser.openSnackBar(this.data['mensaje'],"")}
     
                       },
@@ -298,6 +298,10 @@ export class UserConfigComponent implements OnInit {
 
   getimagen(filename:string){
     return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+  
+  cerrar(){
+    this.IndexUser.home()
   }
   
 

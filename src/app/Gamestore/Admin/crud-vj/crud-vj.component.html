@@ -54,16 +54,16 @@
       </ng-container>
       
       <ng-container matColumnDef="options">
-        <mat-header-cell *matHeaderCellDef> options </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
         <mat-cell *matCellDef="let element" style="margin-right: 1%;"> 
         
-        <button mat-button class="btn" title="edit" (click)="edit(element)">
+        <button mat-button class="btn" title="editar" (click)="edit(element)">
           <mat-icon style="color: black;">edit</mat-icon>
         </button> 
-        <button mat-button class="btn" title="open" (click)="detalle(element)">
+        <button mat-button class="btn" title="detalles" (click)="detalle(element)">
             <mat-icon style="color: #3f51b5;">visibility</mat-icon>
         </button>
-        <button mat-button class="btn" title="close"  (click)="delete(element)">
+        <button mat-button class="btn" title="eliminar"  (click)="delete(element)">
             <mat-icon style="color: red;">delete</mat-icon>
         </button>
         

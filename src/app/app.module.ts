@@ -22,6 +22,12 @@ import { IndexAdminComponent } from 'src/app/Gamestore/Admin/index-admin/index-a
 import { CrudVcComponent } from 'src/app/Gamestore/Admin/crud-vc/crud-vc.component';
 import { ModalVcComponent } from 'src/app/Gamestore/Admin/crud-vc/modal-vc/modal-vc.component';
 import { VideoConsolasHomeComponent } from 'src/app/Gamestore/User/video-consolas-home/video-consolas-home.component'
+import { UserConfigComponent } from './Gamestore/User/user-config/user-config.component';
+import { RegistroComponent } from './login/registro/registro.component';
+
+
+
+
 //Pipe
 import { EurosPipe } from './pipes/euros.pipe';
 
@@ -51,13 +57,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatListModule} from '@angular/material/list';
 
 
 //Bootsstrap
 
 import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
-import { PlataformPipePipe } from './pipes/plataform-pipe.pipe';
 import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-home/detalle-videconsola/detalle-videconsola.component';
+import { PlataformPipePipe } from './pipes/plataform-pipe.pipe';
+import { LogueoComponent } from './login/logueo/logueo.component';
+
 
 
 
@@ -74,27 +83,26 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
 @NgModule({
   declarations: [
     AppComponent,
+    IndexUserComponent,
+    LogueoComponent,
+    IndexAdminComponent,
     VideojuegosHome,
     DetalleJuegoComponent,
     DetalleCompraComponent,
-    IndexUserComponent,
     FormCompraComponent,
     CrudVjComponent,
     ModalVjComponent,
     DialogConfirmComponent,
-    EurosPipe,
-    IndexUserComponent,
-    PlataformPipePipe,
+    PlataformPipePipe,  
     DetalleVideconsolaComponent,
-
     CrudUsuariosComponent,
-    IndexAdminComponent,
     ModalUserComponent,
     CrudVcComponent,
     ModalVcComponent,
     VideoConsolasHomeComponent,
-    
-    
+    UserConfigComponent,
+    RegistroComponent,
+    EurosPipe,
     
     
     
@@ -110,6 +118,7 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     BrowserAnimationsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    
     
     //Material
     MatFormFieldModule,
@@ -129,6 +138,7 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     MatPaginatorModule,
     MatSnackBarModule,
     MatMenuModule,
+    MatListModule,
 
 
     //Bootstrap
@@ -136,10 +146,9 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     NgbCarouselModule,
     
     
-    
   ],
   exports: [
-    IndexUserComponent,
+    
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -156,6 +165,7 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
     MatCardModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatListModule,
    
 
     //Bootstrap
@@ -168,3 +178,4 @@ import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-hom
 )
 
 export class AppModule { }
+

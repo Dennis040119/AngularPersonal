@@ -64,6 +64,13 @@ input[type="file"] {
 
 }
 
+.botonesDiv{
+  padding: 0 0 0 0;
+  margin:2%;
+  background-color:rgb(255, 255, 255);
+  top: -25px;
+}
+
 .btn-danger{
     float: right;
     align-items: flex-end;

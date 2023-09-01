@@ -1,10 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { VideojuegosHome } from '../VideoJuegosHome/VideoJuegosHome.component';
 import { DetalleCompraComponent, FormCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
 import { MatDialog } from '@angular/material/dialog';
-import { VideoJuegoServiceService } from '../../../services/mtnm/video-juego-service.service';
-import { EnumService } from '../../../services/mtnm/enum.service';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBar } from '@angular/material/snack-bar';
