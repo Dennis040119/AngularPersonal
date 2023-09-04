@@ -88,11 +88,21 @@ export class IndexUserComponent implements OnInit,AfterViewInit {
 
   cuenta(){
     this.boleancarrusel=false
-    this.router.navigate(['gamestore/indexUser/UserConfig']);
+    this.router.navigate(['indexUser/UserConfig']);
   }
   home(){
     this.boleancarrusel=true
-    this.router.navigate(['gamestore/indexUser']);
+    this.router.navigate(['indexUser']);
+  }
+
+  nosotrosAcc(){
+    this.boleancarrusel=false
+    this.router.navigate(['indexUser/nosotros']);
+  }
+
+  comprasAcc(){
+    this.boleancarrusel=false
+    this.router.navigate(['indexUser/compras']);
   }
 
   

@@ -12,6 +12,8 @@ import { CrudUsuariosComponent } from './Gamestore/Admin/crud-usuarios/crud-usua
 import { CrudVcComponent } from './Gamestore/Admin/crud-vc/crud-vc.component';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
 import { Guard } from './services/utils/guard';
+import { NosotrosComponent } from './Gamestore/User/nosotros/nosotros.component';
+import { ComprasPersonalComponent } from './Gamestore/User/compras-personal/compras-personal.component';
 
 
 const routes: Routes = [
@@ -50,6 +52,8 @@ const routes: Routes = [
       },
 
       {path: 'UserConfig', component:UserConfigComponent},
+      {path: 'nosotros', component:NosotrosComponent},
+      {path: 'compras', component:ComprasPersonalComponent},
       
       
      

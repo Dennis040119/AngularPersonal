@@ -8,9 +8,7 @@ import { VentaService } from 'src/app/services/mtnm/venta.service'
 import { Venta } from 'src/app/models/cliente/venta';
 import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { Usuario } from 'src/app/models/mtnm/usuario';
-import { IndexUserComponent } from '../../index-user/index-user.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { number } from 'prop-types';
 
 @Component({
   selector: 'app-form-compra',
@@ -18,6 +16,8 @@ import { number } from 'prop-types';
   styleUrls: ['./form-compra.component.css']
 })
 export class FormCompraComponent implements OnInit {
+
+  time = { hour: 0, minute: 0 };
 
   public form!: FormGroup;
   nombres:string=' ';
@@ -112,7 +112,8 @@ export class FormCompraComponent implements OnInit {
       correo:[],
       direccion:[],
       movil:[],
-      fchEntrega:[]
+      fchEntrega:[],
+      horaEntrega:[],
       
     })
   }

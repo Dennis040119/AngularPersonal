@@ -18,7 +18,17 @@
           <span>Cuenta</span>
         </button>
 
-       <button mat-button  class="MenuButton" (click)="login()">
+        <button mat-button class="MenuButton"  routerLink="compras" (click)="comprasAcc()" >
+          <mat-icon style="color:rgb(252, 232, 179);">perm_identity</mat-icon>
+          <span>Compras</span>
+        </button>
+
+        <button mat-button class="MenuButton"  routerLink="nosotros" (click)="nosotrosAcc()" >
+          <mat-icon style="color:rgb(252, 232, 179);">perm_identity</mat-icon>
+          <span>Nosotros</span>
+        </button>
+
+       <button mat-button  class="MenuButton"  (click)="login()">
          <mat-icon style="color: rgb(252, 232, 179);">login</mat-icon>
          <span>Log out</span>
        </button>
@@ -90,7 +100,7 @@
             <button mat-button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
             style="border: 1px black solid;margin-left: 1%;min-width: 15%;" >
             <mat-icon style="color:rgb(144, 39, 39);">videogame_asset</mat-icon>
-              Perifericos
+              Periféricos
             </button>
                 <ul class="dropdown-menu noclose">
                     <li>
@@ -146,8 +156,7 @@
             <button mat-button data-toggle="dropdown" class="btn btn-default dropdown-toggle"
             style="border: 1px black solid;margin-left: 1%;" >
             <i class="bi bi-phone-fill" style="color:rgb(144, 39, 39);" ></i>
-            
-              Moviles
+              Móviles
             </button>
                 <ul class="dropdown-menu noclose" style="margin-top: 30%;">
                     <li>
@@ -191,6 +200,28 @@
 
           <!-- Pagina a la que se llama -->
         <router-outlet (click)="sidenav.toggle()" style="margin-top: 3%;margin-bottom: 10%;"></router-outlet>
+
+
+        <div class="infoDiv" *ngIf="boleancarrusel">
+            <div>
+              <h4>Contáctanos</h4>
+              <ul style="">
+                <li>
+                  <p><i class="bi bi-whatsapp" style="color: green;"></i> 987654321  </p>
+                </li>
+                <li>
+                  <p><i class="bi bi-envelope-at" style="color: rgb(0, 0, 0);"></i> correo@gmail.com  </p>
+                </li>
+                <li>
+                  <p style="cursor: pointer"><i class="bi bi-chat" style="color: rgb(38, 99, 212);"></i> Pulse Aqui </p>
+                </li>
+            </ul>
+              
+              
+            </div>
+
+
+        </div>
 
         <footer  class="footer" >
           <div class="btnFooter">

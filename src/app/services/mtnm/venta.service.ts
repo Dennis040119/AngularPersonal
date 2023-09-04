@@ -23,6 +23,10 @@ export class VentaService {
     return this.http.get<Venta[]>(baseUrl + '/VtBuscar/'+id);
   }
 
+  UserVentas(Userid:string): Observable<Venta[]> {
+    return this.http.get<Venta[]>(baseUrl + '/VtUser/'+Userid);
+  }
+
   registrarVt(Vj:Venta):Observable<Venta>{
     return this.http.post<Venta>(baseUrl+'/VtSave',Vj);
   }

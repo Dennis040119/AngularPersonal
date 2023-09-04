@@ -24,6 +24,11 @@ import { ModalVcComponent } from 'src/app/Gamestore/Admin/crud-vc/modal-vc/modal
 import { VideoConsolasHomeComponent } from 'src/app/Gamestore/User/video-consolas-home/video-consolas-home.component'
 import { UserConfigComponent } from './Gamestore/User/user-config/user-config.component';
 import { RegistroComponent } from './login/registro/registro.component';
+import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-home/detalle-videconsola/detalle-videconsola.component';
+import { PlataformPipePipe } from './pipes/plataform-pipe.pipe';
+import { LogueoComponent } from './login/logueo/logueo.component';
+import { NosotrosComponent } from './Gamestore/User/nosotros/nosotros.component';
+import { ComprasPersonalComponent } from './Gamestore/User/compras-personal/compras-personal.component';
 
 
 
@@ -62,10 +67,8 @@ import {MatListModule} from '@angular/material/list';
 
 //Bootsstrap
 
-import { NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
-import { DetalleVideconsolaComponent } from './Gamestore/User/video-consolas-home/detalle-videconsola/detalle-videconsola.component';
-import { PlataformPipePipe } from './pipes/plataform-pipe.pipe';
-import { LogueoComponent } from './login/logueo/logueo.component';
+import { NgbCarouselModule,NgbTimepicker} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -103,6 +106,8 @@ import { LogueoComponent } from './login/logueo/logueo.component';
     UserConfigComponent,
     RegistroComponent,
     EurosPipe,
+    NosotrosComponent,
+    ComprasPersonalComponent,
     
     
     
@@ -144,6 +149,7 @@ import { LogueoComponent } from './login/logueo/logueo.component';
     //Bootstrap
     
     NgbCarouselModule,
+    NgbTimepicker
     
     
   ],
@@ -169,7 +175,8 @@ import { LogueoComponent } from './login/logueo/logueo.component';
    
 
     //Bootstrap
-    NgbCarouselModule
+    NgbCarouselModule,
+    NgbTimepicker
 
   ],
   providers: [CookieService ,  {provide:ErrorHandler,useClass:GlobalErrorHandler}],

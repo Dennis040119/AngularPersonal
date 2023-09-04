@@ -70,8 +70,12 @@ registrar(){
     Guard.roles="user"
     localStorage.setItem("key","true")
     localStorage.setItem("user","user")
-    this.router.navigate(['gamestore/indexUser']);
+    this.router.navigate(['indexUser']);
   }
+}
+
+login(){
+  this.router.navigate(['login']);
 }
   
   onlyNumbers(event:any): boolean {

@@ -1,0 +1,80 @@
+<div class="body">
+
+    <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+          
+        </mat-form-field>
+       
+
+    </div>
+      
+    <mat-table #table [dataSource]="dataSource" class="table" >
+  
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="IdVenta">
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> IdVenta </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> {{element.venId}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="Usuario">
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
+          {{element.nombre}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Total">
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Total </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
+          {{element.total|euros}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Correo" >
+        <mat-header-cell *matHeaderCellDef style="max-width: 15%;"> Correo </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 15%;"> 
+          {{element.correo}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Direccion" >
+        <mat-header-cell *matHeaderCellDef style="max-width: 15%;"> Direccion </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 15%;"> 
+          {{element.direccion}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="FechaCompra" >
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;padding-left: 3%;"> Fecha Compra </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
+          {{element.fCompra|date:'medium'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="FechaEntrega">
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;padding-left: 3%;"> Fecha Entrega </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
+            {{element.fEntrega| date:'medium'}}
+          </mat-cell>
+      </ng-container>
+
+    
+      
+  
+      
+      
+      <ng-container matColumnDef="options">
+        <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+
+        <button mat-button class="btn-detalle" title="open" (click)="detalle(element)">
+            <mat-icon style="color: #3f51b5;">visibility</mat-icon>
+        </button>
+        
+        </mat-cell>
+      </ng-container>
+  
+
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>

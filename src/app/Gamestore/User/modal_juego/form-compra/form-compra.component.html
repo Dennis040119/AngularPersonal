@@ -43,12 +43,18 @@
         <mat-label>movil</mat-label>
         <input matInput  formControlName="movil" (keypress)="onlyNumbers($event)" name="" maxlength="9"  min="0"  autocomplete="off"  />
       </mat-form-field>
+
       <mat-form-field  style="width: 50%;">
         <mat-label>Fecha de entrega</mat-label>
         <input matInput [matDatepicker]="picker" [min]="minDate" formControlName="fchEntrega" >
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+
+      <div>
+        <mat-label>Hora de entrega</mat-label>
+        <ngb-timepicker [(ngModel)]="time" formControlName="horaEntrega"></ngb-timepicker>
+      </div>
 
     </div>
 </div>
