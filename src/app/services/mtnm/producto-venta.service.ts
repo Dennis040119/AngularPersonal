@@ -24,6 +24,10 @@ export class ProductoVentaService {
     return this.http.get<ProductosVenta[]>(baseUrl + '/PvBuscar/'+id.venId+'/'+id.proId);
   }
 
+  listarProductosPorVenta(Venid:string): Observable<ProductosVenta[]> {
+    return this.http.get<ProductosVenta[]>(baseUrl + '/PvBuscarVenta/'+Venid);
+  }
+
   registrarPv(Vj:ProductosVenta){
     return this.http.post(baseUrl+'/PvSave',Vj);
   }

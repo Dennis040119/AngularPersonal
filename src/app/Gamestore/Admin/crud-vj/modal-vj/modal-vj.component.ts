@@ -20,7 +20,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class ModalVjComponent implements OnInit {
 
-  @ViewChild('fileInput') fileInput: any;
+  
+
+  @ViewChild("fileInput", {
+    read: ElementRef
+  }) fileInput: ElementRef;
 
   public form!: FormGroup;
 
@@ -106,22 +110,7 @@ export class ModalVjComponent implements OnInit {
     console.log(this.fileToUpload)
   }
 
-  uploadFile(id:string,dir:string) {
-    if (!this.fileToUpload) {
-      console.error('Debe seleccionar un archivo, un id y un tipo de archivo.');
-      return;
-    }
-
-    this.imgService.storeFile(this.fileToUpload, id, dir).subscribe({
-      next:data=>{
-        console.log(data)
-      },
-      error:data=>{
-        console.log(data)
-      }
-    })
-      
-  }
+                                 
 
   formGroup(){
     this.form = this.formBuilder.group({
@@ -183,18 +172,27 @@ export class ModalVjComponent implements OnInit {
 
           //Verificamos que se ha escogido una imagen
           if (!this.fileToUpload) {
-            console.error('Debe seleccionar un archivo, un id y un tipo de archivo.');
+            this.openSnackBar('Debe seleccionar un archivo, un id y un tipo de archivo.',"");
             return;
           }
+
+          this.vjService.listarVideoJuegos().subscribe(data => {
+
+            var numero=data.length+1;
+            var id="vj0"+numero;
+
+          
       
           //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
-          this.imgService.storeFile(this.fileToUpload, this.objRegistrar.id, this.dirImgVj).subscribe({
+          this.imgService.storeFile(this.fileToUpload, id, this.dirImgVj).subscribe({
             next:data1=>{
               this.data=data1
               console.log(data1)
               if(this.data["url"]!=""){
 
                 this.objRegistrar.img=this.data["url"]
+
+                //Pasamos a registrar la entidad una vez guardada la imagen
                 this.vjService.registrarVj(this.objRegistrar).subscribe({
 
                   next:(data2)=>{
@@ -221,7 +219,7 @@ export class ModalVjComponent implements OnInit {
           })
 
 
-        
+        });
 
       } catch (error) {
         window.alert("Error al registrar: "+error)
@@ -235,7 +233,7 @@ export class ModalVjComponent implements OnInit {
 
   actualiza(){
     this.formValidators();
-
+    var antiguaUrlimg:string
       
      if(this.form.invalid || this.tipo!="edit"){
       if(this.form.invalid)  {window.alert("Formulario invalido");}
@@ -243,25 +241,36 @@ export class ModalVjComponent implements OnInit {
 
       try {
         this.constructorObj()
+        antiguaUrlimg=this.objRegistrar.img
         var gen
         gen = this.generosList.find(gen => gen.genId==this.form.get("genero")?.value);
         if(gen !=undefined){
           this.objRegistrar.genero=gen
         }
 
-        
-        if (!this.fileToUpload) {
+        const filePath = this.selectedFileUrl;
+
+          // Crea un nuevo objeto File a partir de la ruta del archivo
+          fetch(filePath)
+            .then(response => response.blob())
+            .then(blob => {
+              this.fileToUpload = new File([blob], 'image.jpg', { type: 'image/jpg' });
+              console.log('Imagen cargada exitosamente');
+
+              if (!this.fileToUpload) {
           
-         this.openSnackBar("Debe selecionar una imagen","")
-        }
-    
-        //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
+                this.openSnackBar("Debe selecionar una imagen","")
+              }
+
+
+              //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
         this.imgService.storeFile(this.fileToUpload, this.objRegistrar.id, this.dirImgVj).subscribe({
           next:data1=>{
             this.data=data1
             console.log(data1)
             if(this.data["url"]!=""){
 
+              console.log("Paso la imagen cargada")
               //Seteamos el nombre de la imagen con la que se guardo en el obj 
               this.objRegistrar.img=this.data["url"]
               //Ahora si procedemos a actualizar el obj
@@ -273,10 +282,14 @@ export class ModalVjComponent implements OnInit {
                   else{}
                 },
                 error:error=>{
-                  console.log(error)
+                  this.openSnackBar("Error al actualizar videojuego: "+error,"")
                 },
                 complete:()=>{
-
+                  this.imgService.deleteImagen(antiguaUrlimg,this.dirImgVj).subscribe(data=>{
+                    console.log(antiguaUrlimg)
+                    this.data=data
+                    console.log(this.data['mensaje'])
+                  })
                 }
                
               });
@@ -285,24 +298,22 @@ export class ModalVjComponent implements OnInit {
           
           },
           error:data=>{
-            console.log(data)
+            this.openSnackBar("Error al actualizar imagen: "+data,"")
           },
           complete:()=>{
 
           }
-        })
+        });
 
 
 
 
-
-
-
-
-
-
+          }).catch(error => {
+          console.error('Error al cargar la imagen', error);
+        });
+        
       } catch (error) {
-        window.alert("Error al registrar: "+error)
+        //this.openSnackBar("Error al registrar general: "+error,"")
       }
 
    
@@ -313,7 +324,7 @@ export class ModalVjComponent implements OnInit {
 
   setVjRecepcion(){
 
-    var lista
+    
     //Seteamos los valores cuando editamos un VJ
     this.objRegistrar.id=this.objRecepcion.id
     //El rol de videojuegos siempre sera 'vj'
@@ -321,26 +332,28 @@ export class ModalVjComponent implements OnInit {
     this.form.get("nombre")?.setValue(this.objRecepcion.nombre)
     this.form.get("precio")?.setValue(this.objRecepcion.precio)
 
-    //Operamos para poder cargar la imagen que le corresponde 
+    //Operamos para poder cargar la imagen que le corresponde (solo se carga la etiqueta img y el input de texto) 
     
     this.selectedFileUrl=this.getimagen(this.objRecepcion.img)
-
     var patron: RegExp = /vj.*\.jpg/;
     var texto:string = ""
-    console.log(this.getimagen(this.objRecepcion.img))
-
     if(this.getimagen(this.objRecepcion.img).match(patron) !=null){
       texto=this.getimagen(this.objRecepcion.img).match(patron)!.toString()!
     }
     
-    console.log(texto)
-    this.selectedFileName = texto
     
+    this.selectedFileName = texto
+    //////////////////////////////////////////////////
+    ///(cargamos el input file)
+   
+
+   
+    ////////////////////////////////////////////////////////////////
     this.form.get("genero")?.setValue(this.objRecepcion.genero.genId)
     this.form.get("descripcion")?.setValue(this.objRecepcion.descripcion)
     this.enumService.listarPlataformas().subscribe(data =>{
-
-      lista=data
+       
+       var lista=data
       var codigo1=this.objRecepcion.plataformas.slice(0,5)
 
       this.form.get("plataforma1")?.setValue(codigo1)
@@ -369,6 +382,9 @@ export class ModalVjComponent implements OnInit {
 
   }
 
+
+
+  
   constructorObj() {
     
      
@@ -407,7 +423,7 @@ export class ModalVjComponent implements OnInit {
       this.objRegistrar.plataformas=this.objRegistrar.plataformas.replace(',','')
     }else{}
     
-    console.log(this.objRegistrar)
+    
 
 
   }

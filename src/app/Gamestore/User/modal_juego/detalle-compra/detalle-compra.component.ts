@@ -52,10 +52,14 @@ export class DetalleCompraComponent implements OnInit {
     
     console.log(VideojuegosHome.carrito);
     //console.log(this.carrito.length)
-    this.dataSource = new MatTableDataSource(VideojuegosHome.carrito);
+    
+    console.log(this.data)
+    if(this.data!){
+      this.dataSource = new MatTableDataSource(this.data);
+    }else{
+      this.dataSource = new MatTableDataSource(VideojuegosHome.carrito);
 
-    
-    
+    }
     
     
     

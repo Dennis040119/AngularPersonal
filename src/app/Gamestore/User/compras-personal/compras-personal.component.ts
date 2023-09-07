@@ -6,6 +6,8 @@ import { Usuario } from 'src/app/models/mtnm/usuario';
 import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { VentaService } from 'src/app/services/mtnm/venta.service';
 import { Venta } from 'src/app/models/cliente/venta';
+import { DetalleCompraComponent } from '../modal_juego/detalle-compra/detalle-compra.component';
+import { ProductoVentaService } from 'src/app/services/mtnm/producto-venta.service';
 
 @Component({
   selector: 'app-compras-personal',
@@ -28,6 +30,7 @@ export class ComprasPersonalComponent implements  OnInit {
     
     private dialog: MatDialog,
     private VentaService:VentaService,
+    private ProductoVentaService:ProductoVentaService,
     private UserService:UsuarioService,
     
     //@Inject(MAT_DIALOG_DATA) private data: any,
@@ -73,7 +76,36 @@ export class ComprasPersonalComponent implements  OnInit {
     
   }
   detalle(obj:Venta){
-    console.log(obj);
+    
+
+    this.ProductoVentaService.listarProductosPorVenta(obj.venId).subscribe({
+      next:(result)=>{
+        console.log(result);
+        const dialogCrear = this.dialog.open(DetalleCompraComponent, {
+      
+          width: '1100px',
+          height: '600px',
+          autoFocus: false,
+          
+          data: result,
+  
+        });
+  
+        dialogCrear.afterClosed().subscribe(data => {
+  
+            
+        });
+      },
+      error(err) {
+        
+      },
+      complete() {
+        
+      },
+    })
+  
+      
+  
    }
 
  
