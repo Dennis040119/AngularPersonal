@@ -12,4 +12,5 @@ export class Venta {
     rol:string
     fCompra:Date
     fEntrega:Date
+    horaEntrega:string
 }

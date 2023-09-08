@@ -45,14 +45,20 @@
           {{element.direccion}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="FechaCompra" >
-        <mat-header-cell *matHeaderCellDef style="max-width: 10%;padding-left: 3%;"> Fecha Compra </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Fecha Compra </mat-header-cell>
         <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
-          {{element.fCompra|date:'medium'}}</mat-cell>
+          {{element.fCompra|date:'shortDate'}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="FechaEntrega">
-        <mat-header-cell *matHeaderCellDef style="max-width: 10%;padding-left: 3%;"> Fecha Entrega </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Fecha Entrega </mat-header-cell>
         <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
-            {{element.fEntrega| date:'medium'}}
+            {{element.fEntrega|date:'shortDate'}}
+          </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="HoraEntrega">
+        <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Hora Entrega </mat-header-cell>
+        <mat-cell *matCellDef="let element" style="max-width: 10%;padding-left: 3%;"> 
+            {{element.horaEntrega}}
           </mat-cell>
       </ng-container>
 

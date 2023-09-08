@@ -9,6 +9,7 @@ import { Venta } from 'src/app/models/cliente/venta';
 import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { Usuario } from 'src/app/models/mtnm/usuario';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { number, string } from 'prop-types';
 
 @Component({
   selector: 'app-form-compra',
@@ -17,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FormCompraComponent implements OnInit {
 
-  time = { hour: 0, minute: 0 };
+  horaEntrega : { hour: number; minute: number; }={hour:9,minute:0};
 
   public form!: FormGroup;
   nombres:string=' ';
@@ -60,7 +61,6 @@ export class FormCompraComponent implements OnInit {
     //Seteamos la fecha minima para el calendario
     this.minDate.setDate(this.minDate.getDate()+7)
     
-    console.log(VideojuegosHome.carrito);
     
     //Tiempo para cerrar el componente(5 min)
     setTimeout(() => {this.openSnackBar("Se acabo el tiempo",""),this.dialogRef.close();},300000);
@@ -98,10 +98,20 @@ export class FormCompraComponent implements OnInit {
   
   alertas(){
     this.nombres=this.form.get('nombres')?.value;
-    console.log(this.nombres)
      if(this.nombres== (("")||null)){
         this.booNombres=false
      }else{this.booNombres=true}
+  }
+
+  horarioLimite(){
+
+    if(this.horaEntrega.hour<9  ){
+      this.horaEntrega.hour=9
+    }
+
+    if(this.horaEntrega.hour>18){
+      this.horaEntrega.hour=18
+    }
   }
 
   formGroup(){
@@ -178,19 +188,18 @@ export class FormCompraComponent implements OnInit {
 
         next:(data)=>{
           this.user=data[0]
-          console.log(data[0])
+          
           this.VentaObj.usuario=this.user
         },
         error:(error)=>{
           this.openSnackBar("Error al buscar usuario","")
         },
         complete:()=>{  
-          console.log(this.user)
+          console.log(this.VentaObj)
           this.VenServicios.registrarVt(this.VentaObj).subscribe({
             
             next: data=>{
-              console.log(this.VentaObj)
-              console.log(data)
+              
               if(data.venId=="0000"){
                 this.openSnackBar("Error al procesar compra","")
               }else{
@@ -222,9 +231,9 @@ export class FormCompraComponent implements OnInit {
 
               }
             },
-            error:data=>{},
+            error:data=>{this.openSnackBar("Error al registrar venta: "+data,"")},
             complete:()=>{
-              this.openSnackBar("Compra Exitosa","")
+              //this.openSnackBar("Compra Exitosa","")
             }
     
     
@@ -240,7 +249,7 @@ export class FormCompraComponent implements OnInit {
      }
    }
 
-   construirVenta(){
+  construirVenta(){
     var userLocal=localStorage.getItem("user")
     this.VentaObj.venId=""
     
@@ -250,7 +259,13 @@ export class FormCompraComponent implements OnInit {
     this.VentaObj.tarjeta=this.form.get("tarjeta")!.value
     this.VentaObj.direccion=this.form.get("direccion")!.value
     this.VentaObj.rol="vt"
+
+    //Configuramos bien la fecha de entrega
     this.VentaObj.fEntrega=this.form.get("fchEntrega")!.value
+    
+    this.VentaObj.horaEntrega=this.horaEntrega.hour+":"+this.horaEntrega.minute
+
+
     this.SumarTotal()
     this.VentaObj.total=this.totalVenta
 
@@ -260,7 +275,7 @@ export class FormCompraComponent implements OnInit {
 
    
 
-   SumarTotal(){
+  SumarTotal(){
     VideojuegosHome.carrito.forEach(element => {
       this.totalVenta=this.totalVenta+element.precio
     });

@@ -81,5 +81,10 @@
       
     </mat-grid-tile>
 </mat-grid-list>
+<br>
+<mat-paginator [length]="copiaPaginator.length"  [pageSizeOptions]="[5, 10, 15]" style="margin-top: 5%;"
+               (page)="onPageChange($event)"
+               itemsPerPageLabel="Elementos por pagina" >
+</mat-paginator>
 </div>
 </div>

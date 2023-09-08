@@ -20,7 +20,7 @@ export class ComprasPersonalComponent implements  OnInit {
   
 
   listaVenta!: Venta[];
-  displayedColumns = ['IdVenta', 'Usuario', 'Total','Correo','Direccion','FechaCompra','FechaEntrega','options'];
+  displayedColumns = ['IdVenta', 'Usuario', 'Total','Correo','Direccion','FechaCompra','FechaEntrega','HoraEntrega','options'];
   dataSource = new MatTableDataSource(this.listaVenta);
 
   //Respuesta de servicios

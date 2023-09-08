@@ -53,7 +53,7 @@
 
       <div>
         <mat-label>Hora de entrega</mat-label>
-        <ngb-timepicker [(ngModel)]="time" formControlName="horaEntrega"></ngb-timepicker>
+        <ngb-timepicker [(ngModel)]="horaEntrega" (keyup)="horarioLimite()" formControlName="horaEntrega"></ngb-timepicker>
       </div>
 
     </div>

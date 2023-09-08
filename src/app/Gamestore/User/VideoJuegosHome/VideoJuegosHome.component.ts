@@ -14,6 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { StorageService } from 'src/app/services/medias/storage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 
@@ -27,6 +29,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class VideojuegosHome implements OnInit,AfterViewInit {
 
   @ViewChild("focus") foc: ElementRef;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   static carrito:ProductosVenta[] = [];
   Pv:ProductosVenta
@@ -35,6 +39,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
   acumulador: number=0
   tiles:Videojuegos[] = []
   resguardo:Videojuegos[]
+  copiaPaginator:Videojuegos[]=[]
   GenerosList:Genero[]
   PlataformasList:Plataforma[]
 
@@ -47,6 +52,14 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
   preloaderTime:boolean=true
   
   dirImgVj:string="imgVideojuegos"
+
+
+  ///paginador
+  
+  pageSizeOptions: number[] = [5,10, 15];
+
+  dataSource = new MatTableDataSource(this.tiles);
+
   
   constructor(
     private dialog: MatDialog,
@@ -73,6 +86,27 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
   
    
    
+  }
+
+  onPageChange(event: any): void {
+    
+    
+    var currentPageSize = event.pageSize;
+    
+    console.log(currentPageSize)
+    this.tiles=this.copiaPaginator.filter(obj => this.copiaPaginator.findIndex(tile=> tile==obj)<currentPageSize )
+    
+    if(event.pageIndex+1==2){
+
+      this.tiles=this.copiaPaginator.filter(obj => 
+        (this.copiaPaginator.findIndex(tile=> tile==obj)<currentPageSize+5 &&
+        this.copiaPaginator.findIndex(tile=> tile==obj)>currentPageSize )
+        
+        )
+    }
+    // Aquí puedes realizar acciones adicionales si es necesario
+    console.log('Página actual:', event.pageIndex + 1);
+    console.log('Elementos por página:', event.pageSize);
   }
 
   getParametrosDato(){
@@ -160,6 +194,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
 
     
     this.focus()
+    this.copiaPaginator=this.tiles
   }
 
   clearFilter(){

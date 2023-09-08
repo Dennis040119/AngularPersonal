@@ -182,7 +182,7 @@ export class ModalVjComponent implements OnInit {
             var id="vj0"+numero;
 
           
-      
+            console.log(this.fileToUpload)
           //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
           this.imgService.storeFile(this.fileToUpload, id, this.dirImgVj).subscribe({
             next:data1=>{
@@ -256,14 +256,14 @@ export class ModalVjComponent implements OnInit {
             .then(blob => {
               this.fileToUpload = new File([blob], 'image.jpg', { type: 'image/jpg' });
               console.log('Imagen cargada exitosamente');
+              console.log(this.fileToUpload);
 
               if (!this.fileToUpload) {
           
                 this.openSnackBar("Debe selecionar una imagen","")
-              }
-
-
-              //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
+                return;
+              }else{
+                        //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
         this.imgService.storeFile(this.fileToUpload, this.objRegistrar.id, this.dirImgVj).subscribe({
           next:data1=>{
             this.data=data1
@@ -304,6 +304,10 @@ export class ModalVjComponent implements OnInit {
 
           }
         });
+              }
+
+
+      
 
 
 
