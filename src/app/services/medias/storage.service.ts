@@ -8,7 +8,7 @@ import { Observable, map } from 'rxjs';
 })
 export class StorageService {
 
-  private backendBaseUrl = GLOBAL.url+'media'
+  private backendBaseUrl = GLOBAL.URL_BASE+'media'
 
   constructor(private http:HttpClient) { }
 

@@ -59,8 +59,10 @@ applyFilter(event: Event) {
 construirtabla(){
   this.VcService.listarVideoConsolas().subscribe((data) =>
    { this.listaVc=data;
+   
     this.dataSource = new MatTableDataSource(this.listaVc);
     this.dataSource.paginator = this.paginator;
+    console.log(this.dataSource.data)
     })
 }
 agregar() {

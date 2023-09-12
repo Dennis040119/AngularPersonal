@@ -6,6 +6,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { retry } from 'rxjs';
 import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { Usuario } from 'src/app/models/mtnm/usuario';
+import { StorageService } from 'src/app/services/medias/storage.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 ///Material
 
@@ -22,11 +24,23 @@ export class ModalUserComponent implements OnInit {
    objTransac: Usuario = new Usuario;
    dataService:any
 
+  //Datos que recibimos de crudUsuarios
   objetoDialog:Usuario=new Usuario;
   tipoDialog:string="";
   dataDialog:any
 
+  //Controlador del check de contraseña
   checkNewPass:boolean=false
+
+
+  //Url
+  selectedFile!: File;
+  selectedFileUrl: string="";
+  selectedFileName: string="";
+
+  //Servicio de imagenes
+  fileToUpload: File;
+  dirImgVj:string="userImage"
 
   constructor(
     private dialog: MatDialogRef<ModalUserComponent>,
@@ -34,6 +48,9 @@ export class ModalUserComponent implements OnInit {
     private UsuarioService:UsuarioService,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private formBuilder: FormBuilder,
+    private imgService:StorageService,
+    private snackBar:MatSnackBar,
+
     
 
 
@@ -59,8 +76,8 @@ export class ModalUserComponent implements OnInit {
     }
 
     this.tipoDialog=this.dataDialog["tipo"]
-    if(this.tipoDialog=="edit"||"view"){
-      
+    if(this.tipoDialog.includes("edit")||this.tipoDialog.includes("view")){
+     
       this.SetActualizaUsuario();
       this.form.get("password")?.disable();
     }
@@ -145,8 +162,20 @@ export class ModalUserComponent implements OnInit {
     this.form.get("direccion")?.setValue(this.objetoDialog.direccion)
     this.form.get("rol")?.setValue(this.objetoDialog.rol)
     
+
+    this.selectedFileUrl=this.getimagen(this.objetoDialog.imagen)
+    var patron: RegExp = /vj.*\.jpg/;
+    var texto:string = ""
+    if(this.getimagen(this.objetoDialog.imagen).match(patron) !=null){
+      texto=this.getimagen(this.objetoDialog.imagen).match(patron)!.toString()!
+    }
+    
+    
+    this.selectedFileName = texto
+    //////////////////////////////////////////////////
   }
 
+  //Metodo para bloquear el tipiado de numeros en un input
   onlyNumbers(event:any): boolean {
     const charChode = event.which ? event.which : event.keyCode;
     if (charChode == '46') {
@@ -161,12 +190,15 @@ export class ModalUserComponent implements OnInit {
   }
 
   checkPass(){
+    
     this.checkNewPass=this.form.get("Checkpassword")?.value
-    if(this.checkNewPass==true){
+    if(this.checkNewPass==true && this.tipoDialog=="edit"){
       this.form.get("password")?.enable();
       this.form.get("password")?.setValue("")
-    }else{this.form.get("password")?.disable();
-      if(this.form.get("password")?.value != undefined){this.form.get("password")?.setValue("123456789")}
+    }else{
+      this.form.get("password")?.disable();
+      if(this.form.get("password")?.value != undefined){console.log("checkpass")
+        this.form.get("password")?.setValue("123456789")}
       else{this.form.get("password")?.setValue("")}
       
       }
@@ -185,6 +217,7 @@ export class ModalUserComponent implements OnInit {
    
   }
 
+  //Metodos transaccionales
   operacion(){
     this.tipoDialog=='registrar'? this.registar():this.actualiza()  
   }
@@ -228,6 +261,46 @@ export class ModalUserComponent implements OnInit {
       
     
   }
+
+
+ //Metodos para cargar la imagen y subirla a la BBDD
+  handleFileInput(event: Event) {
+    
+    const files = (event.target as HTMLInputElement).files!;
+    console.log(files.item(0)?.name)
+    this.fileToUpload = files.item(0)!;
+
+    console.log(this.fileToUpload)
+  }
+
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+  
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    this.selectedFileName = this.selectedFile.name;
+    
+    this.getURLFromFile(this.selectedFile)
+    
+  }
+
+  getURLFromFile(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.selectedFileUrl = e.target.result;
+      this.selectedFileName = this.selectedFile.name;
+    };
+    reader.readAsDataURL(file);
+    
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 1000,
+    });
+  }
+
 }
 
 

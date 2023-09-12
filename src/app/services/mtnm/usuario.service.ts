@@ -1,9 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Optional } from '@angular/core';
 import { Observable } from 'rxjs';
+import { httpOptions } from 'src/app/login/logueo/logueo.component';
 import { Usuario } from 'src/app/models/mtnm/usuario';
 
 const baseUrl = 'http://localhost:8090/usuario'
+
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +19,11 @@ export class UsuarioService {
     ) { }
 
 
+    
+
+
     listarUsuarios(): Observable<Usuario[]> {
-      return this.http.get<Usuario[]>(baseUrl + '/usuarioList');
+      return this.http.get<Usuario[]>(baseUrl + '/usuarioList',httpOptions);
     }
 
     listarUsuariosActivos(): Observable<Usuario[]> {

@@ -100,7 +100,7 @@ export class VideojuegosHome implements OnInit,AfterViewInit {
 
       this.tiles=this.copiaPaginator.filter(obj => 
         (this.copiaPaginator.findIndex(tile=> tile==obj)<currentPageSize+5 &&
-        this.copiaPaginator.findIndex(tile=> tile==obj)>currentPageSize )
+        this.copiaPaginator.findIndex(tile=> tile==obj)>=currentPageSize )
         
         )
     }

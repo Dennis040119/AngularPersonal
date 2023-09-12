@@ -3,6 +3,10 @@ import { Route, Router } from '@angular/router'
 import { EnumService } from '../../../services/mtnm/enum.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StorageService } from 'src/app/services/medias/storage.service';
+import { HttpHeaders } from '@angular/common/http';
+import { AutorizacionService } from 'src/app/services/mtnm/autorizacion.service';
+
+
 
 
 @Component({
@@ -23,16 +27,20 @@ export class IndexAdminComponent implements OnInit {
   static snackBar: MatSnackBar;
 
 
-
+  
   constructor(
     private router:Router,
     private Enum:EnumService,
     private snackBar:MatSnackBar,
-    private imgService:StorageService
+    private imgService:StorageService,
+    private authService:AutorizacionService
   ){
 
   }
   ngOnInit(): void {
+
+    console.log(this.authService.isLoggedIn());
+
     this.Enum.listarPlataformas().subscribe(data=>{
 
     })

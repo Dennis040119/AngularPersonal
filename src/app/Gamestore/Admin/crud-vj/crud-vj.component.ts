@@ -66,6 +66,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
 
 
   ngOnInit(): void {
+    this.listavj=[]
     this.construirtabla();
     
     
@@ -95,7 +96,7 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
       
      },
      error:(data)=>{
-      window.alert("no se pudo obtener los datos")
+      window.alert("no se pudo obtener los datos: "+data)
      },
       complete:()=>{
         this.dataSource.paginator = this.paginator;

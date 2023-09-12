@@ -3,7 +3,18 @@ import { UsuarioService } from '../../services/mtnm/usuario.service';
 import { Router } from '@angular/router';
 import { Guard } from '../../services/utils/guard';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AutorizacionService } from 'src/app/services/mtnm/autorizacion.service';
+import { credenciales } from 'src/app/models/mtnm/usuario';
+import { HttpHeaders } from '@angular/common/http';
 
+
+const tokenBearer = `Bearer ${localStorage.getItem("token")}`;
+
+export const httpOptions = {
+  headers: new HttpHeaders({
+    'Authorization': tokenBearer
+  })
+};
 
 
 @Component({
@@ -14,12 +25,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 export class LogueoComponent implements OnInit {
-  email: string="";
+  username: string="";
   password: string=""
+
+  dataService:any
   
   
   constructor(
     private usuarioService:UsuarioService,
+    private authService:AutorizacionService,
     private router:Router,
     private  snackBar:MatSnackBar
   ) {}
@@ -31,26 +45,38 @@ export class LogueoComponent implements OnInit {
 
   login() {
     
-   if((this.email && this.password) !=("" && undefined)){
+   if((this.username && this.password) !=("" && undefined)){
 
-    this.usuarioService.BuscarPorUser(this.email).subscribe(data =>{
+    this.usuarioService.BuscarPorUser(this.username).subscribe(data =>{
       //////////////////////
       if(data.length==1){
          /////////////
-        this.usuarioService.buscarLogin(this.email,this.password).subscribe(data=>{
+        this.usuarioService.buscarLogin(this.username,this.password).subscribe(data=>{
+
+          var cred:credenciales= new credenciales
+          cred.username=this.username
+          cred.password=this.password
+          this.authService.login(cred).subscribe(data=>{
+
+            this.dataService=data
+            console.log(this.dataService.jwt);
+            localStorage.setItem("token",this.dataService.jwt)
+          })
+
+          console.log(data)
         if(data.length==1){
         localStorage.setItem("key","true")
         localStorage.setItem("user",data[0].username)
         
 
-        if(data[0].rol=="user"){
+        if(data[0].rol=="ROLE_USER"){
           Guard.roles="user"
           this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
           this.router.navigate(['indexUser']);
           console.log(Guard.roles)
         }
 
-        if(data[0].rol=="admin"){
+        if(data[0].rol=="ROLE_ADMIN"){
           Guard.roles="admin"
           this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
           this.router.navigate(['indexAdmin']);
@@ -73,6 +99,7 @@ export class LogueoComponent implements OnInit {
 
 
       console.log(Guard.roles)
+      
 
     })
 

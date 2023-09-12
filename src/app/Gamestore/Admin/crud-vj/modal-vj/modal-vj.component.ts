@@ -55,7 +55,7 @@ export class ModalVjComponent implements OnInit {
 
   //Servicio de imagenes
   fileToUpload: File;
-   dirImgVj:string="imgVideojuegos"
+  dirImgVj:string="imgVideojuegos"
 
   //Objetos que recibimos y contruimos para las transacc
   tipo:string="";
@@ -478,7 +478,7 @@ export class ModalVjComponent implements OnInit {
         if(conta >-1){
 
           this.plataformas2.splice(conta,1)
-          this.plataformas3.splice(conta,1)
+          //this.plataformas3.splice(conta,1)
 
         }else{console.log("No se encuentra en el combobox")}
 
@@ -502,16 +502,21 @@ export class ModalVjComponent implements OnInit {
 
     if((this.form.get("plataforma1")?.value && this.form.get("plataforma2")?.value)!= null){
 
+      console.log("paso el if")
       var conta1:number=0
       var conta2:number=0
-      this.enumService.listarPlataformas().subscribe((data)=>{this.plataformas3=data
-
-        conta1 =this.plataformas3.findIndex( (vj) => vj.platId==this.form.get("plataforma1")?.value);
+      this.enumService.listarPlataformas().subscribe((data)=>{
+        
+        this.plataformas3=data
 
         this.plataformas3.splice(0,1)
-        if(conta1 >-1){
+        conta1 =this.plataformas3.findIndex( (vj) => vj.platId==this.form.get("plataforma1")?.value);
 
-        this.plataformas3.splice(conta1,1)
+       
+        if(conta1 >-1){
+          console.log(this.plataformas3)
+          console.log(conta1)
+        this.plataformas3.splice(conta1,1)  
         ///////////////////////////////
         conta2 =this.plataformas3.findIndex( (vj) => vj.platId==this.form.get("plataforma2")?.value);
         if(conta2 >-1){this.plataformas3.splice(conta2,1)}
@@ -525,17 +530,16 @@ export class ModalVjComponent implements OnInit {
     }
   }
 
-  getimagen(filename:string){
-    return this.imgService.getImagen(filename,this.dirImgVj)
-  }
-  
-
   generoComboBox(){
     this.enumService.listarGenero().subscribe(data =>{
       this.generosList=data
     })
   }
 
+  getimagen(filename:string){
+    return this.imgService.getImagen(filename,this.dirImgVj)
+  }
+  
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
     this.selectedFileName = this.selectedFile.name;

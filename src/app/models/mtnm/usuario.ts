@@ -12,4 +12,9 @@ export class Usuario {
     
 }
 
+export class credenciales{
+    username:string
+    password:string
+}
+
 

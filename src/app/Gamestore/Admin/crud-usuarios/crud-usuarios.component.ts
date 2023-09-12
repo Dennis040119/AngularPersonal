@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UsuarioService } from '../../../services/mtnm/usuario.service';
@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ModalUserComponent } from './modal-user/modal-user.component';
 import { DialogConfirmComponent } from 'src/app/axuliares/dialog-confirm/dialog-confirm.component';
 import { IndexAdminComponent } from '../index-admin/index-admin.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-crud-usuarios',
@@ -15,6 +16,7 @@ import { IndexAdminComponent } from '../index-admin/index-admin.component';
 })
 export class CrudUsuariosComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   listaUsu!: Usuario[];
@@ -35,7 +37,7 @@ export class CrudUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.construirtabla();
-    console.log(this.listaUsu)
+    
     
   }
 
@@ -52,6 +54,7 @@ export class CrudUsuariosComponent implements OnInit {
     this.UsuarioService.listarUsuarios().subscribe((data) =>
       {this.listaUsu=data;
       this.dataSource = new MatTableDataSource(this.listaUsu);
+      this.dataSource.paginator = this.paginator;
       })
   }
 
