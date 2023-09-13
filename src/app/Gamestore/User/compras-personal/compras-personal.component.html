@@ -47,12 +47,12 @@
       <ng-container matColumnDef="FechaCompra" >
         <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Fecha Compra </mat-header-cell>
         <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
-          {{element.fCompra|date:'shortDate'}}</mat-cell>
+          {{element.fCompra|date:'dd-MM-yyyy'}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="FechaEntrega">
         <mat-header-cell *matHeaderCellDef style="max-width: 10%;"> Fecha Entrega </mat-header-cell>
         <mat-cell *matCellDef="let element" style="max-width: 10%;"> 
-            {{element.fEntrega|date:'shortDate'}}
+            {{element.fEntrega|date:'dd-MM-yyyy'}}
           </mat-cell>
       </ng-container>
       <ng-container matColumnDef="HoraEntrega">

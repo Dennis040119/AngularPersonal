@@ -11,9 +11,11 @@ import { VideoConsolasHomeComponent } from './Gamestore/User/video-consolas-home
 import { CrudUsuariosComponent } from './Gamestore/Admin/crud-usuarios/crud-usuarios.component';
 import { CrudVcComponent } from './Gamestore/Admin/crud-vc/crud-vc.component';
 import { CrudVjComponent } from './Gamestore/Admin/crud-vj/crud-vj.component';
-import { Guard } from './services/utils/guard';
+import { GuardAdmin } from './services/utils/guardAdmin';
 import { NosotrosComponent } from './Gamestore/User/nosotros/nosotros.component';
 import { ComprasPersonalComponent } from './Gamestore/User/compras-personal/compras-personal.component';
+import { guardUserGuard } from './services/utils/guard-user.guard';
+
 
 
 const routes: Routes = [
@@ -27,7 +29,7 @@ const routes: Routes = [
     path: 'indexUser',
     
     component: IndexUserComponent,
-    canActivate:[Guard],
+    canActivate:[guardUserGuard],
     children: [
       {
         path: 'homeVideojuegos/:plataforma',
@@ -66,7 +68,7 @@ const routes: Routes = [
   {
     path: 'indexAdmin',
     component: IndexAdminComponent,
-    canActivate:[Guard],
+    canActivate:[GuardAdmin],
     children: [
       {
         path: 'CrudVj',
@@ -103,15 +105,7 @@ const routes: Routes = [
     ]
   },
   
-  {
-    path: '',
-    
-    redirectTo:Guard.roles=="user" ?"indexUser":"indexAdmin",
-    //redirectTo:Guard.roles=="admin" ?"indexAdmin":"indexUser",
-    
-    pathMatch:'full'
-    
-  },
+ 
   {path: 'error', component: LogueoComponent },
   
 

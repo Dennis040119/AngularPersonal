@@ -1,11 +1,12 @@
 import {Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/mtnm/usuario.service';
 import { Router } from '@angular/router';
-import { Guard } from '../../services/utils/guard';
+import { GuardAdmin } from '../../services/utils/guardAdmin';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AutorizacionService } from 'src/app/services/mtnm/autorizacion.service';
 import { credenciales } from 'src/app/models/mtnm/usuario';
 import { HttpHeaders } from '@angular/common/http';
+import { guardUserGuard } from 'src/app/services/utils/guard-user.guard';
 
 
 const tokenBearer = `Bearer ${localStorage.getItem("token")}`;
@@ -35,7 +36,9 @@ export class LogueoComponent implements OnInit {
     private usuarioService:UsuarioService,
     private authService:AutorizacionService,
     private router:Router,
-    private  snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private guardUser:guardUserGuard,
+    private guardAdmin:GuardAdmin
   ) {}
 
   ngOnInit(): void {
@@ -47,65 +50,36 @@ export class LogueoComponent implements OnInit {
     
    if((this.username && this.password) !=("" && undefined)){
 
-    this.usuarioService.BuscarPorUser(this.username).subscribe(data =>{
-      //////////////////////
-      if(data.length==1){
-         /////////////
-        this.usuarioService.buscarLogin(this.username,this.password).subscribe(data=>{
-
+          //Colocamos los campos en una variable de tipo credenciales para mandarle al servicio que generara el token
           var cred:credenciales= new credenciales
           cred.username=this.username
           cred.password=this.password
-          this.authService.login(cred).subscribe(data=>{
+          this.authService.login(cred).subscribe({
 
-            this.dataService=data
-            console.log(this.dataService.jwt);
-            localStorage.setItem("token",this.dataService.jwt)
+            next:(data)=>{
+
+              //Obtenemos los datos del token y lo pones en un localStorage
+              this.dataService=data
+              localStorage.setItem("token",this.dataService.jwt)
+              
+              if(data!=null){
+                console.log(data)
+                this.direccionar()
+              }
+              
+              
+                
+
+              },  
+              //Mandamos el error en caso las credenciales esten mal u otro error
+            error:(err) => {console.log(err); this.openSnackBar("Credenciales invalidas: ","")},
+            complete: () => {
+              /////Buscamos el usuario para obtener sus datos
+             
+            }
           })
 
-          console.log(data)
-        if(data.length==1){
-        localStorage.setItem("key","true")
-        localStorage.setItem("user",data[0].username)
-        
-
-        if(data[0].rol=="ROLE_USER"){
-          Guard.roles="user"
-          this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
-          this.router.navigate(['indexUser']);
-          console.log(Guard.roles)
-        }
-
-        if(data[0].rol=="ROLE_ADMIN"){
-          Guard.roles="admin"
-          this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
-          this.router.navigate(['indexAdmin']);
-          console.log(Guard.roles)
-        }
-        
-        
-        
-        
-        }else{
-        localStorage.setItem("key","false")
-        this.openSnackBar("Contraseña Incorrecta","Denegada")
-        }
-      
-        });
-    /////////////////
-      }else{this.openSnackBar("Usuario no registrado","Denegada");}
-
-
-
-
-      console.log(Guard.roles)
-      
-
-    })
-
-
-   
-   }else{ this.openSnackBar("Faltan Datos","")}
+      }else{ this.openSnackBar("Faltan Datos","")}
    
   }
 
@@ -113,6 +87,46 @@ export class LogueoComponent implements OnInit {
 
     this.router.navigate(['registro']);
 
+  }
+
+
+  direccionar(){
+   
+    var direccion=""
+
+
+
+      this.usuarioService.BuscarPorUser(this.username).subscribe({
+
+        next:(data) => {//Si es usuario se le mandara a la pagina de usuarios
+          if(data[0].rol=="ROLE_USER"){
+            this.guardUser.acces=true
+            direccion='indexUser'
+             }
+          
+           //Si es admin se le mandara a la pagina de admin
+          if(data[0].rol=="ROLE_ADMIN"){
+            this.guardAdmin.acces=true
+            direccion='indexAdmin'
+          }
+        
+          localStorage.setItem("user",data[0].username)
+          this.router.navigate([direccion]);
+          this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
+
+        },
+
+        
+        error:(err) => {console.log(err)},
+        complete: () => {
+          
+         
+        }
+
+            
+        
+      })
+    
   }
 
   public openSnackBar(message: string, action: string) {

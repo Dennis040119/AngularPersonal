@@ -39,7 +39,12 @@ export class IndexAdminComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    console.log(this.authService.isLoggedIn());
+    
+
+    setTimeout(() => {
+      console.log(this.authService.isLoggedIn());
+      //console.log(localStorage.getItem("token"))
+    }, 700);
 
     this.Enum.listarPlataformas().subscribe(data=>{
 

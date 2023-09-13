@@ -51,11 +51,24 @@ export class CrudUsuariosComponent implements OnInit {
    return this.IndexAmdmin.getimagen(filename,dir)
   }
   construirtabla(){
-    this.UsuarioService.listarUsuarios().subscribe((data) =>
-      {this.listaUsu=data;
-      this.dataSource = new MatTableDataSource(this.listaUsu);
-      this.dataSource.paginator = this.paginator;
+    this.UsuarioService.listarUsuarios().subscribe({
+
+      next:(data) =>{
+        this.listaUsu=data;
+          this.dataSource = new MatTableDataSource(this.listaUsu);
+          this.dataSource.paginator = this.paginator;
+        
+       },
+       error:(data)=>{
+        window.alert("no se pudo obtener los datos: "+data)
+       },
+        complete:()=>{
+          this.dataSource.paginator = this.paginator;
+          
+        }
+        
       })
+      
   }
 
 

@@ -4,9 +4,9 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterState
 @Injectable({
     providedIn: 'root'
   })
-export class Guard implements CanActivate {
+export class GuardAdmin implements CanActivate {
 
-    static roles:string="";
+  public acces:boolean;
     
 
     constructor(
@@ -16,11 +16,10 @@ export class Guard implements CanActivate {
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
-        const currentUser=localStorage.getItem("key");
+       
         
         
-        
-        if(currentUser=="true")
+        if(this.acces==true && localStorage.getItem("token"))
         {
             return true
         }else{
@@ -29,5 +28,13 @@ export class Guard implements CanActivate {
             
         }
         
+      }
+
+
+     public setAcces(boo:boolean){
+        this.acces=boo
+      }
+      public  getAcces(){
+        return this.acces
       }
 }

@@ -5,10 +5,11 @@ import { StorageService } from 'src/app/services/medias/storage.service';
 import { UsuarioService } from 'src/app/services/mtnm/usuario.service';
 import { LogueoComponent } from '../logueo/logueo.component';
 import { Router } from '@angular/router';
-import { Guard } from 'src/app/services/utils/guard';
+import { GuardAdmin } from 'src/app/services/utils/guardAdmin';
 import { any } from 'prop-types';
 import { combineLatest } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
+import { guardUserGuard } from 'src/app/services/utils/guard-user.guard';
 
 @Component({
   selector: 'app-registro',
@@ -42,7 +43,7 @@ constructor(
   private userService:UsuarioService,
   private appCom:AppComponent,
   private router:Router,
-  
+  private guardUser:guardUserGuard
 ){
 
 }
@@ -137,7 +138,7 @@ registrar(){
       },
       error:(err)=>{},
       complete:()=>{
-        Guard.roles="user"
+        this.guardUser.acces=true
         localStorage.setItem("key","true")
         localStorage.setItem("user",this.objTransacc.username)
         this.router.navigate(['indexUser']);

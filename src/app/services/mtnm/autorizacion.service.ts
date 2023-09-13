@@ -25,9 +25,9 @@ export class AutorizacionService {
 
     const helper = new JwtHelperService();
     const token = localStorage.getItem("token");
-    console.log(localStorage.getItem("token"))
-    console.log(token)
+    
     if(!token){//Primero comprobamos que el token exista
+      console.log("Token no existe")
       return false;
     }else{//Segundo comprobamos que el token no sea cualquier cadena
 

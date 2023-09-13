@@ -27,16 +27,16 @@ export class UsuarioService {
     }
 
     listarUsuariosActivos(): Observable<Usuario[]> {
-      return this.http.get<Usuario[]>(baseUrl + '/usuarioAcList');
+      return this.http.get<Usuario[]>(baseUrl + '/usuarioAcList',);
     }
 
     BuscarPorUser(user:string): Observable<Usuario[]> {
-      return this.http.get<Usuario[]>(baseUrl + '/usuarioxUser/'+user);
+      return this.http.get<Usuario[]>(baseUrl + '/usuarioxUser/'+user,);
     }
 
     buscarLogin(user:string,pass:string)
     {
-          return this.http.get<Usuario[]>(baseUrl+'/loginFind/'+user+'/'+pass);
+          return this.http.get<Usuario[]>(baseUrl+'/loginFind/'+user+'/'+pass,);
     }
 
     registrar(user:Usuario){
