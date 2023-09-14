@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Videojuegos } from '../../models/mtnm/videojuegos';
 import { GLOBAL } from '../utils/global';
-import { httpOptions } from 'src/app/login/logueo/logueo.component';
 
 const baseUrl = 'http://localhost:8090/videojuego'
 
@@ -20,7 +19,7 @@ export class VideoJuegoServiceService {
    }
 
   listarVideoJuegos(): Observable<Videojuegos[]> {
-    return this.http.get<Videojuegos[]>(baseUrl + '/videoJuegoList',httpOptions);
+    return this.http.get<Videojuegos[]>(baseUrl + '/videoJuegoList');
   }
 
   buscarVideoJuegos(id:string): Observable<Videojuegos[]> {

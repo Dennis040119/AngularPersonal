@@ -96,7 +96,8 @@ export class CrudVjComponent implements OnInit,AfterViewInit  {
       
      },
      error:(data)=>{
-      window.alert("no se pudo obtener los datos: "+data)
+     console.log(data)
+      this.indexAdmin.openSnackBar("no se pudo obtener los datos: ","Error")
      },
       complete:()=>{
         this.dataSource.paginator = this.paginator;

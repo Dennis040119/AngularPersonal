@@ -68,6 +68,7 @@ import {MatListModule} from '@angular/material/list';
 //Bootsstrap
 
 import { NgbCarouselModule,NgbTimepicker} from '@ng-bootstrap/ng-bootstrap';
+import { ApiInterceptor } from './services/utils/api.interceptor';
 
 
 
@@ -179,7 +180,11 @@ import { NgbCarouselModule,NgbTimepicker} from '@ng-bootstrap/ng-bootstrap';
     NgbTimepicker
 
   ],
-  providers: [CookieService ,  {provide:ErrorHandler,useClass:GlobalErrorHandler}],
+  providers: [ {
+    provide:HTTP_INTERCEPTORS,
+    useClass:ApiInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 }
 )

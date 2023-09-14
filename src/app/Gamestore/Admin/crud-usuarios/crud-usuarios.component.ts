@@ -60,7 +60,17 @@ export class CrudUsuariosComponent implements OnInit {
         
        },
        error:(data)=>{
-        window.alert("no se pudo obtener los datos: "+data)
+        var msj=""
+          console.log(data.status)
+
+          msj="Error al obtener los datos"
+
+          if(data.status=="403"){
+           msj ="Credenciales Invalidas: "
+          }else{
+
+          }
+          this.IndexAmdmin.openSnackBar(msj,"Error")
        },
         complete:()=>{
           this.dataSource.paginator = this.paginator;

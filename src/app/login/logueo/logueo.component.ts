@@ -11,11 +11,6 @@ import { guardUserGuard } from 'src/app/services/utils/guard-user.guard';
 
 const tokenBearer = `Bearer ${localStorage.getItem("token")}`;
 
-export const httpOptions = {
-  headers: new HttpHeaders({
-    'Authorization': tokenBearer
-  })
-};
 
 
 @Component({
