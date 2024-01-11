@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { GuardAdmin } from '../../services/utils/guardAdmin';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AutorizacionService } from 'src/app/services/mtnm/autorizacion.service';
-import { credenciales } from 'src/app/models/mtnm/usuario';
+import { Usuario, credenciales } from 'src/app/models/mtnm/usuario';
 import { HttpHeaders } from '@angular/common/http';
 import { guardUserGuard } from 'src/app/services/utils/guard-user.guard';
 
@@ -49,32 +49,32 @@ export class LogueoComponent implements OnInit {
           var cred:credenciales= new credenciales
           cred.username=this.username
           cred.password=this.password
-          this.authService.login(cred).subscribe({
 
-            next:(data)=>{
+          
+           
+                /*obtener el token*/
+                
+                this.authService.login(cred).subscribe({
 
-              //Obtenemos los datos del token y lo pones en un localStorage
-              this.dataService=data
-              localStorage.setItem("token",this.dataService.jwt)
-              
-              if(data!=null){
-                console.log(data)
-                this.direccionar()
-              }
-              
+                  next:(data)=>{
+      
+                    //Obtenemos los datos del token y lo pones en un localStorage
+                    this.dataService=data
+                    localStorage.setItem("token",this.dataService.jwt)
+                    this.direccionar()
+                    if(data!=null){}
+                    },  
+                    //Mandamos el error en caso las credenciales esten mal u otro error
+                  error:(err) => {console.log(err); this.openSnackBar("Credenciales invalidas: ",err.message)},
+                  complete: () => {}
+                })
               
                 
-
-              },  
-              //Mandamos el error en caso las credenciales esten mal u otro error
-            error:(err) => {console.log(err); this.openSnackBar("Credenciales invalidas: ","")},
-            complete: () => {
-              /////Buscamos el usuario para obtener sus datos
-             
-            }
-          })
-
-      }else{ this.openSnackBar("Faltan Datos","")}
+              
+              
+              }
+ 
+      else{ this.openSnackBar("Faltan Datos","")}
    
   }
 
@@ -86,42 +86,40 @@ export class LogueoComponent implements OnInit {
 
 
   direccionar(){
-   
-    var direccion=""
+    //localStorage.setItem("token","token")
+    var usu
 
+    this.usuarioService.BuscarPorUser(this.username).subscribe({
 
+      next:(data)=>{
+        if(data!=null){
+          console.log(data)
+          usu=data
 
-      this.usuarioService.BuscarPorUser(this.username).subscribe({
-
-        next:(data) => {//Si es usuario se le mandara a la pagina de usuarios
-          if(data[0].rol=="ROLE_USER"){
+          //Decidimos si es usuario o admin
+          if(usu[0].rol=="user"){
             this.guardUser.acces=true
-            direccion='indexUser'
-             }
+            
+            this.router.navigate(['indexUser']);
+            console.log("usuario")
+      }
           
            //Si es admin se le mandara a la pagina de admin
-          if(data[0].rol=="ROLE_ADMIN"){
+          if(usu[0].rol=="admin"){
             this.guardAdmin.acces=true
-            direccion='indexAdmin'
+            this.router.navigate(['indexAdmin']);
+            console.log("admin")
           }
         
-          localStorage.setItem("user",data[0].username)
-          this.router.navigate([direccion]);
-          this.openSnackBar("Bienvenido "+data[0].username,"Accediendo")
+          localStorage.setItem("user",usu[0].username)
+          this.openSnackBar("Bienvenido "+usu[0].username,"Accediendo")
+      }},
+      error:(error)=>{},
 
-        },
 
-        
-        error:(err) => {console.log(err)},
-        complete: () => {
-          
-         
-        }
-
-            
-        
-      })
+    })
     
+       
   }
 
   public openSnackBar(message: string, action: string) {

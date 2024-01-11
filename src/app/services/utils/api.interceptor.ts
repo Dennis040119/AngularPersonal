@@ -44,11 +44,6 @@ export class ApiInterceptor implements HttpInterceptor {
       .set('Expires','Sat, 01 Jan 2000 00:00:00 GMT')//para evitar cacheos en las peticiones
       .set('Authorization', `Bearer ${token}`)
     });
-    
-
-   
-    
-    
    
     return next.handle(requestCloned).pipe(catchError(x=> this.handleAuthError(x)));;
   }

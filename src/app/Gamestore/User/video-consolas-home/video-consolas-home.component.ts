@@ -177,7 +177,7 @@ export class VideoConsolasHomeComponent implements OnInit,AfterViewInit {
     try {
       setTimeout(() => {
       const invalidControl = this.el.nativeElement.querySelector("#focus");
-      console.log(invalidControl)
+      
       invalidControl.focus();
       
       }, 700);
