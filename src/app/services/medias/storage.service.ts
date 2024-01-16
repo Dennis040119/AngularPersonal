@@ -17,6 +17,7 @@ export class StorageService {
     const url = `${this.backendBaseUrl}/upload/${id}/${tipofile}`;
     const formData = new FormData();
     formData.append('file', file, file.name);
+ 
     return this.http.post(this.backendBaseUrl+"/upload/"+id+"/"+tipofile, formData)  
   }
   

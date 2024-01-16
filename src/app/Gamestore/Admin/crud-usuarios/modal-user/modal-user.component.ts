@@ -211,7 +211,9 @@ export class ModalUserComponent implements OnInit {
     if(this.form.get("Checkpassword")?.value==true){
      rpta = this.form.get("password")?.value==this.form.get("Newpassword")?.value? true:false
      console.log(this.form.get("password")?.value +" : "+this.form.get("Newpassword")?.value)
-    }else{ rpta= true;}
+    }else{ rpta= true;
+        this.objTransac.password="null";
+    }
 
     return rpta
    

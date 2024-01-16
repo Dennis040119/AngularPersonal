@@ -97,7 +97,7 @@ export class LogueoComponent implements OnInit {
           usu=data
 
           //Decidimos si es usuario o admin
-          if(usu[0].rol=="user"){
+          if(usu[0].rol=="ROLE_USER"){
             this.guardUser.acces=true
             
             this.router.navigate(['indexUser']);
@@ -105,7 +105,7 @@ export class LogueoComponent implements OnInit {
       }
           
            //Si es admin se le mandara a la pagina de admin
-          if(usu[0].rol=="admin"){
+          if(usu[0].rol=="ROLE_ADMIN"){
             this.guardAdmin.acces=true
             this.router.navigate(['indexAdmin']);
             console.log("admin")

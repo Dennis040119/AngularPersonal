@@ -35,6 +35,11 @@ export class ApiInterceptor implements HttpInterceptor {
     console.log('Interceptor activado');
     //Clonamos request ya que es un objeto inmutable
     //Modificamos el clon 
+
+    if (request.url.includes('http://localhost:8090/media/upload/')) {
+      // Si es el servicio específico, no añadir el encabezado de autorización
+      return next.handle(request);
+    }
     
     const requestCloned = request.clone({
       headers:request.headers

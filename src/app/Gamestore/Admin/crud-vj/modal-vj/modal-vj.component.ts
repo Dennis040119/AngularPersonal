@@ -173,7 +173,7 @@ export class ModalVjComponent implements OnInit {
           //Verificamos que se ha escogido una imagen
           if (!this.fileToUpload) {
             this.openSnackBar('Debe seleccionar un archivo, un id y un tipo de archivo.',"");
-            return;
+            
           }
 
           this.vjService.listarVideoJuegos().subscribe(data => {
@@ -182,7 +182,7 @@ export class ModalVjComponent implements OnInit {
             var id="vj0"+numero;
 
           
-            console.log(this.fileToUpload)
+          console.log(this.fileToUpload)
           //Guardamos la imagen en la carpeta , y si la operacion es exitosa se procede a registrar el obj
           this.imgService.storeFile(this.fileToUpload, id, this.dirImgVj).subscribe({
             next:data1=>{
@@ -211,6 +211,7 @@ export class ModalVjComponent implements OnInit {
             
             },
             error:data=>{
+              this.openSnackBar("Error al subir la imagen","")
               console.log(data)
             },
             complete:()=>{
